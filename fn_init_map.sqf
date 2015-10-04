@@ -2,8 +2,7 @@ private "_tpvar";
 
 {
 	call {
-		// tp flags
-		if ((_x find "respawn" > -1) || (_x find "tp" > -1)) exitWith {
+		if ((_x find "respawn" > -1) || (_x find "tp" > -1)) exitWith { //all tp flags
 			private ["_markerpos","_markerposx","_markerposy","_tpname","_crate","_tpflag"];
 
 			_markerpos = getmarkerpos _x;
@@ -11,8 +10,8 @@ private "_tpvar";
 			_markerposy = _markerpos select 1;
 			_tpname = markertext _x;
 
-			if (!isdedicated) then {
-				// spawn box clientside
+			if (!isdedicated) then { //clientside arsenal box
+
 				_crate = "B_CargoNet_01_ammo_F" createvehiclelocal [_markerposx - 1, _markerposy - 1];
 				_crate allowdamage false;
 			};
@@ -21,34 +20,40 @@ private "_tpvar";
 			_tpflag = "Land_FieldToilet_F" createvehiclelocal _markerpos;
 			_tpflag allowdamage false;
 
-			if ((isserver) && !(_x find "respawn" > -1)) then {
+			if ((isserver) && !(_x find "respawn" > -1)) then { //add tp respawn
 				[missionnamespace, _x] call BIS_fnc_addRespawnPosition;
 			};
 
-			if isnil("_tpvar") then {
-
-				// first flag, create array
+			if isnil("_tpvar") then { //first flag, create array
 				_tpvar = [[_tpflag, _tpname]];
 
-			} else {
+			} else { //not first flag, add to array
 
-				// not first flag, add to array
 				_tpvar pushback [_tpflag, _tpname];
 			};
 		};
-		if ((isserver) && (_x find "mash" > -1)) exitWith {
-			private ["_mashpos","_mashdir","_mash"];
+		if ((isserver) && (_x find "mash" > -1)) exitWith { //create med facility at mash marker
 
 			_mashpos = getmarkerpos _x;
 			_mashdir = markerdir _x;
-
-			// create flag at tp marker with name
 			_mash = createVehicle ["Land_Medevac_house_V1_F", _mashpos, [], 0, "none"];
 			_mash allowdamage false;
 			_mash setdir _mashdir;
 		};
 	};
 } foreach allmapmarkers;
+
+if (isserver) exitwith {
+	if (isnil "_mash") then { //add mash if missing
+		_mashpos = getmarkerpos "respawn_west";
+		_mashdir = markerdir "respawn_west";
+		_safepos = [_mashpos, 5, 150, 3, 0, 20, 0] call BIS_fnc_findSafePos;
+		_mashmarker = createMarker ["mash", _safepos];
+		_mash = createVehicle ["Land_Medevac_house_V1_F", _safepos, [], 0, "none"];
+		_mash allowdamage false;
+		_mash setdir _mashdir;
+	};
+};
 
 //tp actions
 {
