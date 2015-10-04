@@ -48,7 +48,7 @@ if (isserver) exitwith {
 		_mashpos = getmarkerpos "respawn_west";
 		_mashdir = markerdir "respawn_west";
 		_safepos = [_mashpos, 5, 150, 3, 0, 20, 0] call BIS_fnc_findSafePos;
-		_mashmarker = createMarker ["mash", _safepos];
+		createMarker ["mash", _safepos];
 		_mash = createVehicle ["Land_Medevac_house_V1_F", _safepos, [], 0, "none"];
 		_mash allowdamage false;
 		_mash setdir _mashdir;
