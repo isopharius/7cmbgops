@@ -8,15 +8,13 @@ if (isserver) then { //server
 		profileNamespace setVariable [format["savemish_%1", worldname], mish];
 	};
 
-	if (isdedicated) then {
+	if (isdedicated) then { //save server profile when all players gone
 		["saveprofile", "onPlayerDisconnected", {
 			if ( ({isPlayer _x} count playableUnits) == 0 ) then { saveprofileNamespace };
 		}] call BIS_fnc_addStackedEventHandler;
 	};
-
-} else { //server
-	//Mish transfer
-	[
+} else { //clients
+	[ //Mish transfer
 		"Save/Load",
 		"Transfer to server",
 		{
@@ -43,8 +41,7 @@ if (isserver) then { //server
 		}
 	] call Ares_fnc_RegisterCustomModule;
 
-	//Mish load
-	[
+	[ //Mish load
 		"Save/Load",
 		"Load from server",
 		{
@@ -78,8 +75,7 @@ if (isserver) then { //server
 		}
 	] call Ares_fnc_RegisterCustomModule;
 
-	//Mish delete server
-	[
+	[ //Mish delete server
 		"Save/Load",
 		"Delete from server",
 		{
@@ -106,9 +102,7 @@ if (isserver) then { //server
 	] call Ares_fnc_RegisterCustomModule;
 };
 
-//player only
-if (!isdedicated) then {
-
+if (!isdedicated) then { //players
 	[ //Mish save
 		"Save/Load",
 		"Save to client",
@@ -351,8 +345,7 @@ if (!isdedicated) then {
 		}
 	] call Ares_fnc_RegisterCustomModule;
 
-	//Mish load
-	[
+	[ //Mish load
 		"Save/Load",
 		"Load from client",
 		{
@@ -387,8 +380,7 @@ if (!isdedicated) then {
 		}
 	] call Ares_fnc_RegisterCustomModule;
 
-	//Mish delete player
-	[
+	[ //Mish delete player
 		"Save/Load",
 		"Delete from client",
 		{
@@ -416,7 +408,6 @@ if (!isdedicated) then {
 	] call Ares_fnc_RegisterCustomModule;
 
 	//custom modules
-
 	[
 		"ALiVE",
 		"Add OPCOM Objective",
@@ -907,7 +898,6 @@ if (!isdedicated) then {
 			} else {
 				_pad setposasl [_pos select 0, _pos select 1, 0];
 			};
-			//_pad setvectorup [0,0,1];
 
 			_lhd = createVehicle ["ATLAS_B_LHD_helper", (getposatl _pad), [], 0, "none"];
 			[[_lhd,_pad], "seven_fnc_lha_main", true, true, true] call BIS_fnc_MP;
@@ -915,25 +905,6 @@ if (!isdedicated) then {
 			["LHD spawned"] call Ares_fnc_ShowZeusMessage;
 		}
 	] call Ares_fnc_RegisterCustomModule;
-
-/*
-	[
-		"7CMBG",
-		"Vehicle Checkpoint",
-		{
-			_dialogResult =
-				["Colors",
-						[
-							["Fortifications:", ["Basic", "HMGs", "Bunkers", "VCP"]],
-							["Outer Lights:", ["Red", "Green", "Yellow", "Blue", "White", "IR"], 1]
-						]
-				] call Ares_fnc_ShowChooseDialog;
-
-			if (count _dialogResult == 0) exitWith { "User cancelled dialog."; };
-
-			["HELIPAD LIGHTS DELETED"] call Ares_fnc_ShowZeusMessage;
-		}
-	] call Ares_fnc_RegisterCustomModule;*/
 };
 
 waituntil {!isnil "Ares_EditableObjectBlacklist"};
