@@ -18,7 +18,7 @@ class seven
 
 		class Ares_AddRhsReinforcementPools {};
 		class attachmrzr {};
-		class playradio {};
+		class fmradio {};
 		class adminmenudef {};
 		class briefing {};
 		class garageNew {};

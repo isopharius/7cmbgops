@@ -9,8 +9,8 @@ if (isdedicated) exitwith {};
 
 	_halojump = ["halojump","Halo Jump","\A3\ui_f\data\map\markers\military\end_CA.paa",{call seven_fnc_halo},{(vehicle player == player) && (count (nearestObjects [player, ["Land_FieldToilet_F"], 15]) > 0)}] call ace_interact_menu_fnc_createAction;
 
-	_playradio = ["playradio","Play radio","\7cmbgops\pics\i_carradio.paa",{[(_this select 0)] call seven_fnc_playradio},{(vehicle player == player) && (!visiblemap)}] call ace_interact_menu_fnc_createAction;
-	_soultrain = ["soultrain","Soul Train","",{[] call seven_fnc_init360},{(vehicle player == player) && (!visiblemap)}] call ace_interact_menu_fnc_createAction;
+	_fmradio = ["fmradio","Radio Play/Stop ","\7cmbgops\pics\i_carradio.paa",{[[(_this select 0)],"seven_fnc_fmradio",false,false,true] call BIS_fnc_MP;},{(vehicle player) == player}] call ace_interact_menu_fnc_createAction;
+	_soultrain = ["soultrain","Soul Train","",{[] call seven_fnc_init360},{(vehicle player) == player}] call ace_interact_menu_fnc_createAction;
 
 	_reqair = ["reqair","Request Air Mission","\a3\Modules_F_Curator\Data\portraitCASGunMissile_ca.paa",{[[],"seven_fnc_missionair",false,false,true] call BIS_fnc_MP;},{vehicle player != player}] call ace_interact_menu_fnc_createAction;
 	_reqass = ["reqass","Request Assault Mission","\A3\ui_f\data\map\markers\military\objective_CA.paa",{[[],"seven_fnc_missionclear",false,false,true] call BIS_fnc_MP;},{vehicle player != player}] call ace_interact_menu_fnc_createAction;
@@ -19,7 +19,7 @@ if (isdedicated) exitwith {};
 	_cheston = ["cheston","Backpack to chest","\A3\ui_f\data\map\vehicleicons\iconBackpack_ca.paa",{0 spawn seven_fnc_FSFSV_CallBackpackToFront},{(((call seven_fnc_FSFSV_TestPlayerBackpackBack) > 0) && (!visibleMap))}] call ace_interact_menu_fnc_createAction;
 	_chestoff = ["chestoff","Backpack to back","\A3\ui_f\data\map\vehicleicons\iconBackpack_ca.paa",{0 spawn seven_fnc_FSFSV_CallBackpackToBack},{(((call seven_fnc_FSFSV_TestPlayerBackpackFront) > 0)  && (!visibleMap))}] call ace_interact_menu_fnc_createAction;
 
-	_arsenalcrate = ["arsenalcrate","Grab Arsenal","\A3\ui_f\data\map\vehicleicons\iconCrate_ca.paa",{createVehicle ["B_CargoNet_01_ammo_F", (position player), [], 0, "can_collide"]},{((count (nearestObjects [player, ["Land_Cargo10_military_green_F","Land_Cargo20_military_green_F","Land_Cargo40_military_green_F","B_Slingload_01_Ammo_F"], 15]) > 0) && (!visibleMap))}] call ace_interact_menu_fnc_createAction;
+	_arsenalcrate = ["arsenalcrate","Grab Arsenal","\A3\ui_f\data\map\vehicleicons\iconCrate_ca.paa",{createVehicle ["B_CargoNet_01_ammo_F", (position player), [], 0, "can_collide"]},{count (nearestObjects [player, ["Land_Cargo10_military_green_F","Land_Cargo20_military_green_F","Land_Cargo40_military_green_F","B_Slingload_01_Ammo_F"], 15]) > 0}] call ace_interact_menu_fnc_createAction;
 
 	_garage = ["garage","Requisition Vehicle","\A3\ui_f\data\map\vehicleicons\iconCrateVeh_ca.paa",{[("depot")] spawn seven_fnc_garageNew},{((vehicle player == player) && ((player distance (getmarkerpos "depot")) < 30) && (!visibleMap))}] call ace_interact_menu_fnc_createAction;
 
@@ -31,7 +31,7 @@ if (isdedicated) exitwith {};
 
 	{
 		["Land_FMradio_F", 0, ["ACE_MainActions"], _x] call ace_interact_menu_fnc_addActionToClass;
-	} foreach [_playradio,_soultrain];
+	} foreach [_fmradio,_soultrain];
 
 	{
 		[player, 1, ["ACE_SelfActions", "ACE_Equipment"], _x] call ace_interact_menu_fnc_addActionToObject;

@@ -13,7 +13,7 @@ class Extended_InitPost_EventHandlers {
 	class LandVehicle {
 		fmradio_init = "(_this select 0) addaction ['<t color=''#FFFF00''>Open radio</t>',seven_fnc_radio,'',6,false,true,'','(_this in (crew _target))'];";
 	};
-*/
+	*/
 	//facilities
 	class Land_Medevac_house_V1_F {
 		medical_init = "(_this select 0) setvariable ['ace_medical_isMedicalFacility', 1, true]; (_this select 0) addBackpackCargoGlobal ['B_ons_Carryall_TCCC_TW',1]; (_this select 0) addBackpackCargoGlobal ['B_ons_Carryall_Paramedic',1];";
@@ -63,7 +63,7 @@ class Extended_InitPost_EventHandlers {
 		arsenal_init = "(_this select 0) addAction ['<t color=''#FFFF00''>LOADOUTS</t>',{[] spawn LT_fnc_LTmenu},'',1,true,true,'','_this distance _target < 5'];";
 	};
 	class B_Slingload_01_Ammo_F {
-		arsenal_init = "(_this select 0) addaction ['<t color=''#FFFF00''>Grab Arsenal Box</t>',{createVehicle ['B_CargoNet_01_ammo_F', (position player), [], 0, 'none']},'',1,true,true,'','(_this distance _target < 5) && ((getPos _target nearestObject ''B_CargoNet_01_ammo_F'') == objNull)']; (_this select 0) addaction ['<t color=''#FFFF00''>Grab Ammo Box</t>',{createVehicle ['ONS_Rifles_Box_TW', (position player), [], 0, 'none']},'',1,true,true,'','(_this distance _target < 5) && ((getPos _target nearestObject ''ONS_Rifles_Box_TW'') == objNull)']; (_this select 0) addaction ['<t color=''#FFFF00''>Grab MG Ammo Box</t>',{createVehicle ['ONS_LMG_AMMO_TW', (position player), [], 0, 'none']},'',1,true,true,'','(_this distance _target < 5) && ((getPos _target nearestObject ''ONS_LMG_AMMO_TW'') == objNull)'];";
+		arsenal_init = "(_this select 0) addaction ['<t color=''#FFFF00''>Grab Arsenal Box</t>',{createVehicle ['B_CargoNet_01_ammo_F', (position player), [], 0, 'none']},'',1,true,true,'','(_this distance _target < 5) && (((getPos _target) nearestObject ''B_CargoNet_01_ammo_F'') == objNull)']; (_this select 0) addaction ['<t color=''#FFFF00''>Grab Ammo Box</t>',{createVehicle ['ONS_Rifles_Box_TW', (position player), [], 0, 'none']},'',1,true,true,'','(_this distance _target < 5) && (((getPos _target) nearestObject ''ONS_Rifles_Box_TW'') == objNull)']; (_this select 0) addaction ['<t color=''#FFFF00''>Grab MG Ammo Box</t>',{createVehicle ['ONS_LMG_AMMO_TW', (position player), [], 0, 'none']},'',1,true,true,'','(_this distance _target < 5) && (((getPos _target) nearestObject ''ONS_LMG_AMMO_TW'') == objNull)'];";
 	};
 
 	//ships & subs
