@@ -899,7 +899,7 @@ if (!isdedicated) then { //players
 				_pad setposasl [_pos select 0, _pos select 1, 0];
 			};
 
-			_lhd = createVehicle ["ATLAS_B_LHD_helper", (getposatl _pad), [], 0, "none"];
+			_lhd = createVehicle ["ATLAS_ONS_LHD_helper", (getposatl _pad), [], 0, "none"];
 			[[_lhd,_pad], "seven_fnc_lha_main", true, true, true] call BIS_fnc_MP;
 
 			["LHD spawned"] call Ares_fnc_ShowZeusMessage;
