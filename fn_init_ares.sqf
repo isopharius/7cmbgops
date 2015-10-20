@@ -638,12 +638,11 @@ if (!isdedicated) then { //players
 				] call Ares_fnc_ShowChooseDialog;
 			if (count _dialogResult == 0) exitWith { "User cancelled dialog."; };
 
-			_mode = "bis_fnc_taskDefend";
-			switch (_dialogResult select 0) do
-			{
-				case 0: { _mode = "bis_fnc_taskDefend"; };
-				default { _mode = "CBA_fnc_taskDefend"; };
-			};
+			if ((_dialogResult select 0) == 1) then {
+				 _mode = "bis_fnc_taskDefend";
+			} else {
+				 _mode = "CBA_fnc_taskDefend";
+			}
 
 			_pos = _this select 0;
 			if (_mode == "CBA_fnc_taskDefend") then {
