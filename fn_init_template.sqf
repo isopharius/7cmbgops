@@ -1,6 +1,3 @@
-//HC script
-[true,120,false,true,60,10,true,[]] spawn seven_fnc_WerthlesHeadless;
-
 if (isHC) exitwith {};
 
 [] call seven_fnc_init_map;
