@@ -72,7 +72,7 @@ player createDiaryRecord [
 		<br/>2. EXTERIOR CHECK.
 		<br/>
 		<br/>Glitch Shot -------------------------- One Shot Fired.
-		<br/>Aircraft Obstruction & Damage -------- CHECK.
+		<br/>Aircraft Obstruction and Damage -------- CHECK.
 		<br/>
 		<br/>3. INTERIOR CHECK.
 		<br/>
@@ -111,7 +111,7 @@ player createDiaryRecord [
 		<br/>Landing Gear ------------------------- UP.
 		<br/>Fuel --------------------------------- Percentage.
 		<br/>Power -------------------------------- % Collective.
-		<br/>Heading & Distance to Way Point ------ As required.
+		<br/>Heading and Distance to Way Point ------ As required.
 		<br/>Exterior lights ---------------------- As required."
 	]
 ];
@@ -581,7 +581,7 @@ player createDiaryRecord [
 		<br/>
 		<br/>Pte(B): Private Basic. A new member who has completed their Basic Occupational Qualification and Section Battle Drill courses.
 		<br/>
-		<br/>Pte: Private. A Private has completed their Infantry Platoon Support Weapons and Ordnance Munitions & Explosive courses. These members have learned the fundamentals of becoming an effective infantryman.
+		<br/>Pte: Private. A Private has completed their Infantry Platoon Support Weapons and Ordnance Munitions and Explosive courses. These members have learned the fundamentals of becoming an effective infantryman.
 		<br/>
 		<br/>OCdt: Officer Cadet. Officer Cadets are the AirDet equivalent of a Pte and have begun their training as flight engineers and pilots.
 		<br/>
@@ -653,13 +653,13 @@ player createDiaryRecord [
 		<br/>*** VIRTUAL GARAGE ***
 		<br/>Access Virtual Garage using ACE-Self -> Requisition Vehicle near <marker name='depot'>Depot marker</marker>.
 		<br/>
-		<br/>*** SATCOM & TACCOM ***
+		<br/>*** SATCOM and TACCOM ***
 		<br/>Satellite and Tactical Command tools available inside vehicles or with large radio backpacks, under ACE-Self -> Equipment.
 		<br/>
 		<br/>*** VEHICLE SERVICE ***
 		<br/>Repair, rearm and refuel ground vehicles near <marker name='service'>Service marker</marker>, helipads are for choppers and hangars for fixed-wing.
 		<br/>
-		<br/>*** VEHICLE CARGO, TOW & LIFT ***
+		<br/>*** VEHICLE CARGO, TOW and LIFT ***
 		<br/>Most objects, fortifications and even some of the smaller vehicles can be used as cargo.  Wheeled vehicles can tow each other according to weight.  Helicopters slingload.
 		<br/>
 		<br/>Activate actions under ALiVE -> Player Logistics:
