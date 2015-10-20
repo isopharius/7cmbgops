@@ -33,7 +33,6 @@ class CfgFunctions
 {
 	#include "functions\cfgfunctions.hpp"
 	#include "scripts\LT\cfgfunctions.hpp"
-	#include "scripts\ALiVECommandTablet\functions\cfgfunctions.hpp"
 };
 
 class CfgNotifications
@@ -42,7 +41,6 @@ class CfgNotifications
 };
 
 #include "scripts\LT\LTmenu.hpp"
-#include "scripts\ALiVECommandTablet\dialogs.hpp"
 #include "scripts\pxs_satcom_a3\init_interface.hpp"
 #include "scripts\airboss\dialog.hpp"
 #include "scripts\carradio\dialog.hpp"
