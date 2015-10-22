@@ -9,7 +9,7 @@ if (random 1 > 0.5) then {
 };
 
 _target = createVehicle ["Skeet_Clay_F", [0, 0, 0], [], 0, "can_collide"];
-_target setPosASL [_position select 0, _position select 1, _position select 2];
+_target setPosworld [_position select 0, _position select 1, _position select 2];
 _target setVelocity [sin(_angle - (random 10) + (random 10)) * (10 + random 5), cos(_angle - (random 10) + (random 10)) * (10 + random 5), 5 + random 10];
 
 _target addEventHandler ["HitPart", {(_this select 0) call seven_fnc_on_hit}];

@@ -245,7 +245,7 @@ if (!isdedicated) then { //players
 					"_newObject = createVehicle ['%1', %2, [], 0, 'CAN_COLLIDE']; _newObject setposworld %3; _newObject setVectorDirAndUp [%4, %5];",
 					(typeOf _x),
 					(getPosworld _x),
-					(getPosASL _x),
+					(getPosworld _x),
 					(vectorDir _x),
 					(vectorUp _x)];
 			} forEach _emptyObjects + _emptyVehicles;
@@ -266,7 +266,7 @@ if (!isdedicated) then { //players
 							(skill _x),
 							(rank _x),
 							(getDir _x),
-							(getPosASL _x)];
+							(getPosworld _x)];
 					}
 					else
 					{
@@ -285,7 +285,7 @@ if (!isdedicated) then { //players
 						(typeOf _x),
 						(position _x),
 						(getDir _x),
-						(getPosASL _x)];
+						(getPosworld _x)];
 				} forEach _groupVehicles;
 
 				// Set group behaviours

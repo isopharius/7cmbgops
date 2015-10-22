@@ -3,7 +3,7 @@ if (isdedicated || isHC) exitwith {};
 	_veh = _this select 0;
 	_caller = _this select 1;
 
-			if (((getPosASL _veh select 2) < 60) or ((getPosworld _veh select 2) < 60)) exitwith {hint "Not enough altitude"};
+			if (((getPosworld _veh select 2) < 60) or ((getPosworld _veh select 2) < 60)) exitwith {hint "Not enough altitude"};
 
 			_caller allowDamage false;
 
