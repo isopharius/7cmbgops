@@ -46,6 +46,15 @@ class seven
 		class SHK_moveObjects {};
 		class Teleport {};
 	};
+	class ambience
+	{
+		file = "\7cmbgops\scripts\ambience";
+
+		class init_ambience {};
+		class SpyderAmbiance {};
+		class getunittypes {};
+		class loopcheck {};
+	};
 	class loadouts
 	{
 		file = "\7cmbgops\scripts\loadouts";
