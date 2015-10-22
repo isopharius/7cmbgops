@@ -77,7 +77,7 @@ _perFrameID = [{
 		_logic = _x;
 		if (({(_x distance2D getPos _logic) < 1000} count ([] call BIS_fnc_listPlayers)) == 0) then {
 			if (_logic getVariable "Active") then {
-				[_logic,"Deactivate"] spawn seven_fnc_SpyderAmbiance;
+				[_logic,"Deactivate"] call seven_fnc_SpyderAmbiance;
 				_deactivated = _deactivated + 1;
 			};
 		} else {
