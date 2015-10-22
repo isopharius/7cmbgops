@@ -18,10 +18,10 @@ if (_debug) then {
 };
 
 //-- Initialize unit types
-[_debug] execVM "SpyderAmbiance\getUnitTypes.sqf";
+[_debug] call seven_fnc_getUnitTypes;
 
 //-- Activate loop
-[_animals,_terrorists,_delay,_blacklists,_debug] execVM "SpyderAmbiance\loopCheck.sqf";
+[_animals,_terrorists,_delay,_blacklists,_debug] call seven_fnc_loopCheck;
 
 //-- Debug
 if (_debug) then {
