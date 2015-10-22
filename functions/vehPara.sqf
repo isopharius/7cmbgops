@@ -27,7 +27,7 @@ sleep 0.1;
 _para = createVehicle ["B_Parachute_02_F", [0, 0, 100], [], 0, "CAN_COLLIDE"];
 _para allowdamage false;
 //_para enableSimulationGlobal false;
-_para setpos (getPosATL _k);
+_para setposworld (getPosATL _k);
 
 _k attachTo [_para,[0,0,-.5]];
 
@@ -37,7 +37,7 @@ if !((daytime < 17) && (daytime > 7)) then {
 	_markertype = "NVG_TargetC";
 };
 
-_marker = createVehicle [_markertype, (position _k), [], 0, "CAN_COLLIDE"];
+_marker = createVehicle [_markertype, (getPosworld _k), [], 0, "CAN_COLLIDE"];
 _marker setPosATL (getPosATL _k);
 _marker attachTo [_k,[0,0,1]];
 

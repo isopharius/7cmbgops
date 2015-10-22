@@ -24,7 +24,7 @@ ______________________________________________________*/
 
 private ["_pos","_x"];
 
-_pos = getPos cache;
+_pos = getPosworld cache;
 _x = 0;
 
 //--- Delete the currently spawned cache.

@@ -242,9 +242,9 @@ if (!isdedicated) then { //players
 			_totalUnitsProcessed = 0;
 			{
 				_output pushBack format [
-					"_newObject = createVehicle ['%1', %2, [], 0, 'CAN_COLLIDE']; _newObject setPosASL %3; _newObject setVectorDirAndUp [%4, %5];",
+					"_newObject = createVehicle ['%1', %2, [], 0, 'CAN_COLLIDE']; _newObject setposworld %3; _newObject setVectorDirAndUp [%4, %5];",
 					(typeOf _x),
-					(position _x),
+					(getPosworld _x),
 					(getPosASL _x),
 					(vectorDir _x),
 					(vectorUp _x)];
@@ -260,9 +260,9 @@ if (!isdedicated) then { //players
 					if (vehicle _x == _x) then
 					{
 						_output pushBack format [
-							"_newUnit = _newGroup createUnit ['%1', %2, [], 0, 'CAN_COLLIDE']; _newUnit setSkill %3; _newUnit setRank '%4'; _newUnit setFormDir %5; _newUnit setDir %5; _newUnit setPosASL %6;",
+							"_newUnit = _newGroup createUnit ['%1', %2, [], 0, 'CAN_COLLIDE']; _newUnit setSkill %3; _newUnit setRank '%4'; _newUnit setFormDir %5; _newUnit setDir %5; _newUnit setposworld %6;",
 							(typeOf _x),
-							(position _x),
+							(getPosworld _x),
 							(skill _x),
 							(rank _x),
 							(getDir _x),
@@ -281,7 +281,7 @@ if (!isdedicated) then { //players
 				// Create the vehicles that are part of the group.
 				{
 					_output pushBack format [
-						"_newUnit = createVehicle ['%1', %2, [], 0, 'CAN_COLLIDE']; createVehicleCrew _newUnit; (crew _newUnit) join _newGroup; _newUnit setDir %3; _newUnit setFormDir %3; _newUnit setPosASL %4;",
+						"_newUnit = createVehicle ['%1', %2, [], 0, 'CAN_COLLIDE']; createVehicleCrew _newUnit; (crew _newUnit) join _newGroup; _newUnit setDir %3; _newUnit setFormDir %3; _newUnit setposworld %4;",
 						(typeOf _x),
 						(position _x),
 						(getDir _x),
@@ -642,7 +642,7 @@ if (!isdedicated) then { //players
 				 _mode = "bis_fnc_taskDefend";
 			} else {
 				 _mode = "CBA_fnc_taskDefend";
-			}
+			};
 
 			_pos = _this select 0;
 			if (_mode == "CBA_fnc_taskDefend") then {
@@ -893,9 +893,9 @@ if (!isdedicated) then { //players
 
 			_pad = createVehicle ["Land_HelipadEmpty_F", [(_pos select 0), (_pos select 1), (_pos select 2) + 10], [], 0, "can_collide"];
 			if (worldname == "mog") then {
-				_pad setposasl [_pos select 0, _pos select 1, 7.5];
+				_pad setposworld [_pos select 0, _pos select 1, 7.5];
 			} else {
-				_pad setposasl [_pos select 0, _pos select 1, 0];
+				_pad setposworld [_pos select 0, _pos select 1, 0];
 			};
 
 			_lhd = createVehicle ["ATLAS_ONS_LHD_helper", (getposatl _pad), [], 0, "none"];

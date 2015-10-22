@@ -33,8 +33,8 @@ switch (_missionType) do {
 		_newPos3 = [_markerpos, 400, 500, 10, 0, 10, 0] call BIS_fnc_findSafePos;
 
 		_radiohq = createVehicle ["Land_Jbad_hangar_2",[(_markerpos select 0) + 1, _markerpos select 1,0],[], 0, "NONE"];
-		_radiohq setPos _isFlat_arty;
-		_radiopos = getPos _radiohq;
+		_radiohq setPosworld _isFlat_arty;
+		_radiopos = getPosworld _radiohq;
 
 		_markerarty = ["artymarker", _radiopos, "ICON", [1,1], "COLOR:", "ColorRed", "TEXT:", "Mobile Artillery", "TYPE:", "o_art", "PERSIST"] call CBA_fnc_createMarker;
 
@@ -46,8 +46,8 @@ switch (_missionType) do {
 		_arty2 setFuel 0;
 		_arty2 setDamage 0;
 
-		_camonet1 = createVehicle ["CamoNet_OPFOR_big_F", getPos _arty1, [], 0, "can_collide"];
-		_camonet2 = createVehicle ["CamoNet_OPFOR_big_F", getPos _arty2, [], 0, "can_collide"];
+		_camonet1 = createVehicle ["CamoNet_OPFOR_big_F", getPosworld _arty1, [], 0, "can_collide"];
+		_camonet2 = createVehicle ["CamoNet_OPFOR_big_F", getPosworld _arty2, [], 0, "can_collide"];
 
 		_armor = createGroup INDEPENDENT;
 		_crew1 = _armor createUnit ["LOP_ISTS_Infantry_Engineer", [0,0,1], [], 0, "none"];
@@ -60,7 +60,7 @@ switch (_missionType) do {
 
 		_cars1 = createGroup INDEPENDENT;
 		[_newPos3, 10, "LOP_ISTS_Offroad_M2", _cars1] call BIS_fnc_spawnvehicle;
-		_null = [_cars1,getPos _arty1, 300] call CBA_fnc_taskPatrol;
+		_null = [_cars1,getPosworld _arty1, 300] call CBA_fnc_taskPatrol;
 		sleep 10;
 		[_newPos3, 10, "LOP_ISTS_Offroad_M2", _cars1] call BIS_fnc_spawnvehicle;
 
@@ -158,7 +158,7 @@ switch (_missionType) do {
 
 		_convoy1 = createGroup INDEPENDENT;
 		[_newPos, 10, "LOP_ISTS_BTR60", _convoy1] call BIS_fnc_spawnvehicle;
-		_null = [_convoy1,getPos _shed2, 300] call CBA_fnc_taskPatrol;
+		_null = [_convoy1,getPosworld _shed2, 300] call CBA_fnc_taskPatrol;
 		sleep 15;
 		[_newPos, 10, "LOP_AM_Landrover", _convoy1] call BIS_fnc_spawnvehicle;
 		sleep 15;
@@ -207,8 +207,8 @@ switch (_missionType) do {
 
 		_warehouse = createVehicle ["Land_Ind_Quarry",[(_markerpos select 0) + 1, _markerpos select 1,0],[], 0, "NONE"];
 		_warehouse setDamage 0.9;
-		_warehouse setPos _isFlat_warehouse;
-		_warehousepos = getPos _warehouse;
+		_warehouse setposworld _isFlat_warehouse;
+		_warehousepos = getPosworld _warehouse;
 
 		_markerwarehouse = ["warehousemarker", _warehousepos, "ICON", [1,1], "COLOR:", "ColorRed", "TEXT:", "Insurgent Depot", "TYPE:", "o_support", "PERSIST"] call CBA_fnc_createMarker;
 
@@ -232,7 +232,7 @@ switch (_missionType) do {
 
 		sleep 3;
 
-		_sbomb1 = createVehicle ["R_60mm_HE", (getPos _truck1), [], 0, "can_collide"];
+		_sbomb1 = createVehicle ["R_60mm_HE", (getPosworld _truck1), [], 0, "can_collide"];
 		_truck1 setDammage 1;
 
 		sleep 10;

@@ -38,9 +38,9 @@ _showHint = _this select 3;
 
 _helipadDir = getDir _helipad;
 
-_xPos = getPos _helipad select 0;
-_yPos = getPos _helipad select 1;
-_zPos = getPos _helipad select 2;
+_xPos = getPosworld _helipad select 0;
+_yPos = getPosworld _helipad select 1;
+_zPos = getPosworld _helipad select 2;
 
 hint format["%1 %2 %3", _xPos, _yPos, _zPos];
 
@@ -146,7 +146,7 @@ if(!isNil ("_innerLightTemp")) then
 {
 	_objects = nearestObjects [_helipad, [_innerLight], 5];
 	{
-		createVehicle [_innerLightTemp, [(getPos _x select 0),(getPos _x select 1),(getPos _x select 2)], [],0,"CAN_COLLIDE"];
+		createVehicle [_innerLightTemp, [(getPosworld _x select 0),(getPosworld _x select 1),(getPosworld _x select 2)], [],0,"CAN_COLLIDE"];
 		deleteVehicle _x;
 	} forEach _objects;
 };
@@ -154,7 +154,7 @@ if(!isNil ("_outerLightTemp")) then
 {
 	_objects = nearestObjects [_helipad, [_outerLight], 7.2];
 	{
-		createVehicle [_outerLightTemp, [(getPos _x select 0),(getPos _x select 1),(getPos _x select 2)], [],0,"CAN_COLLIDE"];
+		createVehicle [_outerLightTemp, [(getPosworld _x select 0),(getPosworld _x select 1),(getPosworld _x select 2)], [],0,"CAN_COLLIDE"];
 		deleteVehicle _x;
 	} forEach _objects;
 };

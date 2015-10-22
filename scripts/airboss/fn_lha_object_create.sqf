@@ -7,7 +7,7 @@ disableSerialization;
 	_type = _control lbData _index;
 
 	_vehicle = createVehicle [_type, _position, [], 0, "can_collide"];
-	_vehicle setposASL [(_position select 0), (_position select 1), 17];
+	_vehicle setposworld [(_position select 0), (_position select 1), 17];
 	_vehicle setdir _hdg;
 
 	player reveal _vehicle;

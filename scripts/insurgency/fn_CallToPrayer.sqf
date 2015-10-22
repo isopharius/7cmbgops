@@ -46,7 +46,7 @@ if(isServer) then  {
 					_dir = random 359;
 
 					//--- Create loudspeaker around the defined object as per common_defines.
-					_loudSpeaker = createVehicle ["Land_Loudspeakers_F",[ (getPos _x select 0)-15*sin(_dir),(getPos _x select 1)-15*cos(_dir)], [], 0, "CAN_COLLIDE"];
+					_loudSpeaker = createVehicle ["Land_Loudspeakers_F",[ (getPosworld _x select 0)-15*sin(_dir),(getPosworld _x select 1)-15*cos(_dir)], [], 0, "CAN_COLLIDE"];
 
 					//--- Add event handler similar to cache to only allow Satchel or Demo Charges.
 					_loudSpeaker addEventHandler ["handledamage", {

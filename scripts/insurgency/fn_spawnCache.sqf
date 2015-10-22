@@ -138,7 +138,7 @@ CACHE enableSimulationGlobal false;
 
 //--- Move the Cache to the above select position
 //--- TODO: Verify we even need this.
-CACHE setPos _targetLocation;
+CACHE setposworld _targetLocation;
 publicVariable "CACHE";
 
 sleep 1;

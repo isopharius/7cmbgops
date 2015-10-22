@@ -1,10 +1,10 @@
 /*
   SHK_moveObjects
-  
+
   Version 0.31
   Author: Shuko (miika@miikajarvinen.fi, shuko@quakenet)
   http://forums.bistudio.com/showthread.php?163871-SHK_moveObjects
-  
+
   Moves set of objects from A to B, retaining the direction and distance from
   a point of reference.
 
@@ -15,7 +15,7 @@
     3: Array or String      Optional. Type of objects to search for.
     4: Number or Object     Optional. Direction adjustment. Affects position of objects, not the dir they will be facing.
     5: Number or Object     Optional. Direction the objects will be facing after they are moved.
-    
+
   Examples:
     nul = [gl1,gl2,50] execvm "shk_moveobjects.sqf"
     nul = [start,destination,100,"Man"] execvm "shk_moveobjects.sqf"
@@ -49,7 +49,7 @@ _objects = nearestobjects [_aPos,_types,_range];
   _dir = _dir + _dAdj;
   _dst = _aPos distance _xPos;
   if (!isnil "_fDir") then {_x setdir _fDir};
-  _x setpos [((_dPos select 0) + (_dst * sin _dir)),
+  _x setposworld [((_dPos select 0) + (_dst * sin _dir)),
             ((_dPos select 1) + (_dst * cos _dir)),
             0];
 } foreach _objects;

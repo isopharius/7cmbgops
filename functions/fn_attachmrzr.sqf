@@ -13,7 +13,7 @@ _bp = backpackCargo _mrzr;
 	_bpcount = count _bppoints;
 	if (_bpcount > 0) then {
 		_rnd = floor (random _bpcount);
-		_holder = createVehicle ["GroundWeaponHolder",[((getpos _mrzr) select 0),((getpos _mrzr) select 1),100],[],0, "CAN_COLLIDE"];
+		_holder = createVehicle ["GroundWeaponHolder",[((getPosworld _mrzr) select 0),((getPosworld _mrzr) select 1),100],[],0, "CAN_COLLIDE"];
 		_holder addBackpackCargoGlobal [_x, 1];
 		_rndpoint = _bppoints select _rnd;
 		_holder attachto [_mrzr, [0, 0, 0], _rndpoint];
@@ -28,7 +28,7 @@ _wep = weaponCargo _mrzr;
 	_wepcount = count _weppoints;
 	if ((_wepcount > 0) && (_x iskindof "Launchers_Base_F")) then {
 		_rnd = floor (random _wepcount);
-		_holder = createVehicle ["GroundWeaponHolder",[((getpos _mrzr) select 0),((getpos _mrzr) select 1),100],[],0, "CAN_COLLIDE"];
+		_holder = createVehicle ["GroundWeaponHolder",[((getPosworld _mrzr) select 0),((getPosworld _mrzr) select 1),100],[],0, "CAN_COLLIDE"];
 		_holder addWeaponCargoGlobal [_x, 1];
 		_rndpoint = _weppoints select _rnd;
 		_holder attachto [_mrzr, [0, 0, 0], _rndpoint];

@@ -2,13 +2,13 @@
 //  Convoy creator
 //  Version: 1.6
 //  Author: DTM2801
-//  
+//
 // Credits & thanks: TRexian for providing random cargo part
 // =========================================================================================================
 //
 // Description:
-// This script wil create a convoy (configurable) and will keep monitoring all convoy vehicles for the correct distance by adjusting speed. 
-// If the distance between convoy vehicles gets too far the forward vehicle will slowdown and eventually wait until the follower gets back 
+// This script wil create a convoy (configurable) and will keep monitoring all convoy vehicles for the correct distance by adjusting speed.
+// If the distance between convoy vehicles gets too far the forward vehicle will slowdown and eventually wait until the follower gets back
 // in acceptable distance.
 //
 // Usage:
@@ -50,7 +50,7 @@ if (isServer) then {
 	_customarray = _this select 7; 	if (isNil ("_customarray")) exitWith {hint "CONVOY: \nVehicles not defined."};
 	_wpmarkers = _this select 8; 	if (isNil ("_wpmarkers")) exitWith {hint "CONVOY: \nMarkers true/false not defined."};
 	_debug = _this select 9; 		if (isNil ("_debug")) exitWith {hint "CONVOY: \nDebug true/false not defined."};
-	
+
 	_wpcount = (count _wparray);
 	_vehiclecount = (count _vehiclearray);
 	_customcount = (count _customarray);
@@ -60,7 +60,7 @@ if (isServer) then {
 	_convoytype = 0;
 		if (_vehiclecount > 0) then {_convoytype = 1};
 		if (_customcount > 0) then {_convoytype = 2};
-			
+
 	switch (_convoytype) do {
 		case 0:
 		{
@@ -81,7 +81,7 @@ if (isServer) then {
 			[_convoygrp,_i] setwaypointCombatMode "BLUE";
 			[_convoygrp,_i] setWaypointFormation "FILE";
 			[_convoygrp,_i] setWaypointBehaviour "SAFE";
-	
+
 				if (_wpmarkers) then {
 				_wpmarker_name = (_wparray select _i);
 				_wpmarker = createMarker[_wpmarker_name,(getmarkerpos _selectwp)];
@@ -94,21 +94,21 @@ if (isServer) then {
 		_wp setWaypointType "CYCLE";
 		};
 		_convoyarray = [];
-			
+
 			while {_vehspawn < (_convoysize)} do {
-			_spawn = [(getpos _position), (getdir _position), _vehicle, _convoygrp] call BIS_fnc_spawnVehicle;
+			_spawn = [(getPosworld _position), (getdir _position), _vehicle, _convoygrp] call BIS_fnc_spawnVehicle;
 			_spawned = (_spawn select 0);
 			_spawned setVehicleVarname format ["Convoy_%1",(_vehspawn + 1)];
 			_spawned addEventHandler ["dammaged", {if (_debug) then {hint format ["%1 has been damaged",_this select 0];}}];
-			_spawned addEventHandler ["killed", {if (_debug) then {hint format ["%1 has been destroyed!",_this select 0];}}];	
+			_spawned addEventHandler ["killed", {if (_debug) then {hint format ["%1 has been destroyed!",_this select 0];}}];
 			_convoyarray = _convoyarray + [_spawn];
 			_convoycount = count _convoyarray;
 			_vehspawn = _vehspawn + 1;
-			
+
 			_cargoNum = _spawned emptyPositions "cargo";
 				if (_cargoNum > 0) then {
 				_fillSlots = round (random _cargoNum);
-				_pos = getpos _position;
+				_pos = getPosworld _position;
 				_locGr =  _pos findEmptyPosition [10, 100];
 				sleep .2;
 					if (_locGr select 0 > 0)then {
@@ -117,7 +117,7 @@ if (isServer) then {
 					{_x moveInCargo _spawned;} forEach units _cargo;
 					};
 				};
-						
+
 				if (_convoycount > 1) then {
 				_convoy1 = (_convoyarray select _convoycount -1);
 				_convoy2 = (_convoyarray select _convoycount -2);
@@ -125,15 +125,15 @@ if (isServer) then {
 				_cselect2 = _convoy2 select 0;
 				_spawn call { [_cselect1,_cselect2,_debug] execVM "convoy_control.sqf"; } ;
 				};
-			sleep _delay;		
+			sleep _delay;
 			};
 		};
-		
+
 		case 1:
 		{
 		_convoycenter = createCenter _side;
 		_convoygrp = createGroup _side;
-		
+
 			for "_i" from 0 to (_wpcount -1) do {
 			_selectwp = (_wparray select _i);
 			_wp = _convoygrp addWaypoint [(getmarkerpos _selectwp), 0];
@@ -142,7 +142,7 @@ if (isServer) then {
 			[_convoygrp,_i] setwaypointCombatMode "BLUE";
 			[_convoygrp,_i] setWaypointFormation "FILE";
 			[_convoygrp,_i] setWaypointBehaviour "SAFE";
-	
+
 				if (_wpmarkers) then {
 				_wpmarker_name = (_wparray select _i);
 				_wpmarker = createMarker[_wpmarker_name,(getmarkerpos _selectwp)];
@@ -153,11 +153,11 @@ if (isServer) then {
 			if (_wpcycle) then {
 			_wp = _convoygrp addWaypoint [(getmarkerpos (_wparray select 0)), 0];
 			_wp setWaypointType "CYCLE";
-			};	
+			};
 		_convoyarray = [];
-			
+
 			for "_i" from 0 to (_vehiclecount -1) do {
-			_spawn = [(getpos _position), (getdir _position),(_vehiclearray select _i), _convoygrp] call BIS_fnc_spawnVehicle;
+			_spawn = [(getPosworld _position), (getdir _position),(_vehiclearray select _i), _convoygrp] call BIS_fnc_spawnVehicle;
 			_spawned = (_spawn select 0);
 			_spawned setVehicleVarname format ["Convoy%1",(_vehspawn + 1)];
 			_spawned addEventHandler ["dammaged", {if (_debug) then {hint format ["%1 has been damaged",_this select 0];}}];
@@ -165,11 +165,11 @@ if (isServer) then {
 			_convoyarray = _convoyarray + [_spawn];
 			_convoycount = count _convoyarray;
 			_vehspawn = _vehspawn + 1;
-			
+
 			_cargoNum = _spawned emptyPositions "cargo";
 				if (_cargoNum > 0) then {
 				_fillSlots = round (random _cargoNum);
-				_pos = getpos _position;
+				_pos = getPosworld _position;
 				_locGr =  _pos findEmptyPosition [10, 100];
 				sleep .2;
 					if (_locGr select 0 > 0)then {
@@ -178,7 +178,7 @@ if (isServer) then {
 					{_x moveInCargo _spawned;} forEach units _cargo;
 					};
 				};
-			
+
 				if (_convoycount > 1) then {
 				_convoy1 = (_convoyarray select _convoycount -1);
 				_convoy2 = (_convoyarray select _convoycount -2);
@@ -186,10 +186,10 @@ if (isServer) then {
 				_cselect2 = _convoy2 select 0;
 				_spawn call { [_cselect1,_cselect2,_debug] execVM "convoy_control.sqf"; } ;
 				};
-			sleep _delay;		
+			sleep _delay;
 			};
 		};
-		
+
 		case 2:
 		{
 		_convoygrp = group (_customarray select 0);
@@ -201,7 +201,7 @@ if (isServer) then {
 			[_convoygrp,_i] setwaypointCombatMode "BLUE";
 			[_convoygrp,_i] setWaypointFormation "FILE";
 			[_convoygrp,_i] setWaypointBehaviour "SAFE";
-	
+
 				if (_wpmarkers) then {
 				_wpmarker_name = (_wparray select _i);
 				_wpmarker_name setMarkerType "DOT";
@@ -212,9 +212,9 @@ if (isServer) then {
 			if (_wpcycle) then {
 			_wp = _convoygrp addWaypoint [(getmarkerpos (_wparray select 0)), 0];
 			_wp setWaypointType "CYCLE";
-			};	
+			};
 		_convoyarray = [];
-			
+
 			for "_i" from 0 to (_customcount -1) do {
 			_custom = (_customarray select _i);
 			_custom addEventHandler ["dammaged", {if (_debug) then {hint format ["%1 has been damaged",_this select 0];}}];
@@ -230,7 +230,7 @@ if (isServer) then {
 				_custom call { [_cselect1,_cselect2,_debug] execVM "convoy_control.sqf"; } ;
 				};
 			sleep _delay;
-			};		
+			};
 		};
 	};
 

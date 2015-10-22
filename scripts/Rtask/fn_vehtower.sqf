@@ -5,7 +5,7 @@
 
 _towedVeh = _this select 0;
 
-_towingVeh = getPos _towedVeh nearestObject "B_APC_Tracked_01_CRV_F";
+_towingVeh = getPosworld _towedVeh nearestObject "B_APC_Tracked_01_CRV_F";
 
 _towedVeh attachTo [_towingVeh,[0,-10,0]];
 

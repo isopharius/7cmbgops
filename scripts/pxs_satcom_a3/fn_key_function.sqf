@@ -51,28 +51,28 @@ if (!(_return)) then
 		case (({_x in _pressedButtonArray} count (actionKeys "MoveForward")) > 0):
 		{
 			PXS_SatelliteNorthMovementDelta = 2.5;
-			PXS_SatelliteTarget setPos [((getPos PXS_SatelliteTarget) select 0) - PXS_SatelliteNorthMovementDelta,((getPos PXS_SatelliteTarget) select 1) + PXS_SatelliteNorthMovementDelta,(getPos PXS_SatelliteTarget) select 2];
+			PXS_SatelliteTarget setPosworld [((getPosworld PXS_SatelliteTarget) select 0) - PXS_SatelliteNorthMovementDelta,((getPosworld PXS_SatelliteTarget) select 1) + PXS_SatelliteNorthMovementDelta,(getPosworld PXS_SatelliteTarget) select 2];
 			call seven_fnc_updateCamera;
 		};
 		//case 31://S
 		case (({_x in _pressedButtonArray} count (actionKeys "MoveBack")) > 0):
 		{
 			PXS_SatelliteSouthMovementDelta = 2.5;
-			PXS_SatelliteTarget setPos [((getPos PXS_SatelliteTarget) select 0) + PXS_SatelliteSouthMovementDelta,((getPos PXS_SatelliteTarget) select 1) - PXS_SatelliteSouthMovementDelta,(getPos PXS_SatelliteTarget) select 2];
+			PXS_SatelliteTarget setPosworld [((getPosworld PXS_SatelliteTarget) select 0) + PXS_SatelliteSouthMovementDelta,((getPosworld PXS_SatelliteTarget) select 1) - PXS_SatelliteSouthMovementDelta,(getPosworld PXS_SatelliteTarget) select 2];
 			call seven_fnc_updateCamera;
 		};
 		//case 30://A
 		case (({_x in _pressedButtonArray} count (actionKeys "TurnLeft")) > 0):
 		{
 			PXS_SatelliteWestMovementDelta = 2.5;
-			PXS_SatelliteTarget setPos [((getPos PXS_SatelliteTarget) select 0) - PXS_SatelliteWestMovementDelta,((getPos PXS_SatelliteTarget) select 1) - PXS_SatelliteWestMovementDelta,(getPos PXS_SatelliteTarget) select 2];
+			PXS_SatelliteTarget setPosworld [((getPosworld PXS_SatelliteTarget) select 0) - PXS_SatelliteWestMovementDelta,((getPosworld PXS_SatelliteTarget) select 1) - PXS_SatelliteWestMovementDelta,(getPosworld PXS_SatelliteTarget) select 2];
 			call seven_fnc_updateCamera;
 		};
 		//case 32://D
 		case (({_x in _pressedButtonArray} count (actionKeys "TurnRight")) > 0):
 		{
 			PXS_SatelliteEastMovementDelta = 2.5;
-			PXS_SatelliteTarget setPos [((getPos PXS_SatelliteTarget) select 0) + PXS_SatelliteEastMovementDelta,((getPos PXS_SatelliteTarget) select 1) + PXS_SatelliteEastMovementDelta,(getPos PXS_SatelliteTarget) select 2];
+			PXS_SatelliteTarget setPosworld [((getPosworld PXS_SatelliteTarget) select 0) + PXS_SatelliteEastMovementDelta,((getPosworld PXS_SatelliteTarget) select 1) + PXS_SatelliteEastMovementDelta,(getPosworld PXS_SatelliteTarget) select 2];
 			call seven_fnc_updateCamera;
 		};
 		//case 78://Num +

@@ -29,7 +29,7 @@ ______________________________________________________*/
 private ["_player","_pos","_distance","_offset","_height","_newspawnpos"];
 
 _player = _this select 1;
-_pos = getPos player;
+_pos = getPosworld player;
 _distance = 2;
 _offset = 0;
 _height = -4;

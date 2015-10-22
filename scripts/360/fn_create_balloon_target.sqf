@@ -18,7 +18,7 @@ if (_targetRandomDir) then
 	_direction = random 360;
 } else
 {
-	_vecToTarget = (getPosASL player) vectorFromTo (getPosASL _target);
+	_vecToTarget = (getPosworld player) vectorFromTo (getPosworld _target);
 	_direction = (_vecToTarget select 0) atan2 (_vecToTarget select 1);
 };
 
@@ -37,7 +37,7 @@ if (_targetRandomDir) then
 	_direction = random 360;
 } else
 {
-	_vecToTarget = (getPosASL player) vectorFromTo (getPosASL _target);
+	_vecToTarget = (getPosworld player) vectorFromTo (getPosworld _target);
 	_direction = (_vecToTarget select 0) atan2 (_vecToTarget select 1);
 };
 

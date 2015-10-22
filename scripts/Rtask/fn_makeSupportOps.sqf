@@ -31,12 +31,12 @@ switch (_missionType) do {
 
 		_explo = createVehicle [_ied,[(_markerpos select 0) + 3, _markerpos select 1,0],[], 0, "NONE"];
 
-		_pole = createVehicle ["Pole_F", getPos _explo, [], 0, "NONE"];
+		_pole = createVehicle ["Pole_F", getPosworld _explo, [], 0, "NONE"];
 		[_pole,"iedblow",true,true] call BIS_fnc_MP;
 
 		_grp1S = [_markerpos, WEST, (configfile >> "CfgGroups" >> "West" >> "BLU_F" >> "Infantry" >> "BUS_InfTeam")] call BIS_fnc_spawnGroup;
 		{_x allowdamage false} foreach units _grp1S;
-		_null = [_grp1S,getPos _pole, 150] call CBA_fnc_taskPatrol;
+		_null = [_grp1S,getPosworld _pole, 150] call CBA_fnc_taskPatrol;
 
 		_null = [west, "mob_ied", ["Must neutralize the IED.", "Clear IED", "Clear IED"], getMarkerPos "mob_ied", false] call BIS_fnc_taskSetState;
 		_null = ["mob_ied", "CREATED"] call BIS_fnc_taskSetState;
@@ -73,14 +73,14 @@ switch (_missionType) do {
 		_eng = createVehicle ["B_APC_Tracked_01_CRV_F",[(getMarkerpos "respawn_west" select 0) + 10, getMarkerpos "respawn_west" select 1,0],[], 0, "NONE"];
 		_eng setFuel 1;
 		_eng allowDammage false;
-		_sign = createVehicle ["Sign_Sphere25cm_F",getPos _eng, [], 0, "NONE"];
+		_sign = createVehicle ["Sign_Sphere25cm_F",getPosworld _eng, [], 0, "NONE"];
 		_sign attachTo [_eng,[0,0,+5]];
 
 		_cra = createVehicle [_crater,[(_markerpos select 0), _markerpos select 1,0],[], 0, "NONE"];
 
 		_grp1S = [_markerpos, WEST, (configfile >> "CfgGroups" >> "West" >> "BLU_F" >> "Infantry" >> "BUS_InfTeam")] call BIS_fnc_spawnGroup;
 		{_x allowdamage false} foreach units _grp1S;
-		_null = [_grp1S,getPos _cra, 150] call CBA_fnc_taskPatrol;
+		_null = [_grp1S,getPosworld _cra, 150] call CBA_fnc_taskPatrol;
 
 		_null = [west, "mob_rrep", ["Take the CRV and repair the MSR.", "Road Repair", "Road Repair"], getMarkerPos "mob_rrep", false] call BIS_fnc_taskSetState;
 		_null = ["mob_rrep", "CREATED"] call BIS_fnc_taskSetState;
@@ -125,7 +125,7 @@ switch (_missionType) do {
 		_eng = createVehicle ["B_Truck_01_box_F",[(getMarkerpos "respawn_west" select 0) + 10, getMarkerpos "respawn_west" select 1,0],[], 0, "NONE"];
 		_eng setFuel 1;
 		_eng allowDammage false;
-		_sign = createVehicle ["Sign_Sphere25cm_F",getPos _eng, [], 0, "NONE"];
+		_sign = createVehicle ["Sign_Sphere25cm_F",getPosworld _eng, [], 0, "NONE"];
 		_sign attachTo [_eng,[0,0,+5]];
 
 		_mhq = ["mediumCheckpoint1"] call ALIVE_fnc_findComposition;
@@ -180,7 +180,7 @@ switch (_missionType) do {
 		_eng = createVehicle ["B_Truck_01_box_F",[(getMarkerpos "respawn_west" select 0) + 10, getMarkerpos "respawn_west" select 1,0],[], 0, "NONE"];
 		_eng setFuel 1;
 		_eng allowDammage false;
-		_sign = createVehicle ["Sign_Sphere25cm_F",getPos _eng, [], 0, "NONE"];
+		_sign = createVehicle ["Sign_Sphere25cm_F",getPosworld _eng, [], 0, "NONE"];
 		_sign attachTo [_eng,[0,0,+5]];
 
 		_grp1S = [_markerpos, WEST, (configfile >> "CfgGroups" >> "West" >> "BLU_F" >> "Infantry" >> "BUS_InfTeam")] call BIS_fnc_spawnGroup;
@@ -244,7 +244,7 @@ switch (_missionType) do {
 		_eng = createVehicle ["B_APC_Tracked_01_CRV_F",[(getMarkerpos "respawn_west" select 0) + 10, getMarkerpos "respawn_west" select 1,0],[], 0, "NONE"];
 		_eng setFuel 1;
 		_eng allowDammage false;
-		_sign = createVehicle ["Sign_Sphere25cm_F",getPos _eng, [], 0, "NONE"];
+		_sign = createVehicle ["Sign_Sphere25cm_F",getPosworld _eng, [], 0, "NONE"];
 		_sign attachTo [_eng,[0,0,+5]];
 
 		_damve = createVehicle [_dveh,[(_markerpos select 0) + 10, _markerpos select 1,0],[], 0, "NONE"];
@@ -256,7 +256,7 @@ switch (_missionType) do {
 
 		_grp1S = [_markerpos, WEST, (configfile >> "CfgGroups" >> "West" >> "BLU_F" >> "Infantry" >> "BUS_InfTeam")] call BIS_fnc_spawnGroup;
 		{_x allowdamage false} foreach units _grp1S;
-		_null = [_grp1S,getPos _damve, 150] call CBA_fnc_taskPatrol;
+		_null = [_grp1S,getPosworld _damve, 150] call CBA_fnc_taskPatrol;
 
 		_null = [west, "mob_vrepair", ["Take the CRV to tow damaged vehicle to Service area in Main Camp", "Repair vehicle", "Repair Vehicle"], getMarkerPos "mob_vrepair", false] call BIS_fnc_taskSetState;
 		_null = ["mob_vrepair", "CREATED"] call BIS_fnc_taskSetState;
@@ -310,12 +310,12 @@ switch (_missionType) do {
 		{_men1 disableAI _x} forEach ["MOVE","ANIM","AUTOTARGET","TARGET","FSM"];
 		{[_men1,_x,true,true] call BIS_fnc_MP;} foreach ["dragmat","dropmat","loadmat"];
 
-		_camilla = createVehicle ["Land_Ground_sheet_khaki_F", getPos _men1, [], 0, "NONE"];
+		_camilla = createVehicle ["Land_Ground_sheet_khaki_F", getPosworld _men1, [], 0, "NONE"];
 		_camilla attachTo [_men1,[0,0,0]];
 
 		_grp1S = [_markerpos, WEST, (configfile >> "CfgGroups" >> "West" >> "BLU_F" >> "Infantry" >> "BUS_InfTeam")] call BIS_fnc_spawnGroup;
 		{_x allowdamage false} foreach units _grp1S;
-		_null = [_grp1S,getPos _truck, 150] call CBA_fnc_taskPatrol;
+		_null = [_grp1S,getPosworld _truck, 150] call CBA_fnc_taskPatrol;
 
 		_null = [west, "mob_rescue", ["Evac wounded personnel from the AO and bring them to MASH in Main Camp, you can only do it with MEDEVAC Chopper.", "MEDEVAC", "MEDEVAC"], getMarkerPos "mob_rescue", false] call BIS_fnc_taskSetState;
 		_null = ["mob_rescue", "CREATED"] call BIS_fnc_taskSetState;
@@ -360,20 +360,20 @@ switch (_missionType) do {
 		_uav setDammage 0.8;
 		[_uav,"uavdata",true,true] call BIS_fnc_MP;
 
-		_device = createVehicle ["Land_SurvivalRadio_F", getPos _uav, [], 0, "none"];
+		_device = createVehicle ["Land_SurvivalRadio_F", getPosworld _uav, [], 0, "none"];
 		_device attachTo [_uav,[0,0,-0.3]];
 
-		_markeruav = ["uavmarker", getPos _uav, "ICON", [0.7,0.7], "COLOR:", "ColorRed", "TEXT:", "Downed UAV", "TYPE:", "o_uav", "PERSIST"] call CBA_fnc_createMarker;
+		_markeruav = ["uavmarker", getPosworld _uav, "ICON", [0.7,0.7], "COLOR:", "ColorRed", "TEXT:", "Downed UAV", "TYPE:", "o_uav", "PERSIST"] call CBA_fnc_createMarker;
 
 		_grp1S = [_markerpos, INDEPENDENT, (configfile >> "CfgGroups" >> "INDEP" >> "LOP_ISTS" >> "Infantry" >> "LOP_ISTS_Support_section")] call BIS_fnc_spawnGroup;
-		_null = [_grp1S,getPos _uav, 150] call CBA_fnc_taskDefend;
+		_null = [_grp1S,getPosworld _uav, 150] call CBA_fnc_taskDefend;
 
 		_grp2S = [_markerpos, INDEPENDENT, (configfile >> "CfgGroups" >> "INDEP" >> "LOP_ISTS" >> "Infantry" >> "LOP_ISTS_Support_section")] call BIS_fnc_spawnGroup;
-		_null = [_grp2S,getPos _uav, 200] call CBA_fnc_taskPatrol;
+		_null = [_grp2S,getPosworld _uav, 200] call CBA_fnc_taskPatrol;
 
 		_cars2 = createGroup INDEPENDENT;
 		[_markerpos, 10, "LOP_ISTS_Landrover_M2", _cars2] call BIS_fnc_spawnvehicle;
-		_null = [_cars2,getPos _uav, 700] call CBA_fnc_taskPatrol;
+		_null = [_cars2,getPosworld _uav, 700] call CBA_fnc_taskPatrol;
 		sleep 10;
 		[_markerpos, 10, "LOP_ISTS_Landrover_M2", _cars2] call BIS_fnc_spawnvehicle;
 
@@ -419,7 +419,7 @@ switch (_missionType) do {
 
 		_wreck = createVehicle [_helo, _newPos, [], 0, "none"];
 		_wreck setDammage 1;
-		_wreckpos = getPos _wreck;
+		_wreckpos = getPosworld _wreck;
 
 		sleep 0.3;
 
@@ -436,10 +436,10 @@ switch (_missionType) do {
 
 		_IRgren = createVehicle ["B_IRStrobe", _newPos2, [], 0, "NONE"];
 
-		_signpl = createVehicle ["Sign_Sphere25cm_F",getPos _pilot1, [], 0, "NONE"];
+		_signpl = createVehicle ["Sign_Sphere25cm_F",getPosworld _pilot1, [], 0, "NONE"];
 		_signpl attachTo [_pilot1,[0,0,+5]];
 
-		_markerpilot = ["pilotmarker", getPos _pilot1, "ICON", [0.7,0.7], "COLOR:", "ColorBlue", "TEXT:", "Pilot CSAR", "TYPE:", "hd_join", "PERSIST"] call CBA_fnc_createMarker;
+		_markerpilot = ["pilotmarker", getPosworld _pilot1, "ICON", [0.7,0.7], "COLOR:", "ColorBlue", "TEXT:", "Pilot CSAR", "TYPE:", "hd_join", "PERSIST"] call CBA_fnc_createMarker;
 
 		sleep 0.3;
 

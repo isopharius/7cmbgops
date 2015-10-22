@@ -17,7 +17,7 @@ _bomber allowFleeing 1;
 		_rnd 	= floor (random (count(_nearUnit)));
 		_victim = _nearUnit select _rnd;
 
-		_pos = position _victim;
+		_pos = getPosworld _victim;
 		_bomber doMove _pos;
 		sleep 0.1;
 		waitUntil {_bomber distance _pos < 25 || !alive _bomber || !alive _victim};
@@ -28,12 +28,12 @@ _bomber allowFleeing 1;
 			_rnd 	= floor (random (count(_nearUnit)));
 			_victim = _nearUnit select _rnd;
 		};
-		_pos = position _victim;
+		_pos = getPosworld _victim;
 		if (rating _bomber > -2001) then {
 			_bomber addRating -10000000;
 		};
 		sleep 0.1;
-		_pos = position _victim;
+		_pos = getPosworld _victim;
 		_bomber doMove _pos;
 		waitUntil {_bomber distance _pos < 10 || !alive _bomber || !alive _victim};
 		if (!alive _bomber) exitwith {};
@@ -42,7 +42,7 @@ _bomber allowFleeing 1;
 			if (count _nearUnit == 0) exitwith {};
 			_victim = _nearUnit call BIS_fnc_selectRandom;
 		};
-		_pos = position _victim;
+		_pos = getPosworld _victim;
 		_bomber doMove _pos;
 		if (vehicle _bomber == _bomber) then {
 			_shout = ["Alive_Allah","allahu_akbar1","allahu_akbar2","allahu_akbar3"] call BIS_fnc_selectRandom;
@@ -51,12 +51,12 @@ _bomber allowFleeing 1;
 			[_bomber, "Alive_Beep"] spawn CBA_fnc_globalSay3d;
 		};
 		sleep 0.1;
-		_pos = position _victim;
+		_pos = getPosworld _victim;
 		_bomber doMove _pos;
 		waitUntil {_bomber distance _pos < 5 || !alive _bomber || !alive _victim};
 		if (!alive _bomber) exitwith {};
 		sleep 0.1;
-		_pos = position _bomber;
+		_pos = getPosworld _bomber;
 		if ((_explosiveClass) == "Nuke") then {
 			[[_pos,200], "RHS_fnc_ss21_nuke", false, false, true] call BIS_fnc_MP;
 		} else {

@@ -79,13 +79,13 @@ if (isserver) then {
 		_pos = getmarkerpos "controlroom";
 		_crate = "B_CargoNet_01_ammo_F" createvehiclelocal [(_pos select 0) - 1, (_pos select 1) - 1];
 		_crate allowdamage false;
-		_cratepos = getpos _crate;
-		_crate setposasl [_cratepos select 0, _cratepos select 1, 16.9];
+		_cratepos = getPosworld _crate;
+		_crate setposworld [_cratepos select 0, _cratepos select 1, 16.9];
 
 		lhd_controlroom = createLocation ["NameLocal", _pos, 5, 9.5];
 		lhd_controlroom setRectangular true;
 
-		_lhdcontrol = ["lhdcontrol","Logistics Control","",{[] spawn seven_fnc_lha_ui_debarkationControl},{position player in lhd_controlroom}] call ace_interact_menu_fnc_createAction;
+		_lhdcontrol = ["lhdcontrol","Logistics Control","",{[] spawn seven_fnc_lha_ui_debarkationControl},{getPosworld player in lhd_controlroom}] call ace_interact_menu_fnc_createAction;
 
 		[player, 1, ["ACE_SelfActions"], _lhdcontrol] call ace_interact_menu_fnc_addActionToObject;
 
@@ -123,27 +123,27 @@ if (isserver) then {
 		lhd_lowstairs_3 = createLocation ["NameLocal", [(getmarkerpos "lowstairs_3") select 0, (getmarkerpos "lowstairs_3") select 1], 2, 2];
 		lhd_lowstairs_3 setRectangular true;
 
-		_flightstairs = ["flightstairs","Stairs to Flight Deck","",{player setPosasl [(getmarkerpos "topstairs") select 0, (getmarkerpos "topstairs") select 1, 16.5]},{(position player in lhd_midstairs) or (position player in lhd_lowstairs)}] call ace_interact_menu_fnc_createAction;
+		_flightstairs = ["flightstairs","Stairs to Flight Deck","",{player setposworld [(getmarkerpos "topstairs") select 0, (getmarkerpos "topstairs") select 1, 16.5]},{(getPosworld player in lhd_midstairs) or (getPosworld player in lhd_lowstairs)}] call ace_interact_menu_fnc_createAction;
 
-		_flightstairs_2 = ["flightstairs_2","Stairs to Flight Deck","",{player setPosasl [(getmarkerpos "topstairs_2") select 0, (getmarkerpos "topstairs_2") select 1, 16.5]},{(position player in lhd_midstairs_2) or (position player in lhd_lowstairs_2)}] call ace_interact_menu_fnc_createAction;
+		_flightstairs_2 = ["flightstairs_2","Stairs to Flight Deck","",{player setposworld [(getmarkerpos "topstairs_2") select 0, (getmarkerpos "topstairs_2") select 1, 16.5]},{(getPosworld player in lhd_midstairs_2) or (getPosworld player in lhd_lowstairs_2)}] call ace_interact_menu_fnc_createAction;
 
-		_flightstairs_3 = ["flightstairs_3","Stairs to Flight Deck","",{player setPosasl [(getmarkerpos "topstairs_3") select 0, (getmarkerpos "topstairs_3") select 1, 16.5]},{(position player in lhd_midstairs_3) or (position player in lhd_lowstairs_3)}] call ace_interact_menu_fnc_createAction;
+		_flightstairs_3 = ["flightstairs_3","Stairs to Flight Deck","",{player setposworld [(getmarkerpos "topstairs_3") select 0, (getmarkerpos "topstairs_3") select 1, 16.5]},{(getPosworld player in lhd_midstairs_3) or (getPosworld player in lhd_lowstairs_3)}] call ace_interact_menu_fnc_createAction;
 
-		_flightstairs_4 = ["flightstairs_4","Stairs to Flight Deck","",{player setPosasl [(getmarkerpos "topstairs_4") select 0, (getmarkerpos "topstairs_4") select 1, 16.5]},{(position player in lhd_midstairs_4)}] call ace_interact_menu_fnc_createAction;
+		_flightstairs_4 = ["flightstairs_4","Stairs to Flight Deck","",{player setposworld [(getmarkerpos "topstairs_4") select 0, (getmarkerpos "topstairs_4") select 1, 16.5]},{(getPosworld player in lhd_midstairs_4)}] call ace_interact_menu_fnc_createAction;
 
-		_cargostairs = ["cargostairs","Stairs to Cargo Deck","",{player setPosasl [(getmarkerpos "midstairs") select 0, (getmarkerpos "midstairs") select 1, 9.9]},{(position player in lhd_lowstairs) or (position player in lhd_topstairs)}] call ace_interact_menu_fnc_createAction;
+		_cargostairs = ["cargostairs","Stairs to Cargo Deck","",{player setposworld [(getmarkerpos "midstairs") select 0, (getmarkerpos "midstairs") select 1, 9.9]},{(getPosworld player in lhd_lowstairs) or (getPosworld player in lhd_topstairs)}] call ace_interact_menu_fnc_createAction;
 
-		_cargostairs_2 = ["cargostairs_2","Stairs to Cargo Deck","",{player setPosasl [(getmarkerpos "midstairs_2") select 0, (getmarkerpos "midstairs_2") select 1, 9.9]},{(position player in lhd_lowstairs_2) or (position player in lhd_topstairs_2)}] call ace_interact_menu_fnc_createAction;
+		_cargostairs_2 = ["cargostairs_2","Stairs to Cargo Deck","",{player setposworld [(getmarkerpos "midstairs_2") select 0, (getmarkerpos "midstairs_2") select 1, 9.9]},{(getPosworld player in lhd_lowstairs_2) or (getPosworld player in lhd_topstairs_2)}] call ace_interact_menu_fnc_createAction;
 
-		_cargostairs_3 = ["cargostairs_3","Stairs to Cargo Deck","",{player setPosasl [(getmarkerpos "midstairs_3") select 0, (getmarkerpos "midstairs_3") select 1, 7.8]},{(position player in lhd_lowstairs_3) or (position player in lhd_topstairs_3)}] call ace_interact_menu_fnc_createAction;
+		_cargostairs_3 = ["cargostairs_3","Stairs to Cargo Deck","",{player setposworld [(getmarkerpos "midstairs_3") select 0, (getmarkerpos "midstairs_3") select 1, 7.8]},{(getPosworld player in lhd_lowstairs_3) or (getPosworld player in lhd_topstairs_3)}] call ace_interact_menu_fnc_createAction;
 
-		_cargostairs_4 = ["cargostairs_4","Stairs to Cargo Deck","",{player setPosasl [(getmarkerpos "midstairs_4") select 0, (getmarkerpos "midstairs_4") select 1, 7.8]},{(position player in lhd_topstairs_4)}] call ace_interact_menu_fnc_createAction;
+		_cargostairs_4 = ["cargostairs_4","Stairs to Cargo Deck","",{player setposworld [(getmarkerpos "midstairs_4") select 0, (getmarkerpos "midstairs_4") select 1, 7.8]},{(getPosworld player in lhd_topstairs_4)}] call ace_interact_menu_fnc_createAction;
 
-		_wellstairs = ["wellstairs","Stairs to Well Dock","",{player setPosasl [(getmarkerpos "lowstairs") select 0, (getmarkerpos "lowstairs") select 1, 2]},{(position player in lhd_midstairs) or (position player in lhd_topstairs)}] call ace_interact_menu_fnc_createAction;
+		_wellstairs = ["wellstairs","Stairs to Well Dock","",{player setposworld [(getmarkerpos "lowstairs") select 0, (getmarkerpos "lowstairs") select 1, 2]},{(getPosworld player in lhd_midstairs) or (getPosworld player in lhd_topstairs)}] call ace_interact_menu_fnc_createAction;
 
-		_wellstairs_2 = ["wellstairs_2","Stairs to Well Dock","",{player setPosasl [(getmarkerpos "lowstairs_2") select 0, (getmarkerpos "lowstairs_2") select 1, 2]},{(position player in lhd_midstairs_2) or (position player in lhd_topstairs_2)}] call ace_interact_menu_fnc_createAction;
+		_wellstairs_2 = ["wellstairs_2","Stairs to Well Dock","",{player setposworld [(getmarkerpos "lowstairs_2") select 0, (getmarkerpos "lowstairs_2") select 1, 2]},{(getPosworld player in lhd_midstairs_2) or (getPosworld player in lhd_topstairs_2)}] call ace_interact_menu_fnc_createAction;
 
-		_wellstairs_3 = ["wellstairs_3","Stairs to Well Dock","",{player setPosasl [(getmarkerpos "lowstairs_3") select 0, (getmarkerpos "lowstairs_3") select 1, 2]},{(position player in lhd_midstairs_3) or (position player in lhd_topstairs_3) or (position player in lhd_midstairs_4) or (position player in lhd_topstairs_4)}] call ace_interact_menu_fnc_createAction;
+		_wellstairs_3 = ["wellstairs_3","Stairs to Well Dock","",{player setposworld [(getmarkerpos "lowstairs_3") select 0, (getmarkerpos "lowstairs_3") select 1, 2]},{(getPosworld player in lhd_midstairs_3) or (getPosworld player in lhd_topstairs_3) or (getPosworld player in lhd_midstairs_4) or (getPosworld player in lhd_topstairs_4)}] call ace_interact_menu_fnc_createAction;
 
 		{
 			[player, 1, ["ACE_SelfActions"], _x] call ace_interact_menu_fnc_addActionToObject;

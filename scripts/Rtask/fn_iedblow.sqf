@@ -13,8 +13,8 @@ _ingeniero playMove "AinvPknlMstpSlayWrflDnon_medic";
 sleep 10;
 hint "EXPLOSIVES ARMED BLOW IN 60 SECONDS";
 sleep 60;
-bomb = createVehicle ["M_Mo_82mm_AT_LG", (getPos _explosivo), [], 0, "can_collide"];
+bomb = createVehicle ["M_Mo_82mm_AT_LG", (getPosworld _explosivo), [], 0, "can_collide"];
 deleteVehicle _explosivo;
-{ deleteVehicle _x; } forEach nearestObjects [getpos _explosivo,["ModuleExplosive_IEDLandSmall_F","ModuleExplosive_IEDLandBig_F"],5];
+{ deleteVehicle _x; } forEach nearestObjects [getPosworld _explosivo,["ModuleExplosive_IEDLandSmall_F","ModuleExplosive_IEDLandBig_F"],5];
 
 if(true) exitWith{};

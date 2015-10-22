@@ -14,6 +14,6 @@ sleep 5;
 hint "RETRIEVING DATA";
 sleep 30;
 hint "DATA TRANSMISSION COMPLETED";
-{ deleteVehicle _x; } forEach nearestObjects [getpos _intel,["Land_SurvivalRadio_F"],100];
+{ deleteVehicle _x; } forEach nearestObjects [getPosworld _intel,["Land_SurvivalRadio_F"],100];
 
 if(true) exitWith{};

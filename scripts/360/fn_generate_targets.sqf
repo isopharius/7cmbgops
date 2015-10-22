@@ -14,7 +14,7 @@ _targetRangeMax  = _arguments select 4;
 
 TrainingCourse_TargetList = [];
 
-Projectile_Impact_Aux setPos [0, 0, 0];
+Projectile_Impact_Aux setposworld [0, 0, 0];
 
 for [{_i = 0}, {_i < _targetQuantity}, {_i = _i + 1}] do
 {
@@ -35,7 +35,7 @@ for [{_i = 0}, {_i < _targetQuantity}, {_i = _i + 1}] do
 		_direction = random 360;
 	} else
 	{
-		_vecToTarget = (getPosASL player) vectorFromTo (getPosASL _target);
+		_vecToTarget = (getPosworld player) vectorFromTo (getPosworld _target);
 		_direction = (_vecToTarget select 0) atan2 (_vecToTarget select 1);
 	};
 

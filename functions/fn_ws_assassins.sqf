@@ -161,7 +161,7 @@ while {alive _unit} do {
 
 		//Every _perfomancesleep we update the position of the sleeper (_unitloc)
 		//to create an array of all nearby infantry units (_listclose) and all alive infantry units of the target side (_listclosealive)
-		_unitloc = getPos _unit;
+		_unitloc = getPosworld _unit;
 		_listclose = (nearestObjects [_unitloc,_superclasses,_trgsize]) - [_unit];
 		_listclosealive = [];
 		{if (((side _x == _target_side) && alive _x)) then {_listclosealive set [(count _listclosealive),_x];};} foreach _listclose;

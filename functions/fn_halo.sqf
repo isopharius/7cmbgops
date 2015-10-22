@@ -7,7 +7,7 @@ onMapSingleClick {
 
 		_loadout = [player] call seven_fnc_getloadout;
 
-		player setPos [(_pos select 0),(_pos select 1),((_pos select 2)+8000)];
+		player setposworld [(_pos select 0),(_pos select 1),((_pos select 2)+8000)];
 
 		removeBackpack player;
 		player addBackpack "B_Parachute";

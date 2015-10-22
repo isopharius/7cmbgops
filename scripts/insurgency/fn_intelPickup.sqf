@@ -34,7 +34,7 @@ _intel = _this select 0;
 _used = _this select 1;
 _ID = _this select 2;
 _intel removeAction _ID;
-_cases = nearestObjects[getPos player, _intelItems, 4.5];
+_cases = nearestObjects[getPosworld player, _intelItems, 4.5];
 
 if (isNull CACHE) then {
 	private ["_title","_text"];

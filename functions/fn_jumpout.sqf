@@ -3,7 +3,7 @@ if (isdedicated || isHC) exitwith {};
 	_veh = _this select 0;
 	_caller = _this select 1;
 
-			if (((getPosASL _veh select 2) < 60) or ((getPos _veh select 2) < 60)) exitwith {hint "Not enough altitude"};
+			if (((getPosASL _veh select 2) < 60) or ((getPosworld _veh select 2) < 60)) exitwith {hint "Not enough altitude"};
 
 			_caller allowDamage false;
 
@@ -63,7 +63,7 @@ if (isdedicated || isHC) exitwith {};
 				_caller setdir _newDir;
 				_caller attachTo [_veh,[0,0,0],"jump_out"];
 				//Move Jumper to safe location
-				//_caller setPosASL _exitpos;
+				//_caller setposworld _exitpos;
 				detach _caller;
 
 				_pos2 = getPosASL _caller;
@@ -83,8 +83,8 @@ if (isdedicated || isHC) exitwith {};
 
 				waitUntil {(getPosATL _caller select 2) < 1};
 				moveOut _caller;
-				_pos_ground = getpos _caller;
-				_caller setpos _pos_ground;
+				_pos_ground = getPosworld _caller;
+				_caller setposworld _pos_ground;
 				//Jumper is now safe, allow damage
 				waitUntil {isTouchingGround _caller};
 				_chute = vehicle _caller;

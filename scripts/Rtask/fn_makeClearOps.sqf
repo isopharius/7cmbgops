@@ -112,11 +112,11 @@ switch (_missionType) do {
 		{_officer1 disableAI _x} forEach ["MOVE","ANIM","AUTOTARGET","TARGET","FSM"];
 
 		_grp1C = [_markerpos, INDEPENDENT, (configfile >> "CfgGroups" >> "INDEP" >> "LOP_AM" >> "Infantry" >> "LOP_AM_Rifle_squad")] call BIS_fnc_spawnGroup;
-		_null = [_grp1C,getpos _mrap, 250] call CBA_fnc_taskPatrol;
+		_null = [_grp1C,getPosworld _mrap, 250] call CBA_fnc_taskPatrol;
 
 		_mrap1 = createGroup INDEPENDENT;
 		[_newPos, 10, "LOP_AM_Landrover_M2", _mrap1] call BIS_fnc_spawnvehicle;
-		_null = [_mrap1,getPos _officer1, 300] call CBA_fnc_taskPatrol;
+		_null = [_mrap1,getPosworld _officer1, 300] call CBA_fnc_taskPatrol;
 		sleep 10;
 		[_newPos, 10, "LOP_AM_Landrover_M2", _mrap1] call BIS_fnc_spawnvehicle;
 
@@ -169,7 +169,7 @@ switch (_missionType) do {
 			_buildingpos = 1 max (round random (_house2 select 1));
 			_house2 = _house2 select 0;
 
-			_intel setPos (_house2 buildingPos _buildingpos);
+			_intel setposworld (_house2 buildingPos _buildingpos);
 		};
 
 		sleep 0.3;
@@ -179,7 +179,7 @@ switch (_missionType) do {
 		_civiliantype = ["LOP_Tak_Civ_Man_01","LOP_Tak_Civ_Man_02","LOP_Tak_Civ_Man_04"] call BIS_fnc_selectRandom;
 
 		_civgrp = createGroup CIVILIAN;
-		_suspect = _civgrp createUnit [_civiliantype, [(getpos _intel select 0) + 0.2, getpos _intel select 1,0], [], 0, "none"];
+		_suspect = _civgrp createUnit [_civiliantype, [(getPosworld _intel select 0) + 0.2, getPosworld _intel select 1,0], [], 0, "none"];
 		_suspect setSkill 0;
 		_suspect allowFleeing 1;
 		{_suspect disableAI _x} forEach ["MOVE","ANIM","AUTOTARGET","TARGET","FSM"];
@@ -195,7 +195,7 @@ switch (_missionType) do {
 		sleep 3;
 
 		_grp1C = [_newPos, INDEPENDENT, (configfile >> "CfgGroups" >> "INDEP" >> "LOP_AM" >> "Infantry" >> "LOP_AM_Rifle_squad")] call BIS_fnc_spawnGroup;
-		_null = [_grp1C,getpos _suspect, 50] call CBA_fnc_taskPatrol;
+		_null = [_grp1C,getPosworld _suspect, 50] call CBA_fnc_taskPatrol;
 
 	    ["Now arrest suspect and escort to Main Base", "sideChat", true] call BIS_fnc_MP;
 
@@ -244,9 +244,9 @@ switch (_missionType) do {
 			_buildingpos = 1 max (round random (_house1 select 1));
 			_house1 = _house1 select 0;
 
-			_cache1 setPos (_house1 buildingPos _buildingpos);
+			_cache1 setposworld (_house1 buildingPos _buildingpos);
 		} else {
-			_cache1 setPos [(_markerpos select 0) + random 100,(_markerpos select 1) + random 100,0];
+			_cache1 setposworld [(_markerpos select 0) + random 100,(_markerpos select 1) + random 100,0];
 		};
 
 		_cache2 = createVehicle [_stashtype, _markerpos, [], 0, "none"];
@@ -260,9 +260,9 @@ switch (_missionType) do {
 			_buildingpos = 1 max (round random (_house2 select 1));
 			_house2 = _house2 select 0;
 
-			_cache2 setPos (_house2 buildingPos _buildingpos);
+			_cache2 setposworld (_house2 buildingPos _buildingpos);
 		} else {
-			_cache2 setPos [(_pos select 0) - random 100,(_markerpos select 1) - random 100,0];
+			_cache2 setposworld [(_pos select 0) - random 100,(_markerpos select 1) - random 100,0];
 		};
 
 		_cache3 = createVehicle [_stashtype, _markerpos, [], 0, "none"];
@@ -276,15 +276,15 @@ switch (_missionType) do {
 			_buildingpos = 1 max (round random (_house3 select 1));
 			_house3 = _house3 select 0;
 
-			_cache3 setPos (_house3 buildingPos _buildingpos);
+			_cache3 setposworld (_house3 buildingPos _buildingpos);
 		} else {
-			_cache3 setPos [(_pos select 0) + random 100,(_pos select 1) - random 100,0];
+			_cache3 setposworld [(_pos select 0) + random 100,(_pos select 1) - random 100,0];
 		};
 
 		sleep 0.3;
 
 		_grp1C = [_markerpos, INDEPENDENT, (configfile >> "CfgGroups" >> "INDEP" >> "LOP_AM" >> "Infantry" >> "LOP_AM_Rifle_squad")] call BIS_fnc_spawnGroup;
-		_null = [_grp1C,getPos _cache1, 150] call BIS_fnc_taskPatrol;
+		_null = [_grp1C,getPosworld _cache1, 150] call BIS_fnc_taskPatrol;
 
 		_null = [west, "mob_ammo2", ["We have information that terrorist forces they have several ammo stashes in this marked area, you must find and blow them.", "Destroy Stash", "Destroy Stash"], getMarkerPos "mob_ammo2", false] call BIS_fnc_taskSetState;
 		_null = ["mob_ammo2", "CREATED"] call BIS_fnc_taskSetState;
@@ -323,10 +323,10 @@ switch (_missionType) do {
 		_newPos = [_markerpos, 200, 400, 15, 0, 0, 0] call BIS_fnc_findSafePos;
 
 		_movilhq = createVehicle ["rhs_gaz66_r142_msv", _newPos, [], 0, "NONE"];
-		_mhqpos = getPos _movilhq;
+		_mhqpos = getPosworld _movilhq;
 
 		_isFlat_comms = [_markerpos,600] call ALiVE_fnc_findFlatArea;
-		_movilhq setPos _isFlat_comms;
+		_movilhq setPosworld _isFlat_comms;
 
 		_camonet = createVehicle ["CamoNet_OPFOR_big_F", _mhqpos, [], 0, "none"];
 
@@ -452,11 +452,11 @@ switch (_missionType) do {
 		_artyaa setFuel 0;
 
 		_isFlat_AA = [_markerpos,600] call ALiVE_fnc_findFlatArea;
-		_artyaa setPos _isFlat_AA;
-		_artypos = getpos _artyaa;
+		_artyaa setPosworld _isFlat_AA;
+		_artypos = getPosworld _artyaa;
 
 		_atrezzo = createVehicle ["Land_Jbad_Ind_Shed_02",[(_artypos select 0) + 15, _artypos select 1,0], [], 0, "NONE"];
-		_atpos = getpos _atrezzo;
+		_atpos = getPosworld _atrezzo;
 		_camonet = createVehicle ["CamoNet_OPFOR_big_F", _atpos, [], 0, "none"];
 
 		_aacrew = createGroup INDEPENDENT;
@@ -531,9 +531,9 @@ switch (_missionType) do {
 			_buildingpos = 1 max (round random (_house select 1));
 			_house = _house select 0;
 
-			_warlord setPos (_house buildingPos _buildingpos);
+			_warlord setPosworld (_house buildingPos _buildingpos);
 		};
-		_warlordpos = getpos _warlord;
+		_warlordpos = getPosworld _warlord;
 
 		_markerwlord = ["wlordmarker", _warlordpos, "ICON", [0.7,0.7], "COLOR:", "ColorRed", "TEXT:", "Terrorist Leader", "TYPE:", "o_hq", "PERSIST"] call CBA_fnc_createMarker;
 
@@ -599,10 +599,10 @@ switch (_missionType) do {
 			_buildingpos = 1 max (round random (_house2 select 1));
 			_house2 = _house2 select 0;
 
-			_nuke setPos (_house2 buildingPos _buildingpos);
+			_nuke setPosworld (_house2 buildingPos _buildingpos);
 		};
 
-		_grp1C = [(getpos _nuke), INDEPENDENT, (configfile >> "CfgGroups" >> "INDEP" >> "LOP_AM" >> "Infantry" >> "LOP_AM_Patrol_section")] call BIS_fnc_spawnGroup;
+		_grp1C = [(getPosworld _nuke), INDEPENDENT, (configfile >> "CfgGroups" >> "INDEP" >> "LOP_AM" >> "Infantry" >> "LOP_AM_Patrol_section")] call BIS_fnc_spawnGroup;
 		_null = [_grp1C,_newPos,100] call CBA_fnc_taskDefend;
 
 		sleep 0.1;

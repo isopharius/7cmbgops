@@ -1,9 +1,9 @@
 if(not local Server) exitWith{};
 
-_target_pos = getPos (_this select 0);
+_target_pos = getPosworld (_this select 0);
 
 //helipad = "HeliH" createVehicle _target_pos;
-//helipad setPos _target_pos;
+//helipad setposworld _target_pos;
 
 _ang = 0;
 _rad = 6.5; //radius
@@ -19,7 +19,7 @@ for "_i" from 0 to _bcount do
 	_ang = _ang + _inc;
 
 	_light = createVehicle ["Land_runway_edgelight", _pos, [], 0, "can_collide"];
-	_light setPos _pos;
+	_light setposworld _pos;
 };
 
 if(true) exitWith{};

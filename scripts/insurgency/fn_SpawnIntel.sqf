@@ -60,7 +60,7 @@ _cities = call seven_fnc_urbanAreas;
 			_item = createVehicle [_selectedItem, _intelPosition, [], 0, "None"];
 			[[_item,"<t color='#FF0000'>Gather Intel</t>"],"seven_fnc_addactionMP", true, true, true] call BIS_fnc_MP;
 			// Move the Cache to the above select position
-			_item setPos _intelPosition;
+			_item setposworld _intelPosition;
 
 			spawnedIntelItems set [count spawnedIntelItems, _item];
 			publicVariable "spawnedIntelItems";

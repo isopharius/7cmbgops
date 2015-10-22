@@ -33,14 +33,14 @@ _building = _this select 0;
 _count = [_building] call seven_fnc_getCountBuildingPositions;
 
 if(_count == 0) then {
-	_position = getPos _building;
+	_position = getPosworld _building;
 } else {
 	_position = random _count;
 	_position = _building buildingPos _position;
 };
 
 if((_position select 0) == 0) then {
-	_position = getPos _building;
+	_position = getPosworld _building;
 };
 
 _position

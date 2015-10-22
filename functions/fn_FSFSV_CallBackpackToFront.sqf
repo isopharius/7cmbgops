@@ -3,11 +3,11 @@
 	_backpack = backpack player;
 	_size = sizeof _backpack;
 	_array = _pos isFlatEmpty [(_size / 2),0,0.7,_size,0,false,player];
-	if (count _array == 0) then {_pos = getPos player;};
+	if (count _array == 0) then {_pos = getPosworld player;};
 	if (count _pos > 0) then {
 
 		_FSFSV_SacADosGwh = createVehicle ["GroundWeaponHolder", _pos, [], 0, "can_collide"];
-		_FSFSV_SacADosGwh setPos _pos;
+		_FSFSV_SacADosGwh setPosworld _pos;
 		player reveal _FSFSV_SacADosGwh;
 		player action ["DropBag",_FSFSV_SacADosGwh,_backpack];
 		player forceWalk true;
@@ -53,7 +53,7 @@
 						player setVariable ["FSFSV_BACKPACK",objnull];
 					} else {
 						detach _FSFSV_SacADosGwh;
-						_FSFSV_SacADosGwh setPos [random 50,random 50,(10000 + (random 50))];
+						_FSFSV_SacADosGwh setposworld [random 50,random 50,(10000 + (random 50))];
 						[[_FSFSV_SacADosGwh,true],"FSFSV_cacheObjet"] call BIS_fnc_MP;
 					};
 
@@ -80,7 +80,7 @@
 						(((_speed > -1) && (_speed < 1) && (_falling < 0.5) && (_falling > -0.5)) || (time > _delay))
 					};
 					if !(isNull (attachedTo _FSFSV_SacADosGwh)) then {detach _FSFSV_SacADosGwh;};
-					_FSFSV_SacADosGwh setPos (getPos player);
+					_FSFSV_SacADosGwh setPosworld (getPosworld player);
 					player setVariable ["FSFSV_BACKPACK",objnull];
 				};
 				sleep 0.1;

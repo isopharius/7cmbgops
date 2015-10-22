@@ -14,7 +14,7 @@ _dir = random 359;
 
 // Move the person 15 meters away from the destination (in the direction of _dir)
 
-//player SetPos (_dest modelToWorld [-1*sin(_dir),-1*sin(_dir),0]);
+//player setposworld (_dest modelToWorld [-1*sin(_dir),-1*sin(_dir),0]);
 
 
-player setPosasl (_dest modelToWorld [1*cos(_dir),1*cos(_dir),0]);
+player setposworld (_dest modelToWorld [1*cos(_dir),1*cos(_dir),0]);

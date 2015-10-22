@@ -11,7 +11,7 @@ while {alive _bullet} do {
 	_bulletVelocity = velocity _bullet;
 	_v = _bulletVelocity call BIS_fnc_magnitude;
 	if (isNil ("_mv")) then {_mv = _v;};
-	
+
 	_color = switch true do {
 		case (_v / _mv >= .75) : {[1,0,0,1]};
 		case (_v / _mv >= .50) : {[1,1,0,1]};
@@ -20,7 +20,7 @@ while {alive _bullet} do {
 		case (_v / _mv >= 0.0) : {[1,1,1,1]};
 		default {_color};
 	};
-	
-	drop ["\A3\data_f\missileSmoke","","Billboard",0.1,8,getPos _bullet,[0,0,0],0,1.275,1,0,[0.1 + 0.001*(_unit distance _bullet),0.1],[_color,_color],[1,0],0,0,"","",""];
+
+	drop ["\A3\data_f\missileSmoke","","Billboard",0.1,8,getPosworld _bullet,[0,0,0],0,1.275,1,0,[0.1 + 0.001*(_unit distance _bullet),0.1],[_color,_color],[1,0],0,0,"","",""];
 	sleep 0.01;
 };

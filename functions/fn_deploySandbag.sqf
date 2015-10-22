@@ -31,7 +31,7 @@ INS_SANDBAG = objNull;
 private ["_player","_pos","_distance","_offset","_playerDirection"];
 
 _player = _this select 1;
-_pos = getPos player;
+_pos = getPosworld player;
 _distance = 1;
 _offset = 0;
 _playerDirection = ((getDir _player)+ _offset) mod 360;
