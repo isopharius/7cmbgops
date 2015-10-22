@@ -36,7 +36,7 @@ _distance = 1;
 _offset = 0;
 _playerDirection = ((getDir _player)+ _offset) mod 360;
 
-if (vehicle _player != player) exitWith {
+if !(isNull objectParent player) exitWith {
 	private ["_title","_text"];
 
 	_title = "<t size='1.2' color='#e5b348' shadow='1' shadowColor='#000000'>INSURGENCY | ALiVE</t>

@@ -1,6 +1,6 @@
 	private "_return";
 	_return = 0;
-	if (isnull(player getVariable ["FSFSV_BACKPACK",objnull]) && (backpack player != "") && (vehicle player == player)) then {
+	if (isnull(player getVariable ["FSFSV_BACKPACK",objnull]) && (backpack player != "") && (isNull objectParent player)) then {
 		private ["_pos","_iswater"];
 		_pos = getPosworld player;
 		_iswater = surfaceIsWater _pos;

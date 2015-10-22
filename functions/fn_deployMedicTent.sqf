@@ -35,7 +35,7 @@ _offset = 0;
 _height = -4;
 _side = playerSide;
 
-if (vehicle _player != player) exitWith {
+if !(isNull objectParent player) exitWith {
 	private ["_title","_text"];
 
 	_title = "<t size='1.2' align='center' color='#e5b348' shadow='1' shadowColor='#000000'>INSURGENCY | ALiVE</t>
