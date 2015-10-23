@@ -4,12 +4,15 @@ if(!isDedicated) then { //client admin menu
 
 if (!isserver) exitwith {};
 
-// civ weapon pools
-[ALIVE_civilianWeapons, "LOP_TAK_Civ", [["rhs_weap_makarov_pmm","rhs_mag_9x18_12_57N181S"],["rhs_weap_akms","rhs_30Rnd_762x39mm"],["rhs_weap_akm","rhs_30Rnd_762x39mm"]]] call ALIVE_fnc_hashSet;
-[ALIVE_civilianWeapons, "LOP_AFR_Civ", [["rhs_weap_makarov_pmm","rhs_mag_9x18_12_57N181S"],["rhs_weap_akms","rhs_30Rnd_762x39mm"],["rhs_weap_akm","rhs_30Rnd_762x39mm"]]] call ALIVE_fnc_hashSet;
+if (count (allMissionObjects "ALiVE_amb_civ_population") > 0) then {
 
-//-- Initialize Spyder Ambiance
-[true, true, 30, []] call seven_fnc_init_ambience;
+	// civ weapon pools
+	[ALIVE_civilianWeapons, "LOP_TAK_Civ", [["rhs_weap_makarov_pmm","rhs_mag_9x18_12_57N181S"],["rhs_weap_akms","rhs_30Rnd_762x39mm"],["rhs_weap_akm","rhs_30Rnd_762x39mm"]]] call ALIVE_fnc_hashSet;
+	[ALIVE_civilianWeapons, "LOP_AFR_Civ", [["rhs_weap_makarov_pmm","rhs_mag_9x18_12_57N181S"],["rhs_weap_akms","rhs_30Rnd_762x39mm"],["rhs_weap_akm","rhs_30Rnd_762x39mm"]]] call ALIVE_fnc_hashSet;
+
+	//-- Initialize Spyder Ambiance
+	[true, true, 30, []] call seven_fnc_init_ambience;
+};
 
 /* ---------------------------
 SpyderAmbiance
