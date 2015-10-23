@@ -3,16 +3,15 @@ private "_tpvar";
 {
 	call {
 		if ((_x find "respawn" > -1) || (_x find "tp" > -1)) exitWith { //all tp flags
-			private ["_markerpos","_markerposx","_markerposy"];
-
-			_markerpos = getmarkerpos _x;
-			_markerposx = _markerpos select 0;
-			_markerposy = _markerpos select 1;
 
 			if (!isdedicated) then { //clientside arsenal box and flag at tp marker with name
-				private ["_tpname","_crate","_tpflag"];
+				private ["_markerpos","_markerposx","_markerposy","_tpname","_crate","_tpflag"];
 
+				_markerpos = getmarkerpos _x;
+				_markerposx = _markerpos select 0;
+				_markerposy = _markerpos select 1;
 				_tpname = markertext _x;
+
 				_crate = "B_CargoNet_01_ammo_F" createvehiclelocal [_markerposx - 1, _markerposy - 1];
 				_crate allowdamage false;
 				_tpflag = "Land_FieldToilet_F" createvehiclelocal _markerpos;
