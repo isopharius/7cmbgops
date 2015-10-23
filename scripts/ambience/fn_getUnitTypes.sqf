@@ -29,7 +29,7 @@ _terroristType = [];
 //-- Leights Opfor Pack
 if (isClass (configfile >> "CfgGroups" >> "West" >> "LOP_AA")) then {
 	// Middle Eastern
-	if (worldName in ["MCN_Aliabad","BMFayshkhabur","clafghan","fallujah","fata","hellskitchen","hellskitchens","MCN_HazarKot","praa_av","reshmaan","Shapur_BAF","Takistan","torabora","TUP_Qom","Zargabad","pja307","pja306","Mountains_ACR","tunba","Kunduz"]) then {
+	if (worldName in ["Mog","Hindukush","MCN_Aliabad","BMFayshkhabur","clafghan","fallujah","fata","hellskitchen","hellskitchens","MCN_HazarKot","praa_av","reshmaan","Shapur_BAF","Takistan","torabora","TUP_Qom","Zargabad","pja307","pja306","Mountains_ACR","tunba","Kunduz"]) then {
 		_civType = ["LOP_Tak_Civ_Man_01","LOP_Tak_Civ_Man_02","LOP_Tak_Civ_Man_04"];
 		_terroristType = ["LOP_AM_Infantry_AT","LOP_AM_Infantry_AR","LOP_AM_Infantry_Corpsman","LOP_AM_Infantry_GL","LOP_AM_Infantry_Engineer","LOP_AM_Infantry_Marksman","LOP_AM_Infantry_Rifleman"];
 
@@ -37,7 +37,7 @@ if (isClass (configfile >> "CfgGroups" >> "West" >> "LOP_AA")) then {
 		_selectedCivilians = "Leights Middle East";
 	};
 	// African
-	if (worldName in ["mak_Jungle","pja305","tropica","tigeria","tigeria_se","Sara","SaraLite","Sara_dbe1","Porto","Intro"]) then {
+	if (worldName in ["Atlantis","mak_Jungle","pja305","tropica","tigeria","tigeria_se","Sara","SaraLite","Sara_dbe1","Porto","Intro"]) then {
 		_civType = ["LOP_AFR_Civ_Man_01","LOP_AFR_Civ_Man_02","LOP_AFR_Civ_Man_03","LOP_AFR_Civ_Man_04","LOP_AFR_Civ_Man_05","LOP_AFR_Civ_Man_06"];
 		_terroristType = ["LOP_AFR_Infantry_AT","LOP_AFR_Infantry_Corpsman","LOP_AFR_Infantry_GL","LOP_AFR_Infantry_IED","LOP_AFR_Infantry_AR","LOP_AFR_Infantry_Marksman","LOP_AFR_Infantry_Rifleman"];
 
@@ -59,17 +59,17 @@ if (isClass (configfile >> "CfgVehicles" >> "RDS_Worker")) then {
 
 //-- CAF Aggressors
 if (isClass (configfile >> "CfgGroups" >> "East" >> "caf_ag_me_t")) then {
-	if (worldName in ["MCN_Aliabad","BMFayshkhabur","clafghan","fallujah","fata","hellskitchen","hellskitchens","MCN_HazarKot","praa_av","reshmaan","Shapur_BAF","Takistan","torabora","TUP_Qom","Zargabad","pja307","pja306","Mountains_ACR","tunba","Kunduz"]) then {
+	if (worldName in ["Mog","Hindukush","MCN_Aliabad","BMFayshkhabur","clafghan","fallujah","fata","hellskitchen","hellskitchens","MCN_HazarKot","praa_av","reshmaan","Shapur_BAF","Takistan","torabora","TUP_Qom","Zargabad","pja307","pja306","Mountains_ACR","tunba","Kunduz"]) then {
 		_civType = ["CAF_AG_ME_CIV","CAF_AG_ME_CIV_02","CAF_AG_ME_CIV_03","CAF_AG_ME_CIV_04"];
 		_terroristType = ["CAF_AG_ME_T_AK47","CAF_AG_ME_T_AK74","CAF_AG_ME_T_GL","CAF_AG_ME_T_PKM","CAF_AG_ME_T_RPG","CAF_AG_ME_T_RPK74","CAF_AG_ME_T_SVD"];
-       
+
 		_selectedFaction = "CAF Middle East";
 		_selectedCivilians = "CAF Middle East";
 	};
 };
 
 //-- Defaults
-if ((count _civType == 0) and (worldName in ["mak_Jungle","pja305","tropica","tigeria","tigeria_se","Sara","SaraLite","Sara_dbe1","Porto","Intro"])) then {
+if ((count _civType == 0) and (worldName in ["Atlantis","mak_Jungle","pja305","tropica","tigeria","tigeria_se","Sara","SaraLite","Sara_dbe1","Porto","Intro"])) then {
 	_civType = ["C_man_1_F_afro","C_man_polo_2_F_afro","C_man_polo_3_F_afro","C_man_shorts_1_F_afro","C_man_polo_4_F_afro","C_man_polo_5_F_afro","C_man_polo_6_F_afro"];
 	_selectedCivilians = "Default Jungle";
 };
