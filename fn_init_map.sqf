@@ -44,7 +44,7 @@ private "_tpvar";
 } foreach allmapmarkers;
 
 if (isserver) exitwith {
-	if (isnil "_mash") then { //add mash if missing
+	if (isnil "mash") then { //add mash if missing
 		_mashpos = getmarkerpos "respawn_west";
 		_mashdir = markerdir "respawn_west";
 		_safepos = [_mashpos, 5, 150, 3, 0, 20, 0] call BIS_fnc_findSafePos;
