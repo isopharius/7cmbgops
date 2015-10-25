@@ -5,7 +5,9 @@ class seven
 	class init
 	{
 		file = "\7cmbgops";
-		class init_template {};
+		class init_template {
+			postInit = 1;
+		};
 		class init_ace {};
 		class init_alive {};
 		class init_ares {};

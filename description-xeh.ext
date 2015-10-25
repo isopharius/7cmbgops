@@ -1,7 +1,3 @@
-class Extended_PostInit_EventHandlers {
-    init = "[] call seven_fnc_init_template"; //launch template
-};
-
 class Extended_InitPost_EventHandlers {
     class Man {
         //--- Make sure everyone is happy when the mission starts
