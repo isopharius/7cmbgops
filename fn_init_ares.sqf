@@ -1,3 +1,5 @@
+if (isHC) exitwith {};
+
 if (isserver) then { //server
 
 	mish = profileNamespace getVariable [format["savemish_%1", worldname], []];

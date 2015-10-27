@@ -2,6 +2,7 @@
 // Function file for ArmA III
 // Created by: M4RT14L
 //////////////////////////////////////////////////////////////////
+if (isHC) exitwith {};
 
 if (!isDedicated) then {
     if (isnil "disarmaction") then {disarmaction = {_this addaction ["<t color='#FF6600'>Disarm the nuke</t>", seven_fnc_disarm_nuke, [], 1, false, true, "", "(player distance _target < 3)"]}};

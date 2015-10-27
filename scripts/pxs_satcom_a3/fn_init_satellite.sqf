@@ -1,3 +1,5 @@
+if (isDedicated || isHC) exitwith {};
+
 //compile functions and variables for SATCOM
 //v1.0 A3
 

@@ -1,3 +1,5 @@
+if (isHC) exitwith {};
+
 if (isNil "Ares_Reinforcement_Mission_Unit_Pools") then
 {
 	Ares_Reinforcement_Mission_Unit_Pools = [];
@@ -22,6 +24,7 @@ Ares_Reinforcement_Mission_Unit_Pools pushBack
 			["rhs_msv_sergeant", "rhs_msv_grenadier", "rhs_msv_efreitor", "rhs_msv_rifleman", "rhs_msv_marksman"]
 		]
 	];
+
 Ares_Reinforcement_Mission_Unit_Pools pushBack
 	[
 		"RHS US Forces", // Name of the faction

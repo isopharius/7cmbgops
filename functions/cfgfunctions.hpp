@@ -5,24 +5,35 @@ class seven
 	class init
 	{
 		file = "\7cmbgops";
-		class init_template {
+		class init_map {
 			postInit = 1;
 		};
-		class init_ace {};
-		class init_alive {};
-		class init_ares {};
-		class init_custom {};
-		class init_map {};
+		class init_custom {
+			postInit = 1;
+		};
+		class init_alive {
+			postInit = 1;
+		};
+		class init_ares {
+			postInit = 1;
+		};
+		class init_ace {
+			postInit = 1;
+		};
 	};
 	class funkunfusion
 	{
 		file = "\7cmbgops\functions";
 
-		class Ares_AddRhsReinforcementPools {};
+		class Ares_AddRhsReinforcementPools {
+			postInit = 1;
+		};
 		class attachmrzr {};
 		class fmradio {};
 		class adminmenudef {};
-		class briefing {};
+		class briefing {
+			postInit = 1;
+		};
 		class garageNew {};
 		class getloadout {};
 		class setloadout {};
@@ -47,6 +58,9 @@ class seven
 		class helipad_light_remove {};
 		class SHK_moveObjects {};
 		class Teleport {};
+		class WerthlesHeadless {
+			postInit = 1;
+		};
 	};
 	class ambience
 	{
@@ -68,7 +82,9 @@ class seven
 	{
 		file = "\7cmbgops\scripts\pxs_satcom_a3";
 
-		class init_satellite {};
+		class init_satellite {
+			postInit = 1;
+		};
 		class time_function {};
 		class time_view {};
 		class coordinates_function {};
@@ -87,7 +103,9 @@ class seven
 	{
 		file = "\7cmbgops\scripts\Rtask";
 
-		class addactions {};
+		class addactions {
+			postInit = 1;
+		};
 		class capture {};
 		class disarm_nuke {};
 		class dragmat {};
@@ -170,7 +188,8 @@ class seven
 		class CallToPrayer {};
 		class prayerLoop {};
 		class urbanAreas {};
-	};/*
+	};
+	/*
 	class carradio
 	{
 		file = "\7cmbgops\scripts\carradio";
@@ -185,5 +204,6 @@ class seven
 		class playlist {};
 		class radio {};
 		class settings {};
-	};*/
+	};
+	*/
 };

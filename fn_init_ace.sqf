@@ -1,4 +1,4 @@
-if (isdedicated) exitwith {};
+if (isdedicated || isHC) exitwith {};
 
 	//ACE menu actions
 	_arsenalbox = ["MCC_crateAmmo","B_CargoNet_01_ammo_F","B_supplyCrate_F","Land_PaperBox_closed_F","Land_PaperBox_open_full_F"];

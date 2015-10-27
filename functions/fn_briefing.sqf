@@ -1,3 +1,5 @@
+if(isDedicated || isHC) exitwith {};
+
 player createDiaryRecord [
 	"Diary",
 	[

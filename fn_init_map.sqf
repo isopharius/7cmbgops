@@ -1,3 +1,5 @@
+if (isHC) exitwith {};
+
 private "_tpvar";
 
 {

@@ -1,8 +1,5 @@
 if (isHC) exitwith {};
 
-//ARES + RHS
-[] call seven_fnc_Ares_AddRhsReinforcementPools;
-
 FSFSV_cacheObjet = compileFinal "(_this select 0) hideObject (_this select 1);";
 
 ATLAS_Official = true;
@@ -33,16 +30,7 @@ if(!isDedicated) then {
 			[west, _x] call BIS_fnc_addRespawnInventory;
 		} foreach ["AR1","AR2","AR3","AR4","AR5","AR6","AR7"];
 	};
-
-	//Notes
-	[] call seven_fnc_briefing;
-
-	//SATCOM
-	[] call seven_fnc_init_satellite;
 };
-
-//tasking
-call seven_fnc_addactions;
 
 //cargodrop
 rhs_fnc_cargoAttach = compile preprocessFileLineNumbers "\7cmbgops\functions\cargo_attach.sqf";
