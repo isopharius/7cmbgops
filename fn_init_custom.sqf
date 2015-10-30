@@ -1,3 +1,5 @@
+[] spawn seven_fnc_werthlesheadlessclient;
+
 if (isHC) exitwith {};
 
 FSFSV_cacheObjet = compileFinal "(_this select 0) hideObject (_this select 1);";
