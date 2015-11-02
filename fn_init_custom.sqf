@@ -1,4 +1,4 @@
-[] spawn seven_fnc_werthlesheadlessclient;
+[] spawn seven_fnc_WerthlesHeadless;
 
 if (isHC) exitwith {};
 
