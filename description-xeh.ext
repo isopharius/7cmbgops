@@ -1,9 +1,4 @@
 class Extended_InitPost_EventHandlers {
-    class Man {
-        //--- Make sure everyone is happy when the mission starts
-		init = "if (!isnil 'insurgency') then {_this call seven_fnc_handlerRegister}";
-    };
-
 	//fmradios
 	/*
 	class LandVehicle {

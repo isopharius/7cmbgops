@@ -161,32 +161,6 @@ class seven
 		class toggle_bullet_camera {};
 		class toggle_path_tracing {};
 	};
-	class insurgency
-	{
-		file = "\7cmbgops\scripts\insurgency";
-
-		class common_defines {};
-		class ins_briefing {};
-		class ins_init {};
-		class addactionMP {};
-		class cacheKilled {};
-		class cacheKilledText {};
-		class createIntel {};
-		class endMission {};
-		class findBuildings {};
-		class getCountBuildingPositions {};
-		class handlerRegister {};
-		class intelDrop {};
-		class intelPickup {};
-		class pickedUpIntel {};
-		class RandomBuildingPosition {};
-		class setupCache {};
-		class spawnCache {};
-		class SpawnIntel {};
-		class CallToPrayer {};
-		class prayerLoop {};
-		class urbanAreas {};
-	};
 	/*
 	class carradio
 	{

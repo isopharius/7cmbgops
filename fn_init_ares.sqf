@@ -454,16 +454,6 @@ if (!isdedicated) then { //players
 
 	[
 		"SIDEOPS",
-		"Start Insurgency",
-		{
-			if (!isnil "insurgency") exitwith {"insurgency already started"};
-			[[],"seven_fnc_ins_init", true, true, true] call BIS_fnc_MP;
-			["INSURGENCY STARTED"] call Ares_fnc_ShowZeusMessage;
-		}
-	] call Ares_fnc_RegisterCustomModule;
-
-	[
-		"SIDEOPS",
 		"Start Air SideOps",
 		{
 			_dialogResult =
@@ -894,8 +884,8 @@ if (!isdedicated) then { //players
 			if !(surfaceiswater _pos) exitwith {"Surface is not water"};
 
 			_pad = createVehicle ["Land_HelipadEmpty_F", [(_pos select 0), (_pos select 1), (_pos select 2) + 10], [], 0, "can_collide"];
-			if (worldname == "mog") then {
-				_pad setposworld [_pos select 0, _pos select 1, 7.5];
+			if ((worldname == "mog") || (worldname == "Atlantis")) then {
+				_pad setposworld [_pos select 0, _pos select 1, 4];
 			} else {
 				_pad setposworld [_pos select 0, _pos select 1, 0];
 			};
