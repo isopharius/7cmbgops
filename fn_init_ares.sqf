@@ -762,19 +762,6 @@ if (!isdedicated) then { //players
 
 	[
 		"7CMBG",
-		"Set Armed Civilian",
-		{
-			_sleeper = _this select 1;
-			if ((group _sleeper == grpNull) || (!alive _sleeper) || (side _sleeper != civilian)) exitwith {"NO SUITABLE CIVILIAN SELECTED.";};
-
-			[[_sleeper,"",(50+random 50),10,1,0.8], "seven_fnc_ws_assassins", _sleeper] call BIS_fnc_MP;
-
-			["CIVILIAN %1 ARMED.", _sleeper] call Ares_fnc_ShowZeusMessage;
-		}
-	] call Ares_fnc_RegisterCustomModule;
-
-	[
-		"7CMBG",
 		"Detonate Nuke",
 		{
 			_dialogResult =

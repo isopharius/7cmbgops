@@ -38,7 +38,6 @@ class seven
 		class getloadout {};
 		class setloadout {};
 		class suicidebomber {};
-		class ws_assassins {};
 		class halo {};
 		class jumpout {};
 		class FSFSV_CallBackpackToBack {};
