@@ -717,51 +717,6 @@ if (!isdedicated) then { //players
 
 	[
 		"7CMBG",
-		"Set Suicide Bomber",
-		{
-			_bomber = _this select 1;
-			if ((group _bomber == grpNull) || (!alive _bomber)) exitwith {"NO SUITABLE BOMBER SELECTED.";};
-
-			_dialogResult =
-				["Bomber settings",
-						[
-							["Explosive:", ["Small", "Medium", "Big", "Huge","Nuclear!"]],
-							["Target side(s):", ["BLUFOR", "OPFOR", "INDEPENDENT","ALL"]]
-						]
-				] call Ares_fnc_ShowChooseDialog;
-			if (count _dialogResult == 0) exitWith { "User cancelled dialog."; };
-
-			_bomb = "grenadeHand";
-			switch (_dialogResult select 0) do
-			{
-				case 0: { _bomb = "grenadeHand"; };
-				case 1: { _bomb = "M_Mo_82mm_AT_LG"; };
-				case 2: { _bomb = "M_Mo_120mm_AT_LG"; };
-				case 3: { _bomb = "Bo_GBU12_LGB_MI10"; };
-				default { _bomb = "Nuke"; };
-			};
-
-			_targetside = [WEST];
-			switch (_dialogResult select 1) do
-			{
-				case 0: { _targetside = [WEST]; };
-				case 1: { _targetside = [EAST]; };
-				case 2: { _targetside = [RESISTANCE]; };
-				default { _targetside = [CiVILIAN,WEST,EAST,RESISTANCE]; };
-			};
-
-			[[_bomber,_targetside,_bomb], "seven_fnc_suicidebomber", _bomber] call BIS_fnc_MP;
-
-			if (vehicle _bomber == _bomber) then {
-				["%1 SET AS SUICIDE BOMBER.", _bomber] call Ares_fnc_ShowZeusMessage;
-			} else {
-				["%1 SET AS BOMBCAR.", _bomber] call Ares_fnc_ShowZeusMessage;
-			};
-		}
-	] call Ares_fnc_RegisterCustomModule;
-
-	[
-		"7CMBG",
 		"Detonate Nuke",
 		{
 			_dialogResult =

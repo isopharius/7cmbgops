@@ -37,7 +37,6 @@ class seven
 		class garageNew {};
 		class getloadout {};
 		class setloadout {};
-		class suicidebomber {};
 		class halo {};
 		class jumpout {};
 		class FSFSV_CallBackpackToBack {};
