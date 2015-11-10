@@ -4,6 +4,7 @@ if(!isDedicated) then { //client admin menu
 	["player",[SELF_INTERACTION_KEY],-9905,["call seven_fnc_adminMenuDef","main"]] call ALIVE_fnc_flexiMenu_Add;
 };
 
+/*
 if (!isserver) exitwith {};
 
 if (count (allMissionObjects "ALiVE_amb_civ_population") > 0) then {
@@ -15,6 +16,7 @@ if (count (allMissionObjects "ALiVE_amb_civ_population") > 0) then {
 	//-- Initialize Spyder Ambiance
 	[true, true, 30, []] call seven_fnc_init_ambience;
 };
+*/
 
 /* ---------------------------
 SpyderAmbiance
