@@ -638,6 +638,73 @@ player createDiaryRecord [
 	]
 ];
 
+player createDiaryRecord [
+	"Glossary",
+	[
+		"AIR-to-GROUND",
+		"*** AIR-to-GROUND comms ***
+		<br/>AS FRRAGGED: Unit will be performing exactly as stated by the ATO.
+		<br/>
+		<br/>BANDIT: An aircraft identified as an enemy in accordance with thatre ID criteria. The term does not necessarily imply direction or authority to engage.
+		<br/>
+		<br/>BLIND: No visual contact with FRIENDLY aircraft/ground position. Opposite of VISUAL.
+		<br/>
+		<br/>BOGEY: Radar or UNKNOWN visual air CONTACT.
+		<br/>
+		<br/>CEASE FIRE: (S/A) Discontinue firing/do not open.
+		<br/>
+		<br/>LASER ON: Directive/informative call to start/acknowledge laser designation.
+		<br/>
+		<br/>LASING: Informative call indicating that the speaker is firing the laser.
+		<br/>
+		<br/>LOOKING: Aircrew does not have the ground object, reference point or target in sight (opposite of CONTACT).
+		<br/>
+		<br/>NEGATIVE LASER: (A/S) Aircraft has not acquired Laser energy.
+		<br/>
+		<br/>NO FACTOR: Not a threat.
+		<br/>
+		<br/>NO JOY: Aircrew does not have visual contact with the target/bandit/landmark. Opposite of TALLY.
+		<br/>
+		<br/>PADLOCKED: Informative call indicating aircrew cannot take eyes off an aircraft, ground target, or surface position, without risk of losing TALLY/VISUAL.
+		<br/>
+		<br/>PLAYTIME: Amount of time aircraft can remain on station, given in hours plus minutes (e.g. ONE PLUS THIRTY equals one hour and thirty minutes).
+		<br/>
+		<br/>POP: 1. (A/S) Starting climb for A.S attack.
+		<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2. Max performance climb out of low-altitude structure.
+		<br/>
+		<br/>SHOT: (S/S) Informative call indicating round(s) has or have been fired.
+		<br/>
+		<br/>SNAKE: (A/S) Directive call to oscillate an IR pointer about a target.
+		<br/>
+		<br/>SPARKLE: 1. (A/S) Target marking by IR pointer.
+		<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2. Target marking by gunship/FAC-A using incendiary rounds.
+		<br/>
+		<br/>SPOT: (A/S) Acquisition of laser designation.
+		<br/>
+		<br/>STEADY: (A/S) Directive call to stop oscillation of IR pointer.
+		<br/>
+		<br/>STOP: 1. (A/S) Stop IR illumination of a target.
+		<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2. (A/S) JTAC directs aircrew to abort the attack. This is a mandatory instruction.
+		<br/>
+		<br/>TALLY: Sighting of a target, non-friendly aircraft, landmark, or enemy position. Opposite of NO JOY.
+		<br/>
+		<br/>TEN SECONDS: (A/S) Directive to terminal controller to standby for LASER ON call in approximately 10s.
+		<br/>
+		<br/>TERMINATE: 1. (A/S) Stop laser illuminate of a target.
+		<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2. In training, cease local engagement without affecting the overall exercise.
+		<br/>
+		<br/>THREAT (Direction): Untargeted HOSTILE/BANDIT/BOGEY is within a briefed range of a friendly aircraft.
+		<br/>
+		<br/>TUMBLEWEED: Indicates limited situational awareness, (i.e., NO JOY, BLIND) and is a request for information.
+		<br/>
+		<br/>VISUAL: Sighting of a friendly aircraft or ground position.  Opposite of BLIND.
+		<br/>
+		<br/>WINCHESTER: No ordnance remaining.
+		<br/>
+		<br/>ZIPLIP: Directive call to minimize radio transmissions."
+	]
+];
+
 player createDiarySubject ["Features","Template Features"];
 
 player createDiaryRecord [
