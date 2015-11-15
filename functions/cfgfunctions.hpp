@@ -37,7 +37,6 @@ class seven
 		class garageNew {};
 		class getloadout {};
 		class setloadout {};
-		class halo {};
 		class jumpout {};
 		class FSFSV_CallBackpackToBack {};
 		class FSFSV_CallBackpackToFront {};
@@ -94,33 +93,6 @@ class seven
 		class key_main {};
 		class start_satellite {};
 		class redefine_position {};
-	};
-	class Rtask
-	{
-		file = "\7cmbgops\scripts\Rtask";
-
-		class addactions {
-			postInit = 1;
-		};
-		class capture {};
-		class disarm_nuke {};
-		class dragmat {};
-		class dropmat {};
-		class getintel {};
-		class grab {};
-		class iedblow {};
-		class loadmat {};
-		class uavdata {};
-		class unvehtower {};
-		class vehtower {};
-		class missionAir {};
-		class missionClear {};
-		class missionSupport {};
-		class makeAirOps {};
-		class makeClearOps {};
-		class makeSupportOps {};
-		class removeTask {};
-		class removeTaskLocal {};
 	};
 	class airboss
 	{
