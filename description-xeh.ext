@@ -34,13 +34,13 @@ class Extended_InitPost_EventHandlers {
 
     //aircraft
 	class rhs_ch_47f {
-		chute_init = "(_this select 0) addaction ['<t color=''#FFFF00''>Jump Out</t>',seven_fnc_jumpout,'',6,false,true,'Eject','(_this in _target)']; if (isserver) then {(_this select 0) addBackpackCargoGlobal ['B_ons_Carryall_TCCC_TW',1]; (_this select 0) addBackpackCargoGlobal ['B_ons_Carryall_556_TW',1]; (_this select 0) addBackpackCargoGlobal ['B_ons_Carryall_556_MG_TW',1]; (_this select 0) addItemCargoGlobal ['ToolKit',1];}";
+		chute_init = "(_this select 0) setvariable ['ace_medical_medicClass', 1, true]; (_this select 0) addaction ['<t color=''#FFFF00''>Jump Out</t>',seven_fnc_jumpout,'',6,false,true,'Eject','(_this in _target)']; if (isserver) then {(_this select 0) addBackpackCargoGlobal ['B_ons_Carryall_TCCC_TW',1]; (_this select 0) addBackpackCargoGlobal ['B_ons_Carryall_556_TW',1]; (_this select 0) addBackpackCargoGlobal ['B_ons_Carryall_556_MG_TW',1]; (_this select 0) addItemCargoGlobal ['ToolKit',1];}";
 	};
 	class Heli_Transport_03_base_F {
-		chute_init = "(_this select 0) addaction ['<t color=''#FFFF00''>Jump Out</t>',seven_fnc_jumpout,'',6,false,true,'Eject','(_this in _target)']; if (isserver) then {(_this select 0) addBackpackCargoGlobal ['B_ons_Carryall_TCCC_TW',1]; (_this select 0) addBackpackCargoGlobal ['B_ons_Carryall_556_TW',1]; (_this select 0) addBackpackCargoGlobal ['B_ons_Carryall_556_MG_TW',1]; (_this select 0) addItemCargoGlobal ['ToolKit',1];}";
+		chute_init = "(_this select 0) setvariable ['ace_medical_medicClass', 1, true]; (_this select 0) addaction ['<t color=''#FFFF00''>Jump Out</t>',seven_fnc_jumpout,'',6,false,true,'Eject','(_this in _target)']; if (isserver) then {(_this select 0) addBackpackCargoGlobal ['B_ons_Carryall_TCCC_TW',1]; (_this select 0) addBackpackCargoGlobal ['B_ons_Carryall_556_TW',1]; (_this select 0) addBackpackCargoGlobal ['B_ons_Carryall_556_MG_TW',1]; (_this select 0) addItemCargoGlobal ['ToolKit',1];}";
 	};
 	class ONS_Heli_CH146_base_F {
-		chute_init = "(_this select 0) addaction ['<t color=''#FFFF00''>Jump Out</t>',seven_fnc_jumpout,'',6,false,true,'Eject','(_this in _target)']; if (isserver) then {(_this select 0) addBackpackCargoGlobal ['B_ons_Carryall_TCCC_TW',1]; (_this select 0) addBackpackCargoGlobal ['B_ons_Carryall_556_TW',1]; (_this select 0) addBackpackCargoGlobal ['B_ons_Carryall_556_MG_TW',1]; (_this select 0) addItemCargoGlobal ['ToolKit',1];}";
+		chute_init = "(_this select 0) setvariable ['ace_medical_medicClass', 1, true]; (_this select 0) addaction ['<t color=''#FFFF00''>Jump Out</t>',seven_fnc_jumpout,'',6,false,true,'Eject','(_this in _target)']; if (isserver) then {(_this select 0) addBackpackCargoGlobal ['B_ons_Carryall_TCCC_TW',1]; (_this select 0) addBackpackCargoGlobal ['B_ons_Carryall_556_TW',1]; (_this select 0) addBackpackCargoGlobal ['B_ons_Carryall_556_MG_TW',1]; (_this select 0) addItemCargoGlobal ['ToolKit',1];}";
 	};
 	class RHS_C130J {
 		chute_init = "(_this select 0) addaction ['<t color=''#FFFF00''>Jump Out</t>',seven_fnc_jumpout,'',6,false,true,'Eject','(_this in _target)'];";
