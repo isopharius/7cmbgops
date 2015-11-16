@@ -131,21 +131,4 @@ class seven
 		class toggle_bullet_camera {};
 		class toggle_path_tracing {};
 	};
-	/*
-	class carradio
-	{
-		file = "\7cmbgops\scripts\carradio";
-
-		class initCarRadio {};
-		class controls {};
-		class display {};
-		class editor {};
-		class key {};
-		class lbdrop {};
-		class play {};
-		class playlist {};
-		class radio {};
-		class settings {};
-	};
-	*/
 };
