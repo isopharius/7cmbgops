@@ -713,7 +713,6 @@ player createDiaryRecord [
 		"Logistics",
 		"*** PARADROP ***
 		<br/>STATIC LINE JUMP - use Jump Out action in supported aircraft.
-		<br/>HALO JUMP - use ACE-Self action near magical portapotty.
 		<br/>C130 CARGO DROP - Load crates (ACE interaction) and vehicles inside C130 and use Paradrop Cargo action as pilot.
 		<br/>
 		<br/>*** ARSENAL ***
@@ -750,14 +749,7 @@ player createDiaryRecord [
 		"*** 7CMBG ***
 		<br/>HELIPAD LIGHTS - add lights to nearby helipad, choose colors or IR.
 		<br/>RENEGADE - make unit enemy to everybody.
-		<br/>SET MEDICAL - select a unit/object to become ACE medic or medical vehicle /facility
-		<br/>SUICIDE BOMBER - AI will go after 1 of 3 closest units and detonate itself after warcry, works with cars too! pick bomb size and target side.
-		<br/>ARMED CIVILIAN - adds handgun to selected civilian, if player comes close they have a random chance of attack.
 		<br/>DETONATE NUKE - nuclear bang on position, pick yield.
-		<br/>HIGH COMMANDER - give High Command of all BLUFOR groups to player.
-		<br/>
-		<br/>*** ALiVE ***
-		<br/>ADD OPCOM OBJECTIVE - create objective for each AI commander, pick Size / Type / Priority.
 		<br/>
 		<br/>*** AI Behaviors ***
 		<br/>AI DEFEND - AI group on defence.
@@ -766,12 +758,7 @@ player createDiaryRecord [
 		<br/>*** SAVE / LOAD ***
 		<br/>Save and share mission files, load missions from client or server list.
 		<br/>
-		<br/>*** SIDEOPS ***
-		<br/>Objectives are described under Briefing, pick type and position.
-		<br/>
 		<br/>*** SPAWN ***
-		<br/>LHD - Full-fledged ATLAS LHD.
-		<br/>FLIES - create flies on position.
-		<br/>SANDSTORM - sandstorm effect that follows object."
+		<br/>LHD - Full-fledged ATLAS LHD."
 	]
 ];
