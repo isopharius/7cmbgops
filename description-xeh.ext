@@ -7,7 +7,7 @@ class Extended_InitPost_EventHandlers {
 	*/
 	//facilities
 	class Land_Medevac_house_V1_F {
-		medical_init = "(_this select 0) setvariable ['ace_medical_isMedicalFacility', 1, true]; if (isserver) {(_this select 0) addBackpackCargoGlobal ['B_ons_Carryall_TCCC_TW',1]; (_this select 0) addBackpackCargoGlobal ['B_ons_Carryall_Paramedic',1];}";
+		medical_init = "if (isserver) {(_this select 0) addBackpackCargoGlobal ['B_ons_Carryall_TCCC_TW',1]; (_this select 0) addBackpackCargoGlobal ['B_ons_Carryall_Paramedic',1];}";
 	};
 
 	//soldiers
