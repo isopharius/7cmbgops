@@ -7,8 +7,6 @@ if (isdedicated || isHC) exitwith {};
 
 	_taccom = ["taccom","TACCOM","\A3\ui_f\data\map\markers\flags\Canada_ca.paa",{CreateDialog "Spyder_TacticalCommandMain"},{!(isNull objectParent player) || ((backpack player) == "tf_rt1523g_big") || ((backpack player) == "tf_rt1523g_big_bwmod") || ((backpack player) == "tf_rt1523g_big_rhs")}] call ace_interact_menu_fnc_createAction;
 
-	_halojump = ["halojump","Halo Jump","\A3\ui_f\data\map\markers\military\end_CA.paa",{call seven_fnc_halo},{(isNull objectParent player) && (count (nearestObjects [player, ["Land_FieldToilet_F"], 15]) > 0)}] call ace_interact_menu_fnc_createAction;
-
 	_fmradio = ["fmradio","Radio Play/Stop ","\7cmbgops\pics\i_carradio.paa",{[[(_this select 0)],"seven_fnc_fmradio",false,false,true] call BIS_fnc_MP;},{isNull objectParent player}] call ace_interact_menu_fnc_createAction;
 	_soultrain = ["soultrain","Soul Train","",{[] call seven_fnc_init360},{(vehicle player) == player}] call ace_interact_menu_fnc_createAction;
 
@@ -39,6 +37,6 @@ if (isdedicated || isHC) exitwith {};
 
 	{
 		[player, 1, ["ACE_SelfActions"], _x] call ace_interact_menu_fnc_addActionToObject;
-	} foreach [_vehservice,_heloservice,_garage,_arsenalcrate,_halojump];
+	} foreach [_vehservice,_heloservice,_garage,_arsenalcrate];
 
 	[player, 1, ["ACE_SelfActions", "Medical"], _treat] call ace_interact_menu_fnc_addActionToObject;
