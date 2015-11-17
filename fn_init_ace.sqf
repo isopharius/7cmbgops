@@ -25,8 +25,6 @@ if (isdedicated || isHC) exitwith {};
 
 	_heloservice = ["heloservice","Service chopper","\A3\ui_f\data\map\vehicleicons\iconhelicopter_ca.paa",{[] spawn seven_fnc_rearmchopper},{(((vehicle player) isKindOf "Air") && (!isEngineOn (vehicle player)) && (count (nearestObjects [player, ["Land_repair_center","Heli_H","HeliH","Land_HelipadCircle_F","Land_HelipadCivil_F","Land_HelipadEmpty_F","Land_HelipadRescue_F","Land_HelipadSquare_F"], 15]) > 0) && (!visibleMap))}] call ace_interact_menu_fnc_createAction;
 
-	_treat = ["treat","Treat yourself","\A3\ui_f\data\map\vehicleicons\iconManMedic_ca.paa",{player action ["HealSoldierSelf", player]; player setDamage 0;},{(damage player)>0}] call ace_interact_menu_fnc_createAction;
-
 	{
 		["Land_FMradio_F", 0, ["ACE_MainActions"], _x] call ace_interact_menu_fnc_addActionToClass;
 	} foreach [_fmradio,_soultrain];
