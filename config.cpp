@@ -35,15 +35,9 @@ class CfgFunctions
 	#include "scripts\LT\cfgfunctions.hpp"
 };
 
-class CfgNotifications
-{
-	#include "scripts\Rtask\cfgnotifications.hpp"
-};
-
 #include "scripts\LT\LTmenu.hpp"
 #include "scripts\pxs_satcom_a3\init_interface.hpp"
 #include "scripts\airboss\dialog.hpp"
-#include "scripts\carradio\dialog.hpp"
 
 #include "description-xeh.ext"
 
