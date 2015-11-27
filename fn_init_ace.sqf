@@ -36,5 +36,3 @@ if (isdedicated || isHC) exitwith {};
 	{
 		[player, 1, ["ACE_SelfActions"], _x] call ace_interact_menu_fnc_addActionToObject;
 	} foreach [_vehservice,_heloservice,_garage,_arsenalcrate];
-
-	[player, 1, ["ACE_SelfActions", "Medical"], _treat] call ace_interact_menu_fnc_addActionToObject;
