@@ -46,7 +46,7 @@ private "_tpvar";
 } foreach allmapmarkers;
 
 //tp actions
-
+/*
 if (!isdedicated) then { //clientside teleport actions
 	{
 		private ["_tpactions","_y"];
@@ -59,3 +59,4 @@ if (!isdedicated) then { //clientside teleport actions
 		} foreach _tpactions;
 	} foreach _tpvar;
 };
+*/
