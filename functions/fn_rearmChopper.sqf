@@ -107,13 +107,13 @@ while {_damage > 0} do
 	sleep (1 + (random 6));
 	_percentage = 100 - (_damage * 100);
 	_veh vehicleChat format ["Repairing (%1%)...", floor _percentage];
-	if ((_damage - 0.01) <= 0) then
+	if ((_damage - 0.1) <= 0) then
 	{
 		_veh setDamage 0;
 		_damage = 0;
 	} else {
-		_veh setDamage (_damage - 0.01);
-		_damage = _damage - 0.01;
+		_veh setDamage (_damage - 0.1);
+		_damage = _damage - 0.1;
 	};
 };
 
@@ -124,12 +124,12 @@ while {_fuelLevel < 1} do
 	sleep (1 + (random 5));
 	_percentage = (_fuelLevel * 100);
 	_veh vehicleChat format["Refuelling (%1%)...", floor _percentage];
-	if ((_fuelLevel + 0.01) >= 1) then
+	if ((_fuelLevel + 0.1) >= 1) then
 	{
 		_veh setFuel 1;
 		_fuelLevel = 1;
 	} else {
-		_fuelLevel = _fuelLevel + 0.01;
+		_fuelLevel = _fuelLevel + 0.1;
 	};
 };
 

@@ -213,38 +213,6 @@ player createDiaryRecord [
 	]
 ];
 
-player createDiaryRecord [
-	"Diary",
-	[
-		"SIDEOPS",
-		"***AIR OPERATIONS***
-		<br/>DESTROY MOBILE ARTILLERY - eliminate two enemy MAT pieces.
-		<br/>DESTROY WAREHOUSE - bomb CSAT supply depot.
-		<br/>CONVOY ATTACK - eliminate a supply convoy.
-		<br/>CAS - destroy CSAT armored platoon.
-		<br/><br/>***SUPPORT OPERATIONS***
-		<br/>IED CLEAR - must neutralize an IED, only specialists can disable explosives.
-		<br/>ROAD REPAIR - must use the CRV and bring to the area to repair the road.
-		<br/>DEPLOY HQ - carry and escort a supply truck to the area to deploy the HQ.
-		<br/>DELIVER SUPPLIES - must escort a supply truck and take it to the ally C.O.P.
-		<br/>VEHICLE REPAIR - must carry the CRV and tow the damaged vehicle to Repair service in Loy Manara Air Base.
-		<br/>MEDEVAC - must evacuate the wounded in the AO to MASH in Loy Manara AB.
-		<br/>RECOVER UAV - find the drone and retrieve intel.
-		<br/>CSAR - Find the Pilot and evacuate to MASH in Loy Manara AB.
-		<br/><br/>***CLEAR AND COMBAT OPS***
-		<br/>TAKE CONTROL - take control of the town and eliminate or drive out CSAT forces.
-		<br/>KILL OFFICER - must eliminate the insurgent officer.
-		<br/>FIND EVIDENCES - search for intel in the area and arrest civilian colaborator.
-		<br/>DESTROY AMMO STASH - search the area and destroy the caches.
-		<br/>DESTROY COMMS - must destroy a mobile communications module.
-		<br/>TAKE CONTROL - take control of the town and eliminate or drive out Insurgent forces.
-		<br/>DESTROY SPAA - Find and destroy enemy SPAA Placement.
-		<br/>CAPTURE WARLORD - Find the insurgent Leader and bring it to Loy Manara AB.
-		<br/>DESTROY SPAA - Find and destroy enemy SPAA Placement.
-		<br/>NUCLEAR COUNTDOWN - Disarm the nuke engine before it goes off."
-	]
-];
-
 player createDiarySubject ["Glossary","7CMBG Glossary"];
 
 player createDiaryRecord [

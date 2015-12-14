@@ -5,6 +5,7 @@ class seven
 	class init
 	{
 		file = "\7cmbgops";
+
 		class init_map {
 			postInit = 1;
 		};

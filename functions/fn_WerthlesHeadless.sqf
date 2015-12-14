@@ -20,11 +20,11 @@ private ["_recurrent", "_timeBetween", "_debug", "_advanced", "_startDelay", "_p
 //Ignored Special Variables: _this, _x, _forEachIndex.
 //script parameters
 _recurrent = true; //_this select 0; // run repeatedly
-_timeBetween = 120; //_this select 1; // time between each check
+_timeBetween = 60; //_this select 1; // time between each check
 _debug = false; //_this select 2; // debug available for all or just admin
 _advanced = true; //_this select 3; // selects which AI distribution method to use
-_startDelay = 60; //_this select 4; // how long to wait before running
-_pause = 10; //_this select 5; // how long to wait between each setGroupOwner, longer aids syncing
+_startDelay = 30; //_this select 4; // how long to wait before running
+_pause = 6; //_this select 5; // how long to wait between each setGroupOwner, longer aids syncing
 _report = true; //_this select 6; // turn setup report on or off
 _moreBadNames = []; //_this select 7; // check for units, groups, classes, vehicles or modules with these words in their name, then ignore the associated unit's group
 
@@ -247,7 +247,7 @@ if (isMultiplayer) then
 				};
 			},nil,-666,false,true,"",WHKCondition];
 		}];
-
+/*
 		//draw icons if debug is activated for a player
 		_debugging = [_debug] spawn {
 			_check = true;
@@ -340,7 +340,7 @@ if (isMultiplayer) then
 				};
 				sleep 10;
 			}; //while
-		}; //spawn
+		}; //spawn*/
 	}; //if hasInterface
 
 	if not (isServer or hasInterface) then
