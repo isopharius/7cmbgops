@@ -10,10 +10,6 @@ if (isdedicated || isHC) exitwith {};
 	_fmradio = ["fmradio","Radio Play/Stop ","\7cmbgops\pics\i_carradio.paa",{[[(_this select 0)],"seven_fnc_fmradio",false,false,true] call BIS_fnc_MP;},{isNull objectParent player}] call ace_interact_menu_fnc_createAction;
 	_soultrain = ["soultrain","Soul Train","",{[] call seven_fnc_init360},{(vehicle player) == player}] call ace_interact_menu_fnc_createAction;
 
-	_reqair = ["reqair","Request Air Mission","\a3\Modules_F_Curator\Data\portraitCASGunMissile_ca.paa",{[[],"seven_fnc_missionair",false,false,true] call BIS_fnc_MP;},{!(isNull objectParent player)}] call ace_interact_menu_fnc_createAction;
-	_reqass = ["reqass","Request Assault Mission","\A3\ui_f\data\map\markers\military\objective_CA.paa",{[[],"seven_fnc_missionclear",false,false,true] call BIS_fnc_MP;},{!(isNull objectParent player)}] call ace_interact_menu_fnc_createAction;
-	_reqsup = ["reqsup","Request Support Mission","\A3\ui_f\data\map\markers\military\join_CA.paa",{[[],"seven_fnc_missionsupport",false,false,true] call BIS_fnc_MP;},{!(isNull objectParent player)}] call ace_interact_menu_fnc_createAction;
-
 	_cheston = ["cheston","Backpack to chest","\A3\ui_f\data\map\vehicleicons\iconBackpack_ca.paa",{0 spawn seven_fnc_FSFSV_CallBackpackToFront},{(((call seven_fnc_FSFSV_TestPlayerBackpackBack) > 0) && (!visibleMap))}] call ace_interact_menu_fnc_createAction;
 	_chestoff = ["chestoff","Backpack to back","\A3\ui_f\data\map\vehicleicons\iconBackpack_ca.paa",{0 spawn seven_fnc_FSFSV_CallBackpackToBack},{(((call seven_fnc_FSFSV_TestPlayerBackpackFront) > 0)  && (!visibleMap))}] call ace_interact_menu_fnc_createAction;
 
