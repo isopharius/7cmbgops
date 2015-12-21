@@ -358,6 +358,20 @@ if (!isdedicated) then { //players
 	] call Ares_fnc_RegisterCustomModule;
 
 	[
+		"7CMBG",
+		"Set Medical Vehicle",
+		{
+			_veh = _this select 1;
+			if (!alive _veh) exitwith {"NO SUITABLE VEHICLE SELECTED.";};
+			_veh setvariable ["ace_medical_medicClass", 1, true];
+			_veh addBackpackCargoGlobal ['B_ons_Carryall_TCCC_TW',1];
+			_veh addBackpackCargoGlobal ['B_ons_Carryall_Paramedic',1];
+
+			["%1 SET AS MEDICAL VEHICLE.", _veh] call Ares_fnc_ShowZeusMessage;
+		}
+	] call Ares_fnc_RegisterCustomModule;
+
+	[
 		"Spawn",
 		"LHD Carrier",
 		{
@@ -382,6 +396,7 @@ if (!isdedicated) then { //players
 };
 
 waituntil {!isnil "Ares_EditableObjectBlacklist"};
+
 Ares_EditableObjectBlacklist = Ares_EditableObjectBlacklist + [
 	"ALiVE_mil_placement_custom",
 	"ALiVE_mil_OPCOM",
@@ -397,10 +412,8 @@ Ares_EditableObjectBlacklist = Ares_EditableObjectBlacklist + [
 	"mcc_sandbox_moduleGAIASettings",
 	"mcc_sandbox_moduleCover",
 	"mcc_sandbox_moduleMissionSettings",
-	"ACE_ModuleCheckPBOs",
-	"ACE_ModuleSitting",
-	"ace_finger_moduleSettings",
 	"HeadlessClient_F",
 	"ALiVE_civ_placement",
-	"ALiVE_mil_placement"
+	"ALiVE_mil_placement",
+	"tfar_ModuleTaskForceRadioFrequencies"
 ];
