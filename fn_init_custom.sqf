@@ -23,7 +23,7 @@ if(!isDedicated) then {
 		};
 	}];
 */
-	if (worldName in ["Altis", "Stratis", "Atlantis"]) then {
+	if (worldName in ["Altis", "Stratis", "Atlantis". "Pandora"]) then {
 		{
 			[west, _x] call BIS_fnc_addRespawnInventory;
 		} foreach ["TW1","TW2","TW3","TW4","TW5","TW6","TW7"];
@@ -37,6 +37,3 @@ if(!isDedicated) then {
 //cargodrop
 rhs_fnc_cargoAttach = compile preprocessFileLineNumbers "\7cmbgops\functions\cargo_attach.sqf";
 rhs_fnc_vehPara = compile preprocessFileLineNumbers "\7cmbgops\functions\vehPara.sqf";
-
-//SFP save
-sfp_map_editor_fnc_SaveDataServer = compile preprocessFileLineNumbers "\7cmbgops\functions\fn_SaveDataServer.sqf";
