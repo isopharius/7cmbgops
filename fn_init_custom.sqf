@@ -23,7 +23,7 @@ if(!isDedicated) then {
 		};
 	}];
 */
-	if (worldName in ["Altis", "Stratis", "Atlantis". "Pandora"]) then {
+	if (worldName in ["Altis", "Stratis", "Atlantis", "Pandora"]) then {
 		{
 			[west, _x] call BIS_fnc_addRespawnInventory;
 		} foreach ["TW1","TW2","TW3","TW4","TW5","TW6","TW7"];

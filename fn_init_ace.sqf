@@ -27,7 +27,7 @@ if (isdedicated || isHC) exitwith {};
 
 	{
 		[player, 1, ["ACE_SelfActions", "ACE_Equipment"], _x] call ace_interact_menu_fnc_addActionToObject;
-	} foreach [_cheston,_chestoff,_satcom,_taccom,_reqsup,_reqair,_reqass];
+	} foreach [_cheston,_chestoff,_satcom,_taccom];
 
 	{
 		[player, 1, ["ACE_SelfActions"], _x] call ace_interact_menu_fnc_addActionToObject;
