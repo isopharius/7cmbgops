@@ -4,8 +4,6 @@ if (isHC) exitwith {};
 
 FSFSV_cacheObjet = compileFinal "(_this select 0) hideObject (_this select 1);";
 
-ATLAS_Official = true;
-
 if (isserver) then {
 	LT_distance = 20;
 	smallcamps = ["mediumMGCamp1","mediumMGCamp2","mediumMGCamp3","mediumMilitaryCamp1","smallMilitaryCamp1","mediumMilitaryOutpost1"];

@@ -724,9 +724,6 @@ player createDiaryRecord [
 		<br/>AI SWEEP - AI group on patrol.
 		<br/>
 		<br/>*** SAVE / LOAD ***
-		<br/>Save and share mission files, load missions from client or server list.
-		<br/>
-		<br/>*** SPAWN ***
-		<br/>LHD - Full-fledged ATLAS LHD."
+		<br/>Save and share mission files, load missions from client or server list."
 	]
 ];

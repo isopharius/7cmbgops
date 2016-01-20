@@ -95,22 +95,6 @@ class seven
 		class start_satellite {};
 		class redefine_position {};
 	};
-	class airboss
-	{
-		file = "\7cmbgops\scripts\airboss";
-
-		class lha_main {};
-		class lha_BayOver {};
-		class lha_BaySelect {};
-		class lha_BayStatusUpdate {};
-		class lha_UpdateListBox {};
-		class lha_VehicleReturn {};
-		class lha_VehicleService {};
-		class lha_VehicleSpawn {};
-		class lha_object_create {};
-		class lha_VehicleSpawnBox {};
-		class lha_ui_debarkationControl {};
-	};
 	class train360
 	{
 		file = "\7cmbgops\scripts\360";

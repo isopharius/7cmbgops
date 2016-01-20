@@ -370,29 +370,6 @@ if (!isdedicated) then { //players
 			["%1 SET AS MEDICAL VEHICLE.", _veh] call Ares_fnc_ShowZeusMessage;
 		}
 	] call Ares_fnc_RegisterCustomModule;
-
-	[
-		"Spawn",
-		"LHD Carrier",
-		{
-			_pos = _this select 0;
-
-			if !(isnil "LHAAlive") exitwith {"LHD already exists"};
-			if !(surfaceiswater _pos) exitwith {"Surface is not water"};
-
-			_pad = createVehicle ["Land_HelipadEmpty_F", [(_pos select 0), (_pos select 1), (_pos select 2) + 10], [], 0, "can_collide"];
-			if ((worldname == "mog") || (worldname == "Atlantis")) then {
-				_pad setposworld [_pos select 0, _pos select 1, 4];
-			} else {
-				_pad setposworld [_pos select 0, _pos select 1, 0];
-			};
-
-			_lhd = createVehicle ["ATLAS_ONS_LHD_helper", (getposatl _pad), [], 0, "none"];
-			[[_lhd,_pad], "seven_fnc_lha_main", true, true, true] call BIS_fnc_MP;
-
-			["LHD spawned"] call Ares_fnc_ShowZeusMessage;
-		}
-	] call Ares_fnc_RegisterCustomModule;
 };
 
 waituntil {!isnil "Ares_EditableObjectBlacklist"};
