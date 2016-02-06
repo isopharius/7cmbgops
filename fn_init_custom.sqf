@@ -31,7 +31,7 @@ if(!isDedicated) then {
 		} foreach ["AR1","AR2","AR3","AR4","AR5","AR6","AR7"];
 	};
 
-	#include "\7cmbgops\scripts\SHK_Fastrope.sqf"
+	//#include "\7cmbgops\scripts\SHK_Fastrope.sqf"
 };
 
 //cargodrop
