@@ -58,7 +58,7 @@ if (isserver) then { //server
 	//Mish save
 	[
 		"Save/Load",
-		"Transfer to server",
+		"Transfer MCC mission to server",
 		{
 			_mish = profileNamespace getVariable "MCC_save";
 			_dialogResult =
@@ -80,7 +80,7 @@ if (isserver) then { //server
 	//Mish load
 	[
 		"Save/Load",
-		"Load from server",
+		"Load MCC mission from server",
 		{
 			_dialogResult =
 				[
@@ -118,7 +118,7 @@ if (isserver) then { //server
 	//Mish delete
 	[
 		"Save/Load",
-		"Delete from server",
+		"Delete MCC mission from server",
 		{
 			_dialogResult =
 				[
