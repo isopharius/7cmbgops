@@ -41,9 +41,9 @@
 					_positionMemorisee = _positionActualisee;
 				};
 
-				if (player != vehicle player) then {
+				if !(isnull objectParent player) then {
 					private "_para";
-					_vehicle = vehicle player;
+					_vehicle = objectParent player;
 					_para = if (_vehicle isKindOf "ParachuteBase") then {true;} else {false;};
 
 					if (_para) then {
@@ -57,7 +57,7 @@
 						[[_FSFSV_SacADosGwh,true],"FSFSV_cacheObjet"] call BIS_fnc_MP;
 					};
 
-					waitUntil {sleep 0.1;((player == vehicle player) || !(alive player))};
+					waitUntil {sleep 0.1;((isnull objectParent player) || !(alive player))};
 
 					if (_para) then {
 						[[_FSFSV_SacADosGwh,true],"FSFSV_cacheObjet"] call BIS_fnc_MP;
@@ -74,7 +74,7 @@
 					_delay = time + 100;
 					waitUntil {
 						sleep 0.2;
-						_vehicle = vehicle player;
+						_vehicle = objectParent player;
 						_speed = speed _vehicle;
 						_falling = (velocity _vehicle) select 2;
 						(((_speed > -1) && (_speed < 1) && (_falling < 0.5) && (_falling > -0.5)) || (time > _delay))

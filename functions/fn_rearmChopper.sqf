@@ -20,7 +20,7 @@ Jack Williams (Rarek) for Ahoy World!
 
 
 private ["_damage","_percentage","_veh","_vehType","_fuelLevel"];
-_veh = vehicle player;
+_veh = objectParent player;
 _vehType = getText(configFile>>"CfgVehicles">>typeOf _veh>>"DisplayName");
 
 if (_veh isKindOf "ParachuteBase" || !alive _veh) exitWith {};

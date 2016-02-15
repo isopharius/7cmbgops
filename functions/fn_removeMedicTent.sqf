@@ -32,7 +32,7 @@ _medicTent = INS_MEDICTENT;
 _medicTentFlag = INS_MEDICTENTFLAG;
 _player = _this select 1;
 _side = playerSide;
-_unitType = typeOf (vehicle player);
+_unitType = typeOf (objectParent player);
 _distance = _player distance _medicTent;
 
 if (_distance > 5) exitWith {

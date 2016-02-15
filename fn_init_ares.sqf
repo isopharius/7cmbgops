@@ -33,18 +33,24 @@ MCC_fn_loadZones =
 
 if (isserver) then { //server
 
-	mishlist = profileNamespace getVariable ["servermishlist", []];
-	mishfiles = profileNamespace getVariable ["servermishfiles", []];
+//grab map missions from server
+	_servermishlist = format ["servermishlist%1", worldname];
+	_servermishfiles = format ["servermishfiles%1", worldname];
+	mishlist = profileNamespace getVariable [_servermishlist, []];
+	mishfiles = profileNamespace getVariable [_servermishfiles, []];
 
+
+//publish mission list
 	publicVariable "mishlist";
 	publicVariable "mishfiles";
 
+//update server missions
 	"mishlist" addPublicVariableEventHandler {
-		profileNamespace setVariable ["servermishlist",mishlist];
+		profileNamespace setVariable [_servermishlist,mishlist];
 	};
 
 	"mishfiles" addPublicVariableEventHandler {
-		profileNamespace setVariable ["servermishfiles",mishfiles];
+		profileNamespace setVariable [_servermishfiles,mishfiles];
 	};
 
 	if (isdedicated) then { //save server profile when all players gone

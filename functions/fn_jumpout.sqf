@@ -1,6 +1,6 @@
 if (isdedicated || isHC) exitwith {};
 
-_veh = vehicle player;
+_veh = objectParent player;
 _veh allowdamage false;
 player allowdamage false;
 sleep 1;

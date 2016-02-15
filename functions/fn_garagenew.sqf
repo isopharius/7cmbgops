@@ -19,9 +19,9 @@
 		_displayMission createdisplay "RscDisplayGarage";
 
 		[(_this select 0)] spawn {
-			waitUntil{(Vehicle player) != player};
-			_vehType = typeOf Vehicle player;
-			deleteVehicle (Vehicle player);
+			waitUntil{!(isnull objectParent player)};
+			_vehType = typeOf objectParent player;
+			deleteVehicle (objectParent player);
 			sleep 1.0;
 			_veh = createVehicle [_vehType, getMarkerPos (_this select 0), [], 0, "CAN_COLLIDE"];
 			player moveInDriver _veh;

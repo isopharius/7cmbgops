@@ -30,7 +30,7 @@ private ["_sandbag","_player","_unitType"];
 
 _sandbag = INS_SANDBAG;
 _player = _this select 1;
-_unitType = typeOf (vehicle player);
+_unitType = typeOf (objectParent player);
 _distance = _player distance _sandbag;
 
 if (_distance > 5) exitWith {
