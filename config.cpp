@@ -20,10 +20,7 @@ class CfgPatches
 			"A3_Modules_F_Curator",
 			"cba_xeh_a3",
 			"A3_weapons_F",
-			"asdg_jointrails",
-			"ons_optics",
-			"ons_rifles",
-			"ons_asdg_jr"
+			"asdg_jointrails"
 		};
 	};
 };
