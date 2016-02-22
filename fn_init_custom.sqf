@@ -31,9 +31,13 @@ if(!isDedicated) then {
 		} foreach ["AR1","AR2","AR3","AR4","AR5","AR6","AR7"];
 	};
 
-	//#include "\7cmbgops\scripts\SHK_Fastrope.sqf"
+	#include "\7cmbgops\scripts\SHK_Fastrope.sqf"
 };
 
 //cargodrop
 rhs_fnc_cargoAttach = compile preprocessFileLineNumbers "\7cmbgops\functions\cargo_attach.sqf";
 rhs_fnc_vehPara = compile preprocessFileLineNumbers "\7cmbgops\functions\vehPara.sqf";
+
+//mcc squad create
+MCC_fnc_RSSquadCreate = compile preprocessFileLineNumbers "\7cmbgops\functions\fn_RSSquadCreate.sqf";
+
