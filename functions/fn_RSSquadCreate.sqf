@@ -33,7 +33,7 @@ _name = ["Alpha","Bravo","Charlie","Delta","Echo","Foxtrot","Golf","Hotel","Indi
 
 //Create a new squad
 _group = creategroup (player getVariable ["CP_side",  playerside]);
-_null = [] call MCC_fnc_setGear;
+//_null = [] call MCC_fnc_setGear;
 
 [player] join _group;
 
