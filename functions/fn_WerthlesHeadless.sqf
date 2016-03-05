@@ -25,7 +25,7 @@ _debug = false; //_this select 2; // debug available for all or just admin
 _advanced = true; //_this select 3; // selects which AI distribution method to use
 _startDelay = 30; //_this select 4; // how long to wait before running
 _pause = 1; //_this select 5; // how long to wait between each setGroupOwner, longer aids syncing
-_report = true; //_this select 6; // turn setup report on or off
+_report = false; //_this select 6; // turn setup report on or off
 _moreBadNames = []; //_this select 7; // check for units, groups, classes, vehicles or modules with these words in their name, then ignore the associated unit's group
 
 //Check the script is run in multiplayer only

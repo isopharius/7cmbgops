@@ -56,7 +56,6 @@ class seven
 		class helipad_light_remove {};
 		class SHK_moveObjects {};
 		class Teleport {};
-		class WerthlesHeadless {};
 	};
 	class ambience
 	{

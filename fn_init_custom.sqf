@@ -1,5 +1,3 @@
-[] spawn seven_fnc_WerthlesHeadless;
-
 if (isHC) exitwith {};
 
 FSFSV_cacheObjet = compileFinal "(_this select 0) hideObject (_this select 1);";
@@ -30,8 +28,6 @@ if(!isDedicated) then {
 			[west, _x] call BIS_fnc_addRespawnInventory;
 		} foreach ["AR1","AR2","AR3","AR4","AR5","AR6","AR7"];
 	};
-
-	#include "\7cmbgops\scripts\SHK_Fastrope.sqf"
 };
 
 //cargodrop
@@ -40,4 +36,3 @@ rhs_fnc_vehPara = compile preprocessFileLineNumbers "\7cmbgops\functions\vehPara
 
 //mcc squad create
 MCC_fnc_RSSquadCreate = compile preprocessFileLineNumbers "\7cmbgops\functions\fn_RSSquadCreate.sqf";
-
