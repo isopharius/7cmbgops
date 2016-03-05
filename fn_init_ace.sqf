@@ -5,8 +5,6 @@ if (isdedicated || isHC) exitwith {};
 
 	_satcom = ["satcom","SATCOM","\A3\ui_f\data\map\markers\military\destroy_CA.paa",{call seven_fnc_start_satellite},{!(isNull objectParent player) || ((backpack player) == "tf_rt1523g_big") || ((backpack player) == "tf_rt1523g_big_bwmod") || ((backpack player) == "tf_rt1523g_big_rhs")}] call ace_interact_menu_fnc_createAction;
 
-	_taccom = ["taccom","TACCOM","\A3\ui_f\data\map\markers\flags\Canada_ca.paa",{CreateDialog "Spyder_TacticalCommandMain"},{!(isNull objectParent player) || ((backpack player) == "tf_rt1523g_big") || ((backpack player) == "tf_rt1523g_big_bwmod") || ((backpack player) == "tf_rt1523g_big_rhs")}] call ace_interact_menu_fnc_createAction;
-
 	_fmradio = ["fmradio","Radio Play/Stop","\7cmbgops\pics\i_carradio.paa",{[[(_this select 0)],"seven_fnc_fmradio",false,false,true] call BIS_fnc_MP;},{isNull objectParent player}] call ace_interact_menu_fnc_createAction;
 	_soultrain = ["soultrain","Soul Train","",{[] call seven_fnc_init360},{(isNull objectParent player)}] call ace_interact_menu_fnc_createAction;
 
@@ -39,7 +37,7 @@ if (isdedicated || isHC) exitwith {};
 
 	{
 		[player, 1, ["ACE_SelfActions", "ACE_Equipment"], _x] call ace_interact_menu_fnc_addActionToObject;
-	} foreach [_cheston,_chestoff,_satcom,_taccom];
+	} foreach [_cheston,_chestoff,_satcom];
 
 	{
 		[player, 1, ["ACE_SelfActions"], _x] call ace_interact_menu_fnc_addActionToObject;
