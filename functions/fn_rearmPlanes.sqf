@@ -41,7 +41,7 @@ if (count _magazines > 0) then {
 	{
 		if (!(_x in _removed)) then {
 			_veh removeMagazines _x;
-			_removed = _removed + [_x];
+			_removed pushback _x;
 		};
 	} forEach _magazines;
 	{
@@ -62,7 +62,7 @@ if (_count > 0) then {
 		{
 			if (!(_x in _removed)) then {
 				_veh removeMagazines _x;
-				_removed = _removed + [_x];
+				_removed pushback _x;
 			};
 		} forEach _magazines;
 		{
@@ -80,7 +80,7 @@ if (_count > 0) then {
 				{
 					if (!(_x in _removed)) then {
 						_veh removeMagazines _x;
-						_removed = _removed + [_x];
+						_removed pushback _x;
 					};
 				} forEach _magazines;
 				{

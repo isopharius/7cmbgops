@@ -46,7 +46,7 @@ class Extended_InitPost_EventHandlers {
     //aircraft
 	class CUP_B_LHD_WASP_USMC_Empty
 	{
-	  lhdinit = "(_this select 0) call airboss_fnc_lhdinit; [(_this select 0)] call UK3CB_BAF_Vehicles_Weapons_fnc_vehicles_servicing_init_EH;";
+	  ukinit = "[(_this select 0)] call UK3CB_BAF_Vehicles_Weapons_fnc_vehicles_servicing_init_EH;";
 	};
 	class JS_JC_FA18E
 	{

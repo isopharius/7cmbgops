@@ -229,6 +229,8 @@ if (!isdedicated) then { //players
 			if (!_includeEmptyVehicles) then { _emptyVehicles = []; };
 			if (!_includeEmptyObjects) then { _emptyObjects = []; };
 
+			_emptyObjects append _emptyVehicles;
+
 			_totalUnitsProcessed = 0;
 			{
 				_output pushBack format [
@@ -238,7 +240,7 @@ if (!isdedicated) then { //players
 					(getPosASL _x),
 					(vectorDir _x),
 					(vectorUp _x)];
-			} forEach _emptyObjects + _emptyVehicles;
+			} forEach _emptyObjects;
 
 			{
 				_output pushBack format [
@@ -624,7 +626,7 @@ if (!isdedicated) then { //players
 
 waituntil {!isnil "Ares_EditableObjectBlacklist"};
 
-Ares_EditableObjectBlacklist = Ares_EditableObjectBlacklist + [
+Ares_EditableObjectBlacklist append [
 	"ALiVE_mil_placement_custom",
 	"ALiVE_mil_OPCOM",
 	"ALiVE_mil_logistics",
