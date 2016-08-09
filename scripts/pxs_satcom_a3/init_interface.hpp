@@ -25,6 +25,23 @@ class RscInfoBack
 	text = "";
 };
 
+class PXS_RscText {
+	x = 0;
+	y = 0;
+	h = 0.037;
+	w = 0.3;
+	type = 0;
+	style = 0;
+	shadow = 1;
+	colorShadow[] = {0, 0, 0, 0.5};
+	font = "PuristaMedium";
+	SizeEx = "(			(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 1)";
+	text = "";
+	colorText[] = {1, 1, 1, 1.0};
+	colorBackground[] = {0, 0, 0, 0};
+	linespacing = 1;
+};
+
 // main dialog
 class PXS_RscSatellite
 {
@@ -40,7 +57,7 @@ class PXS_RscSatellite
 			w = 0.075 * safezoneW;
 			h = 0.062 * safezoneH;
 		};
-		class time_data: VAS_RscText
+		class time_data: PXS_RscText
 		{
 			idc = 1001;
 			x = safezoneXAbs + 0.08 * safezoneW;
@@ -58,7 +75,7 @@ class PXS_RscSatellite
 			w = 0.067 * safezoneW;
 			h = 0.062 * safezoneH;
 		};
-		class navflr: VAS_RscText
+		class navflr: PXS_RscText
 		{
 			idc = -1;
 			x = safezoneXAbs + 0.08 * safezoneW;
@@ -75,7 +92,7 @@ class PXS_RscSatellite
 			w = 0.075 * safezoneW;
 			h = 0.032 * safezoneH;
 		};
-		class trckg: VAS_RscText
+		class trckg: PXS_RscText
 		{
 			idc = 1006;
 			x = safezoneXAbs + safezoneWAbs - ((0.06 * safezoneW) + 0.2);
@@ -84,7 +101,7 @@ class PXS_RscSatellite
 			h = 0.05;
 			text = "TRACKING OFF";
 		};
-		class uhf: VAS_RscText
+		class uhf: PXS_RscText
 		{
 			idc = -1;
 			x = safezoneXAbs + 0.08 * safezoneW;
@@ -101,7 +118,7 @@ class PXS_RscSatellite
 			w = 0.07 * safezoneW;
 			h = 0.09 * safezoneH;
 		};
-		class cx: VAS_RscText
+		class cx: PXS_RscText
 		{
 			idc = 1002;
 			x = safezoneXAbs + safezoneWAbs - ((0.06 * safezoneW) + 0.2);
@@ -110,7 +127,7 @@ class PXS_RscSatellite
 			h = 0.05;
 			text = "LAT";
 		};
-		class cy: VAS_RscText
+		class cy: PXS_RscText
 		{
 			idc = 1003;
 			x = safezoneXAbs + safezoneWAbs - ((0.06 * safezoneW) + 0.2);
@@ -119,7 +136,7 @@ class PXS_RscSatellite
 			h = 0.05;
 			text = "LON";
 		};
-		class cz: VAS_RscText
+		class cz: PXS_RscText
 		{
 			idc = 1004;
 			x = safezoneXAbs + safezoneWAbs - ((0.06 * safezoneW) + 0.2);
@@ -129,7 +146,7 @@ class PXS_RscSatellite
 			text = "FOV";
 		};
 		//view type
-		class nv: VAS_RscText
+		class nv: PXS_RscText
 		{
 			idc = 1005;
 			x = safezoneXAbs + 0.08 * safezoneW;

@@ -7,14 +7,12 @@ private "_tpvar";
 		if ((_x find "respawn" > -1) || (_x find "tp" > -1)) exitWith { //all tp flags
 
 			if (!isdedicated) then { //clientside arsenal box and flag at tp marker with name
-				private ["_markerpos","_markerposx","_markerposy","_tpname","_crate","_tpflag"];
+				private ["_markerpos","_tpname","_crate","_tpflag"];
 
 				_markerpos = getmarkerpos _x;
-				_markerposx = _markerpos select 0;
-				_markerposy = _markerpos select 1;
 				_tpname = markertext _x;
 
-				_crate = "B_CargoNet_01_ammo_F" createvehiclelocal [_markerposx - 1, _markerposy - 1];
+				_crate = "B_CargoNet_01_ammo_F" createvehiclelocal [(_markerpos select 0) - 1, (_markerpos select 1) - 1];
 				_crate allowdamage false;
 				_tpflag = "Land_FieldToilet_F" createvehiclelocal _markerpos;
 				_tpflag allowdamage false;
@@ -34,13 +32,11 @@ private "_tpvar";
 		};
 
 		if ((isserver) && (_x find "mash" > -1)) exitWith { //create med facility at mash marker
-			private ["_mashpos","_mashdir","_mash"];
+			private ["_mash"];
 
-			_mashpos = getmarkerpos _x;
-			_mashdir = markerdir _x;
-			_mash = createVehicle ["Land_Medevac_house_V1_F", _mashpos, [], 0, "none"];
+			_mash = createVehicle ["Land_Medevac_house_V1_F", (getmarkerpos _x), [], 0, "none"];
 			_mash allowdamage false;
-			_mash setdir _mashdir;
+			_mash setdir (markerdir _x);
 		};
 	};
 } foreach allmapmarkers;

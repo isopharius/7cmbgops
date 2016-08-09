@@ -98,8 +98,8 @@ if (_radio in fmradio) then {
 		_grp = createGroup west;
 		_log = _grp createUnit ["LOGIC", (getPosworld _radio), [], 0, "can_collide"];
 		_log attachto [_radio];
-		_rndspeech = _speech call bis_fnc_selectRandom;
-		_rndmusic = _music call bis_fnc_selectRandom;
+		_rndspeech = selectRandom _speech;
+		_rndmusic = selectRandom _music;
 
 		{
 			if (_radio in fmradio) then {

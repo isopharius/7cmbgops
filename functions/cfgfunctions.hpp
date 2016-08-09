@@ -1,7 +1,6 @@
 class seven
 {
 	tag = "seven";
-
 	class init
 	{
 		file = "\7cmbgops";
@@ -26,9 +25,6 @@ class seven
 	{
 		file = "\7cmbgops\functions";
 
-		class Ares_AddRhsReinforcementPools {
-			postInit = 1;
-		};
 		class attachmrzr {};
 		class fmradio {};
 		class adminmenudef {};
@@ -39,11 +35,6 @@ class seven
 		class getloadout {};
 		class setloadout {};
 		class jumpout {};
-		class FSFSV_CallBackpackToBack {};
-		class FSFSV_CallBackpackToFront {};
-		class FSFSV_TestPlayerBackpackBack {};
-		class FSFSV_TestPlayerBackpackFront {};
-		class FSFSV_QuellePosition {};
 		class deployMedicTent {};
 		class deploySandbag {};
 		class removeMedicTent {};
@@ -56,15 +47,6 @@ class seven
 		class helipad_light_remove {};
 		class SHK_moveObjects {};
 		class Teleport {};
-	};
-	class ambience
-	{
-		file = "\7cmbgops\scripts\ambience";
-
-		class init_ambience {};
-		class SpyderAmbiance {};
-		class getunittypes {};
-		class loopcheck {};
 	};
 	class loadouts
 	{

@@ -689,8 +689,8 @@ player createDiaryRecord [
 		<br/>*** VIRTUAL GARAGE ***
 		<br/>Access Virtual Garage using ACE-Self -> Requisition Vehicle near <marker name='depot'>Depot marker</marker>.
 		<br/>
-		<br/>*** SATCOM and TACCOM ***
-		<br/>Satellite and Tactical Command tools available inside vehicles or with large radio backpacks, under ACE-Self -> Equipment.
+		<br/>*** SATCOM***
+		<br/>Satellite Command tool available inside vehicles or with large radio backpacks, under ACE-Self -> Equipment.
 		<br/>
 		<br/>*** VEHICLE SERVICE ***
 		<br/>Repair, rearm and refuel ground vehicles near <marker name='service'>Service marker</marker>, helipads are for choppers and hangars for fixed-wing.

@@ -1,56 +1,13 @@
 if (isHC) exitwith {};
 
-MCC_fn_loadZones =
-{
-	private ["_zonesArray","_zonesNumber","_zonesPos","_zonesSize","_zonesDir","_zonesLocation","_size"];
-	_zonesArray 	= _this select 0;
-	_zonesNumber	= _zonesArray select 0;
-	_zonesPos		= _zonesArray select 1;
-	_zonesSize		= _zonesArray select 2;
-	_zonesDir		= _zonesArray select 3;
-	_zonesLocation	= _zonesArray select 4;
-
-	//Create the Zones
-	{
-		mcc_zone_markposition 	= _zonesPos select _x;
-		mcc_zone_number			= _x;
-		mcc_zone_marker_X		= (_zonesSize select _x) select 0;
-		mcc_zone_marker_Y		= (_zonesSize select _x) select 1;
-		mcc_zone_markername		= str _x;
-		mcc_hc					= _zonesLocation select _x;
-		MCC_Marker_dir 			= _zonesDir select _x;
-
-		diag_log format["Zone Created: %1 - %2",_x, mcc_zone_markposition];
-		script_handler = [0] execVM MCC_path +"mcc\general_scripts\mcc_make_the_marker.sqf";
-		waitUntil {str(getMarkerPos mcc_zone_markername) != "[0,0,0]"};
-
-		sleep 1;
-		mcc_zone_markername setMarkerColorLocal "colorBlack";
-		mcc_zone_markername setMarkerAlphalocal 0.4;
-
-	} foreach _zonesNumber;
-};
-
 if (isserver) then { //server
 
-//grab map missions from server
-	_servermishlist = format ["servermishlist%1", worldname];
-	_servermishfiles = format ["servermishfiles%1", worldname];
-	mishlist = profileNamespace getVariable [_servermishlist, []];
-	mishfiles = profileNamespace getVariable [_servermishfiles, []];
+	mish = profileNamespace getVariable [format["savemish_%1", worldname], []];
 
+	publicVariable "mish";
 
-//publish mission list
-	publicVariable "mishlist";
-	publicVariable "mishfiles";
-
-//update server missions
-	"mishlist" addPublicVariableEventHandler {
-		profileNamespace setVariable [_servermishlist,mishlist];
-	};
-
-	"mishfiles" addPublicVariableEventHandler {
-		profileNamespace setVariable [_servermishfiles,mishfiles];
+	"mish" addPublicVariableEventHandler {
+		profileNamespace setVariable [format["savemish_%1", worldname], mish];
 	};
 
 	if (isdedicated) then { //save server profile when all players gone
@@ -61,204 +18,384 @@ if (isserver) then { //server
 
 } else { //clients
 
-	//Mish save
-	[
+	[ //Mish transfer
 		"Save/Load",
-		"Transfer MCC mission to server",
+		"Transfer to server",
 		{
-			_mish = profileNamespace getVariable "MCC_save";
+			_mish = profileNamespace getVariable [format["savemish_%1", worldname],[]];
+			_mishlist = [];
+			{
+				_mishlist pushback (_x select 0);
+			} foreach _mish;
+
 			_dialogResult =
 				[
-					"Transfer MCC mission to server",
+					"Transfer from client to server",
 					[
-						["Choose mission", _mish]
+						["Choose file", _mishlist]
 					]
 				] call Ares_fnc_ShowChooseDialog;
 			if (count _dialogResult == 0) exitWith { "User cancelled dialog."; };
 
-			mishlist pushback (_mish select (_dialogResult select 0));
-			mishfiles pushback ((profileNamespace getVariable "MCC_saveFiles") select (_dialogResult select 0));
-			publicVariable "mishlist";
-			publicVariable "mishfiles";
+			mish pushback (_mish select (_dialogResult select 0));
+			publicVariable "mish";
+
+			_mishname = _mishlist select (_dialogResult select 0);
+			[format["File %1 transferred to server.",_mishname]] call Ares_fnc_ShowZeusMessage;
 		}
 	] call Ares_fnc_RegisterCustomModule;
 
-	//Mish load
-	[
+	[ //Mish load
 		"Save/Load",
-		"Load MCC mission from server",
+		"Load from server",
 		{
+			_mishlist = [];
+			{
+				_mishlist pushback (_x select 0);
+			} foreach mish;
+
 			_dialogResult =
 				[
-					"Load MCC mission from server",
+					"Load from server",
 					[
-						["Choose mission", mishlist]
+						["Choose file", _mishlist]
 					]
 				] call Ares_fnc_ShowChooseDialog;
 			if (count _dialogResult == 0) exitWith { "User cancelled dialog."; };
 
-			_array = ((mishfiles select (_dialogResult select 0)) select 1);
-			_string = _array select 7;
-			if (isnil "_string") then {_string = ""};
-
-			//Do we have saved objects?
-			if ((count (_array select 0))>0 || (count (_array select 1))>0 || (count (_array select 2))>0 || (count (_array select 3))>0 || (count (_array select 4))>0 || (count (_array select 5))>0 || (count (_array select 6))>0 || _string != "") then
+			_loadmish = (mish select (_dialogResult select 0)) select 1;
+			try
 			{
-				sleep 0.5;
-				closeDialog 0;
-				sleep 0.3;
-				[[_array select 0, _array select 1, _array select 2, _array select 3, _array select 4, _array select 5], "MCC_fnc_loadFromMCC", false, false] spawn BIS_fnc_MP;
-				[(_array select 6)] spawn MCC_fn_loadZones;
-
-				_command = 'mcc_isloading=true;closedialog 0;titleText ["Loading Mission","BLACK FADED",5];' + _string + 'mcc_isloading=false;titleText ["Mission Loaded","BLACK IN",5];';
-
-				[] spawn compile _command;
+				[(compile _loadmish), _this, false] call Ares_fnc_BroadcastCode;
 			}
-			else
+			catch
 			{
-				hint "Mission load failed! : No MCC Mission configuration pasted from namespace";
+				diag_log _exception;
+				["Failed to parse code. See RPT for error."] call Ares_fnc_ShowZeusMessage;
 			};
+
+			_mishname = _mishlist select (_dialogResult select 0);
+			[format["If you don't see any errors, file %1 is now loaded!",_mishname]] call Ares_fnc_ShowZeusMessage;
 		}
 	] call Ares_fnc_RegisterCustomModule;
 
-	//Mish delete
-	[
+	[ //Mish delete server
 		"Save/Load",
-		"Delete MCC mission from server",
+		"Delete from server",
 		{
+			_mishlist = [];
+			{
+				_mishlist pushback (_x select 0);
+			} foreach mish;
+
 			_dialogResult =
 				[
-					"Delete MCC mission from server",
+					"Delete from server",
 					[
-						["Choose mission", mishlist]
+						["Choose file", _mishlist]
 					]
 				] call Ares_fnc_ShowChooseDialog;
 			if (count _dialogResult == 0) exitWith { "User cancelled dialog."; };
 
-			mishlist deleteAt (_dialogResult select 0);
-			mishfiles deleteAt (_dialogResult select 0);
-			publicVariable "mishlist";
-			publicVariable "mishfiles";
+			mish deleteAt (_dialogResult select 0);
+			publicVariable "mish";
+
+			_mishname = _mishlist select (_dialogResult select 0);
+			[format["File %1 deleted from server!",_mishname]] call Ares_fnc_ShowZeusMessage;
 		}
 	] call Ares_fnc_RegisterCustomModule;
 };
 
 if (!isdedicated) then { //players
-
-	[
-		"AI Behaviours",
-		"AI Sweep",
+	[ //Mish save
+		"Save/Load",
+		"Save to client",
 		{
-			_unit = _this select 1;
-			_grp = group _unit;
-			if (_grp == grpNull) exitwith {"ERROR: NO GROUP SELECTED.";};
+			_radius = 100;
+			_position = _this select 0;
 
 			_dialogResult =
-				["Begin Sweep",
-						[
-							["Sweep Mode:", ["Basic", "Advanced"]],
-							["Waypoints max spacing:", ["50m", "100m", "200m", "300m", "500m", "750m", "1000m"],3]
-						]
+				[
+					"Save to client",
+					[
+						["Mission Name", ""],
+						["Radius", ["50m", "100m", "500m", "1km", "2km", "5km", "Entire Map"], 6],
+						["Include AI?", ["Yes", "No"]],
+						["Include Empty Vehicles?", ["Yes", "No"]],
+						["Include Objects?", ["Yes", "No"]],
+						["Include Markers?", ["Yes", "No"], 1]
+					]
 				] call Ares_fnc_ShowChooseDialog;
 			if (count _dialogResult == 0) exitWith { "User cancelled dialog."; };
 
-			_radius = 50;
+			["User chose radius with index '%1'", _dialogResult] call Ares_fnc_LogMessage;
+			_radius = 100;
 			switch (_dialogResult select 1) do
 			{
 				case 0: { _radius = 50; };
 				case 1: { _radius = 100; };
-				case 2: { _radius = 200; };
-				case 3: { _radius = 300; };
-				case 4: { _radius = 500; };
-				case 5: { _radius = 750; };
-				default { _radius = 1000; };
+				case 2: { _radius = 500; };
+				case 3: { _radius = 1000; };
+				case 4: { _radius = 2000; };
+				case 5: { _radius = 5000; };
+				case 6: { _radius = -1; };
+				default { _radius = 100; };
 			};
+			_includeUnits = if (_dialogResult select 2 == 0) then { true; } else { false; };
+			_includeEmptyVehicles = if (_dialogResult select 3 == 0) then { true; } else { false; };
+			_includeEmptyObjects = if (_dialogResult select 4 == 0) then { true; } else { false; };
+			_includeMarkers = if (_dialogResult select 5 == 0) then { true; } else { false; };
 
-			_mode = "bis_fnc_taskPatrol";
-			switch (_dialogResult select 0) do
+			_objectsToFilter = curatorEditableObjects (allCurators select 0);
+			_emptyObjects = [];
+			_emptyVehicles = [];
+			_groups = [];
 			{
-				case 0: { _mode = "bis_fnc_taskPatrol"; };
-				default { _mode = "CBA_fnc_taskPatrol"; };
+				_ignoreFlag = false;
+				if ((typeOf _x) in Ares_EditableObjectBlacklist || _x == player || isPlayer _x) then
+				{
+					_ignoreFlag = true;
+				};
+
+				if (!_ignoreFlag && ((_x distance _position <= _radius) || _radius == -1)) then
+				{
+					["Processing object: %1 - %2", _x, typeof(_x)] call Ares_fnc_LogMessage;
+					_ignoreFlag = true;
+					_isUnit = (_x isKindOf "CAManBase")
+						|| (_x isKindOf "car")
+						|| (_x isKindOf "tank")
+						|| (_x isKindOf "air")
+						|| (_x isKindOf "StaticWeapon")
+						|| (_x isKindOf "ship");
+					if (_isUnit) then
+					{
+						if (_x isKindOf "CAManBase") then
+						{
+							["Is a man."] call Ares_fnc_LogMessage;
+							if ((group _x) in _groups) then
+							{
+								["In an old group."] call Ares_fnc_LogMessage;
+							}
+							else
+							{
+								["In a new group."] call Ares_fnc_LogMessage;
+								_groups pushBack (group _x);
+							};
+
+						}
+						else
+						{
+							if (count crew _x > 0) then
+							{
+								["Is a vehicle with units."] call Ares_fnc_LogMessage;
+								if ((group _x) in _groups) then
+								{
+									["In an old group."] call Ares_fnc_LogMessage;
+								}
+								else
+								{
+									["In a new group."] call Ares_fnc_LogMessage;
+									_groups pushBack (group _x);
+								};
+							}
+							else
+							{
+								["Is an empty vehicle."] call Ares_fnc_LogMessage;
+								_emptyVehicles pushBack _x;
+							};
+						};
+					}
+					else
+					{
+						if (_x isKindOf "Logic") then
+						{
+							["Is a logic. Ignoring."] call Ares_fnc_LogMessage;
+						}
+						else
+						{
+							["Is an empty vehicle."] call Ares_fnc_LogMessage;
+							_emptyObjects pushBack _x;
+						};
+					};
+				}
+				else
+				{
+					["Ignoring object: %1 - %2", _x, typeof(_x)] call Ares_fnc_LogMessage;
+				};
+			} forEach _objectsToFilter;
+
+			_output = [];
+			if (!_includeUnits) then { _groups = []; };
+			if (!_includeEmptyVehicles) then { _emptyVehicles = []; };
+			if (!_includeEmptyObjects) then { _emptyObjects = []; };
+
+			_totalUnitsProcessed = 0;
+			{
+				_output pushBack format [
+					"_newObject = createVehicle ['%1', %2, [], 0, 'CAN_COLLIDE']; _newObject setPosASL %3; _newObject setVectorDirAndUp [%4, %5];",
+					(typeOf _x),
+					(position _x),
+					(getPosASL _x),
+					(vectorDir _x),
+					(vectorUp _x)];
+			} forEach _emptyObjects + _emptyVehicles;
+
+			{
+				_output pushBack format [
+					"_newGroup = createGroup %1; ",
+					(side _x)];
+				_groupVehicles = [];
+				// Process all the infantry in the group
+				{
+					if (vehicle _x == _x) then
+					{
+						_output pushBack format [
+							"_newUnit = _newGroup createUnit ['%1', %2, [], 0, 'CAN_COLLIDE']; _newUnit setSkill %3; _newUnit setRank '%4'; _newUnit setFormDir %5; _newUnit setDir %5; _newUnit setPosASL %6;",
+							(typeOf _x),
+							(position _x),
+							(skill _x),
+							(rank _x),
+							(getDir _x),
+							(getPosASL _x)];
+					}
+					else
+					{
+						if (not ((vehicle _x) in _groupVehicles)) then
+						{
+							_groupVehicles pushBack (vehicle _x);
+						};
+					};
+					_totalUnitsProcessed = _totalUnitsProcessed + 1;
+				} forEach (units _x);
+
+				// Create the vehicles that are part of the group.
+				{
+					_output pushBack format [
+						"_newUnit = createVehicle ['%1', %2, [], 0, 'CAN_COLLIDE']; createVehicleCrew _newUnit; (crew _newUnit) join _newGroup; _newUnit setDir %3; _newUnit setFormDir %3; _newUnit setPosASL %4;",
+						(typeOf _x),
+						(position _x),
+						(getDir _x),
+						(getPosASL _x)];
+				} forEach _groupVehicles;
+
+				// Set group behaviours
+				_output pushBack format [
+					"_newGroup setFormation '%1'; _newGroup setCombatMode '%2'; _newGroup setBehaviour '%3'; _newGroup setSpeedMode '%4';",
+					(formation _x),
+					(combatMode _x),
+					(behaviour (leader _x)),
+					(speedMode _x)];
+
+				{
+					if (_forEachIndex > 0) then
+					{
+						_output pushBack format [
+							"_newWaypoint = _newGroup addWaypoint [%1, %2]; _newWaypoint setWaypointType '%3';%4 %5 %6",
+							(waypointPosition _x),
+							0,
+							(waypointType _x),
+							if ((waypointSpeed _x) != 'UNCHANGED') then { "_newWaypoint setWaypointSpeed '" + (waypointSpeed _x) + "'; " } else { "" },
+							if ((waypointFormation _x) != 'NO CHANGE') then { "_newWaypoint setWaypointFormation '" + (waypointFormation _x) + "'; " } else { "" },
+							if ((waypointCombatMode _x) != 'NO CHANGE') then { "_newWaypoint setWaypointCombatMode '" + (waypointCombatMode _x) + "'; " } else { "" }
+							];
+					};
+				} forEach (waypoints _x)
+			} forEach _groups;
+
+			if (_includeMarkers) then
+			{
+				{
+					_markerName = "Ares_Imported_Marker_" + str(_forEachIndex);
+					_output pushBack format [
+						"_newMarker = createMarker ['%1', %2]; _newMarker setMarkerShape '%3'; _newMarker setMarkerType '%4'; _newMarker setMarkerDir %5; _newMarker setMarkerColor '%6'; _newMarker setMarkerAlpha %7; %8 %9",
+						_markerName,
+						(getMarkerPos _x),
+						(markerShape _x),
+						(markerType _x),
+						(markerDir _x),
+						(getMarkerColor _x),
+						(markerAlpha _x),
+						if ((markerShape _x) == "RECTANGLE" ||(markerShape _x) == "ELLIPSE") then { "_newMarker setMarkerSize " + str(markerSize _x) + ";"; } else { ""; },
+						if ((markerShape _x) == "RECTANGLE" || (markerShape _x) == "ELLIPSE") then { "_newMarker setMarkerBrush " + str(markerBrush _x) + ";"; } else { ""; }
+						];
+				} forEach allMapMarkers;
 			};
 
-			_pos = _this select 0;
-			[[_grp, _pos, _radius], _mode, _unit, false, true] call BIS_fnc_MP;
+			_text = "";
+			{
+				_text = _text + _x;
+				[_x] call Ares_fnc_LogMessage;
+			} forEach _output;
 
-			["SWEEP STARTED."] call Ares_fnc_ShowZeusMessage;
+			_objectscount = count _emptyObjects;
+			_groupscount = count _groups;
+			["Saving file %4 to client ... (%1 objects, %2 groups, %3 units)", _objectscount, _groupscount, _totalUnitsProcessed] call Ares_fnc_ShowZeusMessage;
+
+			_mish = profileNamespace getVariable [format["savemish_%1", worldname], []];
+			_mish pushback [format ["%1_%2_%3", name player, (_dialogResult select 0), date], _text];
+			profileNamespace setVariable [format["savemish_%1", worldname], _mish];
 		}
 	] call Ares_fnc_RegisterCustomModule;
 
-	[
-		"AI Behaviours",
-		"AI Defend",
+	[ //Mish load
+		"Save/Load",
+		"Load from client",
 		{
-			_unit = _this select 1;
-			_grp = group _unit;
-			if (_grp == grpNull) exitwith {"ERROR: NO GROUP SELECTED.";};
+			_mish = profileNamespace getVariable [format["savemish_%1", worldname],[]];
+			_mishlist = [];
+			{
+				_mishlist pushback (_x select 0);
+			} foreach _mish;
 
 			_dialogResult =
-				["Begin Defence",
-						[
-							["Defence Mode:", ["Hold", "Fortify"]],
-							["Defend Radius (Fortify only):", ["50m", "100m", "200m", "300m", "500m", "750m", "1000m"],3]
-						]
+				[
+					"Load from client",
+					[
+						["Choose file", _mishlist]
+					]
 				] call Ares_fnc_ShowChooseDialog;
 			if (count _dialogResult == 0) exitWith { "User cancelled dialog."; };
 
-			if ((_dialogResult select 0) == 1) then {
-				 _mode = "bis_fnc_taskDefend";
-			} else {
-				 _mode = "CBA_fnc_taskDefend";
-			};
-
-			_pos = _this select 0;
-			if (_mode == "CBA_fnc_taskDefend") then {
-				_radius = 50;
-				switch (_dialogResult select 1) do
-				{
-					case 0: { _radius = 50; };
-					case 1: { _radius = 100; };
-					case 2: { _radius = 200; };
-					case 3: { _radius = 300; };
-					case 4: { _radius = 500; };
-					case 5: { _radius = 750; };
-					default { _radius = 1000; };
-				};
-				[[_grp, _pos, _radius], _mode, _unit, false, true] call BIS_fnc_MP;
-			} else {
-				[[_grp, _pos], _mode, _unit, false, true] call BIS_fnc_MP;
-			};
-
-			["DEFENCE STARTED."] call Ares_fnc_ShowZeusMessage;
-		}
-	] call Ares_fnc_RegisterCustomModule;
-
-	[
-		"7CMBG",
-		"Set High Commander",
-		{
-			_unit = (_this select 0) nearestObject "Man";
-			if ((_unit == objNull) || (group _unit == grpNull) || (!alive _unit) || !(_unit == player) || (!isplayer _unit)) exitwith {"NO PLAYER SELECTED.";};
-
+			_loadmish = (_mish select (_dialogResult select 0)) select 1;
+			try
 			{
-				if (side _x == west) then {
-					_unit hcsetgroup [_x,""];
-				};
-			} foreach allgroups;
+				[(compile _loadmish), _this, 2] call Ares_fnc_BroadcastCode;
+			}
+			catch
+			{
+				diag_log _exception;
+				["Failed to parse code. See RPT for error."] call Ares_fnc_ShowZeusMessage;
+			};
 
-			["%1 SET TO HIGH COMMANDER.", _unit] call Ares_fnc_ShowZeusMessage;
+			_mishname = _mishlist select (_dialogResult select 0);
+			[format["If you don't see any errors, file %1 is now loaded!",_mishname]] call Ares_fnc_ShowZeusMessage;
 		}
 	] call Ares_fnc_RegisterCustomModule;
 
-	[
-		"7CMBG",
-		"Set Medic (TCCC)",
+	[ //Mish delete player
+		"Save/Load",
+		"Delete from client",
 		{
-			_unit = (_this select 0) nearestObject "Man";
-			if ((_unit == objNull) || (group _unit == grpNull) || (!alive _unit) || !(_unit == player) || (!isplayer _unit)) exitwith {"NO PLAYER SELECTED.";};
-			_unit setvariable ["ace_medical_medicClass", 1, true];
+			_mish = profileNamespace getVariable [format["savemish_%1", worldname],[]];
+			_mishlist = [];
+			{
+				_mishlist pushback (_x select 0);
+			} foreach _mish;
 
-			["%1 SET AS MEDIC.", _unit] call Ares_fnc_ShowZeusMessage;
+			_dialogResult =
+				[
+					"Delete from client",
+					[
+						["Choose file", _mishlist]
+					]
+				] call Ares_fnc_ShowChooseDialog;
+			if (count _dialogResult == 0) exitWith { "User cancelled dialog."; };
+
+			_mish deleteAt (_dialogResult select 0);
+			profileNamespace setVariable [format["savemish_%1", worldname], _mish];
+
+			_mishname = _mishlist select (_dialogResult select 0);
+			[format["File %1 deleted from client!",_mishname]] call Ares_fnc_ShowZeusMessage;
 		}
 	] call Ares_fnc_RegisterCustomModule;
 
@@ -293,57 +430,6 @@ if (!isdedicated) then { //players
 
 	[
 		"7CMBG",
-		"Helipad lights (Add)",
-		{
-			_pads = ["Land_HelipadCircle_F","Land_HelipadCivil_F","Land_HelipadRescue_F","Land_HelipadSquare_F"];
-			_pad = _this select 1;
-			if !((typeof _pad) in _pads) then {
-				_npad = nearestObjects [(_this select 0), _pads, 15];
-				_badpad = false;
-				if ((isnil "_npad") || ((count _npad) == 0)) exitwith {_badpad = true};
-				_pad = _npad select 0;
-			};
-
-			if (_badpad) exitwith {["NO HELIPAD SELECTED"] call Ares_fnc_ShowZeusMessage};
-
-			_dialogResult =
-				["Colors",
-						[
-							["Inner Lights:", ["Red", "Green", "Yellow", "IR"], 2],
-							["Outer Lights:", ["Red", "Green", "Yellow", "Blue", "White", "IR"], 1]
-						]
-				] call Ares_fnc_ShowChooseDialog;
-
-			if (count _dialogResult == 0) exitWith { "User cancelled dialog."; };
-
-			_inner = "Yellow";
-			switch (_dialogResult select 0) do
-			{
-				case 0: { _inner = "Red"; };
-				case 1: { _inner = "Green"; };
-				case 2: { _inner = "Yellow"; };
-				default { _inner = "IR"; };
-			};
-
-			_outer = "Green";
-			switch (_dialogResult select 0) do
-			{
-				case 0: { _outer = "Red"; };
-				case 1: { _outer = "Green"; };
-				case 2: { _outer = "Yellow"; };
-				case 3: { _outer = "Blue"; };
-				case 4: { _outer = "White"; };
-				default { _outer = "IR"; };
-			};
-
-			[_pad, _inner, _outer, false] spawn seven_fnc_helipad_light;
-
-			["HELIPAD LIGHTS ADDED"] call Ares_fnc_ShowZeusMessage;
-		}
-	] call Ares_fnc_RegisterCustomModule;
-
-	[
-		"7CMBG",
 		"Helipad lights (Remove)",
 		{
 			_pads = ["Land_HelipadCircle_F","Land_HelipadCivil_F","Land_HelipadRescue_F","Land_HelipadSquare_F"];
@@ -362,18 +448,176 @@ if (!isdedicated) then { //players
 			["HELIPAD LIGHTS DELETED"] call Ares_fnc_ShowZeusMessage;
 		}
 	] call Ares_fnc_RegisterCustomModule;
+/*
+	[
+		"7CMBG",
+		"Start Riot",
+		{
+			_pos = _this select 0;
+			_men = _pos nearEntities ["Man", 1000];
+			_tire =	createVehicle ["misc_tyreheap", _pos, [], 1, "NONE"];
+
+			{
+				if ((alive _x) && (side _x == CIVILIAN) && (random 10 > 2)) then {
+					_newpos = (position _tire) findEmptyPosition [1, 20];
+					_x moveto _newpos;
+				};
+			} foreach _men;
+
+			["RIOT STARTED."] call Ares_fnc_ShowZeusMessage;
+
+			while {count (_pos nearEntities ["Man", 10]) < 5} do {
+				sleep 10;
+			};
+
+			[1, _tire] execvm "\ares_zeusExtensions\scripts\spawnSmoke.sqf";
+
+			while {count (_pos nearEntities ["Man", 10]) > 5} do {
+				playSound3D ["crowd.ogg", objnull, false, _pos, 1];
+				sleep 12;
+			};
+
+			deletevehicle _tire;
+		}
+	] call Ares_fnc_RegisterCustomModule;
+*/
+	[
+		"Spawn",
+		"Flies",
+		{
+			[(_this select 0)] call BIS_fnc_flies;
+		}
+	] call Ares_fnc_RegisterCustomModule;
+
+	[
+		"Spawn",
+		"Sandstorm",
+		{
+			[(_this select 1)] call BIS_fnc_sandstorm;
+		}
+	] call Ares_fnc_RegisterCustomModule;
 
 	[
 		"7CMBG",
-		"Set Medical Vehicle",
+		"Set Renegade",
 		{
-			_veh = _this select 1;
-			if (!alive _veh) exitwith {"NO SUITABLE VEHICLE SELECTED.";};
-			_veh setvariable ["ace_medical_medicClass", 1, true];
-			_veh addBackpackCargoGlobal ['B_ons_Carryall_TCCC_TW',1];
-			_veh addBackpackCargoGlobal ['B_ons_Carryall_Paramedic',1];
 
-			["%1 SET AS MEDICAL VEHICLE.", _veh] call Ares_fnc_ShowZeusMessage;
+			(_this select 1) addrating -100000;
+		}
+	] call Ares_fnc_RegisterCustomModule;
+
+	[
+		"AI Behaviour",
+		"AI Attack Nearest Enemies",
+		{
+			private ["_pos","_nearunits","_unit","_grp"];
+			_pos = _this select 0;
+			_nearunits = _pos nearEntities 10;
+			_unit = _nearunits select 0;
+
+			_grp = group _unit;
+			if (_grp == grpNull) exitwith {"ERROR: NO GROUP SELECTED.";};
+
+			[[_grp, getpos (_unit findNearestEnemy _pos)], "CBA_fnc_taskAttack", _unit, false, true] call BIS_fnc_MP;
+
+			["ATTACK STARTED."] call Ares_fnc_ShowZeusMessage;
+		}
+	] call Ares_fnc_RegisterCustomModule;
+
+	[
+		"AI Behaviour",
+		"AI Sweep ",
+		{
+			private ["_pos","_nearunits","_unit","_grp","_dialogResult","_radius","_mode"];
+			_pos = _this select 0;
+			_nearunits = _pos nearEntities 10;
+			_unit = _nearunits select 0;
+
+			_grp = group _unit;
+			if (_grp == grpNull) exitwith {"ERROR: NO GROUP SELECTED.";};
+
+			_dialogResult =
+				["Begin Sweep",
+						[
+							["Sweep Mode:", ["Basic", "Advanced"]],
+							["Waypoints max spacing:", ["50m", "100m", "200m", "300m", "500m", "750m", "1000m"],3]
+						]
+				] call Ares_fnc_ShowChooseDialog;
+			if (count _dialogResult == 0) exitWith { "User cancelled dialog."; };
+
+			_radius = 50;
+			switch (_dialogResult select 1) do
+			{
+				case 0: { _radius = 50; };
+				case 1: { _radius = 100; };
+				case 2: { _radius = 200; };
+				case 3: { _radius = 300; };
+				case 4: { _radius = 500; };
+				case 5: { _radius = 750; };
+				default { _radius = 1000; };
+			};
+
+			_mode = "bis_fnc_taskPatrol";
+			switch (_dialogResult select 0) do
+			{
+				case 0: { _mode = "bis_fnc_taskPatrol"; };
+				default { _mode = "CBA_fnc_taskPatrol"; };
+			};
+
+			[_grp, _pos, _radius] remoteExecCall [_mode, _unit, false];
+
+			/*[[_grp, _pos, _radius], _mode, _unit, false, true] call BIS_fnc_MP;*/
+
+			["SWEEP STARTED."] call Ares_fnc_ShowZeusMessage;
+		}
+	] call Ares_fnc_RegisterCustomModule;
+
+	[
+		"AI Behaviour",
+		"AI Defend",
+		{
+			private ["_pos","_nearunits","_unit","_grp","_dialogResult","_radius","_mode"];
+			_pos = _this select 0;
+			_nearunits = _pos nearEntities 10;
+			_unit = _nearunits select 0;
+
+			_grp = group _unit;
+			if (_grp == grpNull) exitwith {"ERROR: NO GROUP SELECTED.";};
+
+			_dialogResult =
+				["Begin Defence",
+						[
+							["Defence Mode:", ["Hold", "Fortify"]],
+							["Defend Radius (Fortify only):", ["50m", "100m", "200m", "300m", "500m", "750m", "1000m"],3]
+						]
+				] call Ares_fnc_ShowChooseDialog;
+			if (count _dialogResult == 0) exitWith { "User cancelled dialog."; };
+
+			_mode = "bis_fnc_taskDefend";
+			switch (_dialogResult select 0) do
+			{
+				case 0: { _mode = "bis_fnc_taskDefend"; };
+				default { _mode = "CBA_fnc_taskDefend"; };
+			};
+
+			if (_mode == "CBA_fnc_taskDefend") then {
+				_radius = 50;
+				switch (_dialogResult select 1) do
+				{
+					case 0: { _radius = 50; };
+					case 1: { _radius = 100; };
+					case 2: { _radius = 200; };
+					case 3: { _radius = 300; };
+					case 4: { _radius = 500; };
+					case 5: { _radius = 750; };
+					default { _radius = 1000; };
+				};
+				[[_grp, _pos, _radius], _mode, _unit, false, true] call BIS_fnc_MP;
+			} else {
+				[[_grp, _pos], _mode, _unit, false, true] call BIS_fnc_MP;
+			};
+
+			["DEFENCE STARTED."] call Ares_fnc_ShowZeusMessage;
 		}
 	] call Ares_fnc_RegisterCustomModule;
 };
@@ -392,11 +636,38 @@ Ares_EditableObjectBlacklist = Ares_EditableObjectBlacklist + [
 	"ALiVE_sys_profile",
 	"ALiVE_require",
 	"ALiVE_SYS_LOGISTICSDISABLE",
-	"mcc_sandbox_moduleGAIASettings",
-	"mcc_sandbox_moduleCover",
-	"mcc_sandbox_moduleMissionSettings",
 	"HeadlessClient_F",
 	"ALiVE_civ_placement",
 	"ALiVE_mil_placement",
-	"tfar_ModuleTaskForceRadioFrequencies"
+	"tfar_ModuleTaskForceRadioFrequencies",
+	"RyanZM_ModuleAbilities",
+	"RyanZM_ModuleSettings",
+	"RyanZM_ModuleInfection",
+	"SpyderAddons_amb_ambiance",
+	"SpyderAddons_civ_interact",
+	"acex_headless_module",
+	"LT_settings",
+	"LT_makeLTmenu",
+	"CUP_B_LHD_WASP_USMC_Empty",
+	"CUP_WV_B_Phalanx",
+	"CUP_WV_B_SS_Launcher_naval",
+	"CUP_WV_B_RAM_Launcher_naval",
+	"CUP_LHD_Light",
+	"CUP_LHD_Light2",
+	"CUP_LHD_Light_Green",
+	"CUP_LHD_Int_1",
+	"CUP_LHD_Int_2",
+	"CUP_LHD_Int_3",
+	"CUP_LHD_house_1",
+	"CUP_LHD_house_",
+	"CUP_LHD_1",
+	"CUP_LHD_2",
+	"CUP_LHD_3",
+	"CUP_LHD_4",
+	"CUP_LHD_5",
+	"CUP_LHD_6",
+	"CUP_LHD_7",
+	"CUP_LHD_Monitor",
+	"CUP_LHD_elev_1",
+	"CUP_LHD_elev_2"
 ];
