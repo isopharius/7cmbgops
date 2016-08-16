@@ -54,7 +54,7 @@ class Extended_InitPost_EventHandlers {
 	};
 	class JS_JC_FA18F
 	{
-	  finit = "(_this select 0) setObjectTextureGlobal [0, '\js_jc_fa18_squads\data\fa18f_hull_canada_co.paa']; (_this select 0) animate ['l_wingfold',1];(_this select 0) animate ['r_wingfold',1];";
+	  finit = "(_this select 0) setObjectTextureGlobal [0, '\7cmbgops\pics\fa18f_hull_canada_co.paa']; (_this select 0) animate ['l_wingfold',1];(_this select 0) animate ['r_wingfold',1];";
 	};
 	class Helicopter {
 		rope_init = "(_this select 0) addaction ['<t color=''#FFFF00''>Jump Out</t>',seven_fnc_jumpout,'',6,false,true,'Eject','((_this in _target) && ((getPosATL _target select 2) > 50) && ((getPosASL _target select 2) > 50))'];";

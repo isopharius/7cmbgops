@@ -4,9 +4,10 @@ if (isdedicated || isHC) exitwith {};
 	_arsenalbox = ["B_CargoNet_01_ammo_F","B_supplyCrate_F","Land_PaperBox_closed_F","Land_PaperBox_open_full_F"];
 
 	_satcom = ["satcom","SATCOM","\A3\ui_f\data\map\markers\military\destroy_CA.paa",{call seven_fnc_start_satellite},{!(isNull objectParent player) || ((backpack player) == "tf_rt1523g_big") || ((backpack player) == "tf_rt1523g_big_bwmod") || ((backpack player) == "tf_rt1523g_big_rhs")}] call ace_interact_menu_fnc_createAction;
+	//_nradio = ["nradio","WALKMAN","\7cmbgops\pics\i_carradio.paa",{call seven_fnc_start},{true}] call ace_interact_menu_fnc_createAction;
 
 	_fmradio = ["fmradio","Radio Play/Stop","\7cmbgops\pics\i_carradio.paa",{[[(_this select 0)],"seven_fnc_fmradio",false,false,true] call BIS_fnc_MP;},{isNull objectParent player}] call ace_interact_menu_fnc_createAction;
-	_soultrain = ["soultrain","Soul Train","",{[] call seven_fnc_init360},{(isNull objectParent player)}] call ace_interact_menu_fnc_createAction;
+	_soultrain = ["soultrain","Soul Train","",{call seven_fnc_init360},{(isNull objectParent player)}] call ace_interact_menu_fnc_createAction;
 
 	_arsenalcrate = ["arsenalcrate","Grab Arsenal","\A3\ui_f\data\map\vehicleicons\iconCrate_ca.paa",{createVehicle ["B_CargoNet_01_ammo_F", (getPosworld player), [], 0, "can_collide"]},{count (nearestObjects [player, ["Land_Cargo10_military_green_F","Land_Cargo20_military_green_F","Land_Cargo40_military_green_F","B_Slingload_01_Ammo_F"], 15]) > 0}] call ace_interact_menu_fnc_createAction;
 
@@ -34,7 +35,7 @@ if (isdedicated || isHC) exitwith {};
 
 	{
 		[player, 1, ["ACE_SelfActions", "ACE_Equipment"], _x] call ace_interact_menu_fnc_addActionToObject;
-	} foreach [_satcom];
+	} foreach [_satcom/*,_nradio*/];
 
 	{
 		[player, 1, ["ACE_SelfActions"], _x] call ace_interact_menu_fnc_addActionToObject;

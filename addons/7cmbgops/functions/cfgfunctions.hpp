@@ -97,4 +97,17 @@ class seven
 		class toggle_bullet_camera {};
 		class toggle_path_tracing {};
 	};
+	class NRD {
+		file = "\7cmbgops\scripts\nradio";
+		class status {};
+		class play {};
+		class stop {};
+		class volume {};
+		class song {};
+		class removeFromProfile {};
+		class addStation {};
+		class fillStations {};
+		class start {};
+		class startAdd {};
+	};
 };

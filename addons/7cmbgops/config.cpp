@@ -33,6 +33,8 @@ class CfgFunctions
 	#include "functions\cfgfunctions.hpp"
 };
 
+#include "scripts\nradio\nradio.hpp"
+
 #include "scripts\pxs_satcom_a3\init_interface.hpp"
 
 #include "description-xeh.ext"
