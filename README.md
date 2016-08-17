@@ -14,5 +14,5 @@ this addon integrates the following scripts and features in no particular order:
 - custom ACE menu  https://github.com/acemod/ACE3/issues/1232
 - custom ALiVE menu  https://dev.withsix.com/projects/cca/wiki/FlexiMenu
 - CF textures for F18 and Apache
-- XEH for every vehicle  https://github.com/CBATeam/CBA_A3/wiki/Extended-Event-Handlers-(new)
+- XEH for your every need  https://github.com/CBATeam/CBA_A3/wiki/Extended-Event-Handlers-(new)
 - and of course your favorite Magical Portapotty which may or may not lead to another dimension
