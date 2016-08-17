@@ -84,7 +84,7 @@ class Extended_InitPost_EventHandlers {
 		*/
 	};
 	class RHS_C130J {
-		chute_init = "(_this select 0) addaction ['<t color=''#FFFF00''>Jump Out</t>',seven_fnc_jumpout,'',6,false,true,'Eject','((_this in _target) && ((getPosATL _target select 2) > 50))'];";
+		chute_init = "(_this select 0) setvariable ['ace_medical_medicClass', 1, true]; (_this select 0) addaction ['<t color=''#FFFF00''>Jump Out</t>',seven_fnc_jumpout,'',6,false,true,'Eject','((_this in _target) && ((getPosATL _target select 2) > 50))'];";
 	};
 
 	//crates
