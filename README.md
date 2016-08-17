@@ -14,4 +14,4 @@ this addon integrates the following scripts and features in no particular order:
 - custom ACE menu  https://github.com/acemod/ACE3/issues/1232
 - custom ALiVE menu
 - CF textures for F18 and Apache
-- XEH for every vehicle  https://github.com/CBATeam/CBA_A3/wiki/Extended-Eventhandlers
+- XEH for every vehicle  https://github.com/CBATeam/CBA_A3/wiki/Extended-Event-Handlers-(new)
