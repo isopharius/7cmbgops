@@ -38,7 +38,8 @@ if (_menuName == "admin") then {
 			["admin", "Admin Menu", "popup"],
 				[
 					["Neutral friendly to BLUFOR",
-						{resistance setFriend [west, 1]; west setfriend [resistance,1]},
+
+						{{resistance setFriend [west, 1]; west setfriend [resistance,1]} remoteExec ["bis_fnc_call", 2, false]},
 						"",
 						"",
 						"",
