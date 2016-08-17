@@ -1,4 +1,4 @@
-_radio = _this select 0;
+_radio = _this;
 
 if (isnil "fmradio") then {
 	fmradio = [_radio];

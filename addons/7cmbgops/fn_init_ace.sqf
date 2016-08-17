@@ -6,7 +6,7 @@ if (isdedicated || isHC) exitwith {};
 	_satcom = ["satcom","SATCOM","\A3\ui_f\data\map\markers\military\destroy_CA.paa",{call seven_fnc_start_satellite},{!(isNull objectParent player) || ((backpack player) == "tf_rt1523g_big") || ((backpack player) == "tf_rt1523g_big_bwmod") || ((backpack player) == "tf_rt1523g_big_rhs")}] call ace_interact_menu_fnc_createAction;
 	//_nradio = ["nradio","WALKMAN","\7cmbgops\pics\i_carradio.paa",{call seven_fnc_start},{true}] call ace_interact_menu_fnc_createAction;
 
-	_fmradio = ["fmradio","Radio Play/Stop","\7cmbgops\pics\i_carradio.paa",{[[(_this select 0)],"seven_fnc_fmradio",false,false,true] call BIS_fnc_MP;},{isNull objectParent player}] call ace_interact_menu_fnc_createAction;
+	_fmradio = ["fmradio","Radio Play/Stop","\7cmbgops\pics\i_carradio.paa",{(_this select 0) remoteExec ["seven_fnc_fmradio", 2, false]},{isNull objectParent player}] call ace_interact_menu_fnc_createAction;
 	_soultrain = ["soultrain","Soul Train","",{call seven_fnc_init360},{(isNull objectParent player)}] call ace_interact_menu_fnc_createAction;
 
 	_arsenalcrate = ["arsenalcrate","Grab Arsenal","\A3\ui_f\data\map\vehicleicons\iconCrate_ca.paa",{createVehicle ["B_CargoNet_01_ammo_F", (getPosworld player), [], 0, "can_collide"]},{count (nearestObjects [player, ["Land_Cargo10_military_green_F","Land_Cargo20_military_green_F","Land_Cargo40_military_green_F","B_Slingload_01_Ammo_F"], 15]) > 0}] call ace_interact_menu_fnc_createAction;
@@ -21,9 +21,9 @@ if (isdedicated || isHC) exitwith {};
 
 	_heloarsenal = ["heloarsenal","Load Arsenal","\A3\ui_f\data\map\vehicleicons\iconCrate_ca.paa",{["B_CargoNet_01_ammo_F", (objectParent player)] call ace_cargo_fnc_loadItem; hint "Arsenal loaded";},{(((objectParent player) isKindOf "Air") && (!isEngineOn (objectParent player)) && (count (nearestObjects [player, ["Land_repair_center","Heli_H","HeliH","Land_HelipadCircle_F","Land_HelipadCivil_F","Land_HelipadEmpty_F","Land_HelipadRescue_F","Land_HelipadSquare_F"], 15]) > 0) && (!visibleMap))}] call ace_interact_menu_fnc_createAction;
 
-	_heloradioin = ["heloradioin","Radio Play/Stop ","\7cmbgops\pics\i_carradio.paa",{[[(objectParent player)],"seven_fnc_fmradio",false,false,true] call BIS_fnc_MP;},{typeof (objectParent player) in ["ONS_Heli_CH146_Training_401_F","ONS_Heli_CH146_Training_402_F","ONS_Heli_CH146_PAX_405_F","ONS_Heli_CH146_PAX_407_F","ONS_Heli_CH146_PAX_409_F","ONS_Heli_CH146_PAX_412_F","ONS_Heli_CH146_SF_427_F","ONS_Heli_CH146_SF_430_F","ONS_Heli_CH146_MED_444_F","ONS_Heli_CH146_CAS_455_F","ONS_Heli_CH146_CAS_457_F","ONS_Heli_CH146_CAS_459_F","ONS_Heli_CH146_RECCE_494_F","ONS_Heli_CH146_RECCE_499_F"]}] call ace_interact_menu_fnc_createAction;
+	_heloradioin = ["heloradioin","Radio Play/Stop ","\7cmbgops\pics\i_carradio.paa",{(objectParent player) remoteExec ["seven_fnc_fmradio", 2, false]},{typeof (objectParent player) in ["ONS_Heli_CH146_Training_401_F","ONS_Heli_CH146_Training_402_F","ONS_Heli_CH146_PAX_405_F","ONS_Heli_CH146_PAX_407_F","ONS_Heli_CH146_PAX_409_F","ONS_Heli_CH146_PAX_412_F","ONS_Heli_CH146_SF_427_F","ONS_Heli_CH146_SF_430_F","ONS_Heli_CH146_MED_444_F","ONS_Heli_CH146_CAS_455_F","ONS_Heli_CH146_CAS_457_F","ONS_Heli_CH146_CAS_459_F","ONS_Heli_CH146_RECCE_494_F","ONS_Heli_CH146_RECCE_499_F"]}] call ace_interact_menu_fnc_createAction;
 
-	_heloradioout = ["heloradioout","Radio Play/Stop","\7cmbgops\pics\i_carradio.paa",{[[(_this select 0)],"seven_fnc_fmradio",false,false,true] call BIS_fnc_MP;},{isNull objectParent player}] call ace_interact_menu_fnc_createAction;
+	_heloradioout = ["heloradioout","Radio Play/Stop","\7cmbgops\pics\i_carradio.paa",{(_this select 0) remoteExec ["seven_fnc_fmradio", 2, false]},{isNull objectParent player}] call ace_interact_menu_fnc_createAction;
 
 	{
 		[_x, 0, ["ACE_MainActions"], _heloradioout] call ace_interact_menu_fnc_addActionToClass;

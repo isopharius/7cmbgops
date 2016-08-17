@@ -424,7 +424,7 @@ if (!isdedicated) then { //players
 			};
 
 			_pos = _this select 0;
-			[[_pos,_yield], "RHS_fnc_ss21_nuke", false, false, true] call BIS_fnc_MP;
+			[_pos,_yield] remoteExec ["RHS_fnc_ss21_nuke", 2, false];
 
 			["TAKE COVER!"] call Ares_fnc_ShowZeusMessage;
 		}
@@ -520,7 +520,7 @@ if (!isdedicated) then { //players
 			_grp = group _unit;
 			if (_grp == grpNull) exitwith {"ERROR: NO GROUP SELECTED.";};
 
-			[[_grp, getpos (_unit findNearestEnemy _pos)], "CBA_fnc_taskAttack", _unit, false, true] call BIS_fnc_MP;
+			[_grp, getPosWorld (_unit findNearestEnemy _pos)] remoteExec ["CBA_fnc_taskAttack", _unit, false];
 
 			["ATTACK STARTED."] call Ares_fnc_ShowZeusMessage;
 		}
@@ -566,9 +566,7 @@ if (!isdedicated) then { //players
 				default { _mode = "CBA_fnc_taskPatrol"; };
 			};
 
-			[_grp, _pos, _radius] remoteExecCall [_mode, _unit, false];
-
-			/*[[_grp, _pos, _radius], _mode, _unit, false, true] call BIS_fnc_MP;*/
+			[_grp, _pos, _radius] remoteExec [_mode, _unit, false];
 
 			["SWEEP STARTED."] call Ares_fnc_ShowZeusMessage;
 		}
@@ -614,9 +612,9 @@ if (!isdedicated) then { //players
 					case 5: { _radius = 750; };
 					default { _radius = 1000; };
 				};
-				[[_grp, _pos, _radius], _mode, _unit, false, true] call BIS_fnc_MP;
+				[_grp, _pos, _radius] remoteExec [_mode, _unit, false];
 			} else {
-				[[_grp, _pos], _mode, _unit, false, true] call BIS_fnc_MP;
+				[_grp, _pos] remoteExec [_mode, _unit, false];
 			};
 
 			["DEFENCE STARTED."] call Ares_fnc_ShowZeusMessage;
