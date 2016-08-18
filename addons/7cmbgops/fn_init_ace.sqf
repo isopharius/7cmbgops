@@ -1,4 +1,4 @@
-if (isdedicated || isHC) exitwith {};
+if (!isdedicated and !isHC) then {
 
 	//ACE menu actions
 	_groupname = ["groupname",format ["Change CallSign [%1]", groupId (group player)],"\7cmbgops\pics\i_carradio.paa",{[] spawn seven_fnc_groupname},{(leader player) isEqualTo player}] call ace_interact_menu_fnc_createAction;
@@ -44,3 +44,4 @@ if (isdedicated || isHC) exitwith {};
 	{
 		[player, 1, ["ACE_SelfActions"], _x] call ace_interact_menu_fnc_addActionToObject;
 	} foreach [_vehservice,_veharsenal,_heloservice,_heloarsenal,_garage,_arsenalcrate,_heloradioin];
+};
