@@ -12,7 +12,7 @@ if (isserver) then { //server
 
 	if (isdedicated) then { //save server profile when all players gone
 		["saveprofile", "onPlayerDisconnected", {
-			if ( ({isPlayer _x} count playableUnits) == 0 ) then { saveprofileNamespace };
+			if ( ({isPlayer _x} count playableUnits) isEqualTo 0 ) then { saveprofileNamespace };
 		}] call BIS_fnc_addStackedEventHandler;
 	};
 
@@ -35,7 +35,7 @@ if (isserver) then { //server
 						["Choose file", _mishlist]
 					]
 				] call Ares_fnc_ShowChooseDialog;
-			if (count _dialogResult == 0) exitWith { "User cancelled dialog."; };
+			if (count _dialogResult isEqualTo 0) exitWith { "User cancelled dialog."; };
 
 			mish pushback (_mish select (_dialogResult select 0));
 			publicVariable "mish";
@@ -61,7 +61,7 @@ if (isserver) then { //server
 						["Choose file", _mishlist]
 					]
 				] call Ares_fnc_ShowChooseDialog;
-			if (count _dialogResult == 0) exitWith { "User cancelled dialog."; };
+			if (count _dialogResult isEqualTo 0) exitWith { "User cancelled dialog."; };
 
 			_loadmish = (mish select (_dialogResult select 0)) select 1;
 			try
@@ -95,7 +95,7 @@ if (isserver) then { //server
 						["Choose file", _mishlist]
 					]
 				] call Ares_fnc_ShowChooseDialog;
-			if (count _dialogResult == 0) exitWith { "User cancelled dialog."; };
+			if (count _dialogResult isEqualTo 0) exitWith { "User cancelled dialog."; };
 
 			mish deleteAt (_dialogResult select 0);
 			publicVariable "mish";
@@ -126,7 +126,7 @@ if (!isdedicated) then { //players
 						["Include Markers?", ["Yes", "No"], 1]
 					]
 				] call Ares_fnc_ShowChooseDialog;
-			if (count _dialogResult == 0) exitWith { "User cancelled dialog."; };
+			if (count _dialogResult isEqualTo 0) exitWith { "User cancelled dialog."; };
 
 			["User chose radius with index '%1'", _dialogResult] call Ares_fnc_LogMessage;
 			_radius = 100;
@@ -141,10 +141,10 @@ if (!isdedicated) then { //players
 				case 6: { _radius = -1; };
 				default { _radius = 100; };
 			};
-			_includeUnits = if (_dialogResult select 2 == 0) then { true; } else { false; };
-			_includeEmptyVehicles = if (_dialogResult select 3 == 0) then { true; } else { false; };
-			_includeEmptyObjects = if (_dialogResult select 4 == 0) then { true; } else { false; };
-			_includeMarkers = if (_dialogResult select 5 == 0) then { true; } else { false; };
+			_includeUnits = if (_dialogResult select 2 isEqualTo 0) then { true; } else { false; };
+			_includeEmptyVehicles = if (_dialogResult select 3 isEqualTo 0) then { true; } else { false; };
+			_includeEmptyObjects = if (_dialogResult select 4 isEqualTo 0) then { true; } else { false; };
+			_includeMarkers = if (_dialogResult select 5 isEqualTo 0) then { true; } else { false; };
 
 			_objectsToFilter = curatorEditableObjects (allCurators select 0);
 			_emptyObjects = [];
@@ -152,12 +152,12 @@ if (!isdedicated) then { //players
 			_groups = [];
 			{
 				_ignoreFlag = false;
-				if ((typeOf _x) in Ares_EditableObjectBlacklist || _x == player || isPlayer _x) then
+				if ((typeOf _x) in Ares_EditableObjectBlacklist or _x == player or isPlayer _x) then
 				{
 					_ignoreFlag = true;
 				};
 
-				if (!_ignoreFlag && ((_x distance _position <= _radius) || _radius == -1)) then
+				if (!_ignoreFlag and ((_x distance _position <= _radius) or _radius isEqualTo -1)) then
 				{
 					["Processing object: %1 - %2", _x, typeof(_x)] call Ares_fnc_LogMessage;
 					_ignoreFlag = true;
@@ -249,7 +249,7 @@ if (!isdedicated) then { //players
 				_groupVehicles = [];
 				// Process all the infantry in the group
 				{
-					if (vehicle _x == _x) then
+					if (vehicle _x isEqualTo _x) then
 					{
 						_output pushBack format [
 							"_newUnit = _newGroup createUnit ['%1', %2, [], 0, 'CAN_COLLIDE']; _newUnit setSkill %3; _newUnit setRank '%4'; _newUnit setFormDir %5; _newUnit setDir %5; _newUnit setPosASL %6;",
@@ -317,8 +317,8 @@ if (!isdedicated) then { //players
 						(markerDir _x),
 						(getMarkerColor _x),
 						(markerAlpha _x),
-						if ((markerShape _x) == "RECTANGLE" ||(markerShape _x) == "ELLIPSE") then { "_newMarker setMarkerSize " + str(markerSize _x) + ";"; } else { ""; },
-						if ((markerShape _x) == "RECTANGLE" || (markerShape _x) == "ELLIPSE") then { "_newMarker setMarkerBrush " + str(markerBrush _x) + ";"; } else { ""; }
+						if ((markerShape _x) isEqualTo "RECTANGLE" ||(markerShape _x) isEqualTo "ELLIPSE") then { "_newMarker setMarkerSize " + str(markerSize _x) + ";"; } else { ""; },
+						if ((markerShape _x) isEqualTo "RECTANGLE" || (markerShape _x) isEqualTo "ELLIPSE") then { "_newMarker setMarkerBrush " + str(markerBrush _x) + ";"; } else { ""; }
 						];
 				} forEach allMapMarkers;
 			};
@@ -356,7 +356,7 @@ if (!isdedicated) then { //players
 						["Choose file", _mishlist]
 					]
 				] call Ares_fnc_ShowChooseDialog;
-			if (count _dialogResult == 0) exitWith { "User cancelled dialog."; };
+			if (count _dialogResult isEqualTo 0) exitWith { "User cancelled dialog."; };
 
 			_loadmish = (_mish select (_dialogResult select 0)) select 1;
 			try
@@ -391,7 +391,7 @@ if (!isdedicated) then { //players
 						["Choose file", _mishlist]
 					]
 				] call Ares_fnc_ShowChooseDialog;
-			if (count _dialogResult == 0) exitWith { "User cancelled dialog."; };
+			if (count _dialogResult isEqualTo 0) exitWith { "User cancelled dialog."; };
 
 			_mish deleteAt (_dialogResult select 0);
 			profileNamespace setVariable [format["savemish_%1", worldname], _mish];
@@ -412,7 +412,7 @@ if (!isdedicated) then { //players
 						]
 				] call Ares_fnc_ShowChooseDialog;
 
-			if (count _dialogResult == 0) exitWith { "User cancelled dialog."; };
+			if (count _dialogResult isEqualTo 0) exitWith { "User cancelled dialog."; };
 
 			_yield = "grenadeHand";
 			switch (_dialogResult select 0) do
@@ -439,7 +439,7 @@ if (!isdedicated) then { //players
 			if !((typeof _pad) in _pads) then {
 				_npad = nearestObjects [(_this select 0), _pads, 15];
 				_badpad = false;
-				if ((isnil "_npad") || ((count _npad) == 0)) exitwith {_badpad = true};
+				if ((isnil "_npad") || ((count _npad) isEqualTo 0)) exitwith {_badpad = true};
 				_pad = _npad select 0;
 			};
 
@@ -460,7 +460,7 @@ if (!isdedicated) then { //players
 			_tire =	createVehicle ["misc_tyreheap", _pos, [], 1, "NONE"];
 
 			{
-				if ((alive _x) && (side _x == CIVILIAN) && (random 10 > 2)) then {
+				if ((alive _x) && (side _x isEqualTo CIVILIAN) && (random 10 > 2)) then {
 					_newpos = (position _tire) findEmptyPosition [1, 20];
 					_x moveto _newpos;
 				};
@@ -512,13 +512,12 @@ if (!isdedicated) then { //players
 		"AI Behaviour",
 		"AI Attack Nearest Enemies",
 		{
-			private ["_pos","_nearunits","_unit","_grp"];
 			_pos = _this select 0;
 			_nearunits = _pos nearEntities 10;
 			_unit = _nearunits select 0;
 
 			_grp = group _unit;
-			if (_grp == grpNull) exitwith {"ERROR: NO GROUP SELECTED.";};
+			if (_grp isEqualTo grpNull) exitwith {"ERROR: NO GROUP SELECTED.";};
 
 			[_grp, getPosWorld (_unit findNearestEnemy _pos)] remoteExec ["CBA_fnc_taskAttack", _unit, false];
 
@@ -530,13 +529,12 @@ if (!isdedicated) then { //players
 		"AI Behaviour",
 		"AI Sweep ",
 		{
-			private ["_pos","_nearunits","_unit","_grp","_dialogResult","_radius","_mode"];
 			_pos = _this select 0;
 			_nearunits = _pos nearEntities 10;
 			_unit = _nearunits select 0;
 
 			_grp = group _unit;
-			if (_grp == grpNull) exitwith {"ERROR: NO GROUP SELECTED.";};
+			if (_grp isEqualTo grpNull) exitwith {"ERROR: NO GROUP SELECTED.";};
 
 			_dialogResult =
 				["Begin Sweep",
@@ -545,7 +543,7 @@ if (!isdedicated) then { //players
 							["Waypoints max spacing:", ["50m", "100m", "200m", "300m", "500m", "750m", "1000m"],3]
 						]
 				] call Ares_fnc_ShowChooseDialog;
-			if (count _dialogResult == 0) exitWith { "User cancelled dialog."; };
+			if (count _dialogResult isEqualTo 0) exitWith { "User cancelled dialog."; };
 
 			_radius = 50;
 			switch (_dialogResult select 1) do
@@ -576,13 +574,12 @@ if (!isdedicated) then { //players
 		"AI Behaviour",
 		"AI Defend",
 		{
-			private ["_pos","_nearunits","_unit","_grp","_dialogResult","_radius","_mode"];
 			_pos = _this select 0;
 			_nearunits = _pos nearEntities 10;
 			_unit = _nearunits select 0;
 
 			_grp = group _unit;
-			if (_grp == grpNull) exitwith {"ERROR: NO GROUP SELECTED.";};
+			if (_grp isEqualTo grpNull) exitwith {"ERROR: NO GROUP SELECTED.";};
 
 			_dialogResult =
 				["Begin Defence",
@@ -591,7 +588,7 @@ if (!isdedicated) then { //players
 							["Defend Radius (Fortify only):", ["50m", "100m", "200m", "300m", "500m", "750m", "1000m"],3]
 						]
 				] call Ares_fnc_ShowChooseDialog;
-			if (count _dialogResult == 0) exitWith { "User cancelled dialog."; };
+			if (count _dialogResult isEqualTo 0) exitWith { "User cancelled dialog."; };
 
 			_mode = "bis_fnc_taskDefend";
 			switch (_dialogResult select 0) do
@@ -600,7 +597,7 @@ if (!isdedicated) then { //players
 				default { _mode = "CBA_fnc_taskDefend"; };
 			};
 
-			if (_mode == "CBA_fnc_taskDefend") then {
+			if (_mode isEqualTo "CBA_fnc_taskDefend") then {
 				_radius = 50;
 				switch (_dialogResult select 1) do
 				{
