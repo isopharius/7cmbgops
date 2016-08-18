@@ -9,7 +9,8 @@ this addon integrates the following scripts and features in no particular order:
 
 - PXS satcom  http://www.armaholic.com/page.php?id=25816
 - 360 training course  http://www.armaholic.com/page.php?id=26414
-- Beaching by sushi  http://www.armaholic.com/page.php?id=31453
+- Breaching by sushi  http://www.armaholic.com/page.php?id=31453
+- Defuse the Bomb  http://www.armaholic.com/page.php?id=24777
 - custom ARES modules for Zeus  http://www.armaholic.com/page.php?id=31235
 - custom respawn loadouts  https://community.bistudio.com/wiki/Arma_3_Respawn:_New_Respawn_Screen
 - custom ACE menu  https://github.com/acemod/ACE3/issues/1232

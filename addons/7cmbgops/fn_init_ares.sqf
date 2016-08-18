@@ -617,6 +617,75 @@ if (!isdedicated) then { //players
 			["DEFENCE STARTED."] call Ares_fnc_ShowZeusMessage;
 		}
 	] call Ares_fnc_RegisterCustomModule;
+
+	[
+		"7CMBG",
+		"Defuse Bomb",
+		{
+			if (!isNil "BOMB") exitWith {hint "Bomb already activated."};
+
+			_object = _this select 1;
+
+			_dialogResult =
+				["SELECT 4 DIGITS CODE",
+						[
+							["First digit:", ["random", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]],
+							["Second digit:", ["random", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]],
+							["Third digit:", ["random", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]],
+							["Fourth digit:", ["random", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]]
+						]
+				] call Ares_fnc_ShowChooseDialog;
+			if (count _dialogResult isEqualTo 0) exitWith { "User cancelled dialog."; };
+
+			_digit1 = (_dialogResult select 0) - 1;
+			if (_digit1 isEqualTo -1) then {
+				_digit1 = round (random 9);
+			};
+			_digit2 = (_dialogResult select 1) - 1;
+			if (_digit2 isEqualTo -1) then {
+				_digit2 = round (random 9);
+			};
+			_digit3 = (_dialogResult select 2) - 1;
+			if (_digit3 isEqualTo -1) then {
+				_digit3 = round (random 9);
+			};
+			_digit4 = (_dialogResult select 3) - 1;
+			if (_digit4 isEqualTo -1) then {
+				_digit4 = round (random 9);
+			};
+
+			CODE = [_digit1, _digit2, _digit3, _digit4];
+			WIRE = selectRandom ["BLUE", "WHITE", "YELLOW", "GREEN"];
+			CODEINPUT = [];
+			DEFUSED = false;
+			ARMED = false;
+			BOMB = true;
+			publicVariable "CODE";
+			publicVariable "WIRE";
+			publicVariable "CODEINPUT";
+			publicVariable "DEFUSED";
+			publicVariable "ARMED";
+			publicVariable "BOMB";
+
+			_object addAction [("<t color='#E61616'>" + ("Defuse the Bomb") + "</t>"),"createDialog 'KeypadDefuse'","",1,true,true,"","(_target distance _this) < 3"];
+
+			["BOMB ARMED. HIDE THE CODE ON ANOTHER OBJECT."] call Ares_fnc_ShowZeusMessage;
+		}
+	] call Ares_fnc_RegisterCustomModule;
+
+	[
+		"7CMBG",
+		"Hide Bomb Code",
+		{
+			if (isNil "BOMB") exitWith {hint "No bomb previously armed."};
+
+			_object = _this select 1;
+
+			_object addAction [("<t color='#E61616'>" + ("Search Bomb Code") + "</t>"),seven_fnc_searchAction,"",1,true,true,"","(_target distance _this) < 3"];
+
+			["BOMB CODE HIDDEN."] call Ares_fnc_ShowZeusMessage;
+		}
+	] call Ares_fnc_RegisterCustomModule;
 };
 
 waituntil {!isnil "Ares_EditableObjectBlacklist"};

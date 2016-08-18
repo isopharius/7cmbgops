@@ -2,7 +2,7 @@
 _grp = group player;
 _dialogResult =
 	[
-		format ["Change CallSign [%1] (for cTab)", groupId _grp],
+		format ["Change current CallSign [%1] (for cTab)", groupId _grp],
 		[
 			["New CallSign", ""]
 		]

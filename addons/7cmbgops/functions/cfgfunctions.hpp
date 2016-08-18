@@ -117,4 +117,11 @@ class seven
         #include "\7cmbgops\scripts\sushi\breach\init.cpp"
     #undef seven_fncS
   };
+  class defuse {
+		file = "\7cmbgops\scripts\defuse\functions";
+		class searchAction {};
+		class bombTimer {};
+		class codeCompare {};
+		class wireCompare {};
+  };
 };
