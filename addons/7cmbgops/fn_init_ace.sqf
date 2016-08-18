@@ -1,7 +1,7 @@
 if (isdedicated || isHC) exitwith {};
 
 	//ACE menu actions
-	_groupname = ["groupname",format ["Change Callsign %1", groupId (group player)],"\7cmbgops\pics\i_carradio.paa",{[] spawn seven_fnc_groupname},{(leader player) isEqualTo player}] call ace_interact_menu_fnc_createAction;
+	_groupname = ["groupname",format ["Change CallSign [%1]>", groupId (group player)],"\7cmbgops\pics\i_carradio.paa",{[] spawn seven_fnc_groupname},{(leader player) isEqualTo player}] call ace_interact_menu_fnc_createAction;
 
 	_arsenalbox = ["B_CargoNet_01_ammo_F","B_supplyCrate_F","Land_PaperBox_closed_F","Land_PaperBox_open_full_F"];
 
