@@ -25,6 +25,7 @@ class seven
 	{
 		file = "\7cmbgops\functions";
 
+		class groupname {};
 		class attachmrzr {};
 		class fmradio {};
 		class adminmenudef {};
