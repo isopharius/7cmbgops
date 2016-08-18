@@ -30,7 +30,7 @@
       "Chemlight_green"
     };
     items[] = {
-      "ACE_IR_Strobe_Item",
+      "B_IR_Grenade",
       "ACE_Flashlight_MX991",
       "RH_eotech553",
       "ACE_fieldDressing",
@@ -111,7 +111,7 @@
       "1Rnd_SmokeRed_Grenade_shell"
     };
     items[] = {
-      "ACE_IR_Strobe_Item",
+      "B_IR_Grenade",
       "ACE_Flashlight_MX991",
       "RH_eotech553",
       "ACE_EarPlugs",
@@ -241,7 +241,7 @@
       "SmokeShellPurple"
     };
     items[] = {
-      "ACE_IR_Strobe_Item",
+      "B_IR_Grenade",
       "ACE_Flashlight_MX991",
       "RH_eotech553",
       "ACE_EarPlugs",
@@ -386,7 +386,7 @@
       "1Rnd_SmokeRed_Grenade_shell"
     };
     items[] = {
-      "ACE_IR_Strobe_Item",
+      "B_IR_Grenade",
       "ACE_Flashlight_MX991",
       "RH_eotech553",
       "ACE_EarPlugs",
@@ -474,7 +474,7 @@
       "1Rnd_SmokeRed_Grenade_shell"
     };
     items[] = {
-      "ACE_IR_Strobe_Item",
+      "B_IR_Grenade",
       "ACE_Flashlight_MX991",
       "RH_eotech553",
       "ACE_EarPlugs",
@@ -601,7 +601,7 @@
       "Chemlight_green"
     };
     items[] = {
-      "ACE_IR_Strobe_Item",
+      "B_IR_Grenade",
       "ACE_Flashlight_MX991",
       "RH_eotech553",
       "ACE_fieldDressing",
@@ -682,7 +682,7 @@
       "1Rnd_SmokeRed_Grenade_shell"
     };
     items[] = {
-      "ACE_IR_Strobe_Item",
+      "B_IR_Grenade",
       "ACE_Flashlight_MX991",
       "RH_eotech553",
       "ACE_EarPlugs",
@@ -812,7 +812,7 @@
       "SmokeShellPurple"
     };
     items[] = {
-      "ACE_IR_Strobe_Item",
+      "B_IR_Grenade",
       "ACE_Flashlight_MX991",
       "RH_eotech553",
       "ACE_EarPlugs",
@@ -957,7 +957,7 @@
       "1Rnd_SmokeRed_Grenade_shell"
     };
     items[] = {
-      "ACE_IR_Strobe_Item",
+      "B_IR_Grenade",
       "ACE_Flashlight_MX991",
       "RH_eotech553",
       "ACE_EarPlugs",
@@ -1045,7 +1045,7 @@
       "1Rnd_SmokeRed_Grenade_shell"
     };
     items[] = {
-      "ACE_IR_Strobe_Item",
+      "B_IR_Grenade",
       "ACE_Flashlight_MX991",
       "RH_eotech553",
       "ACE_EarPlugs",
