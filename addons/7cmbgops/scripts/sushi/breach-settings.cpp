@@ -25,7 +25,7 @@ class BREACH
 			{
 				zone = "full"; //< marker (rectangle or elipse) that covers zone.  Change this name to the one you made
 				closeDoors = 1; //<1- close all doors in zone, 0- do nothing
-				lockAll = 0; //< 1- lock all closed doors in zone, 0-lock random (50%) closed doors, 2-lock 75% of doors in the zone
+				lockAll = 2; //< 1- lock all closed doors in zone, 0-lock random (50%) closed doors, 2-lock 75% of doors in the zone
 			};
 		};
 	};
