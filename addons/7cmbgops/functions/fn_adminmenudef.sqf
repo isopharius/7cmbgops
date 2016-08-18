@@ -38,8 +38,7 @@ if (_menuName == "admin") then {
 			["admin", "Admin Menu", "popup"],
 				[
 					["Neutral friendly to BLUFOR",
-
-						{{resistance setFriend [west, 1]; west setfriend [resistance,1]} remoteExec ["bis_fnc_call", 2, false]},
+						{{resistance setFriend [west, 1]; west setfriend [resistance, 1]} remoteExec ["bis_fnc_call", 2, false]},
 						"",
 						"",
 						"",
@@ -48,7 +47,7 @@ if (_menuName == "admin") then {
 						true
 					],
 					["Neutral hostile to BLUFOR",
-						{resistance setFriend [west, 0]; west setfriend [resistance,0]},
+						{{resistance setFriend [west, 0]; west setfriend [resistance, 0]} remoteExec ["bis_fnc_call", 2, false]},
 						"",
 						"",
 						"",
@@ -57,7 +56,7 @@ if (_menuName == "admin") then {
 						true
 					],
 					["Neutral friendly to OPFOR",
-						{resistance setFriend [east, 1]; east setfriend [resistance,1]},
+						{{resistance setFriend [east, 1]; east setfriend [resistance, 1]} remoteExec ["bis_fnc_call", 2, false]},
 						"",
 						"",
 						"",
@@ -66,7 +65,7 @@ if (_menuName == "admin") then {
 						true
 					],
 					["Neutral hostile to OPFOR",
-						{resistance setFriend [east, 0]; east setfriend [resistance,0]},
+						{{resistance setFriend [east, 0]; east setfriend [resistance,0]} remoteExec ["bis_fnc_call", 2, false]},
 						"",
 						"",
 						"",

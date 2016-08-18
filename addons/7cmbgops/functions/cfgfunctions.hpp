@@ -110,4 +110,10 @@ class seven
 		class start {};
 		class startAdd {};
 	};
+  class SAF {
+    #define seven_fncS
+      	#include "\7cmbgops\scripts\sushi\core\init.cpp"
+        #include "\7cmbgops\scripts\sushi\breach\init.cpp"
+    #undef seven_fncS
+  };
 };

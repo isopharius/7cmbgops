@@ -33,6 +33,11 @@ class CfgFunctions
 	#include "functions\cfgfunctions.hpp"
 };
 
+#define SAF_DEF
+    #include "scripts\sushi\core\init.cpp"
+    #include "scripts\sushi\breach\init.cpp"
+#undef SAF_DEF
+
 #include "scripts\nradio\nradio.hpp"
 
 #include "scripts\pxs_satcom_a3\init_interface.hpp"
