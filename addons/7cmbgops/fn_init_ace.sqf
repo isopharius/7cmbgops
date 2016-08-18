@@ -1,7 +1,7 @@
 if (isdedicated || isHC) exitwith {};
 
 	//ACE menu actions
-	_groupname = ["groupname","Change Callsign","",{call seven_fnc_groupname},{(leader player) == player}] call ace_interact_menu_fnc_createAction;
+	_groupname = ["groupname",format ["Change Callsign %1", groupId (group player)],"\7cmbgops\pics\i_carradio.paa",{[] spawn seven_fnc_groupname},{(leader player) isEqualTo player}] call ace_interact_menu_fnc_createAction;
 
 	_arsenalbox = ["B_CargoNet_01_ammo_F","B_supplyCrate_F","Land_PaperBox_closed_F","Land_PaperBox_open_full_F"];
 
@@ -15,11 +15,11 @@ if (isdedicated || isHC) exitwith {};
 
 	_garage = ["garage","Requisition Vehicle","\A3\ui_f\data\map\vehicleicons\iconCrateVeh_ca.paa",{[("depot")] spawn seven_fnc_garageNew},{((isNull objectParent player) and ((player distance (getmarkerpos "depot")) < 30) and (!visibleMap))}] call ace_interact_menu_fnc_createAction;
 
-	_vehservice = ["vehservice","Service vehicle","\A3\ui_f\data\map\vehicleicons\pictureRepair_ca.paa",{[] spawn seven_fnc_rearmvehicle},{(((objectParent player) isKindOf "Car" or (objectParent player) isKindOf "Tank") and (!isEngineOn (objectParent player)) and (player distance (getmarkerpos "service") < 30) and (!visibleMap))}] call ace_interact_menu_fnc_createAction;
+	_vehservice = ["vehservice","Service vehicle","\A3\ui_f\data\map\vehicleicons\pictureRepair_ca.paa",{[] spawn seven_fnc_rearmvehicle},{(((objectParent player) isKindOf "LandVehicle") and (!isEngineOn (objectParent player)) and (player distance (getmarkerpos "service") < 30) and (!visibleMap))}] call ace_interact_menu_fnc_createAction;
 
 	_heloservice = ["heloservice","Service chopper","\A3\ui_f\data\map\vehicleicons\iconhelicopter_ca.paa",{[] spawn seven_fnc_rearmchopper},{(((objectParent player) isKindOf "Air") and (!isEngineOn (objectParent player)) and (count (nearestObjects [player, ["Land_repair_center","Heli_H","HeliH","Land_HelipadCircle_F","Land_HelipadCivil_F","Land_HelipadEmpty_F","Land_HelipadRescue_F","Land_HelipadSquare_F"], 15]) > 0) and (!visibleMap))}] call ace_interact_menu_fnc_createAction;
 
-	_veharsenal = ["veharsenal","Load Arsenal","\A3\ui_f\data\map\vehicleicons\iconCrate_ca.paa",{["B_CargoNet_01_ammo_F", (objectParent player)] call ace_cargo_fnc_loadItem; hint "Arsenal loaded";},{(((objectParent player) isKindOf "Car" or (objectParent player) isKindOf "Tank") and (!isEngineOn (objectParent player)) && (player distance (getmarkerpos "service") < 30) and (!visibleMap))}] call ace_interact_menu_fnc_createAction;
+	_veharsenal = ["veharsenal","Load Arsenal","\A3\ui_f\data\map\vehicleicons\iconCrate_ca.paa",{["B_CargoNet_01_ammo_F", (objectParent player)] call ace_cargo_fnc_loadItem; hint "Arsenal loaded";},{(((objectParent player) isKindOf "LandVehicle") and (!isEngineOn (objectParent player)) && (player distance (getmarkerpos "service") < 30) and (!visibleMap))}] call ace_interact_menu_fnc_createAction;
 
 	_heloarsenal = ["heloarsenal","Load Arsenal","\A3\ui_f\data\map\vehicleicons\iconCrate_ca.paa",{["B_CargoNet_01_ammo_F", (objectParent player)] call ace_cargo_fnc_loadItem; hint "Arsenal loaded";},{(((objectParent player) isKindOf "Air") and (!isEngineOn (objectParent player)) and (count (nearestObjects [player, ["Land_repair_center","Heli_H","HeliH","Land_HelipadCircle_F","Land_HelipadCivil_F","Land_HelipadEmpty_F","Land_HelipadRescue_F","Land_HelipadSquare_F"], 15]) > 0) and (!visibleMap))}] call ace_interact_menu_fnc_createAction;
 
@@ -33,7 +33,7 @@ if (isdedicated || isHC) exitwith {};
 
 	{
 		["Land_FMradio_F", 0, ["ACE_MainActions"], _x] call ace_interact_menu_fnc_addActionToClass;
-	} foreach [_fmradio,_soultrain];
+	} foreach [_fmradio, _soultrain];
 
 	{
 		[player, 1, ["ACE_SelfActions", "ACE_Equipment"], _x] call ace_interact_menu_fnc_addActionToObject;
