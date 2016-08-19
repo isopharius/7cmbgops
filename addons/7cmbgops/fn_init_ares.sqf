@@ -677,8 +677,9 @@ if (!isdedicated) then { //players
 			_posx = (_pos select 0);
 			_posy = (_pos select 1);
 			_randompos = selectRandom [[_posx + 8000, _posy + 8000, _altitude], [_posx + 8000, _posy - 8000, _altitude], [_posx - 8000, _posy + 8000, _altitude], [_posx - 8000, _posy - 8000, _altitude]];
-			_createplane = [_randompos, random 360, "ONS_AIR_CC130J", WEST] call BIS_fnc_spawnVehicle;
+			_createplane = [_randompos, (random 360), "ONS_AIR_CC130J", WEST] call BIS_fnc_spawnVehicle;
 			_plane = _createplane select 0;
+			_crewplane = _createplane select 1;
 			_groupplane = _createplane select 2;
 			_waypoint = _groupplane addWaypoint [[_posx,_posy,_altitude],0];
 			_waypoint setWaypointSpeed "NORMAL";
@@ -697,8 +698,8 @@ if (!isdedicated) then { //players
 			//delete plane after a while
 			sleep 120;
 			{
-				deleteVehicleCrew _x;
-			} foreach (_createplane select 1);
+				_plane deleteVehicleCrew _x;
+			} foreach _crewplane;
 			deletevehicle _plane;
 			deleteGroup _groupplane;
 		}
