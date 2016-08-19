@@ -517,7 +517,7 @@ if (!isdedicated) then { //players
 			_unit = _nearunits select 0;
 
 			_grp = group _unit;
-			if (_grp isEqualTo grpNull) exitwith {"ERROR: NO GROUP SELECTED.";};
+			if (isNull _grp) exitwith {["ERROR: NO GROUP SELECTED."] call Ares_fnc_ShowZeusMessage;};
 
 			[_grp, getPosWorld (_unit findNearestEnemy _pos)] remoteExec ["CBA_fnc_taskAttack", _unit, false];
 
@@ -526,103 +526,10 @@ if (!isdedicated) then { //players
 	] call Ares_fnc_RegisterCustomModule;
 
 	[
-		"AI Behaviour",
-		"AI Sweep ",
-		{
-			_pos = _this select 0;
-			_nearunits = _pos nearEntities 10;
-			_unit = _nearunits select 0;
-
-			_grp = group _unit;
-			if (_grp isEqualTo grpNull) exitwith {"ERROR: NO GROUP SELECTED.";};
-
-			_dialogResult =
-				["Begin Sweep",
-						[
-							["Sweep Mode:", ["Basic", "Advanced"]],
-							["Waypoints max spacing:", ["50m", "100m", "200m", "300m", "500m", "750m", "1000m"],3]
-						]
-				] call Ares_fnc_ShowChooseDialog;
-			if (count _dialogResult isEqualTo 0) exitWith { "User cancelled dialog."; };
-
-			_radius = 50;
-			switch (_dialogResult select 1) do
-			{
-				case 0: { _radius = 50; };
-				case 1: { _radius = 100; };
-				case 2: { _radius = 200; };
-				case 3: { _radius = 300; };
-				case 4: { _radius = 500; };
-				case 5: { _radius = 750; };
-				default { _radius = 1000; };
-			};
-
-			_mode = "bis_fnc_taskPatrol";
-			switch (_dialogResult select 0) do
-			{
-				case 0: { _mode = "bis_fnc_taskPatrol"; };
-				default { _mode = "CBA_fnc_taskPatrol"; };
-			};
-
-			[_grp, _pos, _radius] remoteExec [_mode, _unit, false];
-
-			["SWEEP STARTED."] call Ares_fnc_ShowZeusMessage;
-		}
-	] call Ares_fnc_RegisterCustomModule;
-
-	[
-		"AI Behaviour",
-		"AI Defend",
-		{
-			_pos = _this select 0;
-			_nearunits = _pos nearEntities 10;
-			_unit = _nearunits select 0;
-
-			_grp = group _unit;
-			if (_grp isEqualTo grpNull) exitwith {"ERROR: NO GROUP SELECTED.";};
-
-			_dialogResult =
-				["Begin Defence",
-						[
-							["Defence Mode:", ["Hold", "Fortify"]],
-							["Defend Radius (Fortify only):", ["50m", "100m", "200m", "300m", "500m", "750m", "1000m"],3]
-						]
-				] call Ares_fnc_ShowChooseDialog;
-			if (count _dialogResult isEqualTo 0) exitWith { "User cancelled dialog."; };
-
-			_mode = "bis_fnc_taskDefend";
-			switch (_dialogResult select 0) do
-			{
-				case 0: { _mode = "bis_fnc_taskDefend"; };
-				default { _mode = "CBA_fnc_taskDefend"; };
-			};
-
-			if (_mode isEqualTo "CBA_fnc_taskDefend") then {
-				_radius = 50;
-				switch (_dialogResult select 1) do
-				{
-					case 0: { _radius = 50; };
-					case 1: { _radius = 100; };
-					case 2: { _radius = 200; };
-					case 3: { _radius = 300; };
-					case 4: { _radius = 500; };
-					case 5: { _radius = 750; };
-					default { _radius = 1000; };
-				};
-				[_grp, _pos, _radius] remoteExec [_mode, _unit, false];
-			} else {
-				[_grp, _pos] remoteExec [_mode, _unit, false];
-			};
-
-			["DEFENCE STARTED."] call Ares_fnc_ShowZeusMessage;
-		}
-	] call Ares_fnc_RegisterCustomModule;
-
-	[
 		"7CMBG",
 		"Defuse Bomb",
 		{
-			if (!isNil "BOMB") exitWith {["Bomb already activated."] call Ares_fnc_ShowZeusMessage;};
+			if (!isNil "BOMB") exitWith {["BOMB ALREADY ARMED."] call Ares_fnc_ShowZeusMessage;};
 
 			_object = _this select 1;
 
@@ -680,7 +587,6 @@ if (!isdedicated) then { //players
 			if (isNil "BOMB") exitWith {["No bomb previously armed."] call Ares_fnc_ShowZeusMessage;};
 
 			_object = _this select 1;
-
 			_object addAction [("<t color='#E61616'>" + ("Search Bomb Code") + "</t>"),seven_fnc_searchAction,"",1,true,true,"","(_target distance _this) < 3"];
 
 			["BOMB CODE HIDDEN."] call Ares_fnc_ShowZeusMessage;
@@ -705,30 +611,37 @@ if (!isdedicated) then { //players
 		"7CMBG",
 		"Sandstorm settings",
 		{
-			_pos = _this select 0;
-			_object = "#lightpoint" createVehicleLocal [0,0,0];
-
 			_dialogResult =
 				["SELECT SANDSTORM INTENSITY",
 						[
-							["Sand Particles:", ["Random","Light","Moderate","Heavy","Disabled"],4]
+							["Sand Particles:", ["Random","Light","Moderate","Heavy","Disabled"], 4]
 						]
 				] call Ares_fnc_ShowChooseDialog;
 			if (count _dialogResult isEqualTo 0) exitWith { "User cancelled dialog."; };
 
+			varEnableSand = nil;
+			publicvariable "varEnableSand";
+
 			_sand = _dialogResult select 0;
 
-			// define the global sand parameter array
-			//[fog,overcast,use ppEfx,allow rain,force wind,vary fog,use wind audio,EFX strength]
-			MKY_arSandEFX = [0,"",true,false,true,true,true,_sand];
-			// init the EFX scripts
-			[] spawn seven_fnc_Sand_Snow_Init;
+			if (_sand isEqualTo 4) then {
+				["SANDSTORM DISABLED."] call Ares_fnc_ShowZeusMessage;
 
-			if (_sand isEqualTo 0) then {["RANDOM SANDSTORM."] call Ares_fnc_ShowZeusMessage;};
-			if (_sand isEqualTo 1) then {["LIGHT SANDSTORM."] call Ares_fnc_ShowZeusMessage;};
-			if (_sand isEqualTo 2) then {["MEDIUM SANDSTORM."] call Ares_fnc_ShowZeusMessage;};
-			if (_sand isEqualTo 3) then {["HEAVY SANDSTORM."] call Ares_fnc_ShowZeusMessage;};
-			if (_sand isEqualTo 4) then {["SANDSTORM DISABLED."] call Ares_fnc_ShowZeusMessage;};
+			} else {
+				["WAIT 10 seconds for sync."] call Ares_fnc_ShowZeusMessage;
+				sleep 10;
+
+				if (_sand isEqualTo 0) then {["RANDOM SANDSTORM INCOMING."] call Ares_fnc_ShowZeusMessage;};
+				if (_sand isEqualTo 1) then {["LIGHT SANDSTORM INCOMING."] call Ares_fnc_ShowZeusMessage;};
+				if (_sand isEqualTo 2) then {["MEDIUM SANDSTORM INCOMING."] call Ares_fnc_ShowZeusMessage;};
+				if (_sand isEqualTo 3) then {["HEAVY SANDSTORM INCOMING."] call Ares_fnc_ShowZeusMessage;};
+
+				// define the global sand parameter array
+				//[fog,overcast,use ppEfx,allow rain,force wind,vary fog,use wind audio,EFX strength]
+				_MKY_arSandEFX = [0,"",true,false,true,true,true,_sand];
+				// init the EFX scripts
+				_MKY_arSandEFX remoteExec ["seven_fnc_Sand_Snow_Init", 0, true];
+			};
 		}
 	] call Ares_fnc_RegisterCustomModule;
 };
