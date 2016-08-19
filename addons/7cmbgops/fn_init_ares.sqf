@@ -510,7 +510,7 @@ if (!isdedicated) then { //players
 
 	[
 		"AI Behaviour",
-		"AI Attack Nearest Enemies",
+		"Attack Nearest Enemy",
 		{
 			_pos = _this select 0;
 			_nearunits = _pos nearEntities 10;
@@ -608,8 +608,8 @@ if (!isdedicated) then { //players
 	] call Ares_fnc_RegisterCustomModule;
 
 	[
-		"7CMBG",
-		"Sandstorm settings",
+		"Environment",
+		"Sandstorm (experimental))",
 		{
 			_dialogResult =
 				["SELECT SANDSTORM INTENSITY",
@@ -658,7 +658,7 @@ if (!isdedicated) then { //players
 						]
 				] call Ares_fnc_ShowChooseDialog;
 			if (count _dialogResult isEqualTo 0) exitWith {};
-
+			["SELECT PLAYERS TO HALO THEN PRESS Enter."] call Ares_fnc_ShowZeusMessage;
 			_selection = [toLower localize "STR_PLAYERS"] call Achilles_fnc_SelectUnits;
 			if (isNil "_selection") exitWith {nil};
 			_haloplayers = [{isPlayer _this},_selection] call Achilles_fnc_filter;
@@ -677,11 +677,13 @@ if (!isdedicated) then { //players
 			_posx = (_pos select 0);
 			_posy = (_pos select 1);
 			_randompos = selectRandom [[_posx + 8000, _posy + 8000, _altitude], [_posx + 8000, _posy - 8000, _altitude], [_posx - 8000, _posy + 8000, _altitude], [_posx - 8000, _posy - 8000, _altitude]];
-			_createplane = [_randompos, (random 360), "ONS_AIR_CC130J", WEST] call BIS_fnc_spawnVehicle;
+			_createplane = [_randompos, 0, "ONS_AIR_CC130J", WEST] call BIS_fnc_spawnVehicle;
 			_plane = _createplane select 0;
 			_crewplane = _createplane select 1;
 			_groupplane = _createplane select 2;
-			_waypoint = _groupplane addWaypoint [[_posx,_posy,_altitude],0];
+			_plane setDir (_randompos getRelDir _pos);
+			_plane flyInHeight _altitude;
+			_waypoint = _groupplane addWaypoint [[_posx,_posy,_altitude - 1000],0];
 			_waypoint setWaypointSpeed "NORMAL";
 			_waypoint setWaypointType "MOVE";
 
