@@ -30,29 +30,23 @@
 
 */
 
+if (isHC) exitWith {};
+
 // does the global data array exist?
+
 if (isNil "arInfoWorld_MKY") then {
 	call seven_fnc_getInfoWorld;
 };
 
-// is this a JIP client ?
-if (!isServer and !isHC and isNull player) then {
-	JIP_varSandData = [player];
-	publicVariableServer "JIP_varSandData";
-};
-
 // only servers execute this
-if (isServer) then {
-	if ((arInfoWorld_MKY select 0) isEqualTo "sand") exitWith {call seven_fnc_Sand_Server;};
+if (isServer) exitWith {
+	if ((arInfoWorld_MKY select 0) isEqualTo "sand") then {call seven_fnc_Sand_Server;};
 };
 
 // any machine with an interface executes this
 if (hasInterface) then {
-	0 = [] spawn {
-		if ((arInfoWorld_MKY select 0) == "sand") exitWith {
-			waitUntil {sleep 5;!(isNil "varEnableSand")};
-			if (isNil "MKY_arSandEFX") exitWith {true;};
-			[MKY_arSandEFX] call seven_fnc_Sand_Client;
-		};
+	if ((arInfoWorld_MKY select 0) isEqualTo "sand") then {
+		sleep 1;
+		[_this] call seven_fnc_Sand_Client;
 	};
 };

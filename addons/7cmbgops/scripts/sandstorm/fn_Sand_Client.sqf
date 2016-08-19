@@ -81,26 +81,26 @@
 */
 ////////////////////////// FUNCTIONS //////////////////////////
 
-MKY_fnc_ppEffect_On = {
-	if !(isNil "effsand") exitWith {true;};
-	effsand = ppEffectCreate ["colorCorrections", 1501];
-	effsand ppEffectEnable true;
-	effsand ppEffectAdjust [1,1.02,-0.005,[0,0,0,0],[1,0.8,0.6,0.65],[0.199,0.587,0.115,0]];
-	effsand ppEffectCommit 20; // can also fade colorization in slowly if not using black in /black out
-	(true);
+_MKY_fnc_ppEffect_On = {
+	if !(isNil "effsand") then {true;} else {
+		effsand = ppEffectCreate ["colorCorrections", 1501];
+		effsand ppEffectEnable true;
+		effsand ppEffectAdjust [1,1.02,-0.005,[0,0,0,0],[1,0.8,0.6,0.65],[0.199,0.587,0.115,0]];
+		effsand ppEffectCommit 20; // can also fade colorization in slowly if not using black in /black out
+		(true);
+	};
 };
-MKY_fnc_ppEffect_Off = {
-	if (isNil "effsand") exitWith {true;};
-	[] spawn {
+_MKY_fnc_ppEffect_Off = {
+	if (isNil "effsand") then {true;} else {
 		effsand ppEffectAdjust [1,1.0,0.0,[.55,.55,.52,0],[.88,.88,.93,1],[1,.1,.4,0.03]];
 		effsand ppEffectCommit 30;  // fade colorization out slowly
 		sleep 35;
 		ppEffectDestroy effsand;
 		effsand = nil;
+		(true);
 	};
-	(true);
 };
-MKY_fnc_Exit_Sand = {
+_MKY_fnc_Exit_Sand = {
 	deleteVehicle objSand;
 	deleteVehicle objSandN;
 	deleteVehicle objSandS;
@@ -108,20 +108,21 @@ MKY_fnc_Exit_Sand = {
 	deleteVehicle objSandW;
 	deleteVehicle objEmitterHost;
 	objEmitterHost = nil;
-	varEnableSand = false;
+	varEnableSand = nil;
 	(true);
 };
-MKY_fnc_create_Emitter_Host = {
+_MKY_fnc_create_Emitter_Host = {
 	// create the object that will be bound to player model, which emitters will themselves be bound to
-	if !(isNil "objEmitterHost") exitWith {true;};
-	objEmitterHost = "Land_Bucket_F" createVehicleLocal (position player);
-	objEmitterHost attachTo [player,[0,0,0]];
-	objEmitterHost hideObject true;
-	objEmitterHost allowDamage false;
-	objEmitterHost enableSimulation false;
-	(true);
+	if !(isNil "objEmitterHost") then {true;} else {
+		objEmitterHost = "Land_Bucket_F" createVehicleLocal (position player);
+		objEmitterHost attachTo [player,[0,0,0]];
+		objEmitterHost hideObject true;
+		objEmitterHost allowDamage false;
+		objEmitterHost enableSimulation false;
+		(true);
+	};
 };
-MKY_fnc_set_Object_Direction = {
+_MKY_fnc_set_Object_Direction = {
 	// spawn a thread that sets attached object to the bearing variable
 	scriptSetObjDir = [] spawn {
 		// wait for dummy object to exist
@@ -140,7 +141,7 @@ MKY_fnc_set_Object_Direction = {
 	};
 	(true);
 };
-MKY_fnc_sand_Init = {
+_MKY_fnc_sand_Init = {
 
 	// create the parent particle emitter and attach to the emitter host object (the bucket)
 	objSand = "#particlesource" createVehicleLocal (getPosASL player);
@@ -222,11 +223,11 @@ MKY_fnc_sand_Init = {
 	// if (bFixPE) exitWith {0 = [] call MKY_fnc_fixPE;};
 
 	// call function to set the dropInterval of all particle emitters
-	0 = [0] call MKY_fnc_setDI;
+	[0] call _MKY_fnc_setDI;
 
 	(true);
 };
-MKY_fnc_fixPE = {
+_MKY_fnc_fixPE = {
 	// destroy the particle emitters and rebuild (to fix sparodic issue I cannot solve)
 	deleteVehicle objSand;
 	deleteVehicle objSandN;
@@ -235,10 +236,10 @@ MKY_fnc_fixPE = {
 	deleteVehicle objSandW;
 	sleep 1;
 	bFixPE = false;
-	0 = [] call MKY_fnc_sand_Init;
+	call _MKY_fnc_sand_Init;
 	(true);
 };
-MKY_fnc_setDI = {
+_MKY_fnc_setDI = {
 	// use passed parameter to set dropInterval of emitters
 	// always increase EFX upwind and slightly decrease on downwind
 	private "_int";
@@ -276,12 +277,11 @@ MKY_fnc_setDI = {
 	};
 	(true);
 };
-f_handle_Respawn = {
+_f_handle_Respawn = {
 	// simple event handler would sometimes fail to reattach the objEmitterHost
 	// calling a function like this appears to work every time
-	private ["_unit","_body"];
-	_unit = (_this select 0);
-	_body = (_this select 1);
+	private _unit = (_this select 0);
+	private _body = (_this select 1);
 	// detach from dead body
 	detach objEmitterHost;
 	objEmitterHost setPosASL (getPosASL player);
@@ -352,10 +352,10 @@ if (intEFX == 4) exitWith {(true);};
 // functions have been defined, variables have been created, begin calling functions and executing commands
 
 // create an object that hosts the particle emitters
-0 = [] call MKY_fnc_create_Emitter_Host;
+call _MKY_fnc_create_Emitter_Host;
 
 // add event handler to always reattach the emitter host to new player vehicle
-nul = player addEventHandler ["Respawn",f_handle_Respawn];
+player addEventHandler ["Respawn",_f_handle_Respawn];
 
 // prepare overcast
 _intOvercast_org = overcast;
@@ -364,10 +364,8 @@ if ((count _this) > 1) then {
 		skipTime -24;
 		86400 setOvercast (_this select 1);
 		skipTime 24;
-		0 = [] spawn {
-			sleep 0.1;
-			simulWeatherSync;
-		};
+		sleep 0.1;
+		simulWeatherSync;
 	};
 };
 
@@ -377,7 +375,7 @@ sleep 1;
 if ((count _this) > 2) then {
 	if (typeName (_this select 2) == "BOOL") then {
 		if (_this select 2) then {
-			0 = [] call MKY_fnc_ppEffect_On;
+			call _MKY_fnc_ppEffect_On;
 		};
 	};
 };
@@ -397,13 +395,11 @@ if ((count _this) > 0) then {
 			// create variance in fog values
 			[((_this select 0) select 0),((_this select 0) select 1),((_this select 0) select 2)] spawn {
 				sleep 20; // give initial setFog time to change
-				while {true} do {
-					while {varEnableSand} do {
+					while {!isNil "varEnableSand"} do {
 						sleep 30;
 						20 setFog [(_this select 0),(_this select 1),((getPosASL player) select 2) + ([-15,15] call BIS_fnc_randomInt)];;
+						sleep 5;
 					};
-					sleep 5;
-				};
 			};
 		};
 	};
@@ -411,8 +407,7 @@ if ((count _this) > 0) then {
 
 // continually set wind and rain values
 [] spawn {
-	while {true} do {
-		while {varEnableSand} do {
+		while {!isNil "varEnableSand"} do {
 			sleep 8;
 			if (bEnforceWind) then {setWind arCurrent_Wind;};
 			if !(bAllowRain) then {0 setRain 0;};
@@ -425,14 +420,11 @@ if ((count _this) > 0) then {
 					_x setPosASL (getPosASL player);
 				} forEach [objSand,objSandN,objSandS,objSandE,objSandW];
 			};
+			sleep 1;
 		};
-		sleep 1;
-	};
 };
 
-while {true} do {
-
-	if (varEnableSand) then {
+while {!isNil "varEnableSand"} do {
 		/*
 			each mission may be different, but you might need to wait to create the particles
 			if the player will be moved. Here we are going to wait for player to NOT be
@@ -442,17 +434,17 @@ while {true} do {
 		*/
 
 		// spawn thread that continually sets direction of emitter host
-		0 = [] call MKY_fnc_set_Object_Direction;
+		call _MKY_fnc_set_Object_Direction;
 
 		// create the emitters
-		0 = [] call MKY_fnc_sand_Init;
+		call _MKY_fnc_sand_Init;
 		// waitUntil {sleep 1;!(bFixPE)};
 
 		// spawn thread that lowers wind volume while in building/vehicle
-		0 = [] spawn {
+		[] spawn {
 			private "_strVar";
 			_strVar = "splayer";
-			while {varEnableSand} do {
+			while {!isNil "varEnableSand"} do {
 				if (isNull objectParent player) then {	// player IS the vehicle
 					if (_strVar == "svehicle") then {
 						objEmitterHost attachTo [player,[0,0,0]];
@@ -502,36 +494,39 @@ while {true} do {
 		// set dropInterval
 
 		// tight loop until sand effect is cancelled
-		while {varEnableSand} do {
-			sleep 5;
-			_cnt = _cnt + 5;
+		_enablevar = {
+			if (!isNil "varEnableSand") then {
+				_cnt = _cnt + 5;
 
-			// after 5 seconds, go back to default
-			if (_di != intEFX) then {
-				if (_di != 5) then {0 = [intEFX] call MKY_fnc_setDI;};
-			};
+				// after 5 seconds, go back to default
+				if (_di != intEFX) then {
+					if (_di != 5) then {[intEFX] call _MKY_fnc_setDI;};
+				};
 
-			// objSandDistance setPosASL (getPosASL player);
-			if (_cnt > _rnd) then {
+				// objSandDistance setPosASL (getPosASL player);
+				if (_cnt > _rnd) then {
 
-				_di = arSands_MKY call BIS_fnc_selectRandom;
-				0 = [_di] call MKY_fnc_setDI;
+					_di = selectRandom arSands_MKY;
+					[_di] call _MKY_fnc_setDI;
 
-				sand_Array set [9,(arSandsVolume_MKY call BIS_fnc_selectRandom)];
-				sand_Array set [12,(arSandColors_MKY call BIS_fnc_selectRandom)];
-				sand_Array set [5,[0,70,0]]; // North is in front, 70 meter out
-				objSandN setParticleParams sand_Array;
-				sand_Array set [5,[0,-70,0]]; // south is behind, only 30 meter out
-				objSandS setParticleParams sand_Array;
-				sand_Array set [5,[70,0,0]]; // East is to right, 70 meter out
-				objSandE setParticleParams sand_Array;
-				sand_Array set [5,[-70,0,0]]; // West is to left, 70 meter out
-				objSandW setParticleParams sand_Array;
-				_cnt = 0;
-				_rnd = ([10,25] call BIS_fnc_randomNum);
+					sand_Array set [9,(selectRandom arSandsVolume_MKY)];
+					sand_Array set [12,(selectRandom arSandColors_MKY)];
+					sand_Array set [5,[0,70,0]]; // North is in front, 70 meter out
+					objSandN setParticleParams sand_Array;
+					sand_Array set [5,[0,-70,0]]; // south is behind, only 30 meter out
+					objSandS setParticleParams sand_Array;
+					sand_Array set [5,[70,0,0]]; // East is to right, 70 meter out
+					objSandE setParticleParams sand_Array;
+					sand_Array set [5,[-70,0,0]]; // West is to left, 70 meter out
+					objSandW setParticleParams sand_Array;
+					_cnt = 0;
+					_rnd = ([10,25] call BIS_fnc_randomNum);
+				};
+				sleep 5;
+				call _enablevar;
 			};
 		};
-
+		call _enablevar;
 
 		// stop handle to spawned thread
 		terminate scriptSetObjDir;
@@ -542,10 +537,9 @@ while {true} do {
 		removeAllMusicEventHandlers "MusicStop";
 
 		// remove effects and exit
-		0 = [] call MKY_fnc_ppEffect_Off;
+		call _MKY_fnc_ppEffect_Off;
 		if ((count _this) > 0) then {if (typeName (_this select 0) == "ARRAY") then {60 setFog _arFog_org;};};
 		// leave overcast as it is
-		0 = [] call MKY_fnc_Exit_Sand;
-	};
-	sleep 1;
+		call _MKY_fnc_Exit_Sand;
+		sleep 1;
 };
