@@ -682,16 +682,17 @@ if (!isdedicated) then { //players
 			_crewplane = _createplane select 1;
 			_groupplane = _createplane select 2;
 			_plane setDir (_plane getRelDir _pos);
-			_plane flyInHeight _altitude;
-			_waypoint = _groupplane addWaypoint [[_posx,_posy,_altitude - 1000],0];
-			_waypoint setWaypointSpeed "NORMAL";
+			_altitude = _altitude - (random 1000);
+			_plane flyInHeight (_altitude - 700);
+			_waypoint = _groupplane addWaypoint [[_posx,_posy,_altitude],500];
+			_waypoint setWaypointSpeed "LIMITED";
 			_waypoint setWaypointType "MOVE";
 
 			//put players in the plane
 			{
 				_x moveInCargo _plane;
 			} foreach _haloplayers;
-			waitUntil {(!alive _plane) or ((_plane distance (waypointPosition _waypoint)) < 3000)};
+			waitUntil {(!alive _plane) or ((_plane distance (waypointPosition _waypoint)) < 5000)};
 			if (!alive _plane) exitWith {};
 
 			_plane animateSource ["ramp", 0.65];
