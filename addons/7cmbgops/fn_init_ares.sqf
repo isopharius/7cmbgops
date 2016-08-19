@@ -35,7 +35,7 @@ if (isserver) then { //server
 						["Choose file", _mishlist]
 					]
 				] call Ares_fnc_ShowChooseDialog;
-			if (count _dialogResult isEqualTo 0) exitWith { "User cancelled dialog."; };
+			if (count _dialogResult isEqualTo 0) exitWith {};
 
 			mish pushback (_mish select (_dialogResult select 0));
 			publicVariable "mish";
@@ -61,7 +61,7 @@ if (isserver) then { //server
 						["Choose file", _mishlist]
 					]
 				] call Ares_fnc_ShowChooseDialog;
-			if (count _dialogResult isEqualTo 0) exitWith { "User cancelled dialog."; };
+			if (count _dialogResult isEqualTo 0) exitWith {};
 
 			_loadmish = (mish select (_dialogResult select 0)) select 1;
 			try
@@ -95,7 +95,7 @@ if (isserver) then { //server
 						["Choose file", _mishlist]
 					]
 				] call Ares_fnc_ShowChooseDialog;
-			if (count _dialogResult isEqualTo 0) exitWith { "User cancelled dialog."; };
+			if (count _dialogResult isEqualTo 0) exitWith {};
 
 			mish deleteAt (_dialogResult select 0);
 			publicVariable "mish";
@@ -118,15 +118,15 @@ if (!isdedicated) then { //players
 				[
 					"Save to client",
 					[
-						["Mission Name", ""],
-						["Radius", ["50m", "100m", "500m", "1km", "2km", "5km", "Entire Map"], 6],
+						["Mission Name:", ""],
+						["Radius:", ["50m", "100m", "500m", "1km", "2km", "5km", "Entire Map"], 6],
 						["Include AI?", ["Yes", "No"]],
 						["Include Empty Vehicles?", ["Yes", "No"]],
 						["Include Objects?", ["Yes", "No"]],
 						["Include Markers?", ["Yes", "No"], 1]
 					]
 				] call Ares_fnc_ShowChooseDialog;
-			if (count _dialogResult isEqualTo 0) exitWith { "User cancelled dialog."; };
+			if (count _dialogResult isEqualTo 0) exitWith {};
 
 			["User chose radius with index '%1'", _dialogResult] call Ares_fnc_LogMessage;
 			_radius = 100;
@@ -356,7 +356,7 @@ if (!isdedicated) then { //players
 						["Choose file", _mishlist]
 					]
 				] call Ares_fnc_ShowChooseDialog;
-			if (count _dialogResult isEqualTo 0) exitWith { "User cancelled dialog."; };
+			if (count _dialogResult isEqualTo 0) exitWith {};
 
 			_loadmish = (_mish select (_dialogResult select 0)) select 1;
 			try
@@ -391,7 +391,7 @@ if (!isdedicated) then { //players
 						["Choose file", _mishlist]
 					]
 				] call Ares_fnc_ShowChooseDialog;
-			if (count _dialogResult isEqualTo 0) exitWith { "User cancelled dialog."; };
+			if (count _dialogResult isEqualTo 0) exitWith {};
 
 			_mish deleteAt (_dialogResult select 0);
 			profileNamespace setVariable [format["savemish_%1", worldname], _mish];
@@ -412,7 +412,7 @@ if (!isdedicated) then { //players
 						]
 				] call Ares_fnc_ShowChooseDialog;
 
-			if (count _dialogResult isEqualTo 0) exitWith { "User cancelled dialog."; };
+			if (count _dialogResult isEqualTo 0) exitWith {};
 
 			_yield = "grenadeHand";
 			switch (_dialogResult select 0) do
@@ -542,7 +542,7 @@ if (!isdedicated) then { //players
 							["Fourth digit:", ["random", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]]
 						]
 				] call Ares_fnc_ShowChooseDialog;
-			if (count _dialogResult isEqualTo 0) exitWith { "User cancelled dialog."; };
+			if (count _dialogResult isEqualTo 0) exitWith {};
 
 			_digit1 = (_dialogResult select 0) - 1;
 			if (_digit1 isEqualTo -1) then {
@@ -600,7 +600,7 @@ if (!isdedicated) then { //players
 			_pos = _this select 0;
 			_object = "#lightpoint" createVehicleLocal [0,0,0];
 
-			explosive = [_object, _pos, random 360, "iEDurbanSmall_Remote_Mag" , "PressurePlate", []] call ACE_Explosives_fnc_placeExplosive;
+			[_object, _pos, random 360, "iEDurbanSmall_Remote_Mag" , "PressurePlate", []] call ACE_Explosives_fnc_placeExplosive;
 			deletevehicle _object;
 
 			["IED PLACED."] call Ares_fnc_ShowZeusMessage;
@@ -617,7 +617,7 @@ if (!isdedicated) then { //players
 							["Sand Particles:", ["Random","Light","Moderate","Heavy","Disabled"], 4]
 						]
 				] call Ares_fnc_ShowChooseDialog;
-			if (count _dialogResult isEqualTo 0) exitWith { "User cancelled dialog."; };
+			if (count _dialogResult isEqualTo 0) exitWith {};
 
 			varEnableSand = nil;
 			publicvariable "varEnableSand";
@@ -642,6 +642,63 @@ if (!isdedicated) then { //players
 				// init the EFX scripts
 				_MKY_arSandEFX remoteExec ["seven_fnc_Sand_Snow_Init", 0, true];
 			};
+		}
+	] call Ares_fnc_RegisterCustomModule;
+
+	[
+		"Player",
+		"HALO Jump",
+		{
+			_pos = _this select 0;
+
+			_dialogResult =
+						[
+							["Altitude:", ["3000m","5000m","8000m","10000m","12000m"],2]
+						]
+				] call Ares_fnc_ShowChooseDialog;
+			if (count _dialogResult isEqualTo 0) exitWith {};
+
+			_selection = [toLower localize "STR_PLAYERS"] call Achilles_fnc_SelectUnits;
+			if (isNil "_selection") exitWith {nil};
+			_haloplayers = [{isPlayer _this},_selection] call Achilles_fnc_filter;
+
+			_altitude = 8000;
+			switch (_dialogResult select 0) do
+			{
+				case 0: { _altitude = 4000; };
+				case 1: { _altitude = 6000; };
+				case 2: { _altitude = 9000; };
+				case 3: { _altitude = 11000; };
+				case 4: { _altitude = 13000; };
+			};
+
+			//spawn plane
+			_posx = (_pos select 0);
+			_posy = (_pos select 1);
+			_randompos = selectRandom [[_posx + 8000, _posy + 8000, _altitude], [_posx + 8000, _posy - 8000, _altitude], [_posx - 8000, _posy + 8000, _altitude], [_posx - 8000, _posy - 8000, _altitude]];
+			_createplane = [_randompos, random 360, "ONS_AIR_CC130J", WEST] call BIS_fnc_spawnVehicle;
+			_plane = _createplane select 0;
+			_groupplane = _createplane select 2;
+			_waypoint = _groupplane addWaypoint [[_posx,_posy,_altitude],0];
+			_waypoint setWaypointSpeed "NORMAL";
+			_waypoint setWaypointType "MOVE";
+
+			//put players in the plane
+			{
+				_x moveInCargo _plane;
+			} foreach _haloplayers;
+			waitUntil {(!alive _plane) or ((_plane distance (waypointPosition _waypoint)) < 3000)};
+			if (!alive _plane) exitWith {};
+
+			_plane animateSource ["ramp", 0.65];
+			_groupplane setSpeedMode "LIMITED";
+
+			//delete plane after a while
+			sleep 120;
+			{
+			} foreach (_createplane select 1);
+			deletevehicle _plane;
+			deleteGroup _groupplane;
 		}
 	] call Ares_fnc_RegisterCustomModule;
 };
