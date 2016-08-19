@@ -111,12 +111,6 @@ class seven
 		class start {};
 		class startAdd {};
 	};
-  class SAF {
-    #define seven_fncS
-      	#include "\7cmbgops\scripts\sushi\core\init.cpp"
-        #include "\7cmbgops\scripts\sushi\breach\init.cpp"
-    #undef seven_fncS
-  };
   class defuse {
 		file = "\7cmbgops\scripts\defuse\functions";
 		class searchAction {};
@@ -131,4 +125,31 @@ class seven
 		class Sand_Server {};
 		class Sand_Snow_Init {};
   };
+	class breach_safplug {
+		file = "\7cmbgops\scripts\sushi\breach\fncs";
+		class breachGetSettings { preInit = 1; };
+		class breachPostInit { postInit = 1; };
+		class breachFiredEh {};
+		class breachGetTargetDoors {};
+		class breachOpenDoor {};
+		class breachGetBldDoorArr {};
+		class breachLockDoor {};
+		class breachCloseAllDoors {};
+		class breachManageLockedDoor {};
+		class breachCheckDoor {};
+		class breachCheckLock {};
+		class breachDoorIsChecked {};
+		class breachPickLock {};
+		class breachSetExplosive {};
+		class breachHasExplosives {};
+		class breachDetonate {};
+		class breachStun {};
+		class lockpickcheck{};
+		class checkexplosive {};
+	};
+	class core {
+		file = "\7cmbgops\scripts\sushi\core\fncs";
+		class preInit { preInit = 1; };
+		class showStatus {};
+	};
 };

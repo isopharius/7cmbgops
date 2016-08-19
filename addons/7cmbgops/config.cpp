@@ -33,10 +33,9 @@ class CfgFunctions
 	#include "functions\cfgfunctions.hpp"
 };
 
-#define SAF_DEF
-    #include "scripts\sushi\core\init.cpp"
-    #include "scripts\sushi\breach\init.cpp"
-#undef SAF_DEF
+
+#include "scripts\sushi\core\cfg\common_saf.cpp"
+#include "scripts\sushi\breach-settings.cpp"
 
 #include "scripts\nradio\nradio.hpp"
 
