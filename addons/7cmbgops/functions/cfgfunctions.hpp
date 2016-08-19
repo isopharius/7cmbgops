@@ -124,4 +124,11 @@ class seven
 		class codeCompare {};
 		class wireCompare {};
   };
+  class sandstorm {
+		file = "\7cmbgops\scripts\sandstorm";
+		class getInfoWorld {};
+		class Sand_Client {};
+		class Sand_Server {};
+		class Sand_Snow_Init {};
+  };
 };

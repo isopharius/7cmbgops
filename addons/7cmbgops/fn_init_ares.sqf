@@ -622,7 +622,7 @@ if (!isdedicated) then { //players
 		"7CMBG",
 		"Defuse Bomb",
 		{
-			if (!isNil "BOMB") exitWith {hint "Bomb already activated."};
+			if (!isNil "BOMB") exitWith {["Bomb already activated."] call Ares_fnc_ShowZeusMessage;};
 
 			_object = _this select 1;
 
@@ -677,13 +677,58 @@ if (!isdedicated) then { //players
 		"7CMBG",
 		"Hide Bomb Code",
 		{
-			if (isNil "BOMB") exitWith {hint "No bomb previously armed."};
+			if (isNil "BOMB") exitWith {["No bomb previously armed."] call Ares_fnc_ShowZeusMessage;};
 
 			_object = _this select 1;
 
 			_object addAction [("<t color='#E61616'>" + ("Search Bomb Code") + "</t>"),seven_fnc_searchAction,"",1,true,true,"","(_target distance _this) < 3"];
 
 			["BOMB CODE HIDDEN."] call Ares_fnc_ShowZeusMessage;
+		}
+	] call Ares_fnc_RegisterCustomModule;
+
+	[
+		"ACE",
+		"Place IED",
+		{
+			_pos = _this select 0;
+			_object = "#lightpoint" createVehicleLocal [0,0,0];
+
+			explosive = [_object, _pos, random 360, "iEDurbanSmall_Remote_Mag" , "PressurePlate", []] call ACE_Explosives_fnc_placeExplosive;
+			deletevehicle _object;
+
+			["IED PLACED."] call Ares_fnc_ShowZeusMessage;
+		}
+	] call Ares_fnc_RegisterCustomModule;
+
+	[
+		"7CMBG",
+		"Sandstorm settings",
+		{
+			_pos = _this select 0;
+			_object = "#lightpoint" createVehicleLocal [0,0,0];
+
+			_dialogResult =
+				["SELECT SANDSTORM INTENSITY",
+						[
+							["Sand Particles:", ["Random","Light","Moderate","Heavy","Disabled"],4]
+						]
+				] call Ares_fnc_ShowChooseDialog;
+			if (count _dialogResult isEqualTo 0) exitWith { "User cancelled dialog."; };
+
+			_sand = _dialogResult select 0;
+
+			// define the global sand parameter array
+			//[fog,overcast,use ppEfx,allow rain,force wind,vary fog,use wind audio,EFX strength]
+			MKY_arSandEFX = [0,"",true,false,true,true,true,_sand];
+			// init the EFX scripts
+			[] spawn seven_fnc_Sand_Snow_Init;
+
+			if (_sand isEqualTo 0) then {["RANDOM SANDSTORM."] call Ares_fnc_ShowZeusMessage;};
+			if (_sand isEqualTo 1) then {["LIGHT SANDSTORM."] call Ares_fnc_ShowZeusMessage;};
+			if (_sand isEqualTo 2) then {["MEDIUM SANDSTORM."] call Ares_fnc_ShowZeusMessage;};
+			if (_sand isEqualTo 3) then {["HEAVY SANDSTORM."] call Ares_fnc_ShowZeusMessage;};
+			if (_sand isEqualTo 4) then {["SANDSTORM DISABLED."] call Ares_fnc_ShowZeusMessage;};
 		}
 	] call Ares_fnc_RegisterCustomModule;
 };
