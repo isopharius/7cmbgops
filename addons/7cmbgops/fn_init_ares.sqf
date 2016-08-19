@@ -652,6 +652,7 @@ if (!isdedicated) then { //players
 			_pos = _this select 0;
 
 			_dialogResult =
+				["SELECT JUMP ALTITUDE (chutes not included)",
 						[
 							["Altitude:", ["3000m","5000m","8000m","10000m","12000m"],2]
 						]
@@ -696,6 +697,7 @@ if (!isdedicated) then { //players
 			//delete plane after a while
 			sleep 120;
 			{
+				deleteVehicleCrew _x;
 			} foreach (_createplane select 1);
 			deletevehicle _plane;
 			deleteGroup _groupplane;
