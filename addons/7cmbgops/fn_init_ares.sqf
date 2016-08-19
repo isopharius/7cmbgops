@@ -683,7 +683,7 @@ if (!isdedicated) then { //players
 			_groupplane = _createplane select 2;
 			_plane setDir (_plane getRelDir _pos);
 			_altitude = _altitude - (random 1000);
-			_plane flyInHeight (_altitude - 700);
+			_plane flyInHeight _altitude;
 			_waypoint = _groupplane addWaypoint [[_posx,_posy,_altitude],500];
 			_waypoint setWaypointSpeed "LIMITED";
 			_waypoint setWaypointType "MOVE";
