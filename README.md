@@ -5,7 +5,7 @@ required mods: @cba_a3;@ace;@alive;@ons_a3;@task_force_radio;@7cmbg;
 
 only necessary mission files are sqm and description.ext, all scripts initialized from template
 
-this addon integrates the following scripts and features in no particular order:
+this addon integrates the following in no particular order:
 
 INCLUDED SCRIPTS - all credits to the original authors
 - PXS satcom  http://www.armaholic.com/page.php?id=25816
