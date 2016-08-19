@@ -649,8 +649,6 @@ if (!isdedicated) then { //players
 		"Player",
 		"HALO Jump",
 		{
-			_pos = _this select 0;
-
 			_dialogResult =
 				["SELECT JUMP ALTITUDE (chutes not included)",
 						[
@@ -658,6 +656,7 @@ if (!isdedicated) then { //players
 						]
 				] call Ares_fnc_ShowChooseDialog;
 			if (count _dialogResult isEqualTo 0) exitWith {};
+
 			["SELECT PLAYERS TO HALO THEN PRESS Enter."] call Ares_fnc_ShowZeusMessage;
 			_selection = [toLower localize "STR_PLAYERS"] call Achilles_fnc_SelectUnits;
 			if (isNil "_selection") exitWith {nil};
@@ -674,6 +673,7 @@ if (!isdedicated) then { //players
 			};
 
 			//spawn plane
+			_pos = _this select 0;
 			_posx = (_pos select 0);
 			_posy = (_pos select 1);
 			_randompos = selectRandom [[_posx + 8000, _posy + 8000, _altitude], [_posx + 8000, _posy - 8000, _altitude], [_posx - 8000, _posy + 8000, _altitude], [_posx - 8000, _posy - 8000, _altitude]];
@@ -681,7 +681,7 @@ if (!isdedicated) then { //players
 			_plane = _createplane select 0;
 			_crewplane = _createplane select 1;
 			_groupplane = _createplane select 2;
-			_plane setDir (_randompos getRelDir _pos);
+			_plane setDir (_plane getRelDir _pos);
 			_plane flyInHeight _altitude;
 			_waypoint = _groupplane addWaypoint [[_posx,_posy,_altitude - 1000],0];
 			_waypoint setWaypointSpeed "NORMAL";
