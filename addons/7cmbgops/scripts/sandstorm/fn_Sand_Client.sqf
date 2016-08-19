@@ -126,7 +126,7 @@ _MKY_fnc_set_Object_Direction = {
 	// spawn a thread that sets attached object to the bearing variable
 	scriptSetObjDir = [] spawn {
 		// wait for dummy object to exist
-		waitUntil {sleep 0.25;!(isNil "objEmitterHost")};
+		waitUntil {!isNil "objEmitterHost"};
 		while {true} do {
 			sleep 0.25;
 			if (isNil "objEmitterHost") exitWith {true;};
@@ -154,7 +154,7 @@ _MKY_fnc_sand_Init = {
 	objSandW = "#particlesource" createVehicleLocal (getPosASL player);
 
 	// be sure to wait until emitter host is present
-	waitUntil {sleep 1;!(isNil "objEmitterHost")};
+	waitUntil {!isNil "objEmitterHost"};
 
 	// define a master array for the sand EFX
 	sand_Array = [
@@ -296,7 +296,7 @@ private ["_arFog_org","_arFog","_intOvercast_org","_intOvercast","_intIndex"];
 
 // wait for array to be created on the server and present on this client
 // MKY_arWind = [45,[-1,-1]]; // ** TEST **
-waitUntil {sleep .5;!(isNil "MKY_arWind")};
+waitUntil {!isNil "MKY_arWind"};
 windVal = 6;
 bInStructure = false;
 bFixPE = true;
