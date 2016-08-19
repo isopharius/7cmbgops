@@ -68,7 +68,7 @@ class CfgSounds
 {
 	sounds[] = {crowd,muezzin1,muezzin2,muezzinshort1,muezzinshort2,muezzinshort3,muezzinshort4,muezzinmusic1,muezzinmusic2,Alarm,allahu_akbar1,allahu_akbar2,allahu_akbar3,jihad,scream1,scream2,scream3,scream4,scream5,scream6,Hint,Hit,Buzzer};
 
-	#include "scripts\defuse\sounds\cfgSounds.hpp"
+	#include "scripts\defuse\cfgSounds.hpp"
 	class crowd
 	{
 		name	 = "crowd";
