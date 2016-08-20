@@ -568,9 +568,13 @@ if (!isdedicated) then { //players
 			publicVariable "ARMED";
 			publicVariable "BOMB";
 
-			(_this select 1) addAction ["<t color='#E61616'>Defuse the Bomb</t>","createDialog 'KeypadDefuse'","",1,true,true,"","true",4];
+			_bombobject = _this select 1;
+			_defusebomb = ["defusebomb","Defuse the Bomb","",{createDialog "KeypadDefuse"},{BOMB}] call ace_interact_menu_fnc_createAction;
+			[_bombobject, 0, ["ACE_MainActions"], _defusebomb] call ace_interact_menu_fnc_addActionToObject;
 
-			["BOMB ARMED. HIDE THE CODE ON ANOTHER OBJECT."] call Ares_fnc_ShowZeusMessage;
+			format["BOMB ARMED in %1.", typeOf _bombobject] call Ares_fnc_ShowZeusMessage;
+			sleep 2.5;
+			["NOW GO HIDE THE CODE ON ANOTHER OBJECT."] call Ares_fnc_ShowZeusMessage;
 		}
 	] call Ares_fnc_RegisterCustomModule;
 
@@ -578,12 +582,13 @@ if (!isdedicated) then { //players
 		"7CMBG",
 		"Hide Bomb Code",
 		{
-			if (isNil "BOMB") exitWith {["No bomb previously armed."] call Ares_fnc_ShowZeusMessage;};
+			if (isNil "BOMB") exitWith {["No bomb previously armed!"] call Ares_fnc_ShowZeusMessage;};
 
-			_object = _this select 1;
-			_object addAction ["<t color='#E61616'>Search Bomb Code</t>",seven_fnc_searchAction,"",1,true,true,"","true",4];
+			_bombobject = _this select 1;
+			_searchbomb = ["searchbomb","Search Bomb Code","",{call seven_fnc_searchAction},{BOMB}] call ace_interact_menu_fnc_createAction;
+			[_bombobject, 0, ["ACE_MainActions"], _searchbomb] call ace_interact_menu_fnc_addActionToObject;
 
-			["BOMB CODE HIDDEN."] call Ares_fnc_ShowZeusMessage;
+			format["BOMB CODE HIDDEN in %1.", typeOf _bombobject] call Ares_fnc_ShowZeusMessage;
 		}
 	] call Ares_fnc_RegisterCustomModule;
 
