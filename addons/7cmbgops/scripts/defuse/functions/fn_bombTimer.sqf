@@ -1,12 +1,11 @@
-private ["_bomb", "_time"];
-_bomb = [_this, 0, objNull, [objNull]] call BIS_fnc_param;
-_time = [_this, 1, 0, [0]] call BIS_fnc_param;
+private _bomb = [_this, 0, objNull, [objNull]] call BIS_fnc_param;
+private _time = [_this, 1, 0, [0]] call BIS_fnc_param;
 
 //Validate parameters
-if (isNull _bomb) exitWith {"Object parameter must not be objNull. Accepted: OBJECT" call BIS_fnc_error};
+if (isNull _bomb) exitWith {};
 
 while {_time > 0 && !DEFUSED} do {
-	_time = _time - 1;  
+	_time = _time - 1;
 	hintSilent format["Bomb Detonation: \n %1", [((_time)/60)+.01,"HH:MM"] call BIS_fnc_timetostring];
 
 	if (_time < 1) then {
@@ -16,10 +15,10 @@ while {_time > 0 && !DEFUSED} do {
 		} forEach allUnits;
 	};
 	if (ARMED) then {
-		_time = 5; 
+		_time = 5;
 		ARMED = false
 	};
-	
+
 	sleep 1;
 };
 

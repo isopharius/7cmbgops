@@ -541,8 +541,6 @@ if (!isdedicated) then { //players
 				] call Ares_fnc_ShowChooseDialog;
 			if (count _dialogResult isEqualTo 0) exitWith {};
 
-			_object = _this select 1;
-
 			_digit1 = (_dialogResult select 0) - 1;
 			if (_digit1 isEqualTo -1) then {
 				_digit1 = round (random 9);
@@ -573,7 +571,8 @@ if (!isdedicated) then { //players
 			publicVariable "ARMED";
 			publicVariable "BOMB";
 
-			_object addAction [("<t color='#E61616'>" + ("Defuse the Bomb") + "</t>"),"createDialog 'KeypadDefuse'","",1,true,true,"","(_target distance _this) < 3"];
+			_object = _this select 1;
+			_object addAction ["<t color='#E61616'>Defuse the Bomb</t>","createDialog 'KeypadDefuse'","",1,true,true,"","true",4];
 
 			["BOMB ARMED. HIDE THE CODE ON ANOTHER OBJECT."] call Ares_fnc_ShowZeusMessage;
 		}
@@ -586,7 +585,7 @@ if (!isdedicated) then { //players
 			if (isNil "BOMB") exitWith {["No bomb previously armed."] call Ares_fnc_ShowZeusMessage;};
 
 			_object = _this select 1;
-			_object addAction [("<t color='#E61616'>" + ("Search Bomb Code") + "</t>"),seven_fnc_searchAction,"",1,true,true,"","(_target distance _this) < 3"];
+			_object addAction ["<t color='#E61616'>Search Bomb Code</t>"),seven_fnc_searchAction,"",1,true,true,"","true",4];
 
 			["BOMB CODE HIDDEN."] call Ares_fnc_ShowZeusMessage;
 		}
