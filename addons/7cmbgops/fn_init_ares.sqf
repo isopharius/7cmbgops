@@ -128,8 +128,8 @@ if (!isdedicated) then { //players
 
 			_position = _this select 0;
 
-			_radius = 100;
-			switch (_dialogResult select 1) do
+			_radius = _dialogResult select 1;
+			switch (_radius) do
 			{
 				case 0: { _radius = 50; };
 				case 1: { _radius = 100; };
@@ -600,17 +600,37 @@ if (!isdedicated) then { //players
 			_dialogResult =
 				["ACE IED options",
 						[
-							["IED type:", ["Random", "Small Urban", "Satchel"]]
+							["IED type:", ["Random", "Small", "Big", "Satchel"]]
 						]
 				] call Ares_fnc_ShowChooseDialog;
 			if (count _dialogResult isEqualTo 0) exitWith {};
 
+			_pos = _this select 0;
+			_posx = _pos select 0;
+			_posy = _pos select 1;
+			_iedtype = _dialogResult select 0;
 			//pick IED type
-			switch (_dialogResult select 0) do
-			{
-				case 0: { _iedtype = selectRandom ["iEDurbanSmall_Remote_Mag","SatchelCharge_Remote_Mag"]; };
-				case 1: { _iedtype = "iEDurbanSmall_Remote_Mag"; };
-				case 2: { _iedtype = "SatchelCharge_Remote_Mag"; };
+			switch (_iedtype) do {
+				case 1: {
+					if (!isNull ([_posx,_posy] nearObjects ["House", 20])) then {
+						_iedtype = "iEDurbanSmall_Remote_Mag";
+					} else {
+						_iedtype = "IEDLandSmall_Remote_Mag";
+					};
+				};
+				case 2: {
+					if (!isNull ([_posx,_posy] nearObjects ["House", 20])) then {
+						_iedtype = "IEDUrbanBig_Remote_Mag";
+					} else {
+						_iedtype = "IEDLandBig_Remote_Mag";
+					};
+				};
+				case 3: {
+					_iedtype = "SatchelCharge_Remote_Mag";
+				};
+				default {
+					_iedtype = selectRandom ["iEDurbanSmall_Remote_Mag","IEDUrbanBig_Remote_Mag","IEDLandSmall_Remote_Mag","IEDLandBig_Remote_Mag","SatchelCharge_Remote_Mag"];
+				};
 			};
 
 			_pos = _this select 0;
@@ -639,7 +659,6 @@ if (!isdedicated) then { //players
 			publicvariable "varEnableSand";
 
 			_sand = _dialogResult select 0;
-
 			if (_sand isEqualTo 4) then {
 				["SANDSTORM DISABLED."] call Ares_fnc_ShowZeusMessage;
 
@@ -663,7 +682,7 @@ if (!isdedicated) then { //players
 
 	[
 		"Player",
-		"HALO",
+		"PARADROP",
 		{
 			_dialogResult =
 				["SELECT JUMP ALTITUDE (chutes not included)",
