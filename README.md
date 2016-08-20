@@ -15,7 +15,7 @@ INCLUDED SCRIPTS - all credits to the original authors
 - Sand / Snow Storm  http://www.armaholic.com/page.php?id=30147
 
 CUSTOM FEATURES
-- HALO Jump
+- PARA Jump
 - ARES modules for Zeus  http://www.armaholic.com/page.php?id=31235
 - respawn loadouts  https://community.bistudio.com/wiki/Arma_3_Respawn:_New_Respawn_Screen
 - ACE menu  https://github.com/acemod/ACE3/issues/1232

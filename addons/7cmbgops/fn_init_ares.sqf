@@ -682,7 +682,7 @@ if (!isdedicated) then { //players
 
 	[
 		"Player",
-		"PARADROP",
+		"PARA Jump",
 		{
 			_dialogResult =
 				["SELECT JUMP ALTITUDE (chutes not included)",
