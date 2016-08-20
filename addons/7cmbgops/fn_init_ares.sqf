@@ -585,7 +585,7 @@ if (!isdedicated) then { //players
 			if (isNil "BOMB") exitWith {["No bomb previously armed."] call Ares_fnc_ShowZeusMessage;};
 
 			_object = _this select 1;
-			_object addAction ["<t color='#E61616'>Search Bomb Code</t>"),seven_fnc_searchAction,"",1,true,true,"","true",4];
+			_object addAction ["<t color='#E61616'>Search Bomb Code</t>",seven_fnc_searchAction,"",1,true,true,"","true",4];
 
 			["BOMB CODE HIDDEN."] call Ares_fnc_ShowZeusMessage;
 		}
