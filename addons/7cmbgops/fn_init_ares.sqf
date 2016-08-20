@@ -111,8 +111,6 @@ if (!isdedicated) then { //players
 		"Save/Load",
 		"Save to client",
 		{
-			_radius = 100;
-			_position = _this select 0;
 
 			_dialogResult =
 				[
@@ -128,7 +126,8 @@ if (!isdedicated) then { //players
 				] call Ares_fnc_ShowChooseDialog;
 			if (count _dialogResult isEqualTo 0) exitWith {};
 
-			["User chose radius with index '%1'", _dialogResult] call Ares_fnc_LogMessage;
+			_position = _this select 0;
+
 			_radius = 100;
 			switch (_dialogResult select 1) do
 			{
@@ -531,8 +530,6 @@ if (!isdedicated) then { //players
 		{
 			if (!isNil "BOMB") exitWith {["BOMB ALREADY ARMED."] call Ares_fnc_ShowZeusMessage;};
 
-			_object = _this select 1;
-
 			_dialogResult =
 				["SELECT 4 DIGITS CODE",
 						[
@@ -543,6 +540,8 @@ if (!isdedicated) then { //players
 						]
 				] call Ares_fnc_ShowChooseDialog;
 			if (count _dialogResult isEqualTo 0) exitWith {};
+
+			_object = _this select 1;
 
 			_digit1 = (_dialogResult select 0) - 1;
 			if (_digit1 isEqualTo -1) then {
@@ -597,10 +596,27 @@ if (!isdedicated) then { //players
 		"ACE",
 		"Place IED",
 		{
+
+			_dialogResult =
+				["ACE IED options",
+						[
+							["IED type:", ["Random", "Small Urban", "Satchel"]]
+						]
+				] call Ares_fnc_ShowChooseDialog;
+			if (count _dialogResult isEqualTo 0) exitWith {};
+
+			//pick IED type
+			switch (_dialogResult select 0) do
+			{
+				case 0: { _iedtype = selectRandom ["iEDurbanSmall_Remote_Mag","SatchelCharge_Remote_Mag"]; };
+				case 1: { _iedtype = "iEDurbanSmall_Remote_Mag"; };
+				case 2: { _iedtype = "SatchelCharge_Remote_Mag"; };
+			};
+
 			_pos = _this select 0;
 			_object = "#lightpoint" createVehicleLocal [0,0,0];
 
-			[_object, _pos, random 360, "iEDurbanSmall_Remote_Mag" , "PressurePlate", []] call ACE_Explosives_fnc_placeExplosive;
+			[_object, _pos, random 360, _iedtype , "PressurePlate", []] call ACE_Explosives_fnc_placeExplosive;
 			deletevehicle _object;
 
 			["IED PLACED."] call Ares_fnc_ShowZeusMessage;
