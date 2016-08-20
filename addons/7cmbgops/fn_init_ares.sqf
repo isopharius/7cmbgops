@@ -640,7 +640,7 @@ if (!isdedicated) then { //players
 
 	[
 		"Environment",
-		"Sandstorm (experimental))",
+		"Sandstorm (experimental)",
 		{
 			_dialogResult =
 				["SELECT SANDSTORM INTENSITY",
