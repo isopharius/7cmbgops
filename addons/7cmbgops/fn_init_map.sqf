@@ -1,14 +1,9 @@
 if (isHC) exitwith {};
 
-private "_tpvar";
-
 {
-	call {
-		if ((_x find "respawn" > -1) || (_x find "tp" > -1)) exitWith { //all tp flags
+		if ((_x find "respawn" > -1) || (_x find "tp" > -1)) then { //all tp flags
 
 			if (!isdedicated) then { //clientside arsenal box and flag at tp marker with name
-				private ["_markerpos","_tpname","_crate","_tpflag"];
-
 				_markerpos = getmarkerpos _x;
 				_tpname = markertext _x;
 
@@ -29,16 +24,14 @@ private "_tpvar";
 			if ((isserver) && !(_x find "respawn" > -1)) then { //add tp respawn
 				[missionnamespace, _x] call BIS_fnc_addRespawnPosition;
 			};
-		};
 
-		if ((isserver) && (_x find "mash" > -1)) exitWith { //create med facility at mash marker
-			private ["_mash"];
-
-			_mash = createVehicle ["Land_Medevac_house_V1_F", (getmarkerpos _x), [], 0, "none"];
-			_mash allowdamage false;
-			_mash setdir (markerdir _x);
+		} else {
+			if ((isserver) && (_x find "mash" > -1)) then { //create med facility at mash marker
+				_mash = createVehicle ["Land_Medevac_house_V1_F", (getmarkerpos _x), [], 0, "none"];
+				_mash allowdamage false;
+				_mash setdir (markerdir _x);
+			};
 		};
-	};
 } foreach allmapmarkers;
 
 //tp actions
