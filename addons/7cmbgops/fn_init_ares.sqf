@@ -514,18 +514,20 @@ if (!isdedicated) then { //players
 			_grp = group _unit;
 			if (isNull _grp) exitwith {["ERROR: NO GROUP SELECTED."] call Ares_fnc_ShowZeusMessage;};
 
-			_pos = _this select 0;
-			[_grp, getPosWorld (_unit findNearestEnemy _pos)] remoteExec ["CBA_fnc_taskAttack", _unit, false];
+			[_grp, getPosWorld (_unit findNearestEnemy (_this select 0)),500] remoteExec ["CBA_fnc_taskAttack", _unit, false];
 
 			["ATTACK STARTED."] call Ares_fnc_ShowZeusMessage;
 		}
 	] call Ares_fnc_RegisterCustomModule;
-
+/*
 	[
 		"7CMBG",
 		"Defuse Bomb",
 		{
 			if (!isNil "BOMB") exitWith {["BOMB ALREADY ARMED."] call Ares_fnc_ShowZeusMessage;};
+
+			_bombobject = nearestObject (_this select 0);
+			if (isNull _bombobject) exitWith {["NO OBJECT SELECTED!"] call Ares_fnc_ShowZeusMessage;};
 
 			_dialogResult =
 				["SELECT 4 DIGITS CODE",
@@ -568,11 +570,10 @@ if (!isdedicated) then { //players
 			publicVariable "ARMED";
 			publicVariable "BOMB";
 
-			_bombobject = _this select 1;
-			_defusebomb = ["defusebomb","Defuse the Bomb","",{createDialog "KeypadDefuse"},{BOMB}] call ace_interact_menu_fnc_createAction;
+			_defusebomb = ["defusebomb","Defuse the Bomb","",{createDialog "KeypadDefuse"},{(!DEFUSED)}] call ace_interact_menu_fnc_createAction;
 			[_bombobject, 0, ["ACE_MainActions"], _defusebomb] call ace_interact_menu_fnc_addActionToObject;
 
-			format["BOMB ARMED in %1.", typeOf _bombobject] call Ares_fnc_ShowZeusMessage;
+			[format["BOMB ARMED in %1.", typeOf _bombobject]] call Ares_fnc_ShowZeusMessage;
 			sleep 2.5;
 			["NOW GO HIDE THE CODE ON ANOTHER OBJECT."] call Ares_fnc_ShowZeusMessage;
 		}
@@ -584,14 +585,16 @@ if (!isdedicated) then { //players
 		{
 			if (isNil "BOMB") exitWith {["No bomb previously armed!"] call Ares_fnc_ShowZeusMessage;};
 
-			_bombobject = _this select 1;
-			_searchbomb = ["searchbomb","Search Bomb Code","",{call seven_fnc_searchAction},{BOMB}] call ace_interact_menu_fnc_createAction;
+			_bombobject = nearestObject (_this select 0);
+			if (isNull _bombobject) exitWith {["NO OBJECT SELECTED!"] call Ares_fnc_ShowZeusMessage;};
+
+			_searchbomb = ["searchbomb","Search Bomb Code","",{call seven_fnc_searchAction},{(!DEFUSED)}] call ace_interact_menu_fnc_createAction;
 			[_bombobject, 0, ["ACE_MainActions"], _searchbomb] call ace_interact_menu_fnc_addActionToObject;
 
-			format["BOMB CODE HIDDEN in %1.", typeOf _bombobject] call Ares_fnc_ShowZeusMessage;
+			[format["BOMB CODE HIDDEN in %1.", typeOf _bombobject]] call Ares_fnc_ShowZeusMessage;
 		}
 	] call Ares_fnc_RegisterCustomModule;
-
+*/
 	[
 		"ACE",
 		"Place IED",
