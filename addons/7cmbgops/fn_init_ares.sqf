@@ -571,8 +571,7 @@ if (!isdedicated) then { //players
 			publicVariable "ARMED";
 			publicVariable "BOMB";
 
-			_object = _this select 1;
-			_object addAction ["<t color='#E61616'>Defuse the Bomb</t>","createDialog 'KeypadDefuse'","",1,true,true,"","true",4];
+			(_this select 1) addAction ["<t color='#E61616'>Defuse the Bomb</t>","createDialog 'KeypadDefuse'","",1,true,true,"","true",4];
 
 			["BOMB ARMED. HIDE THE CODE ON ANOTHER OBJECT."] call Ares_fnc_ShowZeusMessage;
 		}
