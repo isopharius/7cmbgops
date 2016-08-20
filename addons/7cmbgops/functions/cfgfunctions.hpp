@@ -127,8 +127,8 @@ class seven
   };
 	class breach_safplug {
 		file = "\7cmbgops\scripts\sushi\breach\fncs";
-		class breachGetSettings { preInit = 1; };
-		class breachPostInit { postInit = 1; };
+		//class breachGetSettings { preInit = 1; };
+		//class breachPostInit { postInit = 1; };
 		class breachFiredEh {};
 		class breachGetTargetDoors {};
 		class breachOpenDoor {};
