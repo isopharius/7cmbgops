@@ -410,7 +410,6 @@ if (!isdedicated) then { //players
 							["Explosive yield:", ["Small", "Medium", "Big", "Huge"]]
 						]
 				] call Ares_fnc_ShowChooseDialog;
-
 			if (count _dialogResult isEqualTo 0) exitWith {};
 
 			_yield = "grenadeHand";
@@ -511,12 +510,11 @@ if (!isdedicated) then { //players
 		"AI Behaviour",
 		"Attack Nearest Enemy",
 		{
+			_unit = _this select 1;
 			_grp = group _unit;
 			if (isNull _grp) exitwith {["ERROR: NO GROUP SELECTED."] call Ares_fnc_ShowZeusMessage;};
-			_pos = _this select 0;
-			_nearunits = _pos nearEntities 10;
-			_unit = _nearunits select 0;
 
+			_pos = _this select 0;
 			[_grp, getPosWorld (_unit findNearestEnemy _pos)] remoteExec ["CBA_fnc_taskAttack", _unit, false];
 
 			["ATTACK STARTED."] call Ares_fnc_ShowZeusMessage;
