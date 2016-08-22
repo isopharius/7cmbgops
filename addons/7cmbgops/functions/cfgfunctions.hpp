@@ -38,7 +38,6 @@ class seven
 		class garageNew {};
 		class getloadout {};
 		class setloadout {};
-		class jumplights {};
 		class jumpout {};
 		class deployMedicTent {};
 		class deploySandbag {};
