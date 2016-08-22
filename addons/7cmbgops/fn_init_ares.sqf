@@ -599,7 +599,6 @@ if (!isdedicated) then { //players
 		"ACE",
 		"Place IED",
 		{
-
 			_dialogResult =
 				["ACE IED options",
 						[
@@ -676,9 +675,7 @@ if (!isdedicated) then { //players
 
 				// define the global sand parameter array
 				//[fog,overcast,use ppEfx,allow rain,force wind,vary fog,use wind audio,EFX strength]
-				_MKY_arSandEFX = [0,"",true,false,true,true,true,_sand];
-				// init the EFX scripts
-				_MKY_arSandEFX remoteExec ["seven_fnc_Sand_Snow_Init", 0, true];
+				[0,"",true,false,true,true,true,_sand] remoteExec ["seven_fnc_Sand_Snow_Init", 0, true];
 			};
 		}
 	] call Ares_fnc_RegisterCustomModule;
@@ -730,6 +727,7 @@ if (!isdedicated) then { //players
 			{
 				_x moveInCargo _plane;
 			} foreach _haloplayers;
+
 			waitUntil {(!alive _plane) or ((_plane distance (waypointPosition _waypoint)) < 5000)};
 			if (!alive _plane) exitWith {};
 

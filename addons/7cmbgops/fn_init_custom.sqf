@@ -17,7 +17,7 @@ if (isserver) then {
 	largecamps = [];
 };
 
-// player/server init
+// player init
 /*
 if (!isdedicated) exitwith {
 

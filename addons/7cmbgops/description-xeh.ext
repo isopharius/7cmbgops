@@ -60,7 +60,7 @@ class Extended_InitPost_EventHandlers {
 		rope_init = "(_this select 0) addaction ['<t color=''#FFFF00''>Jump Out</t>',seven_fnc_jumpout,'',6,false,true,'Eject','((_this in _target) && ((getPosATL _target select 2) > 50) && ((getPosASL _target select 2) > 50))'];";
 	};
 	class rhs_ch_47f {
-		chute_init = "(_this select 0) setvariable ['ace_medical_medicClass', 1, true];";
+		chute_init = "[(_this select 0) setvariable ['ace_medical_medicClass', 1, true];";
 		/*
 		chute_serverinit = "if (isserver) then {(_this select 0) addBackpackCargoGlobal ['B_ons_Carryall_TCCC_TW',1]; (_this select 0) addBackpackCargoGlobal ['B_ons_Carryall_556_TW',1]; (_this select 0) addBackpackCargoGlobal ['B_ons_Carryall_556_MG_TW',1]; (_this select 0) addItemCargoGlobal ['ToolKit',1];}";
 		*/
@@ -118,16 +118,7 @@ class Extended_InitPost_EventHandlers {
 	};
 
 	//RCAF texture
-	class UK3CB_BAF_Apache_AH1_AT {
-		baf_init = "(_this select 0) setObjectTexture [0, '\7cmbgops\pics\ah1_baf_body_co_RCAF.paa'];";
-	};
-	class UK3CB_BAF_Apache_AH1_CAS {
-		baf_init = "(_this select 0) setObjectTexture [0, '\7cmbgops\pics\ah1_baf_body_co_RCAF.paa'];";
-	};
-	class UK3CB_BAF_Apache_AH1 {
-		baf_init = "(_this select 0) setObjectTexture [0, '\7cmbgops\pics\ah1_baf_body_co_RCAF.paa'];";
-	};
-	class UK3CB_BAF_Apache_AH1_JS {
+	class UK3CB_BAF_Apache_base {
 		baf_init = "(_this select 0) setObjectTexture [0, '\7cmbgops\pics\ah1_baf_body_co_RCAF.paa'];";
 	};
 };

@@ -25,16 +25,20 @@ class seven
 	{
 		file = "\7cmbgops\functions";
 
+		class briefing {
+			postInit = 1;
+		};
+		class IntLight {
+			postInit = 1;
+		};
 		class groupname {};
 		class attachmrzr {};
 		class fmradio {};
 		class adminmenudef {};
-		class briefing {
-			postInit = 1;
-		};
 		class garageNew {};
 		class getloadout {};
 		class setloadout {};
+		class jumplights {};
 		class jumpout {};
 		class deployMedicTent {};
 		class deploySandbag {};

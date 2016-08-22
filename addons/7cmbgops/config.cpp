@@ -68,6 +68,17 @@ class CfgSounds
 	sounds[] = {crowd,muezzin1,muezzin2,muezzinshort1,muezzinshort2,muezzinshort3,muezzinshort4,muezzinmusic1,muezzinmusic2,Alarm,allahu_akbar1,allahu_akbar2,allahu_akbar3,jihad,scream1,scream2,scream3,scream4,scream5,scream6,Hint,Hit,Buzzer};
 
 	#include "scripts\defuse\cfgSounds.hpp"
+	
+	class alarm_prepare {
+		name = "alarm_prepare";
+		sound[] = {"scripts\usableCargoRamp\sounds\alarm-prepare.ogg", 1, 1};
+		titles[] = {0, ""};
+	};
+	class alarm_go {
+		name = "alarm_go";
+		sound[] = {"scripts\usableCargoRamp\sounds\alarm-go.ogg", 1, 1};
+		titles[] = {0, ""};
+	};
 	class crowd
 	{
 		name	 = "crowd";

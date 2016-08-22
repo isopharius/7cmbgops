@@ -23,7 +23,7 @@ if (!isdedicated and !isHC) then {
 
 	_heloarsenal = ["heloarsenal","Load Arsenal","\A3\ui_f\data\map\vehicleicons\iconCrate_ca.paa",{["B_CargoNet_01_ammo_F", (objectParent player)] call ace_cargo_fnc_loadItem; hint "Arsenal loaded";},{(((objectParent player) isKindOf "Helicopter") and (!isEngineOn (objectParent player)) and (count (nearestObjects [player, ["Land_repair_center","Heli_H","HeliH","Land_HelipadCircle_F","Land_HelipadCivil_F","Land_HelipadEmpty_F","Land_HelipadRescue_F","Land_HelipadSquare_F"], 15]) > 0) and (!visibleMap))}] call ace_interact_menu_fnc_createAction;
 
-	_heloradioin = ["heloradioin","Radio Play/Stop ","\7cmbgops\pics\i_carradio.paa",{(objectParent player) remoteExec ["seven_fnc_fmradio", 2, false]},{(objectParent player) isKindOf "Helicopter"}] call ace_interact_menu_fnc_createAction;
+	_heloradioin = ["heloradioin","Radio Play/Stop","\7cmbgops\pics\i_carradio.paa",{(objectParent player) remoteExec ["seven_fnc_fmradio", 2, false]},{(objectParent player) isKindOf "Helicopter"}] call ace_interact_menu_fnc_createAction;
 
 	_heloradioout = ["heloradioout","Radio Play/Stop","\7cmbgops\pics\i_carradio.paa",{(_this select 0) remoteExec ["seven_fnc_fmradio", 2, false]},{isNull objectParent player}] call ace_interact_menu_fnc_createAction;
 
