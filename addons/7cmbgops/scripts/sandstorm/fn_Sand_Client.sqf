@@ -395,11 +395,15 @@ if ((count _this) > 0) then {
 			// create variance in fog values
 			[((_this select 0) select 0),((_this select 0) select 1),((_this select 0) select 2)] spawn {
 				sleep 20; // give initial setFog time to change
-					while {!isNil "varEnableSand"} do {
-						sleep 30;
-						20 setFog [(_this select 0),(_this select 1),((getPosASL player) select 2) + ([-15,15] call BIS_fnc_randomInt)];
-						sleep 5;
+					_sandenable = {
+						if (!isNil "varEnableSand") then {
+							sleep 30;
+							20 setFog [(_this select 0),(_this select 1),((getPosASL player) select 2) + ([-15,15] call BIS_fnc_randomInt)];
+							sleep 5;
+							call _sandenable;
+						};
 					};
+					call _sandenable;
 			};
 		};
 	};
@@ -407,24 +411,29 @@ if ((count _this) > 0) then {
 
 // continually set wind and rain values
 [] spawn {
-		while {!isNil "varEnableSand"} do {
-			sleep 8;
-			if (bEnforceWind) then {setWind arCurrent_Wind;};
-			if !(bAllowRain) then {0 setRain 0;};
-			// if sand emitter exists, move it to player position also
-			// if !(isNil "objSand") then {objSand setPosASL (getPosASL player);};
-			// if particle emitters get too far from player model, particles can work incorrectly ??
-			// move all particle emitters to player current position is easiest solution ??
-			if !(isNil "objSand") then {
-				{
-					_x setPosASL (getPosASL player);
-				} forEach [objSand,objSandN,objSandS,objSandE,objSandW];
+		_varsand = {
+			if (!isNil "varEnableSand") then {
+				sleep 8;
+				if (bEnforceWind) then {setWind arCurrent_Wind;};
+				if !(bAllowRain) then {0 setRain 0;};
+				// if sand emitter exists, move it to player position also
+				// if !(isNil "objSand") then {objSand setPosASL (getPosASL player);};
+				// if particle emitters get too far from player model, particles can work incorrectly ??
+				// move all particle emitters to player current position is easiest solution ??
+				if !(isNil "objSand") then {
+					{
+						_x setPosASL (getPosASL player);
+					} forEach [objSand,objSandN,objSandS,objSandE,objSandW];
+				};
+				sleep 1;
+				call _varsand;
 			};
-			sleep 1;
 		};
+		call _varsand;
 };
 
-while {!isNil "varEnableSand"} do {
+_sandvar = {
+	if (!isNil "varEnableSand") then {
 		/*
 			each mission may be different, but you might need to wait to create the particles
 			if the player will be moved. Here we are going to wait for player to NOT be
@@ -444,30 +453,35 @@ while {!isNil "varEnableSand"} do {
 		[] spawn {
 			private "_strVar";
 			_strVar = "splayer";
-			while {!isNil "varEnableSand"} do {
-				if (isNull objectParent player) then {	// player IS the vehicle
-					if (_strVar == "svehicle") then {
-						objEmitterHost attachTo [player,[0,0,0]];
-						_strVar = "splayer";
-					};
+			_enablesand = {
+				if {!isNil "varEnableSand"} then {
+					if (isNull objectParent player) then {	// player IS the vehicle
+						if (_strVar == "svehicle") then {
+							objEmitterHost attachTo [player,[0,0,0]];
+							_strVar = "splayer";
+						};
 
-					if (lineIntersects [eyepos player,[eyepos player select 0,eyepos player select 1,(eyepos player select 2) + 10]]) then {
-						// indoors
-						1 fademusic 0.2;
-					} else {
-						// outdoors
-						1 fademusic 0.5;
-					};
-				} else {	// player is IN a vehicle
+						if (lineIntersects [eyepos player,[eyepos player select 0,eyepos player select 1,(eyepos player select 2) + 10]]) then {
+							// indoors
+							1 fademusic 0.2;
+						} else {
+							// outdoors
+							1 fademusic 0.5;
+						};
+					} else {	// player is IN a vehicle
 
-					1 fadeMusic 0.2;
-					if (_strVar == "splayer") then {
-						objEmitterHost attachTo [vehicle player,[0,0,0]];
-						_strVar = "svehicle";
+						1 fadeMusic 0.2;
+						if (_strVar == "splayer") then {
+							objEmitterHost attachTo [objectParent player,[0,0,0]];
+							_strVar = "svehicle";
+						};
 					};
+					sleep 2;
+					call _enablesand;
 				};
-				sleep 2;
 			};
+			call _enablesand;
+
 		};
 
 		/*
@@ -537,9 +551,12 @@ while {!isNil "varEnableSand"} do {
 		removeAllMusicEventHandlers "MusicStop";
 
 		// remove effects and exit
-		call _MKY_fnc_ppEffect_Off;
+		[] spawn _MKY_fnc_ppEffect_Off;
 		if ((count _this) > 0) then {if (typeName (_this select 0) == "ARRAY") then {60 setFog _arFog_org;};};
 		// leave overcast as it is
 		call _MKY_fnc_Exit_Sand;
 		sleep 1;
+		call _sandvar;
+	};
 };
+call _sandvar;
