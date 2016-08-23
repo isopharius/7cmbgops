@@ -146,7 +146,8 @@ if(!isNil ("_innerLightTemp")) then
 {
 	_objects = nearestObjects [_helipad, [_innerLight], 5];
 	{
-		createVehicle [_innerLightTemp, [(getPosworld _x select 0),(getPosworld _x select 1),(getPosworld _x select 2)], [],0,"CAN_COLLIDE"];
+		_obj = createVehicle [_innerLightTemp, [0,0,0], [], 0, "CAN_COLLIDE"];
+		_obj setPosWorld (getPosworld _x);
 		deleteVehicle _x;
 	} forEach _objects;
 };
@@ -154,7 +155,8 @@ if(!isNil ("_outerLightTemp")) then
 {
 	_objects = nearestObjects [_helipad, [_outerLight], 7.2];
 	{
-		createVehicle [_outerLightTemp, [(getPosworld _x select 0),(getPosworld _x select 1),(getPosworld _x select 2)], [],0,"CAN_COLLIDE"];
+		_obj = createVehicle [_outerLightTemp, [0,0,0], [], 0, "CAN_COLLIDE"];
+		_obj setPosWorld (getPosworld _x);
 		deleteVehicle _x;
 	} forEach _objects;
 };
