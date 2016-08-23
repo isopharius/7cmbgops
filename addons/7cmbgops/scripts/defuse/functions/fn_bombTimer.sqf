@@ -1,28 +1,26 @@
-private _bomb = [_this, 0, objNull, [objNull]] call BIS_fnc_param;
-private _time = [_this, 1, 0, [0]] call BIS_fnc_param;
+params [["_bomb", objNull, [objNull]], ["_time", 0, [0]]];
 
 //Validate parameters
 if (isNull _bomb) exitWith {};
 
-while {_time > 0 && !DEFUSED} do {
-	_time = _time - 1;
-	hintSilent format["Bomb Detonation: \n %1", [((_time)/60)+.01,"HH:MM"] call BIS_fnc_timetostring];
+_while = {
+	if (_time > 0 && !DEFUSED) then {
+		_time = _time - 2;
+		hintSilent format["Bomb Detonation: \n %1", [((_time)/60)+.01,"HH:MM"] call BIS_fnc_timetostring];
 
-	if (_time < 1) then {
-		_blast = createVehicle ["HelicopterExploSmall", position _bomb, [], 0, "NONE"];
-		{
-			if (_x distance _bomb <= 15) then {_x setDamage 1};
-		} forEach allUnits;
-	};
-	if (ARMED) then {
-		_time = 5;
-		ARMED = false
-	};
+		if (_time < 1) then {
+			_blast = createVehicle ["HelicopterExploSmall", position _bomb, [], 0, "NONE"];
+		};
+		if (ARMED) then {
+			_time = 5;
+			ARMED = false;
+		};
 
-	sleep 1;
+		sleep 2;
+		call _while;
+	};
 };
-
-deleteVehicle _bomb;
+call _while;
 
 //Return Value
 _bomb
