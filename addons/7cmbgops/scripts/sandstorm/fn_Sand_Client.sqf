@@ -397,7 +397,7 @@ if ((count _this) > 0) then {
 				sleep 20; // give initial setFog time to change
 					while {!isNil "varEnableSand"} do {
 						sleep 30;
-						20 setFog [(_this select 0),(_this select 1),((getPosASL player) select 2) + ([-15,15] call BIS_fnc_randomInt)];;
+						20 setFog [(_this select 0),(_this select 1),((getPosASL player) select 2) + ([-15,15] call BIS_fnc_randomInt)];
 						sleep 5;
 					};
 			};
