@@ -55,7 +55,7 @@ IL_intensity_mult = 1;
 	],"Allow Colour Change",(optional - if not present but there is 2 it will change it) which lights to be able to change to green *first to number* ]*/
 
 if (isnil "IL_config") then { IL_config = [] };
-IL_config = IL_config + [
+IL_config append [
 	[["Heli_Light_01_base_F"], false, [
 		 [ [0,1,0.5], IL_c_red, IL_attenuation, IL_intensity ]
 	],true],
@@ -375,7 +375,7 @@ IL_fnc_addAction = {
 						_lights = (IL_config select _i) select 2;
 						_timestamp = _veh getVariable ['IL_timestamp',IL_lastchange];
 
-						if (count IL_lights == 0) then {
+						if (count IL_lights isEqualTo 0) then {
 							if (IL_Debug) then {player sideChat 'lights added, hint displayed for the array'; hintSilent str _lights;};
 							{
 								_light = '#lightpoint' createVehicleLocal [0,0,0];
@@ -384,14 +384,16 @@ IL_fnc_addAction = {
 								_light setLightAttenuation (_x select 2);
 								_light setLightIntensity (_x select 3) * IL_intensity_mult;
 								if (IL_Debug && IL_Balls) then {
-									if (isNil {_veh getVariable 'il_balls'}) then {
+									_balls = _veh getVariable 'il_balls';
+									if (isNil _balls) then {
 										_ball = 'Sign_Sphere10cm_F' createVehicle [0,0,0];
 										_ball attachTo [_light,[0,0,0]];
 										_veh setVariable ['il_balls',[_ball],true];
 									} else {
 										_ball = 'Sign_Sphere10cm_F' createVehicle [0,0,0];
 										_ball attachTo [_veh,(_x select 0)];
-										_veh setVariable ['il_balls',(_veh getVariable 'il_balls') + [_ball],true];
+										_balls pushback _ball;
+										_veh setVariable ['il_balls',_balls,true];
 									};
 								};
 								IL_lights pushBack _light;
@@ -421,10 +423,11 @@ IL_fnc_addAction = {
 							IL_lights = IL_lights - [_x];
 							deleteVehicle _x;
 						} forEach IL_lights;
-						if ((IL_Debug) && (IL_Balls) && !(isNil {_veh getVariable 'il_balls'})) then {
+						_balls = _veh getVariable 'il_balls';
+						if ((IL_Debug) && (IL_Balls) && !(isNil _balls)) then {
 							{
 								deleteVehicle _x;
-							} forEach (_veh getVariable 'il_balls');
+							} forEach _balls;
 							_veh setVariable ['il_balls',nil,true];
 							if (IL_Debug) then {player sideChat format ['removing balls because lights are off %1',str IL_lights];};
 						};
@@ -440,8 +443,8 @@ IL_fnc_addAction = {
 				} forEach IL_lights;
 			};
 		};
-		if (IL_Crew_Only) then { _show = (_show && ((_this == driver _target) OR (_this == gunner _target) OR (_this == commander _target) OR (_this in (vehicle _target call IL_fnc_returnTurretUnits)))) };
-		if (IL_Action_Night && sunOrMoon == 1) then { _show = (_show && (vehicle _target getVariable [IL_varname,false] )) };
+		if (IL_Crew_Only) then { _show = (_show && ((_this isEqualTo driver _target) OR (_this isEqualTo gunner _target) OR (_this isEqualTo commander _target) OR (_this in (vehicle _target call IL_fnc_returnTurretUnits)))) };
+		if (IL_Action_Night && sunOrMoon isEqualTo 1) then { _show = (_show && (vehicle _target getVariable [IL_varname,false] )) };
 		_show
 	"];
 	if (IL_Debug) then {player sideChat 'action added'};
@@ -493,10 +496,11 @@ IL_fnc_addAction = {
 		_veh = vehicle player;
 		_i = _veh call IL_fnc_inList;
 		_show = false;
-		if (!(isNil {_veh getVariable 'IL_override'}) && (IL_c_green in ((_veh getVariable 'IL_override') select 0))) then { player setUserActionText[IL_action2,IL_Red_Text];};
-		if (isNil {_veh getVariable 'IL_override'}) then { player setUserActionText[IL_action2,IL_Green_Text];};
+		_override = _veh getVariable 'IL_override';
+		if (!(isNil _override) && (IL_c_green in (_override select 0))) then { player setUserActionText[IL_action2,IL_Red_Text];};
+		if (isNil _override) then { player setUserActionText[IL_action2,IL_Green_Text];};
 		if ((_veh != player) && (_i > -1)) then { _show = ((_i > -1) && ((IL_config select _i) select 3)) };
-		if (IL_Crew_Only) then { _show = (_show && ((_this == driver _target) OR (_this == gunner _target) OR (_this == commander _target) OR (_this in (vehicle _target call IL_fnc_returnTurretUnits)))) };
+		if (IL_Crew_Only) then { _show = (_show && ((_this isEqualTo driver _target) OR (_this isEqualTo gunner _target) OR (_this isEqualTo commander _target) OR (_this in (vehicle _target call IL_fnc_returnTurretUnits)))) };
 		_veh getVariable [IL_varname,false] &&
 		_show
 	"];
