@@ -7,26 +7,11 @@ _while = {
 		if (_time < 1) then {
 			if (isServer) then {
 				removeAllActions _bomb;
-				[_bomb, "alarm_prepare"] call CBA_fnc_globalSay3d;
-				sleep 1;
-				[_bomb, "alarm_prepare"] call CBA_fnc_globalSay3d;
-				sleep 1;
-				[_bomb, "alarm_prepare"] call CBA_fnc_globalSay3d;
-				sleep 1;
-				[_bomb, "alarm_prepare"] call CBA_fnc_globalSay3d;
-				sleep 1;
-				[_bomb, "alarm_prepare"] call CBA_fnc_globalSay3d;
-				sleep 1;
-				[_bomb, "alarm_prepare"] call CBA_fnc_globalSay3d;
-				sleep 1;
-				[_bomb, "alarm_prepare"] call CBA_fnc_globalSay3d;
-				sleep 1;
-				[_bomb, "alarm_prepare"] call CBA_fnc_globalSay3d;
-				sleep 1;
-				[_bomb, "alarm_prepare"] call CBA_fnc_globalSay3d;
-				sleep 1;
-				[_bomb, "alarm_prepare"] call CBA_fnc_globalSay3d;
-				sleep 1;
+
+				for "_i" from 0 to 9 do {
+					[_bomb, "alarm_prepare"] call CBA_fnc_globalSay3d;
+					sleep 1;
+				};
 
 				[position bombcontainer, _yield] spawn RHS_fnc_ss21_nuke;
 				_bomb setdamage 1;
