@@ -28,7 +28,7 @@ class KeypadDefuse
 			offsetPressedX = 0.002;
 			offsetPressedY = 0.002;
 			soundClick[] = {"",0,0};
-			onMouseButtonDown = "playSound 'button_click'; CODEINPUT set [count CODEINPUT, 9]; ctrlSetText [1099, (ctrlText 1099) + str 9]";
+			onMouseButtonDown = "playSound 'button_click'; CODEINPUT pushBack 9; ctrlSetText [1099, (ctrlText 1099) + str 9]";
 		};
 		class B8: RscButtonDefuse
 		{
@@ -50,7 +50,7 @@ class KeypadDefuse
 			offsetPressedX = 0.002;
 			offsetPressedY = 0.002;
 			soundClick[] = {"",0,0};
-			onMouseButtonDown = "playSound 'button_click'; CODEINPUT set [count CODEINPUT, 8]; ctrlSetText [1099, (ctrlText 1099) + str 8]";
+			onMouseButtonDown = "playSound 'button_click'; CODEINPUT pushBack 8; ctrlSetText [1099, (ctrlText 1099) + str 8]";
 		};
 		class B7: RscButtonDefuse
 		{
@@ -72,7 +72,7 @@ class KeypadDefuse
 			offsetPressedX = 0.002;
 			offsetPressedY = 0.002;
 			soundClick[] = {"",0,0};
-			onMouseButtonDown = "playSound 'button_click'; CODEINPUT set [count CODEINPUT, 7]; ctrlSetText [1099, (ctrlText 1099) + str 7]";
+			onMouseButtonDown = "playSound 'button_click'; CODEINPUT pushBack 7; ctrlSetText [1099, (ctrlText 1099) + str 7]";
 		};
 		class B6: RscButtonDefuse
 		{
@@ -94,7 +94,7 @@ class KeypadDefuse
 			offsetPressedX = 0.002;
 			offsetPressedY = 0.002;
 			soundClick[] = {"",0,0};
-			onMouseButtonDown = "playSound 'button_click'; CODEINPUT set [count CODEINPUT, 6]; ctrlSetText [1099, (ctrlText 1099) + str 6]";
+			onMouseButtonDown = "playSound 'button_click'; CODEINPUT pushBack 6; ctrlSetText [1099, (ctrlText 1099) + str 6]";
 		};
 		class B5: RscButtonDefuse
 		{
@@ -116,7 +116,7 @@ class KeypadDefuse
 			offsetPressedX = 0.002;
 			offsetPressedY = 0.002;
 			soundClick[] = {"",0,0};
-			onMouseButtonDown = "playSound 'button_click'; CODEINPUT set [count CODEINPUT, 5]; ctrlSetText [1099, (ctrlText 1099) + str 5]";
+			onMouseButtonDown = "playSound 'button_click'; CODEINPUT pushBack 5; ctrlSetText [1099, (ctrlText 1099) + str 5]";
 		};
 		class B4: RscButtonDefuse
 		{
@@ -138,7 +138,7 @@ class KeypadDefuse
 			offsetPressedX = 0.002;
 			offsetPressedY = 0.002;
 			soundClick[] = {"",0,0};
-			onMouseButtonDown = "playSound 'button_click'; CODEINPUT set [count CODEINPUT, 4]; ctrlSetText [1099, (ctrlText 1099) + str 4]";
+			onMouseButtonDown = "playSound 'button_click'; CODEINPUT pushBack 4; ctrlSetText [1099, (ctrlText 1099) + str 4]";
 		};
 		class B3: RscButtonDefuse
 		{
@@ -160,7 +160,7 @@ class KeypadDefuse
 			offsetPressedX = 0.002;
 			offsetPressedY = 0.002;
 			soundClick[] = {"",0,0};
-			onMouseButtonDown = "playSound 'button_click'; CODEINPUT set [count CODEINPUT, 3]; ctrlSetText [1099, (ctrlText 1099) + str 3]";
+			onMouseButtonDown = "playSound 'button_click'; CODEINPUT pushBack 3; ctrlSetText [1099, (ctrlText 1099) + str 3]";
 		};
 		class B2: RscButtonDefuse
 		{
@@ -182,7 +182,7 @@ class KeypadDefuse
 			offsetPressedX = 0.002;
 			offsetPressedY = 0.002;
 			soundClick[] = {"",0,0};
-			onMouseButtonDown = "playSound 'button_click'; CODEINPUT set [count CODEINPUT, 2]; ctrlSetText [1099, (ctrlText 1099) + str 2]";
+			onMouseButtonDown = "playSound 'button_click'; CODEINPUT pushBack 2; ctrlSetText [1099, (ctrlText 1099) + str 2]";
 		};
 		class B1: RscButtonDefuse
 		{
@@ -204,7 +204,7 @@ class KeypadDefuse
 			offsetPressedX = 0.002;
 			offsetPressedY = 0.002;
 			soundClick[] = {"",0,0};
-			onMouseButtonDown = "playSound 'button_click'; CODEINPUT set [count CODEINPUT, 1]; ctrlSetText [1099, (ctrlText 1099) + str 1]";
+			onMouseButtonDown = "playSound 'button_click'; CODEINPUT pushBack 1; ctrlSetText [1099, (ctrlText 1099) + str 1]";
 		};
 		class B0: RscButtonDefuse
 		{
@@ -226,7 +226,7 @@ class KeypadDefuse
 			offsetPressedX = 0.002;
 			offsetPressedY = 0.002;
 			soundClick[] = {"",0,0};
-			onMouseButtonDown = "playSound 'button_click'; CODEINPUT set [count CODEINPUT, 0]; ctrlSetText [1099, (ctrlText 1099) + str 0]";
+			onMouseButtonDown = "playSound 'button_click'; CODEINPUT pushBack 0; ctrlSetText [1099, (ctrlText 1099) + str 0]";
 		};
 		class Benter: RscButtonDefuse
 		{
@@ -270,7 +270,7 @@ class KeypadDefuse
 			offsetPressedX = 0.002;
 			offsetPressedY = 0.002;
 			soundClick[] = {"",0,0};
-			onMouseButtonDown = "playSound 'button_click'; CODEINPUT = []; ctrlSetText [1099, str CODEINPUT]";
+			onMouseButtonDown = "playSound 'button_click'; CODEINPUT = []; ctrlSetText [1099, '']";
 		};
 		class KeypadImage: RscPictureDefuse
 		{
