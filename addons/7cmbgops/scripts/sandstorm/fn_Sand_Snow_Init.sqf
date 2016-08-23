@@ -39,7 +39,7 @@ if (isNil "arInfoWorld_MKY") then {
 };
 
 // only servers execute this
-if (isServer) exitWith {
+if (isServer) then {
 	if ((arInfoWorld_MKY select 0) isEqualTo "sand") then {call seven_fnc_Sand_Server;};
 };
 
