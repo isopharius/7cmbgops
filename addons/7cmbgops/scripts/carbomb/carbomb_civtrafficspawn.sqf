@@ -54,7 +54,8 @@ _driverkilled = _civdriver addEventHandler ["Killed",{
 	_killername = name _killer;
 	_vehicle = vehicle _driver;
 	if (isPlayer _killer) then {
-	[[_killername],"karma_cb_civtraffic_killed",nil,true] spawn BIS_fnc_MP;
+	//[[_killername],"karma_cb_civtraffic_killed",nil,true] spawn BIS_fnc_MP;
+	[_killername] remoteExec [nil,true];
 	};
 	if (karma_cb_debug == 1) then {
 		_marker = _vehicle getVariable "markername";
