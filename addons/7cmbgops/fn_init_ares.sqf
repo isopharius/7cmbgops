@@ -233,7 +233,7 @@ if (!isdedicated) then { //players
 			_totalUnitsProcessed = 0;
 			{
 				_output pushBack format [
-					"_newObject = createVehicle ['%1', %2, [], 0, 'CAN_COLLIDE']; _newObject setPosASL %3; _newObject setVectorDirAndUp [%4, %5];",
+					"_newObject = createVehicle ['%1', [0,0,0], [], 0, 'CAN_COLLIDE']; _newObject setPosASL %3; _newObject setVectorDirAndUp [%4, %5];",
 					(typeOf _x),
 					(position _x),
 					(getPosASL _x),
@@ -611,6 +611,7 @@ if (!isdedicated) then { //players
 			_posx = _pos select 0;
 			_posy = _pos select 1;
 			_iedtype = _dialogResult select 0;
+
 			//pick IED type
 			switch (_iedtype) do {
 				case 1: {
@@ -668,10 +669,10 @@ if (!isdedicated) then { //players
 				["WAIT 10 seconds for sync."] call Ares_fnc_ShowZeusMessage;
 				sleep 10;
 
-				if (_sand isEqualTo 0) then {["RANDOM SANDSTORM INCOMING."] call Ares_fnc_ShowZeusMessage;};
-				if (_sand isEqualTo 1) then {["LIGHT SANDSTORM INCOMING."] call Ares_fnc_ShowZeusMessage;};
-				if (_sand isEqualTo 2) then {["MEDIUM SANDSTORM INCOMING."] call Ares_fnc_ShowZeusMessage;};
-				if (_sand isEqualTo 3) then {["HEAVY SANDSTORM INCOMING."] call Ares_fnc_ShowZeusMessage;};
+				if (_sand isEqualTo 0) then {["SANDSTORM INCOMING!"] call Ares_fnc_ShowZeusMessage;};
+				if (_sand isEqualTo 1) then {["LIGHT SANDSTORM INCOMING!"] call Ares_fnc_ShowZeusMessage;};
+				if (_sand isEqualTo 2) then {["MEDIUM SANDSTORM INCOMING!"] call Ares_fnc_ShowZeusMessage;};
+				if (_sand isEqualTo 3) then {["HEAVY SANDSTORM INCOMING!"] call Ares_fnc_ShowZeusMessage;};
 
 				// define the global sand parameter array
 				//[fog,overcast,use ppEfx,allow rain,force wind,vary fog,use wind audio,EFX strength]
