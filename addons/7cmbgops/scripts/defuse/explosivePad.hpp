@@ -248,7 +248,7 @@ class KeypadDefuse
 			offsetPressedX = 0.002;
 			offsetPressedY = 0.002;
 			soundClick[] = {"",0,0};
-			onMouseButtonDown = "[CODE, CODEINPUT] spawn COB_fnc_codeCompare; closeDialog 0";
+			onMouseButtonDown = "[CODE, CODEINPUT] spawn seven_fnc_codeCompare; closeDialog 0";
 		};
 		class Bclear: RscButtonDefuse
 		{
@@ -340,7 +340,7 @@ class KeypadDefuse
 			h = 0.033 * safezoneH;
 			colorBackground[] = {0,1,0,1};
 			soundClick[] = {"",0,0};
-			onMouseButtonDown = "playSound 'wire_cut'; [WIRE,'GREEN'] spawn COB_fnc_wireCompare; closeDialog 0";
+			onMouseButtonDown = "playSound 'wire_cut'; [WIRE,'GREEN'] spawn seven_fnc_wireCompare; closeDialog 0";
 		};
 	};
 };
