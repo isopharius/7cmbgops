@@ -51,6 +51,7 @@ class seven
 		class helipad_light_remove {};
 		class SHK_moveObjects {};
 		class Teleport {};
+		class Sand_Snow_Init {};
 	};
 	class loadouts
 	{
@@ -120,13 +121,6 @@ class seven
 		class bombTimer {};
 		class codeCompare {};
 		class wireCompare {};
-  };
-  class sandstorm {
-		file = "\7cmbgops\scripts\sandstorm";
-		class getInfoWorld {};
-		class Sand_Client {};
-		class Sand_Server {};
-		class Sand_Snow_Init {};
   };
 	class breach_safplug {
 		file = "\7cmbgops\scripts\sushi\breach\fncs";
