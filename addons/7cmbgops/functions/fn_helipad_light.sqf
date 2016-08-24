@@ -44,72 +44,68 @@ _zPos = getPosworld _helipad select 2;
 
 hint format["%1 %2 %3", _xPos, _yPos, _zPos];
 
-switch (_innerLight) do
-{
-	case "red":	{
-					_innerLight = "Land_Flush_Light_red_F";
-				};
-	case "green": {
-						_innerLight = "Land_Flush_Light_green_F";
-					};
-	case "yellow": {
-						_innerLight = "Land_Flush_Light_yellow_F";
-					};
-	case "blue": {
-					_innerLight = "Land_runway_edgelight_blue_F";
-				};
-	case "white": {
-					_innerLight = "Land_runway_edgelight";
-				};
-	case "bir": {
-					_innerLightTemp = "NVG_TargetW";
-					_innerLight = "Land_Flush_Light_yellow_F";
-				};
-	case "oir": {
-					_innerLightTemp = "NVG_TargetE";
-					_innerLight = "Land_Flush_Light_yellow_F";
-				};
-	case "iir": {
-					_innerLightTemp = "NVG_TargetC";
-					_innerLight = "Land_Flush_Light_yellow_F";
-				};
-	default {
-				_innerLight = "Land_Flush_Light_yellow_F";
-			};
+call {
+	if (_innerLight isEqualTo "red") exitWith {
+		_innerLight = "Land_Flush_Light_red_F";
+	};
+	if (_innerLight isEqualTo "green") exitWith {
+		_innerLight = "Land_Flush_Light_green_F";
+	};
+	if (_innerLight isEqualTo "yellow") exitWith {
+		_innerLight = "Land_Flush_Light_yellow_F";
+	};
+	if (_innerLight isEqualTo "blue") exitWith {
+		_innerLight = "Land_runway_edgelight_blue_F";
+	};
+	if (_innerLight isEqualTo "white") exitWith {
+		_innerLight = "Land_runway_edgelight";
+	};
+	if (_innerLight isEqualTo "bir") exitWith {
+		_innerLightTemp = "NVG_TargetW";
+		_innerLight = "Land_Flush_Light_yellow_F";
+	};
+	if (_innerLight isEqualTo "oir") exitWith {
+		_innerLightTemp = "NVG_TargetE";
+		_innerLight = "Land_Flush_Light_yellow_F";
+	};
+	if (_innerLight isEqualTo "iir") then {
+		_innerLightTemp = "NVG_TargetC";
+		_innerLight = "Land_Flush_Light_yellow_F";
+	} else {
+		_innerLight = "Land_Flush_Light_yellow_F";
+	};
 };
 
-switch (_outerLight) do
-{
-	case "red":	{
-					_outerLight = "Land_Flush_Light_red_F"
-				};
-	case "green": {
-					_outerLight = "Land_Flush_Light_green_F"
-				  };
-	case "yellow": {
-						_outerLight = "Land_Flush_Light_yellow_F"
-					};
-	case "blue": {
-					_outerLight = "Land_runway_edgelight_blue_F"
-				};
-	case "white": {
-					_outerLight = "Land_runway_edgelight"
-				  };
-	case "bir": {
-					_outerLightTemp = "NVG_TargetW";
-					_outerLight = "Land_Flush_Light_green_F";
-				};
-	case "oir": {
-					_outerLightTemp = "NVG_TargetE";
-					_outerLight = "Land_Flush_Light_green_F";
-				};
-	case "iir": {
-					_outerLightTemp = "NVG_TargetC";
-					_outerLight = "Land_Flush_Light_green_F";
-				};
-	default {
-				_outerLight = "Land_Flush_Light_green_F"
-			};
+call {
+	if (_outerLight isEqualTo "red") exitWith {
+		_outerLight = "Land_Flush_Light_red_F";
+	};
+	if (_outerLight isEqualTo "green") exitWith {
+		_outerLight = "Land_Flush_Light_green_F";
+	};
+	if (_outerLight isEqualTo "yellow") exitWith {
+		_outerLight = "Land_Flush_Light_yellow_F";
+	};
+	if (_outerLight isEqualTo "blue") exitWith {
+		_outerLight = "Land_runway_edgelight_blue_F";
+	};
+	if (_outerLight isEqualTo "white") exitWith {
+		_outerLight = "Land_runway_edgelight";
+	};
+	if (_outerLight isEqualTo "bir") exitWith {
+		_outerLightTemp = "NVG_TargetW";
+		_outerLight = "Land_Flush_Light_green_F";
+	};
+	if (_outerLight isEqualTo "oir") exitWith {
+		_outerLightTemp = "NVG_TargetE";
+		_outerLight = "Land_Flush_Light_green_F";
+	};
+	if (_outerLight isEqualTo "iir") then {
+		_outerLightTemp = "NVG_TargetC";
+		_outerLight = "Land_Flush_Light_green_F";
+	} else {
+		_outerLight = "Land_Flush_Light_green_F";
+	};
 };
 
 for "_i" from 0 to 5 do {

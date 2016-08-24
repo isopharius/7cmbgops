@@ -128,18 +128,31 @@ if (!isdedicated) then { //players
 
 			_position = _this select 0;
 
-			_radius = _dialogResult select 1;
-			switch (_radius) do
-			{
-				case 0: { _radius = 50; };
-				case 1: { _radius = 100; };
-				case 2: { _radius = 500; };
-				case 3: { _radius = 1000; };
-				case 4: { _radius = 2000; };
-				case 5: { _radius = 5000; };
-				case 6: { _radius = -1; };
-				default { _radius = 100; };
+			//get radius
+			call {
+				_radius = _dialogResult select 1;
+				if (_radius isEqualTo 0) exitWith {
+					_radius = 50;
+				};
+				if (_radius isEqualTo 1) exitWith {
+					_radius = 100;
+				};
+				if (_radius isEqualTo 2) exitWith {
+					_radius = 500;
+				};
+				if (_radius isEqualTo 3) exitWith {
+					_radius = 1000;
+				};
+				if (_radius isEqualTo 4) exitWith {
+					_radius = 2000;
+				};
+				if (_radius isEqualTo 5) then {
+					_radius = 5000;
+				} else {
+					_radius = -1;
+				};
 			};
+
 			_includeUnits = if (_dialogResult select 2 isEqualTo 0) then { true; } else { false; };
 			_includeEmptyVehicles = if (_dialogResult select 3 isEqualTo 0) then { true; } else { false; };
 			_includeEmptyObjects = if (_dialogResult select 4 isEqualTo 0) then { true; } else { false; };
@@ -412,13 +425,20 @@ if (!isdedicated) then { //players
 				] call Ares_fnc_ShowChooseDialog;
 			if (count _dialogResult isEqualTo 0) exitWith {};
 
-			_yield = "grenadeHand";
-			switch (_dialogResult select 0) do
-			{
-				case 0: { _yield = 500; };
-				case 1: { _yield = 1000; };
-				case 2: { _yield = 2000; };
-				default { _yield = 5000; };
+			//get yield
+			call {
+				_yield = _dialogResult select 0;
+				if (_yield isEqualTo 0) exitWith {
+					_yield = 500;
+				};
+				if (_yield isEqualTo 1) exitWith {
+					_yield = 1000;
+				};
+				if (_yield isEqualTo 2) then {
+					_yield = 2000;
+				} else {
+					_yield = 5000;
+				};
 			};
 
 			_pos = _this select 0;
@@ -428,26 +448,6 @@ if (!isdedicated) then { //players
 		}
 	] call Ares_fnc_RegisterCustomModule;
 
-	[
-		"7CMBG",
-		"Helipad lights (Remove)",
-		{
-			_pads = ["Land_HelipadCircle_F","Land_HelipadCivil_F","Land_HelipadRescue_F","Land_HelipadSquare_F"];
-			_pad = _this select 1;
-			if !((typeof _pad) in _pads) then {
-				_npad = nearestObjects [(_this select 0), _pads, 15];
-				_badpad = false;
-				if ((isnil "_npad") || ((count _npad) isEqualTo 0)) exitwith {_badpad = true};
-				_pad = _npad select 0;
-			};
-
-			if (_badpad) exitwith {["NO HELIPAD SELECTED"] call Ares_fnc_ShowZeusMessage};
-
-			[_pad] call seven_fnc_helipad_light_remove;
-
-			["HELIPAD LIGHTS DELETED"] call Ares_fnc_ShowZeusMessage;
-		}
-	] call Ares_fnc_RegisterCustomModule;
 /*
 	[
 		"7CMBG",
@@ -535,28 +535,27 @@ if (!isdedicated) then { //players
 			_pos = _this select 0;
 			_posx = _pos select 0;
 			_posy = _pos select 1;
-			_iedtype = _dialogResult select 0;
 
 			//pick IED type
-			switch (_iedtype) do {
-				case 1: {
+			call {
+				_iedtype = _dialogResult select 0;
+			    if (_iedtype isEqualTo 1) exitWith {
 					if (!isNull ([_posx,_posy] nearObjects ["House", 20])) then {
 						_iedtype = "iEDurbanSmall_Remote_Mag";
 					} else {
 						_iedtype = "IEDLandSmall_Remote_Mag";
 					};
-				};
-				case 2: {
+			    };
+			    if (_iedtype isEqualTo 2) exitWith {
 					if (!isNull ([_posx,_posy] nearObjects ["House", 20])) then {
 						_iedtype = "IEDUrbanBig_Remote_Mag";
 					} else {
 						_iedtype = "IEDLandBig_Remote_Mag";
 					};
-				};
-				case 3: {
+			    };
+			    if (_iedtype isEqualTo 3) then {
 					_iedtype = "SatchelCharge_Remote_Mag";
-				};
-				default {
+			    } else {
 					_iedtype = selectRandom ["iEDurbanSmall_Remote_Mag","IEDUrbanBig_Remote_Mag","IEDLandSmall_Remote_Mag","IEDLandBig_Remote_Mag","SatchelCharge_Remote_Mag"];
 				};
 			};
@@ -564,8 +563,10 @@ if (!isdedicated) then { //players
 			_pos = _this select 0;
 			_object = "#lightpoint" createVehicleLocal [0,0,0];
 
-			[_object, _pos, random 360, _iedtype , "PressurePlate", []] call ACE_Explosives_fnc_placeExplosive;
+			[_object, _pos, random 360, _iedtype; , "PressurePlate", []] call ACE_Explosives_fnc_placeExplosive;
 			deletevehicle _object;
+			_ied = _pos nearestobject _iedtype;
+			[[_ied], true] remoteExec ["Ares_fnc_AddUnitsToCurator",2,false];
 
 			["IED PLACED."] call Ares_fnc_ShowZeusMessage;
 		}
@@ -623,14 +624,23 @@ if (!isdedicated) then { //players
 			if (isNil "_selection") exitWith {nil};
 			_haloplayers = [{isPlayer _this},_selection] call Achilles_fnc_filter;
 
-			_altitude = 8000;
-			switch (_dialogResult select 0) do
-			{
-				case 0: { _altitude = 4000; };
-				case 1: { _altitude = 6000; };
-				case 2: { _altitude = 9000; };
-				case 3: { _altitude = 11000; };
-				case 4: { _altitude = 13000; };
+			//get altitude
+			call {
+				_altitude = _dialogResult select 0;
+				if (_altitude isEqualTo 0) exitWith {
+					_altitude = 4000;
+				};
+				if (_altitude isEqualTo 1) exitWith {
+					_altitude = 6000;
+				};
+				if (_altitude isEqualTo 2) exitWith {
+					_altitude = 9000;
+				};
+				if (_altitude isEqualTo 3) then {
+					_altitude = 11000;
+				} else {
+					_altitude = 13000;
+				};
 			};
 
 			//spawn plane

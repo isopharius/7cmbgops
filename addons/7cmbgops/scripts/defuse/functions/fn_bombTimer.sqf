@@ -1,6 +1,5 @@
-params ["_bomb", "_time", "_yield"];
+params [["_bomb", _bomb], ["_time", _time], ["_yield", _yield]];
 
-_while = {
 	if (_time > 0 && !DEFUSED) then {
 		hintSilent format["Bomb Detonation in: \n %1", [((_time)/60)+.01,"HH:MM"] call BIS_fnc_timetostring];
 
@@ -25,11 +24,9 @@ _while = {
 				_time = _time - 30;
 				sleep 30;
 			};
-			call _while;
+			call seven_fnc_bombTimer;
 		};
 	};
-};
-call _while;
 
 //Return Value
 _bomb
