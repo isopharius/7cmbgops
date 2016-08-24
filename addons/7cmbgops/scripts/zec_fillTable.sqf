@@ -52,20 +52,20 @@ if (typeName _fillType == "ARRAY") then {
 
 	_itemTools = _itemTools - ["Land_FireExtinguisher_F","Land_Axe_F","Land_Axe_fire_F","Land_DrillAku_F","Land_Shovel_F","Land_MetalWire_F"];  // Remove large items.
 
-	switch (_fillType) do {
-		case 1: { // Office
+	call {
+		if (_fillType isEqualTo 1) exitWith { // Office
 			_itemArray = _itemIntel + ["Land_FMradio_F","Land_HandyCam_F","Land_MobilePhone_old_F","Land_MobilePhone_smart_F","Land_PortableLongRangeRadio_F"];
 		};
-		case 2: { // Food
+		if (_fillType isEqualTo 2) exitWith { // Food
 			_itemArray = _itemFood + ["Land_TinContainer_F"] + (_itemFood - ["Land_Canteen_F","Land_CerealsBox_F"]);
 		};
-		case 3: { // Medical
+		if (_fillType isEqualTo 3) exitWith { // Medical
 			_itemArray = _itemMedical + (_itemMedical - ["Land_Defibrillator_F"]);
 		};
-		case 4: { // Tools
+		if (_fillType isEqualTo 4) then { // Tools
 			_itemArray =  _itemTools + (_itemTools - ["Land_Grinder_F"]);
-		};
-		default { // Random
+		} else {
+			//Random
 			_itemArray = _itemIntel + _itemFood + _itemMedical;
 		};
 	};

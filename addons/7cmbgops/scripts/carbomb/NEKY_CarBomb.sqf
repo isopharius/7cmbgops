@@ -77,32 +77,35 @@
 //	Made by NeKo-ArroW
 ////////////////////////
 
+if !(isServer) exitWith {False};
+
 Private ["_Case","_Pos","_TypeVehicle","_PreSelectedControllers","_RigPositions","_OffroadPos","_OffroadArmedPos","_HatchbackPos","_HatchbackSportPos","_SUVPos","_TruckPos","_TruckFIAPos","_RandomBomb","_ChanceOfPlanting","_WPPos","_BumpSensitivity","_Index","_Grp","_TempArray","_Controller","_ControllerSide","_FrequencyF","_FrequencyC","_ChanceOfRigged","_PosMin","_PosMax","_Vehicle","_BombType","_Visual","_Remote","_RemoteController","_RemoteRange","_Small","_Medium","_Large"];
 
-if !(isServer) exitWith {False};
 #include "NEKY_Settings.sqf"
-_ChanceOfPlanting = [_This, 3, _ChanceOfPlanting, [0]] call BIS_FNC_Param;
+
+params [
+	["_Vehicle", ObjNull, [ObjNull]],
+	["_BombType", "medium", [""]],
+	["_Visual", _Visual, [[""]]],
+	["_ChanceOfPlanting", _ChanceOfPlanting, [0]],
+	["_RigPositions", _RigPositions, [[]]],
+	["_ChanceOfRigged", _ChanceOfRigged, [0]],
+	["_Remote", _Remote, [[]]],
+	["_ControllerSide", _ControllerSide, [SideUnknown]],
+	["_RemoteRange", _RemoteRange, [0]],
+	["_RemoteControllers", _RemoteControllers, [0]]
+];
 
 if !((Random 1) <= _ChanceOfPlanting) exitWith {SystemChat "Not planting this one!"; False};
 if (isNil "NEKY_CarBombControllers") then {NEKY_CarBombControllers = []};
 if (isNil "NEKY_CarBombDetonated") then {NEKY_CarBombDetonated = []};
-
-_Vehicle = [_This, 0, ObjNull, [ObjNull]] call BIS_FNC_Param;
-_BombType = toLower ([_This, 1, "medium", [""]] call BIS_FNC_Param);
-_Visual = [_This, 2, _Visual, [[""]]] call BIS_FNC_Param;
-_RigPositions = [_This, 4, _RigPositions, [[]]] call BIS_FNC_Param;
-_ChanceOfRigged = [_This, 5, _ChanceOfRigged, [0]] call BIS_FNC_Param;
-_Remote = [_This, 6, _Remote, [[]]] call BIS_FNC_Param;
-_ControllerSide = [_This, 7, _ControllerSide, [SideUnknown]] call BIS_FNC_Param;
-_RemoteRange = [_This, 8, _RemoteRange, [0]] call BIS_FNC_Param;
-_RemoteControllers = [_This, 9, _RemoteControllers, [0]] call BIS_FNC_Param;
 
 // Get snap point
 _TypeVehicle = toLower (TypeOf _Vehicle);
 #include "NEKY_Placements.sqf"
 Switch (_TypeVehicle) do
 {
-	Private ["_Pos"];
+	Private "_Pos";
 	case "b_g_offroad_01_f";
 	case "c_offroad_01_f": {_Pos = (_OffroadPos call BIS_FNC_SelectRandom)};
 	case "b_g_offroad_01_armed_f": {_Pos = (_OffroadArmedPos call BIS_FNC_SelectRandom)};
