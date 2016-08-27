@@ -11,9 +11,6 @@ class seven
 		class init_custom {
 			postInit = 1;
 		};
-		class init_alive {
-			postInit = 1;
-		};
 		class init_ares {
 			postInit = 1;
 		};
@@ -79,7 +76,7 @@ class seven
 		class mouseZChanged {};
 		class key_main {};
 		class start_satellite {};
-		class redefine_position {};
+		class PXS_delay;
 	};
 	class train360
 	{
