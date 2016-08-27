@@ -14,6 +14,6 @@ closeDialog 1000;
 
 deleteVehicle PXS_SatelliteTarget;
 
-onMapSingleClick "";
+removeMissionEventHandler ["MapSingleClick", satclick]}];
 openMap false;
 PXS_SatelliteActive = false;

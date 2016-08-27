@@ -12,10 +12,10 @@ _discheck = 0;
 _maxplayerdis = karma_cb_maxplayerdis;
 _removelist = _list;
 _playerlist = switchableUnits + playableUnits;
-while {count _nearroad == 0} do {
+while {count _nearroad isEqualTo 0} do {
 	{
 	_location = _x;
-	{	
+	{
 		_locationposition = locationPosition _location;
 		_discheck = _x distance _locationposition;
 		if (_discheck > _maxplayerdis) then {

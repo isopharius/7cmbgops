@@ -1,7 +1,6 @@
-private["_event","_keyCode","_return"];
+private["_keyCode","_return"];
 
-_event = _this;
-_keyCode = _event select 1;
+_keyCode = _this select 1;
 _return = true;
 
 #define FACTOR 50
@@ -23,7 +22,8 @@ call {
 		[5] call seven_fnc_adjustCamera;
 	};
 	if (_keyCode isEqualTo 50) then {//M redefine default satellite position
-		call seven_fnc_redefine_position;
+		waitUntil {call seven_fnc_closeCamera};
+		call seven_fnc_start_satellite;
 	} else {
 		_return = false;
 	};

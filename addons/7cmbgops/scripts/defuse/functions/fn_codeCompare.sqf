@@ -9,19 +9,18 @@ if (_compare) then {
 	DEFUSED = true;
 	BOMB = false;
 	bombcontainer setdamage 1;
-	removeAllActions bombcontainer;
-	publicVariable "DEFUSED";
+	[bombcontainer] remoteExec ["removeAllActions", 0, true];
+	publicVariableServer "DEFUSED";
 	publicVariable "BOMB";
 	playSound "button_close";
 } else {
 	cutText ["BOMB ARMED!", "PLAIN DOWN"];
 	player sidechat "BOMB ARMED, BETTER LUCK NEXT TIME!";
 	ARMED = true;
-	publicVariable "ARMED";
+	publicVariableServer "ARMED";
 	playSound "button_wrong";
 };
 
 CODEINPUT = [];
 
-//Return Value
 _code

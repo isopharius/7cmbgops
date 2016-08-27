@@ -1,16 +1,14 @@
-private ["_arguments", "_targetClass", "_targetRandomDir", "_targetAnimated"];
+private _arguments = _this select 3;
+private _targetClass     = _arguments select 0;
+private _targetRandomDir = _arguments select 1;
+private _targetAnimated  = _arguments select 2;
 
-_arguments = _this select 3;
-_targetClass     = _arguments select 0;
-_targetRandomDir = _arguments select 1;
-_targetAnimated  = _arguments select 2;
+private ["_vecToTarget", "_direction"];
 
-private ["_target",  "_angle", "_range", "_position", "_vecToTarget", "_direction"];
-
-_position = screenToWorld [0.5, 0.5];
+private _position = screenToWorld [0.5, 0.5];
 
 // Table
-_target = createVehicle ["Land_WoodenTable_small_F", [0, 0, 0], [], 0, "can_collide"];
+private _target = createVehicle ["Land_WoodenTable_small_F", [0, 0, 0], [], 0, "can_collide"];
 _target setPosATL [_position select 0, _position select 1, 0.0];
 
 if (_targetRandomDir) then

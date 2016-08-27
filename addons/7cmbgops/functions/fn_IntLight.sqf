@@ -9,12 +9,6 @@
 // nul=[] execVM "IntLight.sqf";
 
 /*Definable*/
-if (isNil {IL_Debug}) then {
-IL_Debug = false; 			//Enable Debug Mode
-};
-if (isNil {IL_Balls}) then {
-IL_Balls = false; 			//Show the attach points (requires Debug mode)
-};
 if (isNil {IL_Crew_Only}) then {
 IL_Crew_Only = true; 		//Only allow Pilot/Driver/Co-Pilot/Gunner/Commander (does not include left & right gunners for choppers) to change the light
 };
@@ -28,7 +22,7 @@ IL_Action_Night = false; 	//Only allow the action to come up during the Dark tim
 /*Start Script*/
 IL_Loaded = false;
 
-if (isDedicated) exitWith {};
+if (!hasInterface) exitWith {};
 
 waitUntil {!isNull player};
 
@@ -324,7 +318,6 @@ IL_fnc_attachTo = {
 IL_fnc_addAction = {
 	if (IL_action > -1) then {
 		player removeAction IL_action;
-		if (IL_Debug) then {player sideChat 'action removed'};
 	};
 
 	IL_action = player addAction [
@@ -337,7 +330,6 @@ IL_fnc_addAction = {
 		} else {
 			_veh setVariable[IL_varname,true,true];
 		};
-		if (IL_Debug) then {player sideChat format ['vehicle was chosen because of this classname %1', IL_config select (_veh call IL_fnc_inList) select 0]};
 	",
 	"",
 	0.999,
@@ -358,14 +350,6 @@ IL_fnc_addAction = {
 
 					if ( (cameraView != 'INTERNAL') && ((IL_config select _i) select 1) ) then {
 						if (count IL_lights > 0) then {
-							if (IL_Debug) then {player sideChat 'Lights being removed because in third person'};
-							if ((IL_Debug) && (IL_Balls) && !(isNil {_veh getVariable 'il_balls'})) then {
-								{
-									deleteVehicle _x;
-								} forEach (_veh getVariable 'il_balls');
-								_veh setVariable ['il_balls',nil,true];
-								if (IL_Debug) then {player sideChat format ['Balls being removed because in third person %1',str IL_lights];};
-							};
 							{
 								IL_lights = IL_lights - [_x];
 								deleteVehicle _x;
@@ -376,26 +360,12 @@ IL_fnc_addAction = {
 						_timestamp = _veh getVariable ['IL_timestamp',IL_lastchange];
 
 						if (count IL_lights isEqualTo 0) then {
-							if (IL_Debug) then {player sideChat 'lights added, hint displayed for the array'; hintSilent str _lights;};
 							{
 								_light = '#lightpoint' createVehicleLocal [0,0,0];
 								_light attachTo [_veh,(_x select 0)];
 								_light setLightColor (_x select 1);
 								_light setLightAttenuation (_x select 2);
 								_light setLightIntensity (_x select 3) * IL_intensity_mult;
-								if (IL_Debug && IL_Balls) then {
-									_balls = _veh getVariable 'il_balls';
-									if (isNil _balls) then {
-										_ball = 'Sign_Sphere10cm_F' createVehicle [0,0,0];
-										_ball attachTo [_light,[0,0,0]];
-										_veh setVariable ['il_balls',[_ball],true];
-									} else {
-										_ball = 'Sign_Sphere10cm_F' createVehicle [0,0,0];
-										_ball attachTo [_veh,(_x select 0)];
-										_balls pushback _ball;
-										_veh setVariable ['il_balls',_balls,true];
-									};
-								};
 								IL_lights pushBack _light;
 								IL_lastchange = 0;
 							} forEach _lights;
@@ -403,7 +373,6 @@ IL_fnc_addAction = {
 
 						if (_timestamp != IL_lastchange) then {
 							_override = _veh getVariable ['IL_override',_lights];
-							if (IL_Debug) then {player sideChat format ['light colour changed',str _override];};
 							{
 								_o = _override select _forEachIndex;
 								_x attachTo [_veh,(_o select 0)];
@@ -418,25 +387,15 @@ IL_fnc_addAction = {
 					if (IL_Red_On_Always) then { _veh setVariable ['IL_override',nil,true]; };
 					player setUserActionText[IL_action,IL_text_ON];
 					if (count IL_lights > 0) then {
-						if (IL_Debug) then {player sideChat format ['removing lights because lights are off %1',str IL_lights];};
 						{
 							IL_lights = IL_lights - [_x];
 							deleteVehicle _x;
 						} forEach IL_lights;
-						_balls = _veh getVariable 'il_balls';
-						if ((IL_Debug) && (IL_Balls) && !(isNil _balls)) then {
-							{
-								deleteVehicle _x;
-							} forEach _balls;
-							_veh setVariable ['il_balls',nil,true];
-							if (IL_Debug) then {player sideChat format ['removing balls because lights are off %1',str IL_lights];};
-						};
 					};
 				};
 			};
 		} else {
 			if (count IL_lights > 0) then {
-				if (IL_Debug) then {player sideChat format ['removing lights because you are not in a vehicle %1',str IL_lights];};
 				{
 					IL_lights = IL_lights - [_x];
 					deleteVehicle _x;
@@ -447,11 +406,9 @@ IL_fnc_addAction = {
 		if (IL_Action_Night && sunOrMoon isEqualTo 1) then { _show = (_show && (vehicle _target getVariable [IL_varname,false] )) };
 		_show
 	"];
-	if (IL_Debug) then {player sideChat 'action added'};
 
 	if (IL_action2 > -1) then {
 		player removeAction IL_action2;
-		if (IL_Debug) then {player sideChat 'action2 removed'};
 	};
 
 	IL_action2 = player addAction [
@@ -504,22 +461,16 @@ IL_fnc_addAction = {
 		_veh getVariable [IL_varname,false] &&
 		_show
 	"];
-	if (IL_Debug) then {player sideChat 'action2 added'};
-	if (IL_Debug && IL_Crew_Only) then {player sideChat "IL_Crew_Only Active"};
-	if (IL_Debug && IL_Red_On_Always) then {player sideChat "IL_Red_On_Always Active"};
 };
 
 // init
 if (IL_eventHandler > -1) then {
 	player removeEventHandler ["Respawn",IL_eventHandler];
-	if (IL_Debug) then {player sideChat "IL Respawn EventHandler Removed"};
 };
 
 [] spawn IL_fnc_addAction;
 IL_eventHandler = player addEventHandler ["Respawn", {
 	[] spawn IL_fnc_addAction;
-	if (IL_Debug) then {player sideChat "IL Respawn EventHandler Executed!";};
 }];
-if (IL_Debug) then {player sideChat format ["IL Respawn EventHandler Added, #%1",IL_eventHandler];};
 
 IL_Loaded = true;

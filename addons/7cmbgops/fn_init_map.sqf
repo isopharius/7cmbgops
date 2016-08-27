@@ -9,7 +9,7 @@ if (isHC) exitwith {};
 
 				_crate = "B_CargoNet_01_ammo_F" createvehiclelocal [0,0,0];
 				_crate allowdamage false;
-				_crate setPos [(_markerpos select 0) - 1, (_markerpos select 1) - 1];
+				_crate setPos [(_markerpos select 0) - 2.5, (_markerpos select 1) - 2.5];
 				_tpflag = "Land_FieldToilet_F" createvehiclelocal [0,0,0];
 				_tpflag allowdamage false;
 				_tpflag setPos _markerpos;

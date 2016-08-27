@@ -15,13 +15,6 @@ if (hasInterface) then {
 	_veh allowdamage true;
 	sleep 1;
 
-	_while = {
-		if (!isTouchingGround player) then {
-			sleep 2;
-			call _while;
-		};
-	};
-	call _while;
-
+	waitUntil {isTouchingGround player};
 	player allowdamage true;
 };

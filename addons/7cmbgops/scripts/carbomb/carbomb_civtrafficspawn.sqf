@@ -27,7 +27,7 @@ _driverOut = _civdriver addEventHandler ["GetOut",{
 		deleteMarker _marker;
 	};
 	_idleState = _vehicle getVariable "IdleState";
-	if (_idleState == 0) then {_vehicle setVariable ["IdleState", 2, false]};
+	if (_idleState isEqualTo 0) then {_vehicle setVariable ["IdleState", 2, false]};
 		karma_cb_civlist = karma_cb_civlist - [_vehicle];
 		karma_cb_wrecklist set [count karma_cb_wrecklist, _vehicle];
 		karma_cb_wrecklist set [count karma_cb_wrecklist, _driver];
@@ -42,7 +42,7 @@ _civname = missionNamespace getVariable _name;
 //hint format ["%1",_civname];
 sleep 1;
 _civtraffic setVariable ["markername", _name, false];
-if (karma_cb_debug == 1) then {
+if (karma_cb_debug isEqualTo 1) then {
 	_markerstr = createMarker[_name,getPosATL _civtraffic];
 	_name setMarkerShape "ICON";
 	_name setMarkerType "mil_dot";
@@ -57,7 +57,7 @@ _driverkilled = _civdriver addEventHandler ["Killed",{
 	//[[_killername],"karma_cb_civtraffic_killed",nil,true] spawn BIS_fnc_MP;
 	[_killername] remoteExec [nil,true];
 	};
-	if (karma_cb_debug == 1) then {
+	if (karma_cb_debug isEqualTo 1) then {
 		_marker = _vehicle getVariable "markername";
 		deleteMarker _marker;
 	};

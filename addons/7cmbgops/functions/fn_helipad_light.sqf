@@ -121,7 +121,7 @@ for "_i" from 1 to 4 do {
 	// sleep .01;
 };
 
-if((typeOf _helipad == "Land_HelipadRescue_F") || (typeOf _helipad == "Land_HelipadSquare_F") || (typeOf _helipad == "Land_HelipadEmpty_F")) then {
+if((typeOf _helipad isEqualTo "Land_HelipadRescue_F") || (typeOf _helipad isEqualTo "Land_HelipadSquare_F") || (typeOf _helipad isEqualTo "Land_HelipadEmpty_F")) then {
 	for "_i" from 0 to 10 do {
 		createVehicle [_outerLight, [((_xPos - 5) + (_i * 1)),(_yPos + 5),_zPos], [],0,"CAN_COLLIDE"];
 		createVehicle [_outerLight, [((_xPos - 5) + (_i * 1)),(_yPos - 5),_zPos], [],0,"CAN_COLLIDE"];

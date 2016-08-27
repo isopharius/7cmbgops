@@ -42,7 +42,7 @@ karma_cb_civcenter = createCenter CIVILIAN;
 karma_cb_bombcenter = createCenter EAST;
 _k = 0;
 _j = 0;
-if (karma_cb_debug == 1) then {
+if (karma_cb_debug isEqualTo 1) then {
 	hintSilent format ["Karma Module Car Bomb Module:Number Of Locations %1",count _nearestCity];
 };
 sleep 5;

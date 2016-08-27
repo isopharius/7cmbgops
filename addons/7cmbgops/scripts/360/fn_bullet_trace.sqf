@@ -1,16 +1,16 @@
-private ["_unit", "_bullet", "_bulletVelocity", "_mv", "_v", "_color", "_distance"];
+private "_color";
 
 TrainingCourse_ShotsFired = TrainingCourse_ShotsFired + 1;
 
 if !(TrainingCourse_BulletPathTracing) exitWith {};
 
-_unit = _this select 0;
-_bullet = _this select 6;
+params ["_unit"];
+private _bullet = _this select 6;
 
 while {alive _bullet} do {
-	_bulletVelocity = velocity _bullet;
-	_v = _bulletVelocity call BIS_fnc_magnitude;
-	if (isNil ("_mv")) then {_mv = _v;};
+	private _bulletVelocity = velocity _bullet;
+	private _v = _bulletVelocity call BIS_fnc_magnitude;
+	if (isNil ("_mv")) then {private _mv = _v;};
 
 	call {
 		if (_v / _mv >= .75) exitWith {_color = [1,0,0,1]};

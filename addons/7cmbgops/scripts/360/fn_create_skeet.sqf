@@ -1,7 +1,5 @@
-private ["_target",  "_angle", "_position", "_distance", "_direction"];
-
-_position = getPosworld player;
-_angle = getDir player;
+private "_position";
+private _angle = getDir player;
 if (random 1 > 0.5) then {
 	_position = _position vectorAdd [sin(_angle + 90) * 2, cos(_angle + 90) * 2, 2 + random 1];
 } else {

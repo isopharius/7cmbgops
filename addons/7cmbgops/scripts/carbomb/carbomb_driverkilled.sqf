@@ -11,7 +11,7 @@ karma_cb_wrecklist set [count karma_cb_wrecklist, _cbomb];
 karma_cb_wrecklist set [count karma_cb_wrecklist, _driver];
 _dmspercent = (floor (random 100));
 //Marker
-if (karma_cb_debug == 1) then {
+if (karma_cb_debug isEqualTo 1) then {
 _marker = _cbomb getVariable "markername";
 deleteMarker _marker;
 };

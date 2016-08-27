@@ -1,11 +1,67 @@
-if (!isdedicated and !isHC) then {
-
-	//ACE menu actions
-	_groupname = ["groupname","Change CallSign","\7cmbgops\pics\i_carradio.paa",{[] spawn seven_fnc_groupname},{(leader player) isEqualTo player}] call ace_interact_menu_fnc_createAction;
+if (hasInterface) then {
 
 	_arsenalbox = ["B_CargoNet_01_ammo_F","B_supplyCrate_F","Land_PaperBox_closed_F","Land_PaperBox_open_full_F"];
 
-	_satcom = ["satcom","SATCOM","\A3\ui_f\data\map\markers\military\destroy_CA.paa",{call seven_fnc_start_satellite},{(!isNull objectParent player) or ((backpack player) iskindof "TFAR_Bag_Base")}] call ace_interact_menu_fnc_createAction;
+	//ACE menu actions
+	_groupname = [
+		"groupname",
+		"Change CallSign",
+		"\7cmbgops\pics\i_carradio.paa",
+		{
+			_grp = group player;
+			_dialogResult =
+				[
+					format ["Change current CallSign [%1] (for cTab)", groupId _grp],
+					[
+						["New CallSign", ""]
+					]
+				] call Ares_fnc_ShowChooseDialog;
+
+			if ((count _dialogResult isEqualTo 0) or ((_dialogResult select 0) isEqualTo "")) then {
+				hint "CallSign not changed.";
+
+			} else {
+				_callsign = _dialogResult select 0;
+				_grp = group player;
+				_grp setGroupIdGlobal [_callsign];
+				format["New CallSign [%1]", _callsign] remoteExecCall ["hint", _grp, false];
+			};
+		},
+		{
+			(leader player) isEqualTo player;
+		}
+	] call ace_interact_menu_fnc_createAction;
+
+	_satcom = [
+		"satcom",
+		"SATCOM",
+		"\A3\ui_f\data\map\markers\military\destroy_CA.paa",
+		{
+			satclick = addMissionEventHandler [
+			    "MapSingleClick",
+			    {
+			        if ((player distance _pos) < 5000) then {
+			            onMapSingleClick "";
+			            PXS_SatelliteTarget = "Logic" createVehicleLocal _pos;
+			            PXS_SatelliteTarget setDir 0;
+			            [] spawn seven_fnc_PXS_Delay;
+			            openMap false;
+			        } else {
+			            if (true) exitwith {
+			                hint "Satellite viewrange is limited to a 5 kilometers radius!";
+			            };
+			        };
+			    }
+			];
+			hint "Click on the map to insert default satellite coordinates.";
+			openMap true;
+		},
+		{
+			(!isNull objectParent player) or ((backpack player) iskindof "TFAR_Bag_Base");
+		}
+	] call ace_interact_menu_fnc_createAction;
+
+
 	//_nradio = ["nradio","WALKMAN","\7cmbgops\pics\i_carradio.paa",{call seven_fnc_start},{true}] call ace_interact_menu_fnc_createAction;
 
 	_fmradio = ["fmradio","Radio Play/Stop","\7cmbgops\pics\i_carradio.paa",{(_this select 0) remoteExec ["seven_fnc_fmradio", 2, false]},{isNull objectParent player}] call ace_interact_menu_fnc_createAction;

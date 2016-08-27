@@ -1,27 +1,22 @@
-private ["_target", "_unit", "_bullet", "_ammo", "_position", "_vectorToTarget", "_velocity", "_distance", "_targetDir", "_impactDeviation", "_accuracy", "_score", "_targetScore"];
+private ["_impactDeviation", "_targetScore"];
 
-if (TrainingCourse_ShotsFired == 0) exitWith {};
+if (TrainingCourse_ShotsFired isEqualTo 0) exitWith {};
 
 TrainingCourse_TargetsHit = (TrainingCourse_TargetsHit + 1) min TrainingCourse_ShotsFired;
 
-_target   = _this select 0;
-_unit     = _this select 1;
-_bullet   = _this select 2;
-_position = _this select 3;
-_velocity = _this select 4;
-_ammo     = _this select 6;
+params ["_target", "_unit", "_bullet", "_position", "_velocity", "_ammo"];
 
-_vectorToTarget = (getPosworld _unit) vectorDiff _position;
-_distance = vectorMagnitude _vectorToTarget;
+private _vectorToTarget = (getPosworld _unit) vectorDiff _position;
+private _distance = vectorMagnitude _vectorToTarget;
 
 TrainingCourse_AverageDistance = TrainingCourse_AverageDistance + (_distance - TrainingCourse_AverageDistance) / TrainingCourse_TargetsHit;
 
-_accuracy = TrainingCourse_TargetsHit / TrainingCourse_ShotsFired;
-_score = (_accuracy * TrainingCourse_AverageDistance / 25) min 100;
+private _accuracy = TrainingCourse_TargetsHit / TrainingCourse_ShotsFired;
+private _score = (_accuracy * TrainingCourse_AverageDistance / 25) min 100;
 
 if ((typeOf _target) in ["TargetP_Inf_Acc2_F", "TargetP_Inf2_Acc2_F", "TargetP_Inf_Acc2_NoPop_F", "TargetP_Inf2_Acc2_NoPop_F"]) then
 {
-	_targetDir = getDir _target;
+	private _targetDir = getDir _target;
 	_impactDeviation = _position vectorDiff (getPosworld _target);
 	_impactDeviation = _impactDeviation vectorDiff [sin(_targetDir) * 0.16, cos(_targetDir) * 0.16, 0.85];
 	_impactDeviation = vectorMagnitude _impactDeviation;

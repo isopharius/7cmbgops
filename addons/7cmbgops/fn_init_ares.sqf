@@ -106,7 +106,7 @@ if (isserver) then { //server
 	] call Ares_fnc_RegisterCustomModule;
 };
 
-if (!isdedicated) then { //players
+if (hasInterface) then { //players
 	[ //Mish save
 		"Save/Load",
 		"Save to client",
@@ -533,21 +533,19 @@ if (!isdedicated) then { //players
 			if (count _dialogResult isEqualTo 0) exitWith {};
 
 			_pos = _this select 0;
-			_posx = _pos select 0;
-			_posy = _pos select 1;
 
 			//pick IED type
 			call {
 				_iedtype = _dialogResult select 0;
 			    if (_iedtype isEqualTo 1) exitWith {
-					if (!isNull ([_posx,_posy] nearObjects ["House", 20])) then {
+					if (!isNull (_pos nearObjects ["House", 20])) then {
 						_iedtype = "iEDurbanSmall_Remote_Mag";
 					} else {
 						_iedtype = "IEDLandSmall_Remote_Mag";
 					};
 			    };
 			    if (_iedtype isEqualTo 2) exitWith {
-					if (!isNull ([_posx,_posy] nearObjects ["House", 20])) then {
+					if (!isNull (_pos nearObjects ["House", 20])) then {
 						_iedtype = "IEDUrbanBig_Remote_Mag";
 					} else {
 						_iedtype = "IEDLandBig_Remote_Mag";
@@ -645,8 +643,8 @@ if (!isdedicated) then { //players
 
 			//spawn plane
 			_pos = _this select 0;
-			_posx = (_pos select 0);
-			_posy = (_pos select 1);
+			_posx = _pos select 0;
+			_posy = _pos select 1;
 			_randompos = selectRandom [[_posx + 8000, _posy + 8000, _altitude], [_posx + 8000, _posy - 8000, _altitude], [_posx - 8000, _posy + 8000, _altitude], [_posx - 8000, _posy - 8000, _altitude]];
 			_createplane = [_randompos, 0, "ONS_AIR_CC130J", WEST] call BIS_fnc_spawnVehicle;
 			_plane = _createplane select 0;

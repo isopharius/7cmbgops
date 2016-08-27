@@ -1,19 +1,17 @@
-private ["_unit", "_bullet", "_camera", "_camPos", "_camTgt"];
-
 if !(TrainingCourse_BulletCamera) exitWith {};
 
-_unit = _this select 0;
-_bullet = _this select 6;
+params ["_unit"];
+private _bullet = _this select 6;
 
 waitUntil {(_unit distance _bullet) > 10.0};
 
-if (vectorMagnitudeSqr (getPosworld _bullet) == 0) exitWith {};
+if (vectorMagnitudeSqr (getPosworld _bullet) isEqualTo 0) exitWith {};
 
 TrainingCourse_BulletCameraAbort = false;
 waitUntil {!isNull (findDisplay 46)};
-(findDisplay 46) displayAddEventHandler ["KeyDown", "if ((_this select 1) == 28) then {TrainingCourse_BulletCameraAbort = true;};"];
+(findDisplay 46) displayAddEventHandler ["KeyDown", "if ((_this select 1) isEqualTo 28) then {TrainingCourse_BulletCameraAbort = true;};"];
 
-_camera = "Camera" camCreate (getPosworld _bullet);
+private _camera = "Camera" camCreate (getPosworld _bullet);
 _camera camSetTarget _bullet;
 _camera cameraEffect ["INTERNAL","BACK"];
 _camera camSetFOV 0.7;
@@ -29,9 +27,9 @@ while {(alive _bullet) && !TrainingCourse_BulletCameraAbort} do
 	sleep 0.001;
 	if (vectorMagnitudeSqr (getPosworld _bullet) > 0) then
 	{
-		_camPos = (getPosworld _bullet);
+		private _camPos = (getPosworld _bullet);
 		sleep 0.009;
-		_camTgt = (getPosworld _bullet);
+		private _camTgt = (getPosworld _bullet);
 	};
 };
 

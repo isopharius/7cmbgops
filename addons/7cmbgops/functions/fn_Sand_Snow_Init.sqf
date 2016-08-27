@@ -344,13 +344,13 @@ if ((arInfoWorld_MKY select 0) isEqualTo "sand") then {
 		arSandsVolume_MKY = [7.83,7.84,7.85];	// global array - used to define the volume of particles, chosen at random
 
 		// allow rain during sand
-		if ((count _this) > 3) then {if (typeName (_this select 3) == "BOOL") then {bAllowRain = (_this select 3);};};
+		if ((count _this) > 3) then {if (typeName (_this select 3) isEqualTo "BOOL") then {bAllowRain = (_this select 3);};};
 		// enforce winds
-		if ((count _this) > 4) then {if (typeName (_this select 4) == "BOOL") then {bEnforceWind = (_this select 4);};};
+		if ((count _this) > 4) then {if (typeName (_this select 4) isEqualTo "BOOL") then {bEnforceWind = (_this select 4);};};
 		// allow fog variation
-		if ((count _this) > 5) then {if (typeName (_this select 5) == "BOOL") then {bVaryFog = (_this select 5);};};
+		if ((count _this) > 5) then {if (typeName (_this select 5) isEqualTo "BOOL") then {bVaryFog = (_this select 5);};};
 		// use wind audio if allowed
-		if ((count _this) > 6) then {if (typeName (_this select 6) == "BOOL") then {bUseAudio = (_this select 6);};};
+		if ((count _this) > 6) then {if (typeName (_this select 6) isEqualTo "BOOL") then {bUseAudio = (_this select 6);};};
 		// use effect strength
 		if ((count _this) > 7) then {
 			_switch = _this select 7;
@@ -380,8 +380,8 @@ if ((arInfoWorld_MKY select 0) isEqualTo "sand") then {
 
 		//intEFX = 0;	// TEMP FOR TESTING ***
 
-		// if intEFX == 4, stop processing (disabled effect)
-		if (intEFX == 4) exitWith {(true);};
+		// if intEFX isEqualTo 4, stop processing (disabled effect)
+		if (intEFX isEqualTo 4) exitWith {(true);};
 
 		// functions have been defined, variables have been created, begin calling functions and executing commands
 
@@ -401,7 +401,7 @@ if ((arInfoWorld_MKY select 0) isEqualTo "sand") then {
 		// prepare overcast
 		_intOvercast_org = overcast;
 		if ((count _this) > 1) then {
-			if (typeName (_this select 1) == "SCALAR") then {
+			if (typeName (_this select 1) isEqualTo "SCALAR") then {
 				skipTime -24;
 				86400 setOvercast (_this select 1);
 				skipTime 24;
@@ -414,7 +414,7 @@ if ((arInfoWorld_MKY select 0) isEqualTo "sand") then {
 
 		// prepare ppEffect
 		if ((count _this) > 2) then {
-			if (typeName (_this select 2) == "BOOL") then {
+			if (typeName (_this select 2) isEqualTo "BOOL") then {
 				if (_this select 2) then {
 					if !(isNil "effsand") then {true;} else {
 						effsand = ppEffectCreate ["colorCorrections", 1501];
@@ -435,7 +435,7 @@ if ((arInfoWorld_MKY select 0) isEqualTo "sand") then {
 		// prepare fog
 		_arFog_org = fogParams;
 		if ((count _this) > 0) then {
-			if (typeName (_this select 0) == "ARRAY") then {
+			if (typeName (_this select 0) isEqualTo "ARRAY") then {
 				20 setFog (_this select 0); // can use a delay if needed, its at 0 for black out / black in
 				if (bVaryFog) then {
 					// create variance in fog values
@@ -516,7 +516,7 @@ if ((arInfoWorld_MKY select 0) isEqualTo "sand") then {
 					_enablesand = {
 						if {!isNil "varEnableSand"} then {
 							if (isNull objectParent player) then {	// player IS the vehicle
-								if (_strVar == "svehicle") then {
+								if (_strVar isEqualTo "svehicle") then {
 									objEmitterHost attachTo [player,[0,0,0]];
 									_strVar = "splayer";
 								};
@@ -531,7 +531,7 @@ if ((arInfoWorld_MKY select 0) isEqualTo "sand") then {
 							} else {	// player is IN a vehicle
 
 								1 fadeMusic 0.2;
-								if (_strVar == "splayer") then {
+								if (_strVar isEqualTo "splayer") then {
 									objEmitterHost attachTo [objectParent player,[0,0,0]];
 									_strVar = "svehicle";
 								};
@@ -620,7 +620,7 @@ if ((arInfoWorld_MKY select 0) isEqualTo "sand") then {
 						effsand = nil;
 					};
 				};
-				if ((count _this) > 0) then {if (typeName (_this select 0) == "ARRAY") then {60 setFog _arFog_org;};};
+				if ((count _this) > 0) then {if (typeName (_this select 0) isEqualTo "ARRAY") then {60 setFog _arFog_org;};};
 				// leave overcast as it is
 				deleteVehicle objSand;
 				deleteVehicle objSandN;

@@ -26,7 +26,7 @@ params [["_obj",nil,[objNull]],["_fillType",0,[[],0]],["_fillPercent",40,[0]]];
 
 if (!isServer || isNil "_obj") exitWith {diag_log text "[ERROR] (z_fillItems.sqf): Invalid or missing object passed to script."; false};
 
-if (typeName _fillType == "ARRAY") then {
+if (typeName _fillType isEqualTo "ARRAY") then {
 	_itemArray = [];
 	{
 		if (!isClass (configFile >> "CfgWeapons" >> _x)) then {

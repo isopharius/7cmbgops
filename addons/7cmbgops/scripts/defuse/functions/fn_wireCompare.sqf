@@ -7,20 +7,19 @@ if (_compare) then {
 	cutText ["BOMB DEFUSED!", "PLAIN DOWN"];
 	player sidechat "BOMB DEFUSED, YOU ROCK!";
 	DEFUSED = true;
-	publicVariable "DEFUSED";
-	bombcontainer setdamage 1;
-	removeAllActions bombcontainer;
 	BOMB = false;
+	bombcontainer setdamage 1;
+	[bombcontainer] remoteExec ["removeAllActions", 0, true];
 	publicVariable "BOMB";
+	publicVariableServer "DEFUSED";
 	playSound "button_close";
 } else {
 	cutText ["BOMB ARMED!", "PLAIN DOWN"];
 	player sidechat "BOMB ARMED, NICE TRY!";
-	removeAllActions bombcontainer;
+	[bombcontainer] remoteExec ["removeAllActions", 0, true];
 	ARMED = true;
-	publicVariable "ARMED";
+	publicVariableServer "ARMED";
 	playSound "button_wrong";
 };
 
-//Return Value
 _wire
