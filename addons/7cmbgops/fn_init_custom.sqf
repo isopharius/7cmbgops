@@ -17,6 +17,11 @@ if (isserver) then {
 	largecamps = [];
 };
 
+if (hasInterface) then {
+	["player",[SELF_INTERACTION_KEY],-9905,["call seven_fnc_adminMenuDef","main"]] call ALIVE_fnc_flexiMenu_Add;
+};
+
+
 // player init
 /*
 if (!isdedicated) exitwith {
