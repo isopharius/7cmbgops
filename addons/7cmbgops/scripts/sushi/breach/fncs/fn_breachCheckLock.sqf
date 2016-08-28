@@ -1,4 +1,4 @@
-private _doorArr = [cursorTarget] call seven_fnc_breachGetTargetDoors;
+private _doorArr = [cursorTarget] call saf_fnc_breachGetTargetDoors;
 private _txt = "";
 private _doorStatus = 0;
 private _anim = true;

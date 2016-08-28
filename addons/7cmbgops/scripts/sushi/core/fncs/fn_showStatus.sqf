@@ -17,7 +17,7 @@ disableSerialization;
 	BOOL - true kiedy jendostka skonczy, fals jeśli przerwie
 	
 	Example:
-	["Sprawdzam",10,player,[getPos player,5]] call seven_fnc_showStatus;
+	["Sprawdzam",10,player,[getPos player,5]] call SAF_fnc_showStatus;
 
 */
 

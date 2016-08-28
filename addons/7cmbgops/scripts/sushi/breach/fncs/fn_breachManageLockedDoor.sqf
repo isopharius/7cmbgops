@@ -11,13 +11,11 @@ if (_dS1 == 1 || _dS2 == 1 || _dS3 == 1 || _dS4 == 1) then {
 	{	
 	
 		private _status = _target getVariable [format["SAF_var_breach_managingDoor_%1",_x], false];
-		
 		if (!_status) then {
 			[_x,_target] spawn {
 				private _d = _this select 0;
 				private _target = _this select 1;
 				private _status = _target getVariable [format ["bis_disabled_%1", _d], 0];
-
 				_target setVariable [format["SAF_var_breach_managingDoor_%1",_d],true];
 				
 				while {_status == 1 && _target == cursorTarget} do {

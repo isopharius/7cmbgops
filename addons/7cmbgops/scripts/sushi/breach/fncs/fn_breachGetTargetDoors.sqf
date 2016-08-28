@@ -44,7 +44,7 @@ if(!isNull _target && _target isKindOf "house" || _target isKindOf "Cargo_Patrol
 					};
 				};
 				
-			if ((_door1 find "dvere") > 0) then {
+			if ((_door1 find "dvere") < 1) then {
 				_selectionName_dvere = format ["Dvere%1", _n];
 			};
 			if ((_door1 find "door_") > 0) then {
@@ -70,7 +70,7 @@ if(!isNull _target && _target isKindOf "house" || _target isKindOf "Cargo_Patrol
 			{
 				private _p = _target animationPhase _x;
 				if (saf_mission_setting_breach_closeFix > 0) then { 
-					if (_p > 0) then {
+					if (_p < 0 || _p > 0) then {
 						_break = false;
 					};
 				} else {
@@ -83,26 +83,25 @@ if(!isNull _target && _target isKindOf "house" || _target isKindOf "Cargo_Patrol
 			if (_break) then {breakTo "mainScope";};
 			if (saf_mission_setting_breach_LockFrontDoorsOnly  > 0) then {
 			if (_target in saf_mission_setting_breach_Buildings && _dS1 == -1 && _dS2 == -1 && _dS3 == -1  && _dS4 == -1 &&
-				(_selectionName_def == "door_1_rot" || _selectionName_def == "door_3_rot" || _selectionName_def == "door_2_rot") || 
+				((_selectionName_def == "door_1_rot" || _selectionName_def == "door_3_rot" || _selectionName_def == "door_2_rot") || 
 				(_selectionName_jbad == "door_1" || _selectionName_jbad == "door_3" || _selectionName_jbad == "door_2") ||
 				(_selectionName_dvere == "dvere1" || _selectionName_dvere == "dvere2" || _selectionName_dvere == "dvere3") ||
-				(_selectionName_Map == "DoorF" || _selectionName_Map == "DoorR" || _selectionName_Map == "DoorE")) then {	
-				[_target,_selectionName_def,_selectionName_jbad,_selectionName_dvere,_selectionName_Map,_dS1,_dS2,_ds3] call seven_fnc_breachLockDoor;
+				(_selectionName_Map == "DoorF" || _selectionName_Map == "DoorR" || _selectionName_Map == "DoorE"))) then {	
+				[_target,_selectionName_def,_selectionName_jbad,_selectionName_dvere,_selectionName_Map,_dS1,_dS2,_ds3,_ds4] call SAF_fnc_breachLockDoor;
 			} else {
 
 				if (_target in saf_mission_setting_breach_Buildings) then {
-				diag_log format ["GetTargetDoors5"];
-					[_target,_selectionName_def,_selectionName_jbad,_selectionName_dvere,_selectionName_Map] call seven_fnc_breachManageLockedDoor;
+					[_target,_selectionName_def,_selectionName_jbad,_selectionName_dvere,_selectionName_Map] call SAF_fnc_breachManageLockedDoor;
 				};
 			};
 			} else {
 			if (saf_mission_setting_breach_LockFrontDoorsOnly  < 1 ) then {
 				if (_target in saf_mission_setting_breach_Buildings && _dS1 == -1 && _dS2 == -1 && _dS3 == -1 && _dS4 == -1) then {	
-				[_target,_selectionName_def,_selectionName_jbad,_selectionName_dvere,_selectionName_Map,_dS1,_dS2,_ds3,_ds4] call seven_fnc_breachLockDoor;
+				[_target,_selectionName_def,_selectionName_jbad,_selectionName_dvere,_selectionName_Map,_dS1,_dS2,_ds3,_ds4] call SAF_fnc_breachLockDoor;
 			} else {
 
 				if (_target in saf_mission_setting_breach_Buildings) then {
-					[_target,_selectionName_def,_selectionName_jbad,_selectionName_dvere,_selectionName_Map] call seven_fnc_breachManageLockedDoor;
+					[_target,_selectionName_def,_selectionName_jbad,_selectionName_dvere,_selectionName_Map] call SAF_fnc_breachManageLockedDoor;
 				};
 			};
 			};

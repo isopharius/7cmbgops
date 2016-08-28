@@ -1,5 +1,5 @@
 params [["_doorArr",[]],["_charge",false],["_isChecked",false]];
-if (count _doorArr < 1) then { _doorArr = [cursorTarget] call seven_fnc_breachGetTargetDoors; };
+if (count _doorArr < 1) then { _doorArr = [cursorTarget] call saf_fnc_breachGetTargetDoors; };
 private _txt = "";
 private _doorStatus = 0;
 if(count _doorArr > 0) then {

@@ -16,8 +16,6 @@ then{
 										//if the marker is a square
 		
 		private _buildingsArr = nearestObjects [_center,["house","Cargo_Patrol_base_F","Cargo_Tower_base_F","Cargo_HQ_base_F"],_r];
-		diag_log format ["PostInit0"];	
-		diag_log _buildingsArr;
 		if (count _buildingsArr > 0) then {
 			{
 
@@ -25,7 +23,6 @@ then{
 				private _ones = ["door","door_1_1","door_1_2","door_2_1","door_2_2","dvere1","dvere2","dvere3","dvere4","dvere5","dvere6","dvere7","dvere8","dvere9","dvere10","dvere11","dvere12","dvere13","dvere14","doorl","doorr","door_01","door01_a","door_02","door02_a","door_03","door_04","door_05","door_06","door_1a","door_1","door_2"];
 				private _twos = ["door_1_rot","door_3_rot","door_2_rot","door_4_rot","door_5_rot","door_6_rot","door_7_rot"];
 					_y = _x;
-					 diag_log format "CloseDoors";
 							{_y animate [format ["%1", _x], 1]} foreach _zeroes;
 							{_y animate [format ["%1", _x], 1]} foreach _ones;
 							{_y animate [format ["%1", _x], 1]} foreach _twos;

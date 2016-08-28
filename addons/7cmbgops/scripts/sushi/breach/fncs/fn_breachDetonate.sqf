@@ -16,8 +16,8 @@ drop [
 1, 0, "", "", 
 _c4];
 */
-[getPos _c4] remoteExec ["seven_fnc_breachStun"];
+[getPos _c4] remoteExec ["SAF_fnc_breachStun"];
 "SmallSecondary" createVehicle position _c4;
 deleteVehicle _c4;
 if (getDammage _b > 0.4) then {_b setDammage 0.4};
-[_b,_s,true] spawn seven_fnc_breachOpenDoor;
+[_b,_s,true] spawn SAF_fnc_breachOpenDoor;
