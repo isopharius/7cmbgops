@@ -1,3 +1,19 @@
+    //Custom delay
+    PAPABEAR = [West,"HQ"];
+    PAPABEAR sideChat format ["%1, this is PAPA BEAR! Your request has been transmitted!", group player];
+    sleep 3 + random 4;
+    PAPABEAR sideChat format ["%1, CANSTAR-42 NORAD-ID 385818353 is aligning. This will take about 30 seconds. PAPA BEAR over!", group player];
+    sleep 20;
+    PAPABEAR sideChat format ["%1, this is PAPA BEAR! CANSTAR-42 Alignment process is nearly finished. PAPA BEAR over and out!", group player];
+    sleep random 5;
+    for "_i" from 0 to 4 do {
+        _cnt = 5 - _i;
+        hintSilent format ["CANSTAR-42 is ready in %1 seconds!",_cnt];
+        sleep 1;
+        if (_cnt isEqualTo 1) then {hint format ["CANSTAR-42 is ready!",_cnt]};
+    };
+    sleep 1;
+
 //script for launch the SATCOM camera
 
 PXS_SatelliteActive = true; //SATCOM is activated
@@ -20,11 +36,6 @@ PXS_SatelliteCamera cameraEffect ["internal","back"];
 call seven_fnc_updateCamera;
 
 showCinemaBorder false;
-
-//camera effect
-ppEffectDestroy PXS_ppColor;
-ppEffectDestroy PXS_ppInversion;
-ppEffectDestroy PXS_ppGrain;
 
 PXS_ppGrain = ppEffectCreate ["filmGrain",2005];
 PXS_ppGrain ppEffectEnable true;

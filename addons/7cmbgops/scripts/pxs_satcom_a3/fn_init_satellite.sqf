@@ -1,5 +1,4 @@
 if (hasInterface) then {
-
 	//variables for SATCOM
 	PXS_SatelliteInitialHeight = 800; //height of camera
 	PXS_SatelliteFOV = 0.2; //default FOV

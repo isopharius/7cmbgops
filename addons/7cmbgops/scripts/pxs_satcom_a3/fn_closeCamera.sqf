@@ -13,7 +13,8 @@ camDestroy PXS_SatelliteCamera;
 closeDialog 1000;
 
 deleteVehicle PXS_SatelliteTarget;
+ppEffectDestroy PXS_ppGrain;
 
-removeMissionEventHandler ["MapSingleClick", satclick]}];
+//removeMissionEventHandler ["MapSingleClick", satclick];
 openMap false;
 PXS_SatelliteActive = false;
