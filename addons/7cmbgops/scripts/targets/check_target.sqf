@@ -12,13 +12,13 @@ while {(2 * _i) < count _scoretable} do {
 
     _hit_distance_from_center = sqrt(_xb*_xb + _yb*_yb);
 	_j = 0;
-	
+
     while {_hit_distance_from_center < (_borders select _j)} do {
 		_j= _j + 1;
     };
-	
+
 	_score = _j;
-    _scorelist = _scorelist + [_score];
+    _scorelist pushBack _score;
     _totalscore = _totalscore + _score;
     _i = _i + 1;
 };
