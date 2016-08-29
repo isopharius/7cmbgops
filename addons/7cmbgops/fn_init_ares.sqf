@@ -726,6 +726,56 @@ if (hasInterface) then { //players
 			deleteGroup _groupplane;
 		}
 	] call Ares_fnc_RegisterCustomModule;
+
+	[
+		"Player",
+		"Teleport Single Player",
+		{
+			// Generate a list of the player objects and their names
+			_playerList = [];
+			_playerNameList = [];
+			{
+				if (isPlayer _x) then
+				{
+					_playerList pushBack _x;
+					_playerNameList pushBack (name _x);
+				};
+			} forEach playableUnits;
+
+			// Ask the user who to teleport
+			_dialogResult =
+				[
+					"Teleport Player",
+					[
+						["Player Name", _playerNameList]
+					]
+				] call Ares_fnc_ShowChooseDialog;
+
+			if ((count _dialogResult) > 0) then
+			{
+				// Get the position to teleport to
+				params ["_teleportLocation"];
+
+				// Teleport the selected player.
+				_playerToTeleport = _playerList select (_dialogResult select 0);
+
+				// Show some text to the player that is going to be teleported.
+				publicVariable "Ares_playersToShowMessageTo";
+				[[], {titleText ["You are being teleported...", "BLACK", 1]; sleep 1; titleFadeOut 2;}] remoteExecCall ["BIS_fnc_spawn" , _playerToTeleport, false];
+				sleep 1;
+
+				// If the player is in a vehicle, kick them out.
+				if (!isNull objectParent _playerToTeleport) then
+				{
+					_playerToTeleport action ["Eject", vehicle _playerToTeleport];
+				};
+
+				_smallRandomOffset = [(random 6) - 3, (random 6) - 3, 0];
+				_playerToTeleport setPos (_teleportLocation vectorAdd _smallRandomOffset);
+				[format["%1 teleported to %2", _playerNameList select (_dialogResult select 0), _teleportLocation]] call Ares_fnc_ShowZeusMessage;
+			};
+		}
+	] call Ares_fnc_RegisterCustomModule;
 };
 
 waituntil {!isnil "Ares_EditableObjectBlacklist"};
