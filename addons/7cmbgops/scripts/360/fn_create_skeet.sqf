@@ -12,4 +12,4 @@ _target setVelocity [sin(_angle - (random 10) + (random 10)) * (10 + random 5), 
 
 _target addEventHandler ["HitPart", {(_this select 0) call seven_fnc_on_hit}];
 
-TrainingCourse_TargetList = TrainingCourse_TargetList + [_target];
+TrainingCourse_TargetList pushBack _target;
