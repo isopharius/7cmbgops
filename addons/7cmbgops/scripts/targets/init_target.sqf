@@ -11,7 +11,7 @@ _target_name = format["target_%1",time];
 _monitor = nil;
 
 _path = "scripts\una_targets\";
-_target = _this select 0;
+params ["_target"];
 if(count _this > 1) then {_monitor = _this select 1;};
 if(count _this > 2) then {_target_name = _this select 2;};
 
@@ -106,7 +106,7 @@ While {true} do {
         _j = 0;
         //iterate trough all hits since last sweep
         while { !(_last_hit in _holelist) } do {
-			_holelist = _holelist + [_last_hit];
+			_holelist pushBack _last_hit;
 
 			//position of last hit (in world coords)
 			_xh = getpos _last_hit select 0;
@@ -131,7 +131,7 @@ While {true} do {
 			};
 
 			//save the hit positions into an array
-			_scoretable = _scoretable + [_xb,_yb];
+			_scoretable append [_xb,_yb];
 
 			_j = _j + 1;
 
