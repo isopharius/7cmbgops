@@ -29,12 +29,8 @@
 		nothing
 */
 
-private ["_helipad","_helipadDir","_innerLight","_innerLightTemp","_outerLight","_outerLightTemp","_showHint","_xPos","_y","_zPos","_vehicle", "_vehiclePos", "_scriptPath", "_scriptFolder"];
-
-_helipad = _this select 0;
-_innerLight = _this select 1;
-_outerLight = _this select 2;
-_showHint = _this select 3;
+private ["_helipadDir","_innerLightTemp","_outerLightTemp","_xPos","_y","_zPos","_vehicle", "_vehiclePos", "_scriptPath", "_scriptFolder"];
+params ["_helipad", "_innerLight", "_outerLight", "_showHint"];
 
 _helipadDir = getDir _helipad;
 

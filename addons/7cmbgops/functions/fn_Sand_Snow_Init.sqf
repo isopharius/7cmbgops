@@ -263,8 +263,7 @@ if ((arInfoWorld_MKY select 0) isEqualTo "sand") then {
 		_MKY_fnc_setDI = {
 			// use passed parameter to set dropInterval of emitters
 			// always increase EFX upwind and slightly decrease on downwind
-			private "_int";
-			_int = _this select 0;
+			params ["_int"];
 
 			_wind = MKY_arWind select 0;
 			call {
@@ -302,8 +301,7 @@ if ((arInfoWorld_MKY select 0) isEqualTo "sand") then {
 		_f_handle_Respawn = {
 			// simple event handler would sometimes fail to reattach the objEmitterHost
 			// calling a function like this appears to work every time
-			private _unit = (_this select 0);
-			private _body = (_this select 1);
+			params ["_int", "_body"];
 			// detach from dead body
 			detach objEmitterHost;
 			objEmitterHost setPosASL (getPosASL player);

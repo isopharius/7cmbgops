@@ -309,9 +309,7 @@ IL_fnc_returnTurretUnits = {
 };
 
 IL_fnc_attachTo = {
-	_light = _this select 0;
-	_veh = _this select 1;
-	_pos = _this select 2;
+	params ["_light", "_veh", "_pos"];
 	waitUntil{_light setPos (_veh modelToWorld _pos); isNull _light};
 };
 

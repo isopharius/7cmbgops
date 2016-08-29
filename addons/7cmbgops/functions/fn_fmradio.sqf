@@ -94,7 +94,7 @@ if (_radio in fmradio) then {
 			["viet_wooly",143]
 		];
 
-		_radio = _this select 0;
+		params ["_radio"];
 		_grp = createGroup west;
 		_log = _grp createUnit ["LOGIC", (getPosworld _radio), [], 0, "can_collide"];
 		_log attachto [_radio];

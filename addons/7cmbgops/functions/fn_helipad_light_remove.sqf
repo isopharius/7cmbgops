@@ -20,7 +20,7 @@
 */
 private["_helipad", "_pos", "_types", "_objects"];
 
-_helipad = _this select 0;
+params ["_helipad"];
 
 _pos = getPosworld _heliPad;
 _types = ["Land_Flush_Light_red_F", "Land_Flush_Light_green_F","Land_Flush_Light_yellow_F","Land_runway_edgelight_blue_F","Land_runway_edgelight","B_IRStrobe","
