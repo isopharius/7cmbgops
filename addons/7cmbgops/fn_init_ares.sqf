@@ -448,6 +448,56 @@ if (hasInterface) then { //players
 		}
 	] call Ares_fnc_RegisterCustomModule;
 
+	[
+		"7CMBG",
+		"Defuse DA NUKE",
+		{
+			if (!isNil "BOMB") then {
+				if (BOMB) exitWith {["BOMB ALREADY ARMED!"] call Ares_fnc_ShowZeusMessage;};
+			};
+
+			_dialogResult =
+				["SELECT BOMB TIMER",
+						[
+							["Bomb timer (in minutes):", ""],
+							["Bomb container:", ["Weirdo Device"]],
+							["Bomb yield:", ["Random"]]
+						]
+				] call Ares_fnc_ShowChooseDialog;
+			if (count _dialogResult isEqualTo 0) exitWith {};
+
+			if ((_dialogResult select 0) isEqualTo "") exitWith {["PLEASE SET TIMER."] call Ares_fnc_ShowZeusMessage;};
+
+			CODE = [round (random 9),round (random 9),round (random 9),round (random 9)];
+			WIRE = selectRandom ["BLUE", "WHITE", "YELLOW", "GREEN"];
+			CODEINPUT = [];
+			DEFUSED = false;
+			ARMED = false;
+			BOMB = true;
+			bombcontainer = createVehicle ["Land_Device_assembled_F", [0,0,0], [], 0, "CAN_COLLIDE"];
+			bombcontainer enableSimulation false;
+			bombcontainer setPos (_this select 0);
+
+			[[bombcontainer], true] remoteExec ["Ares_fnc_AddUnitsToCurator", 2, false];
+
+			publicVariable "CODE";
+			publicVariable "WIRE";
+			publicVariable "CODEINPUT";
+			publicVariable "BOMB";
+			publicVariable "bombcontainer";
+			publicVariableServer "DEFUSED";
+			publicVariableServer "ARMED";
+
+			[format["BOMB ARMED with CODE %1 - %2 - %3 - %4!", CODE select 0, CODE select 1,CODE select 2, CODE select 3]] call Ares_fnc_ShowZeusMessage;
+			player sidechat format["the CODE is %1 - %2 - %3 - %4, add it somewhere with Spawn>Intel", CODE select 0, CODE select 1,CODE select 2, CODE select 3];
+
+			sleep 2;
+
+       		[bombcontainer, ((parseNumber(_dialogResult select 0)) * 60), 5000] remoteExec ["fnc_bombTimer", 2, false];
+       		[bombcontainer,["<t color='#E61616'>Defuse the BOMB</t>","createDialog 'KeypadDefuse'","",1,true,true,"","true",3]] remoteexec ["addAction", 0,true];
+		}
+	] call Ares_fnc_RegisterCustomModule;
+
 /*
 	[
 		"7CMBG",
