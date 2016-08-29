@@ -126,7 +126,7 @@ if (hasInterface) then { //players
 				] call Ares_fnc_ShowChooseDialog;
 			if (count _dialogResult isEqualTo 0) exitWith {};
 
-			_position = _this select 0;
+			params ["_position"];
 
 			//get radius
 			call {
@@ -441,7 +441,7 @@ if (hasInterface) then { //players
 				};
 			};
 
-			_pos = _this select 0;
+			params ["_pos"];
 			[_pos,_yield] remoteExec ["RHS_fnc_ss21_nuke", 2, false];
 
 			["TAKE COVER!"] call Ares_fnc_ShowZeusMessage;
@@ -532,7 +532,7 @@ if (hasInterface) then { //players
 				] call Ares_fnc_ShowChooseDialog;
 			if (count _dialogResult isEqualTo 0) exitWith {};
 
-			_pos = _this select 0;
+			params ["_pos"];
 
 			//pick IED type
 			call {
@@ -558,10 +558,9 @@ if (hasInterface) then { //players
 				};
 			};
 
-			_pos = _this select 0;
 			_object = "#lightpoint" createVehicleLocal [0,0,0];
 
-			[_object, _pos, random 360, _iedtype; , "PressurePlate", []] call ACE_Explosives_fnc_placeExplosive;
+			[_object, _pos, random 360, _iedtype, "PressurePlate", []] call ACE_Explosives_fnc_placeExplosive;
 			deletevehicle _object;
 			_ied = _pos nearestobject _iedtype;
 			[[_ied], true] remoteExec ["Ares_fnc_AddUnitsToCurator",2,false];
@@ -642,7 +641,7 @@ if (hasInterface) then { //players
 			};
 
 			//spawn plane
-			_pos = _this select 0;
+			params ["_pos"];
 			_posx = _pos select 0;
 			_posy = _pos select 1;
 			_randompos = selectRandom [[_posx + 8000, _posy + 8000, _altitude], [_posx + 8000, _posy - 8000, _altitude], [_posx - 8000, _posy + 8000, _altitude], [_posx - 8000, _posy - 8000, _altitude]];
