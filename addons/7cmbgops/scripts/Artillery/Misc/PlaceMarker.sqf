@@ -1,0 +1,12 @@
+private["_markerName","_marker","_r"];
+params ["_pos", "_delay"];
+_markerName = "";
+_marker = "";
+_r = (random 9999);
+_markerName = format ["%1%2%3",_pos,_delay,_r];
+_marker = createMarkerLocal [_markerName,_pos];
+_marker setMarkerSizeLocal [1,1];
+_marker setMarkerTypeLocal "mil_box";
+_marker setMarkerColorLocal "ColorYellow";
+//sleep _delay;
+//deleteMarker _marker;

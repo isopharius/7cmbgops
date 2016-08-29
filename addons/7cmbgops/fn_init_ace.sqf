@@ -40,24 +40,46 @@ if (hasInterface) then {
 			satclick = addMissionEventHandler [
 			    "MapSingleClick",
 			    {
-			        if ((player distance _pos) < 5000) then {
-			            onMapSingleClick "";
-			            PXS_SatelliteTarget = "Logic" createVehicleLocal _pos;
+            		removeMissionEventHandler ["MapSingleClick", satclick];
+            		//_pos = _this select 1;
+			        //if ((player distance _pos) < 5000) then {
+			            PXS_SatelliteTarget = "Logic" createVehicleLocal (_this select 1);
 			            PXS_SatelliteTarget setDir 0;
-			            [] spawn seven_fnc_PXS_Delay;
+			            [] spawn seven_fnc_view_satellite;
 			            openMap false;
-			        } else {
-			            if (true) exitwith {
-			                hint "Satellite viewrange is limited to a 5 kilometers radius!";
-			            };
-			        };
+			        //} else {
+			        //    hint "Satellite viewrange is limited to a 10 kilometers radius!";
+			        //};
 			    }
 			];
 			hint "Click on the map to insert default satellite coordinates.";
 			openMap true;
 		},
 		{
-			(!isNull objectParent player) or ((backpack player) iskindof "TFAR_Bag_Base");
+			"ItemcTab" in (items player + assignedItems player);
+		}
+	] call ace_interact_menu_fnc_createAction;
+
+	_arty = [
+		"arty",
+		"Artillery Console",
+		"\A3\ui_f\data\map\markers\military\destroy_CA.paa",
+		{
+			if (!(dtaReady) or (time < 4)) exitWith {hint "DTA starting, please wait..."};
+			if (dtaLastDialog isEqualTo "Assets") then {
+				[] execVM "\7cmbgops\scripts\Artillery\Dialog\Assets.sqf";
+			} else {
+				if (dtaLastDialog isEqualTo "Aimpoint") then {
+					[] execVM "\7cmbgops\scripts\Artillery\Dialog\Aimpoint.sqf";
+				} else {
+					if (dtaLastDialog isEqualTo "Control") then {
+						[false] execVM "\7cmbgops\scripts\Artillery\Dialog\Control.sqf";
+					};
+				};
+			};
+		},
+		{
+			"ItemcTab" in (items player + assignedItems player);
 		}
 	] call ace_interact_menu_fnc_createAction;
 
@@ -93,7 +115,7 @@ if (hasInterface) then {
 
 	{
 		[player, 1, ["ACE_SelfActions", "ACE_Equipment"], _x] call ace_interact_menu_fnc_addActionToObject;
-	} foreach [_satcom/*,_nradio*/];
+	} foreach [_satcom, _arty/*, _nradio*/];
 
 	[player, 1, ["ACE_SelfActions", "ACE_TeamManagement"], _groupname] call ace_interact_menu_fnc_addActionToObject;
 

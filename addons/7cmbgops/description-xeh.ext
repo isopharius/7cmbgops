@@ -9,6 +9,11 @@ class Extended_Killed_Eventhandlers
 };
 */
 
+class Extended_PostInit_EventHandlers
+{
+		dtaInit = "[] execVM '\7cmbgops\scripts\Artillery\Start.sqf'";
+};
+
 class Extended_InitPost_EventHandlers {
 /*
 	//LAVs

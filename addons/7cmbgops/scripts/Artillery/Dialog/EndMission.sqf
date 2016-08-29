@@ -1,0 +1,15 @@
+closeDialog 0;
+//_asset = dtaSelectedAsset;
+_asset = dtaControlledAssetLocal;
+dtaControlledAssets = dtaControlledAssets - [_asset];
+publicVariable "dtaControlledAssets";
+dtaControlledAssetLocal = grpNull;
+[player,"End of mission.","EndOfMission"] call dta_fnc_SendComms;
+dtaLastDialog = "Assets";
+dtaHaveAimpoint = false;
+dtaAngle = "LOW";
+dtaFireMissionCurrent = [];
+dtaSelectedTube = objNull;
+dtaSelectedTubeIndex = 0;
+dtaLastWarheadType = "";
+dtaRounds = 3;

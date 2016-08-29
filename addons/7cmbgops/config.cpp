@@ -28,24 +28,24 @@ class CfgPatches
 	};
 };
 
+#include "scripts\Artillery\zReconfig\Ammo\config.cpp"
+
 class CfgFunctions
 {
 	#include "functions\cfgfunctions.hpp"
 };
 
-
+//dialogs
+#include "scripts\Artillery\Menu.hpp"
 #include "scripts\sushi\core\cfg\common_saf.cpp"
 #include "scripts\sushi\breach-settings.cpp"
-
 #include "scripts\nradio\nradio.hpp"
-
 #include "scripts\pxs_satcom_a3\init_interface.hpp"
-
 #include "scripts\defuse\common.hpp"
 #include "scripts\defuse\explosivePad.hpp"
 
+//CBA XEH
 #include "description-xeh.ext"
-
 
 class CfgVehicles
 {
@@ -68,6 +68,7 @@ class CfgSounds
 	sounds[] = {crowd,muezzin1,muezzin2,muezzinshort1,muezzinshort2,muezzinshort3,muezzinshort4,muezzinmusic1,muezzinmusic2,Alarm,allahu_akbar1,allahu_akbar2,allahu_akbar3,jihad,scream1,scream2,scream3,scream4,scream5,scream6,Hint,Hit,Buzzer};
 
 	#include "scripts\defuse\cfgSounds.hpp"
+	#include "scripts\Artillery\cfgSounds.hpp"
 
 	class alarm_prepare {
 		name = "alarm_prepare";

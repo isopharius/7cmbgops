@@ -75,8 +75,6 @@ class seven
 		class key_function {};
 		class mouseZChanged {};
 		class key_main {};
-		class start_satellite {};
-		class PXS_delay;
 	};
 	class train360
 	{
@@ -101,6 +99,7 @@ class seven
 	};
 	class NRD {
 		file = "\7cmbgops\scripts\nradio";
+
 		class status {};
 		class play {};
 		class stop {};
