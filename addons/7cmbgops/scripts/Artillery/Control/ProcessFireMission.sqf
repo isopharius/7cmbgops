@@ -144,7 +144,7 @@ while {((count _tubes) > 0)} do {
 	//nul = [_tube,_rounds,_profile,_pos,_warheadType,_missionType,_sheafSize,_fuse,_assetType,_sheaf,_airburstHeight,_flightTime,_asset,_tubeType,_angle] execVM "\7cmbgops\scripts\Artillery\Control\Tube.sqf";
 
 	_tubeArray = [_tube,_rounds,_profile,_pos,_warheadType,_missionType,_sheafSize,_fuse,_assetType,_sheaf,_airburstHeight,_flightTime,_asset,_tubeType,_angle,_selectedTube];
-	[_tubeArray,"\7cmbgops\scripts\Artillery\Control\Tube.sqf"] remoteExec ["BIS_fnc_execVM", _tube, false];
+	[_tubeArray,"\7cmbgops\scripts\Artillery\Control\Tube.sqf"] remoteExecCall ["BIS_fnc_execVM", _tube, false];
 
 	if (_missionType isEqualTo "SPOT") then {_tubes = []};
 };
