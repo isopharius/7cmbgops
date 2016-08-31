@@ -11,28 +11,30 @@ class Extended_Killed_Eventhandlers
 
 class Extended_PostInit_EventHandlers
 {
-		dtaInit = "[] execVM '\7cmbgops\scripts\Artillery\Start.sqf'";
+	Init = "
+		[] execVM '\7cmbgops\init_map.sqf';
+		[] execVM '\7cmbgops\init_custom.sqf';
+		[] execVM '\7cmbgops\init_ares.sqf';
+		[] execVM '\7cmbgops\init_ace.sqf';
+		[] execVM '\7cmbgops\scripts\Artillery\Start.sqf';
+	";
 };
 
 class Extended_InitPost_EventHandlers {
-/*
-	//LAVs
-	class ONS_lav3_isc_F {
-		veh_init = "if (isserver) then {(_this select 0) addItemCargoGlobal ['ToolKit',1]; (_this select 0) addBackpackCargoGlobal ['B_ons_Carryall_TCCC_TW',1]; (_this select 0) addBackpackCargoGlobal ['B_ons_Carryall_556_MG_TW',1]; (_this select 0) addBackpackCargoGlobal ['B_ons_Carryall_556_TW',1];}";
+
+	//IEDs
+	class IEDLandSmall_Remote_Mag {
+		ied_init = "[(_this select 0), getPos (_this select 0), random 360, ""IEDLandSmall_Remote_Mag"", ""PressurePlate"", []] call ACE_Explosives_fnc_placeExplosive; deleteVehicle (_this select 0);";
 	};
-	class ONS_LAV2_Coyote_DFS_F {
-		veh_init = "if (isserver) then {(_this select 0) addItemCargoGlobal ['ToolKit',1]; (_this select 0) addBackpackCargoGlobal ['B_ons_Carryall_TCCC_TW',1]; (_this select 0) addBackpackCargoGlobal ['B_ons_Carryall_556_MG_TW',1]; (_this select 0) addBackpackCargoGlobal ['B_ons_Carryall_556_TW',1];}";
+	class iEDurbanSmall_Remote_Mag {
+		ied_init = "[(_this select 0), getPos (_this select 0), random 360, ""IEDurbanSmall_Remote_Mag"", ""PressurePlate"", []] call ACE_Explosives_fnc_placeExplosive; deleteVehicle (_this select 0);";
 	};
-	class ons_apc_wheeled_01 {
-		veh_init = "if (isserver) then {(_this select 0) addItemCargoGlobal ['ToolKit',1]; (_this select 0) addBackpackCargoGlobal ['B_ons_Carryall_TCCC_TW',1]; (_this select 0) addBackpackCargoGlobal ['B_ons_Carryall_556_MG_TW',1]; (_this select 0) addBackpackCargoGlobal ['B_ons_Carryall_556_TW',1];}";
+	class IEDLandBig_Remote_Mag {
+		ied_init = "[(_this select 0), getPos (_this select 0), random 360, ""IEDLandBig_Remote_Mag"", ""PressurePlate"", []] call ACE_Explosives_fnc_placeExplosive; deleteVehicle (_this select 0);";
 	};
-	class ons_apc_wheeled_01_TW {
-		veh_init = "if (isserver) then {(_this select 0) addItemCargoGlobal ['ToolKit',1]; (_this select 0) addBackpackCargoGlobal ['B_ons_Carryall_TCCC_TW',1]; (_this select 0) addBackpackCargoGlobal ['B_ons_Carryall_556_MG_TW',1]; (_this select 0) addBackpackCargoGlobal ['B_ons_Carryall_556_TW',1];}";
+	class IEDUrbanBig_Remote_Mag {
+		ied_init = "[(_this select 0), getPos (_this select 0), random 360, ""IEDUrbanBig_Remote_Mag"", ""PressurePlate"", []] call ACE_Explosives_fnc_placeExplosive; deleteVehicle (_this select 0);";
 	};
-	class ONS_MRZR_Base {
-		veh_init = "if (isserver) then {(_this select 0) addItemCargoGlobal ['ToolKit',1]; (_this select 0) addBackpackCargoGlobal ['B_ons_Carryall_TCCC_TW',1]; (_this select 0) addBackpackCargoGlobal ['B_ons_Carryall_556_MG_TW',1]; (_this select 0) addBackpackCargoGlobal ['B_ons_Carryall_556_TW',1];}";
-	};
-*/
 
 	//ACE medics
 	class ONS_Soldier_CSOR_TW {
@@ -70,7 +72,7 @@ class Extended_InitPost_EventHandlers {
         arsenal_init = "[(_this select 0), true, true, true, true, true, true] call LT_fnc_LTaction;";
     };
 	class B_Slingload_01_Ammo_F {
-		arsenal_init = "(_this select 0) addaction ['<t color=''#FFFF00''>Grab Arsenal Box</t>',{createVehicle ['B_CargoNet_01_ammo_F', (getPosworld player), [], 0, 'none']},'',1,true,true,'','(_this distance _target < 5) && (((getPosworld _target) nearestObject ''B_CargoNet_01_ammo_F'') isEqualTo objNull)']; (_this select 0) addaction ['<t color=''#FFFF00''>Grab Ammo Box</t>',{createVehicle ['ONS_Rifles_Box_TW', (getPosworld player), [], 0, 'none']},'',1,true,true,'','(_this distance _target < 5) && (((getPosworld _target) nearestObject ''ONS_Rifles_Box_TW'') isEqualTo objNull)']; (_this select 0) addaction ['<t color=''#FFFF00''>Grab MG Ammo Box</t>',{createVehicle ['ONS_LMG_AMMO_TW', (getPosworld player), [], 0, 'none']},'',1,true,true,'','(_this distance _target < 5) && (((getPosworld _target) nearestObject ''ONS_LMG_AMMO_TW'') isEqualTo objNull)'];";
+		arsenal_init = "(_this select 0) addaction ['<t color=''#FFFF00''>Grab Arsenal Box</t>', {_crate = createVehicle ['B_CargoNet_01_ammo_F', [0,0,0], [], 0, 'CAN_COLLIDE']; _crate setPosWorld (getPosworld player)},'',1,true,true,'','(((getPosworld _target) nearestObject ''B_CargoNet_01_ammo_F'') isEqualTo objNull)', 5]; (_this select 0) addaction ['<t color=''#FFFF00''>Grab Ammo Box</t>', {_crate = createVehicle ['ONS_Rifles_Box_TW', [0,0,0], [], 0, 'CAN_COLLIDE']; _crate setPosWorld (getPosworld player)},'',1,true,true,'','(((getPosworld _target) nearestObject ''ONS_Rifles_Box_TW'') isEqualTo objNull)', 5]; (_this select 0) addaction ['<t color=''#FFFF00''>Grab MG Ammo Box</t>',{_crate = createVehicle ['ONS_LMG_AMMO_TW', [0,0,0], [], 0, 'CAN_COLLIDE']; _crate setPosWorld (getPosworld player)},'',1,true,true,'','(((getPosworld _target) nearestObject ''ONS_LMG_AMMO_TW'') isEqualTo objNull)', 5];";
 	};
 
 	//draggable ships & subs
