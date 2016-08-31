@@ -11,7 +11,6 @@ class CfgPatches
 
 		requiredAddons[] =
 		{
-			"achilles_modules_f_ares",
 			"A3_UI_F",
 			"A3_UI_F_Curator",
 			"A3_Functions_F",
