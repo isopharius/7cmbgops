@@ -10,7 +10,7 @@
 _target_name = format["target_%1",time];
 _monitor = nil;
 
-_path = "scripts\una_targets\";
+_path = "\7cmbgops\scripts\targets\";
 params ["_target"];
 if(count _this > 1) then {_monitor = _this select 1;};
 if(count _this > 2) then {_target_name = _this select 2;};

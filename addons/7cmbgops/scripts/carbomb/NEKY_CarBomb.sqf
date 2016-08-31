@@ -122,7 +122,7 @@ if (IsNil "_Pos") exitWith {False};
 // Create and attach bomb
 _Bomb = CreateVehicle [(_Visual call BIS_FNC_SelectRandom), [0,0,1000], [], 0, "NONE"];
 _Bomb attachTo [_Vehicle,(_Pos select 0)];
-[[_Bomb,_Pos],{(_This select 0) setDir (_This select 1 select 1); (_This select 0) setVectorUp (_This select 1 select 2)}] remoteExec ["BIS_FNC_SPAWN", 0, false];
+[[_Bomb,_Pos],{(_This select 0) setDir (_This select 1 select 1); (_This select 0) setVectorUp (_This select 1 select 2)}] remoteExecCall ["BIS_FNC_SPAWN", 0, false];
 
 // Random Bomb
 If (_BombType == "random") then {_BombType = (_RandomBomb call BIS_FNC_SelectRandom)};
@@ -276,7 +276,7 @@ Switch (_Case) do
 			[_Controller] Join _Grp;
 			_Grp SetBehaviour "SAFE";
 			_Grp SetCombatMode "WHITE";
-			[[_Controller],{(_This select 0) EnableAI "MOVE"; (_This select 0) ForceSpeed -1}] remoteExec ["BIS_FNC_SPAWN", 0, false];
+			[[_Controller],{(_This select 0) EnableAI "MOVE"; (_This select 0) ForceSpeed -1}] remoteExecCall ["BIS_FNC_SPAWN", 0, false];
 
 			// Create Waypoints
 			_Index = 0;

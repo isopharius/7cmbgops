@@ -8,8 +8,9 @@ private ["_namevar","_position","_vehicletype",
 _locationlist = _this select 0;
 _location = [_locationlist] call karma_cb_location_scan;
 _vehicletype = ["C_Hatchback_01_F","C_Hatchback_01_sport_F","C_Offroad_01_F","C_SUV_01_F","C_Van_01_box_F","C_Van_01_transport_F"] call BIS_fnc_SelectRandom;
-_carbomb = createVehicle [_vehicletype, _location, [], 0, "NONE"];
+_carbomb = createVehicle [_vehicletype, [0,0,0], [], 0, "NONE"];
 createVehicleCrew _carbomb;
+_carbom setPos _location;
 _cbombdriver = driver _carbomb;
 //Switch Side
 _cbombergroup = createGroup EAST;

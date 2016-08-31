@@ -16,8 +16,8 @@ private _affected = _center nearEntities ["CAManBase", _r];
 	sleep 0.2;
 	if (alive _x && !isPlayer _x && !_conscious && !_cuffed && _safHos == -1 && !_surrending)  then {
 		private _strength = 1 - (((getPosASL _x) vectorDistance _center) min 20) / 20;
-		
-	
+
+
 		if (_strength > 0.3) then {
 			[[_x,_stance],{
 				private _u =_this select 0;
@@ -32,7 +32,7 @@ private _affected = _center nearEntities ["CAManBase", _r];
 
 					_t > 5 || !alive _u
 				};
-				
+
 				private _cuffed = _u getVariable ["ace_captives_isHandcuffed", false];
 				private _safHos = _u getVariable ["SAF_var_hostage_state",-1];
 				private _surrending = _u getVariable ["ace_captives_isSurrendering", false];
@@ -40,11 +40,11 @@ private _affected = _center nearEntities ["CAManBase", _r];
 					_u switchMove "";
 					if (!_surrending) then {
 						_u playActionNow "crouch";
-					};					
+					};
 				};
 				group _u setBehaviour "AWARE";
 				_u enableAI "AUTOTARGET";
-			}] remoteExec ["BIS_fnc_spawn"];
+			}] remoteExecCall ["BIS_fnc_spawn"];
 		};
 	};
 } foreach _affected;

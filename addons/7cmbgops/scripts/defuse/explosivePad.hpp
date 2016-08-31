@@ -248,7 +248,7 @@ class KeypadDefuse
 			offsetPressedX = 0.002;
 			offsetPressedY = 0.002;
 			soundClick[] = {"",0,0};
-			onMouseButtonDown = "[CODE, CODEINPUT] spawn seven_fnc_codeCompare; closeDialog 0";
+			onMouseButtonDown = "[CODE, CODEINPUT] execVM '\7cmbgops\scripts\defuse\codeCompare.sqf'; closeDialog 0";
 		};
 		class Bclear: RscButtonDefuse
 		{
@@ -307,7 +307,7 @@ class KeypadDefuse
 			h = 0.033 * safezoneH;
 			colorBackground[] = {0,0,1,1};
 			soundClick[] = {"",0,0};
-			onMouseButtonDown = "playSound 'wire_cut'; [WIRE,'BLUE'] spawn seven_fnc_wireCompare; closeDialog 0";
+			onMouseButtonDown = "playSound 'wire_cut'; [WIRE,'BLUE'] execVM '\7cmbgops\scripts\defuse\wireCompare.sqf'; closeDialog 0";
 		};
 		class Bwhite: RscButtonDefuse
 		{
@@ -318,7 +318,7 @@ class KeypadDefuse
 			h = 0.033 * safezoneH;
 			colorBackground[] = {1,1,1,1};
 			soundClick[] = {"",0,0};
-			onMouseButtonDown = "playSound 'wire_cut'; [WIRE,'WHITE'] spawn seven_fnc_wireCompare; closeDialog 0";
+			onMouseButtonDown = "playSound 'wire_cut'; [WIRE,'WHITE'] execVM '\7cmbgops\scripts\defuse\wireCompare.sqf'; closeDialog 0";
 		};
 		class Byellow: RscButtonDefuse
 		{
@@ -329,7 +329,7 @@ class KeypadDefuse
 			h = 0.033 * safezoneH;
 			colorBackground[] = {1,1,0,1};
 			soundClick[] = {"",0,0};
-			onMouseButtonDown = "playSound 'wire_cut'; [WIRE,'YELLOW'] spawn seven_fnc_wireCompare; closeDialog 0";
+			onMouseButtonDown = "playSound 'wire_cut'; [WIRE,'YELLOW'] execVM '\7cmbgops\scripts\defuse\wireCompare.sqf'; closeDialog 0";
 		};
 		class Bgreen: RscButtonDefuse
 		{
@@ -340,7 +340,7 @@ class KeypadDefuse
 			h = 0.033 * safezoneH;
 			colorBackground[] = {0,1,0,1};
 			soundClick[] = {"",0,0};
-			onMouseButtonDown = "playSound 'wire_cut'; [WIRE,'GREEN'] spawn seven_fnc_wireCompare; closeDialog 0";
+			onMouseButtonDown = "playSound 'wire_cut'; [WIRE,'GREEN'] execVM '\7cmbgops\scripts\defuse\wireCompare.sqf'; closeDialog 0";
 		};
 	};
 };
