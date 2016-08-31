@@ -177,7 +177,7 @@ if ((arInfoWorld_MKY select 0) isEqualTo "sand") then {
 		_MKY_fnc_sand_Init = {
 
 			// create the parent particle emitter and attach to the emitter host object (the bucket)
-			objSand = "#particlesource" createVehicleLocal (getPosASL player);
+			objSand = "#particlesource" createVehicleLocal [0,0,0];
 			objSand attachTo [objEmitterHost,[0,0,0]];
 
 			// create the children emitters that will follow the parent emitter
@@ -386,7 +386,7 @@ if ((arInfoWorld_MKY select 0) isEqualTo "sand") then {
 		// create an object that hosts the particle emitters
 		// create the object that will be bound to player model, which emitters will themselves be bound to
 		if (isNil "objEmitterHost") then {
-			objEmitterHost = "Land_Bucket_F" createVehicleLocal (position player);
+			objEmitterHost = "Land_Bucket_F" createVehicleLocal [0,0,0];
 			objEmitterHost attachTo [player,[0,0,0]];
 			objEmitterHost hideObject true;
 			objEmitterHost allowDamage false;

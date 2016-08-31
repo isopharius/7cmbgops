@@ -45,7 +45,7 @@ if (hasInterface) then {
 			        //if ((player distance _pos) < 5000) then {
 			            PXS_SatelliteTarget = "Logic" createVehicleLocal (_this select 1);
 			            PXS_SatelliteTarget setDir 0;
-			            [] spawn seven_fnc_view_satellite;
+			            [] spawn seven_fnc_init_satellite;
 			            openMap false;
 			        //} else {
 			        //    hint "Satellite viewrange is limited to a 10 kilometers radius!";
@@ -69,12 +69,8 @@ if (hasInterface) then {
 			if (dtaLastDialog isEqualTo "Assets") then {
 				[] execVM "\7cmbgops\scripts\Artillery\Dialog\Assets.sqf";
 			} else {
-				if (dtaLastDialog isEqualTo "Aimpoint") then {
-					[] execVM "\7cmbgops\scripts\Artillery\Dialog\Aimpoint.sqf";
-				} else {
-					if (dtaLastDialog isEqualTo "Control") then {
-						[false] execVM "\7cmbgops\scripts\Artillery\Dialog\Control.sqf";
-					};
+				if (dtaLastDialog isEqualTo "Control") then {
+				[false] spawn seven_fnc_Control;
 				};
 			};
 		},

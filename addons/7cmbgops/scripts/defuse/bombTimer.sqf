@@ -1,11 +1,11 @@
 params ["_bomb", "_time", "_yield"];
 
 	if ((_time > 0) && (!DEFUSED)) then {
-		format["Bomb Detonation in: \n %1", [((_time)/60)+.01,"HH:MM"] call BIS_fnc_timetostring] remoteExec ["hintSilent", 0, false];
+		format["Bomb Detonation in: \n %1", [((_time)/60)+.01,"HH:MM"] call BIS_fnc_timetostring] remoteExecCall ["hintSilent", 0, false];
 
 		if (_time < 1) then {
 
-			[bombcontainer] remoteExec ["removeAllActions", 0, true];
+			[bombcontainer] remoteExecCall ["removeAllActions", 0, true];
 
 			//beeps
 			for "_i" from 1 to 29 do {

@@ -1,23 +1,6 @@
 class seven
 {
 	tag = "seven";
-	class init
-	{
-		file = "\7cmbgops";
-
-		class init_map {
-			postInit = 1;
-		};
-		class init_custom {
-			postInit = 1;
-		};
-		class init_ares {
-			postInit = 1;
-		};
-		class init_ace {
-			postInit = 1;
-		};
-	};
 	class funkunfusion
 	{
 		file = "\7cmbgops\functions";
@@ -31,7 +14,7 @@ class seven
 		class groupname {};
 		class attachmrzr {};
 		class fmradio {};
-		class adminmenudef {};
+		class adminmenuDef {};
 		class garageNew {};
 		class getloadout {};
 		class setloadout {};
@@ -48,7 +31,6 @@ class seven
 		class helipad_light_remove {};
 		class SHK_moveObjects {};
 		class Teleport {};
-		class Sand_Snow_Init {};
 	};
 	class loadouts
 	{
@@ -61,9 +43,7 @@ class seven
 	{
 		file = "\7cmbgops\scripts\pxs_satcom_a3";
 
-		class init_satellite {
-			postInit = 1;
-		};
+		class init_satellite {};
 		class time_function {};
 		class time_view {};
 		class coordinates_function {};
@@ -111,13 +91,10 @@ class seven
 		class start {};
 		class startAdd {};
 	};
-  class defuse {
-		file = "\7cmbgops\scripts\defuse\functions";
+	class defuse {
+		file = "\7cmbgops\scripts\defuse";
 		class searchAction {};
-		class bombTimer {};
-		class codeCompare {};
-		class wireCompare {};
-  };
+	};
 	class breach_safplug {
 		file = "\7cmbgops\scripts\sushi\breach\fncs";
 		//class breachGetSettings { preInit = 1; };
@@ -142,7 +119,56 @@ class seven
 	};
 	class core {
 		file = "\7cmbgops\scripts\sushi\core\fncs";
-		class preInit { preInit = 1; };
 		class showStatus {};
+	};
+	class artillery {
+		class Control {
+			file = "\7cmbgops\scripts\Artillery\Control";
+			class Splash {};
+			class Tube {};
+			class ProcessFireMission {};
+		};
+		class Dialog {
+			file = "\7cmbgops\scripts\Artillery\Dialog";
+			class Adjust {};
+			class AimpointHelp {};
+			class Assets {};
+			class ChangeTube {};
+			class ClearAdjust {};
+			class Control {};
+			class ControlAsset {};
+			class DisplayWarheads {};
+			class EndMission {};
+			class InputAimpoint {};
+			class RefreshMissions {};
+			class ReleaseAsset {};
+			class SelectAsset {};
+			class SelectFuse {};
+			class SelectMission {};
+			class Transmit {};
+		};
+		class Misc {
+			file = "\7cmbgops\scripts\Artillery\Misc";
+			class CommsPlay {};
+		};
+		class Special {
+			file = "\7cmbgops\scripts\Artillery\Special";
+			class Fired {};
+			class WP {};
+			class LaserGuided {};
+			class SelfGuided {};
+			class GuideProjectile {};
+		};
+		class Airburst {
+			file = "\7cmbgops\scripts\Artillery\Airburst";
+			class AirburstFire2 {};
+			class AirburstFireHigh {};
+			class AirburstFireLow {};
+			class AirburstFireMed {};
+			class AirburstFireHit {};
+			class CallShrapnel {};
+			class FireShrappnel {};
+			class OriginToTarget {};
+		};
 	};
 };

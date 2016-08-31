@@ -37,10 +37,11 @@ if (isserver) then { //server
 				] call Ares_fnc_ShowChooseDialog;
 			if (count _dialogResult isEqualTo 0) exitWith {};
 
-			mish pushback (_mish select (_dialogResult select 0));
+			_mishpick = _dialogResult select 0;
+			mish pushback (_mish select _mishpick);
 			publicVariable "mish";
 
-			_mishname = _mishlist select (_dialogResult select 0);
+			_mishname = _mishlist select _mishpick;
 			[format["File %1 transferred to server.",_mishname]] call Ares_fnc_ShowZeusMessage;
 		}
 	] call Ares_fnc_RegisterCustomModule;
@@ -63,7 +64,8 @@ if (isserver) then { //server
 				] call Ares_fnc_ShowChooseDialog;
 			if (count _dialogResult isEqualTo 0) exitWith {};
 
-			_loadmish = (mish select (_dialogResult select 0)) select 1;
+			_mishpick = _dialogResult select 0;
+			_loadmish = (mish select _mishpick) select 1;
 			try
 			{
 				[(compile _loadmish), _this, false] call Ares_fnc_BroadcastCode;
@@ -74,7 +76,7 @@ if (isserver) then { //server
 				["Failed to parse code. See RPT for error."] call Ares_fnc_ShowZeusMessage;
 			};
 
-			_mishname = _mishlist select (_dialogResult select 0);
+			_mishname = _mishlist select _mishpick;
 			[format["If you don't see any errors, file %1 is now loaded!",_mishname]] call Ares_fnc_ShowZeusMessage;
 		}
 	] call Ares_fnc_RegisterCustomModule;
@@ -97,10 +99,11 @@ if (isserver) then { //server
 				] call Ares_fnc_ShowChooseDialog;
 			if (count _dialogResult isEqualTo 0) exitWith {};
 
-			mish deleteAt (_dialogResult select 0);
+			_mishpick = _dialogResult select 0;
+			mish deleteAt _mishpick;
 			publicVariable "mish";
 
-			_mishname = _mishlist select (_dialogResult select 0);
+			_mishname = _mishlist select _mishpick;
 			[format["File %1 deleted from server!",_mishname]] call Ares_fnc_ShowZeusMessage;
 		}
 	] call Ares_fnc_RegisterCustomModule;
@@ -129,29 +132,8 @@ if (hasInterface) then { //players
 			params ["_position"];
 
 			//get radius
-			call {
-				_radius = _dialogResult select 1;
-				if (_radius isEqualTo 0) exitWith {
-					_radius = 50;
-				};
-				if (_radius isEqualTo 1) exitWith {
-					_radius = 100;
-				};
-				if (_radius isEqualTo 2) exitWith {
-					_radius = 500;
-				};
-				if (_radius isEqualTo 3) exitWith {
-					_radius = 1000;
-				};
-				if (_radius isEqualTo 4) exitWith {
-					_radius = 2000;
-				};
-				if (_radius isEqualTo 5) then {
-					_radius = 5000;
-				} else {
-					_radius = -1;
-				};
-			};
+			_radius = [50, 100, 500, 1000, 2000, 5000, -1];
+			_radius = _radius select (_dialogResult select 1);
 
 			_includeUnits = if (_dialogResult select 2 isEqualTo 0) then { true; } else { false; };
 			_includeEmptyVehicles = if (_dialogResult select 3 isEqualTo 0) then { true; } else { false; };
@@ -370,7 +352,8 @@ if (hasInterface) then { //players
 				] call Ares_fnc_ShowChooseDialog;
 			if (count _dialogResult isEqualTo 0) exitWith {};
 
-			_loadmish = (_mish select (_dialogResult select 0)) select 1;
+			_mishpick = _dialogResult select 0;
+			_loadmish = (_mish select _mishpick) select 1;
 			try
 			{
 				[(compile _loadmish), _this, 2] call Ares_fnc_BroadcastCode;
@@ -381,7 +364,7 @@ if (hasInterface) then { //players
 				["Failed to parse code. See RPT for error."] call Ares_fnc_ShowZeusMessage;
 			};
 
-			_mishname = _mishlist select (_dialogResult select 0);
+			_mishname = _mishlist select _mishpick;
 			[format["If you don't see any errors, file %1 is now loaded!",_mishname]] call Ares_fnc_ShowZeusMessage;
 		}
 	] call Ares_fnc_RegisterCustomModule;
@@ -405,10 +388,11 @@ if (hasInterface) then { //players
 				] call Ares_fnc_ShowChooseDialog;
 			if (count _dialogResult isEqualTo 0) exitWith {};
 
-			_mish deleteAt (_dialogResult select 0);
+			_mishpick = _dialogResult select 0;
+			_mish deleteAt _mishpick;
 			profileNamespace setVariable [format["savemish_%1", worldname], _mish];
 
-			_mishname = _mishlist select (_dialogResult select 0);
+			_mishname = _mishlist select _mishpick;
 			[format["File %1 deleted from client!",_mishname]] call Ares_fnc_ShowZeusMessage;
 		}
 	] call Ares_fnc_RegisterCustomModule;
@@ -426,20 +410,8 @@ if (hasInterface) then { //players
 			if (count _dialogResult isEqualTo 0) exitWith {};
 
 			//get yield
-			call {
-				_yield = _dialogResult select 0;
-				if (_yield isEqualTo 0) exitWith {
-					_yield = 500;
-				};
-				if (_yield isEqualTo 1) exitWith {
-					_yield = 1000;
-				};
-				if (_yield isEqualTo 2) then {
-					_yield = 2000;
-				} else {
-					_yield = 5000;
-				};
-			};
+			_yield = [500, 1000, 2000, 5000];
+			_yield = _yield select (_dialogReslut select 0);
 
 			params ["_pos"];
 			[_pos,_yield] remoteExec ["RHS_fnc_ss21_nuke", 2, false];
@@ -493,44 +465,11 @@ if (hasInterface) then { //players
 
 			sleep 2;
 
-       		[bombcontainer, ((parseNumber(_dialogResult select 0)) * 60), 5000] remoteExec ["fnc_bombTimer", 2, false];
-       		[bombcontainer,["<t color='#E61616'>Defuse the BOMB</t>","createDialog 'KeypadDefuse'","",1,true,true,"","true",3]] remoteexec ["addAction", 0,true];
+       		[[bombcontainer, ((parseNumber(_dialogResult select 0)) * 60), 5000], "7cmbgops\scripts\defuse\bombTimer.sqf"] remoteExecCall ["BIS_fnc_execVM", 2, false];
+       		[bombcontainer,["<t color='#E61616'>Defuse the BOMB</t>","createDialog 'KeypadDefuse'","",1,true,true,"","true",3]] remoteexecCall ["addAction", 0,true];
 		}
 	] call Ares_fnc_RegisterCustomModule;
 
-/*
-	[
-		"7CMBG",
-		"Start Riot",
-		{
-			_pos = _this select 0;
-			_men = _pos nearEntities ["Man", 1000];
-			_tire =	createVehicle ["misc_tyreheap", _pos, [], 1, "NONE"];
-
-			{
-				if ((alive _x) && (side _x isEqualTo CIVILIAN) && (random 10 > 2)) then {
-					_newpos = (position _tire) findEmptyPosition [1, 20];
-					_x moveto _newpos;
-				};
-			} foreach _men;
-
-			["RIOT STARTED."] call Ares_fnc_ShowZeusMessage;
-
-			while {count (_pos nearEntities ["Man", 10]) < 5} do {
-				sleep 10;
-			};
-
-			[1, _tire] execvm "\ares_zeusExtensions\scripts\spawnSmoke.sqf";
-
-			while {count (_pos nearEntities ["Man", 10]) > 5} do {
-				playSound3D ["crowd.ogg", objnull, false, _pos, 1];
-				sleep 12;
-			};
-
-			deletevehicle _tire;
-		}
-	] call Ares_fnc_RegisterCustomModule;
-*/
 	[
 		"Spawn",
 		"Flies",
@@ -564,7 +503,7 @@ if (hasInterface) then { //players
 			_grp = group _unit;
 			if (isNull _grp) exitwith {["ERROR: NO GROUP SELECTED."] call Ares_fnc_ShowZeusMessage;};
 
-			[_grp, getPosWorld (_unit findNearestEnemy (_this select 0)),500] remoteExec ["CBA_fnc_taskAttack", _unit, false];
+			[_grp, getPosWorld (_unit findNearestEnemy (_this select 0)),500] remoteExecCall ["CBA_fnc_taskAttack", _unit, false];
 
 			["ATTACK STARTED."] call Ares_fnc_ShowZeusMessage;
 		}
@@ -577,7 +516,7 @@ if (hasInterface) then { //players
 			_dialogResult =
 				["ACE IED options",
 						[
-							["IED type:", ["Random", "Small", "Big", "Satchel"]]
+							["IED type:", ["Random", "Small", "Small Urban", "Big", "Big Urban"]]
 						]
 				] call Ares_fnc_ShowChooseDialog;
 			if (count _dialogResult isEqualTo 0) exitWith {};
@@ -585,28 +524,13 @@ if (hasInterface) then { //players
 			params ["_pos"];
 
 			//pick IED type
-			call {
-				_iedtype = _dialogResult select 0;
-			    if (_iedtype isEqualTo 1) exitWith {
-					if (!isNull (_pos nearObjects ["House", 20])) then {
-						_iedtype = "iEDurbanSmall_Remote_Mag";
-					} else {
-						_iedtype = "IEDLandSmall_Remote_Mag";
-					};
-			    };
-			    if (_iedtype isEqualTo 2) exitWith {
-					if (!isNull (_pos nearObjects ["House", 20])) then {
-						_iedtype = "IEDUrbanBig_Remote_Mag";
-					} else {
-						_iedtype = "IEDLandBig_Remote_Mag";
-					};
-			    };
-			    if (_iedtype isEqualTo 3) then {
-					_iedtype = "SatchelCharge_Remote_Mag";
+				_iedpick = _dialogResult select 0;
+				_iedtype = ["IEDLandSmall_Remote_Mag", "iEDurbanSmall_Remote_Mag", "IEDLandBig_Remote_Mag","IEDUrbanBig_Remote_Mag"];
+			    if (_iedpick isEqualTo 0) then {
+					_iedtype = selectRandom _iedtype;
 			    } else {
-					_iedtype = selectRandom ["iEDurbanSmall_Remote_Mag","IEDUrbanBig_Remote_Mag","IEDLandSmall_Remote_Mag","IEDLandBig_Remote_Mag","SatchelCharge_Remote_Mag"];
+					_iedtype = _iedtype select (_iedpick - 1);
 				};
-			};
 
 			_object = "#lightpoint" createVehicleLocal [0,0,0];
 
@@ -642,14 +566,13 @@ if (hasInterface) then { //players
 				["WAIT 10 seconds for sync."] call Ares_fnc_ShowZeusMessage;
 				sleep 10;
 
-				if (_sand isEqualTo 0) then {["SANDSTORM INCOMING!"] call Ares_fnc_ShowZeusMessage;};
-				if (_sand isEqualTo 1) then {["LIGHT SANDSTORM INCOMING!"] call Ares_fnc_ShowZeusMessage;};
-				if (_sand isEqualTo 2) then {["MEDIUM SANDSTORM INCOMING!"] call Ares_fnc_ShowZeusMessage;};
-				if (_sand isEqualTo 3) then {["HEAVY SANDSTORM INCOMING!"] call Ares_fnc_ShowZeusMessage;};
+				_msg = ["SANDSTORM INCOMING!", "LIGHT SANDSTORM INCOMING!", "MEDIUM SANDSTORM INCOMING!", "HEAVY SANDSTORM INCOMING!"];
+				_msg = _msg select _sand;
+				[_msg] call Ares_fnc_ShowZeusMessage;
 
 				// define the global sand parameter array
 				//[fog,overcast,use ppEfx,allow rain,force wind,vary fog,use wind audio,EFX strength]
-				[0,"",true,false,true,true,true,_sand] remoteExec ["seven_fnc_Sand_Snow_Init", 0, true];
+				[[0,"",true,false,true,true,true,_sand], "\7cmbgops\scripts\Sand_Snow_Init.sqf"] remoteExecCall ["BIS_fnc_execVM", 0, true];
 			};
 		}
 	] call Ares_fnc_RegisterCustomModule;
@@ -672,23 +595,8 @@ if (hasInterface) then { //players
 			_haloplayers = [{isPlayer _this},_selection] call Achilles_fnc_filter;
 
 			//get altitude
-			call {
-				_altitude = _dialogResult select 0;
-				if (_altitude isEqualTo 0) exitWith {
-					_altitude = 4000;
-				};
-				if (_altitude isEqualTo 1) exitWith {
-					_altitude = 6000;
-				};
-				if (_altitude isEqualTo 2) exitWith {
-					_altitude = 9000;
-				};
-				if (_altitude isEqualTo 3) then {
-					_altitude = 11000;
-				} else {
-					_altitude = 13000;
-				};
-			};
+			_altitude = [4000, 6000, 9000, 11000, 13000];
+			_altitude = _altitude select (_dialogResult select 0);
 
 			//spawn plane
 			params ["_pos"];
@@ -706,7 +614,7 @@ if (hasInterface) then { //players
 			_waypoint setWaypointSpeed "LIMITED";
 			_waypoint setWaypointType "MOVE";
 
-			//put players in the plane
+			//put players in plane
 			{
 				_x moveInCargo _plane;
 			} foreach _haloplayers;
@@ -724,56 +632,6 @@ if (hasInterface) then { //players
 			} foreach _crewplane;
 			deletevehicle _plane;
 			deleteGroup _groupplane;
-		}
-	] call Ares_fnc_RegisterCustomModule;
-
-	[
-		"Player",
-		"Teleport Single Player",
-		{
-			// Generate a list of the player objects and their names
-			_playerList = [];
-			_playerNameList = [];
-			{
-				if (isPlayer _x) then
-				{
-					_playerList pushBack _x;
-					_playerNameList pushBack (name _x);
-				};
-			} forEach playableUnits;
-
-			// Ask the user who to teleport
-			_dialogResult =
-				[
-					"Teleport Player",
-					[
-						["Player Name", _playerNameList]
-					]
-				] call Ares_fnc_ShowChooseDialog;
-
-			if ((count _dialogResult) > 0) then
-			{
-				// Get the position to teleport to
-				params ["_teleportLocation"];
-
-				// Teleport the selected player.
-				_playerToTeleport = _playerList select (_dialogResult select 0);
-
-				// Show some text to the player that is going to be teleported.
-				publicVariable "Ares_playersToShowMessageTo";
-				[[], {titleText ["You are being teleported...", "BLACK", 1]; sleep 1; titleFadeOut 2;}] remoteExecCall ["BIS_fnc_spawn" , _playerToTeleport, false];
-				sleep 1;
-
-				// If the player is in a vehicle, kick them out.
-				if (!isNull objectParent _playerToTeleport) then
-				{
-					_playerToTeleport action ["Eject", vehicle _playerToTeleport];
-				};
-
-				_smallRandomOffset = [(random 6) - 3, (random 6) - 3, 0];
-				_playerToTeleport setPos (_teleportLocation vectorAdd _smallRandomOffset);
-				[format["%1 teleported to %2", _playerNameList select (_dialogResult select 0), _teleportLocation]] call Ares_fnc_ShowZeusMessage;
-			};
 		}
 	] call Ares_fnc_RegisterCustomModule;
 };

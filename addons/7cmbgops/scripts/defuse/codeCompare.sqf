@@ -1,7 +1,7 @@
-params ["_wire", "_cutWire"];
+params ["_code", "_inputCode"];
 
-//compare wires
-private _compare = _wire isEqualTo _cutWire;
+//compare codes
+private _compare = _code isEqualTo _inputCode;
 
 if (_compare) then {
 	cutText ["BOMB DEFUSED!", "PLAIN DOWN"];
@@ -9,17 +9,16 @@ if (_compare) then {
 	DEFUSED = true;
 	BOMB = false;
 	bombcontainer setdamage 1;
-	[bombcontainer] remoteExec ["removeAllActions", 0, true];
-	publicVariable "BOMB";
+	[bombcontainer] remoteExecCall ["removeAllActions", 0, true];
 	publicVariableServer "DEFUSED";
+	publicVariable "BOMB";
 	playSound "button_close";
 } else {
 	cutText ["BOMB ARMED!", "PLAIN DOWN"];
-	player sidechat "BOMB ARMED, NICE TRY!";
-	[bombcontainer] remoteExec ["removeAllActions", 0, true];
+	player sidechat "BOMB ARMED, BETTER LUCK NEXT TIME!";
 	ARMED = true;
 	publicVariableServer "ARMED";
 	playSound "button_wrong";
 };
 
-_wire
+CODEINPUT = [];

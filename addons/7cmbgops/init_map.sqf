@@ -8,9 +8,11 @@ if (isHC) exitwith {};
 				_tpname = markertext _x;
 
 				_crate = "B_CargoNet_01_ammo_F" createvehiclelocal [0,0,0];
+    			_crate enableSimulation false;
 				_crate allowdamage false;
 				_crate setPos [(_markerpos select 0) - 2.5, (_markerpos select 1) - 2.5];
 				_tpflag = "Land_FieldToilet_F" createvehiclelocal [0,0,0];
+    			_tpflag enableSimulation false;
 				_tpflag allowdamage false;
 				_tpflag setPos _markerpos;
 
@@ -30,6 +32,7 @@ if (isHC) exitwith {};
 		} else {
 			if ((isserver) && (_x find "mash" > -1)) then { //create med facility at mash marker
 				_mash = createVehicle ["Land_Medevac_house_V1_F", [0,0,0], [], 0, "none"];
+    			_mash enableSimulation false;
 				_mash allowdamage false;
 				_mash setPos (getmarkerpos _x);
 				_mash setdir (markerdir _x);
