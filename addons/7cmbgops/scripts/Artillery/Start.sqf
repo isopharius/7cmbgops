@@ -1,6 +1,5 @@
 // Starts the artillery system
 sleep 0.1;
-if (((getMarkerPos "dtaTest") select 0) > 0) exitWith {hint "DTA TEST MODE ACTIVE"};
 
 dtaVersion = "v0.34";
 dtaReady = false;
@@ -109,7 +108,3 @@ dtaExclude = [];
 dtaTestShots = 0;
 dtaReady = true;
 [] execVM "\7cmbgops\scripts\Artillery\Misc\zLoadFunctions.sqf";
-
-// For testing
-sleep 1;
-if (dtaDebug) then {[] execVM "\7cmbgops\scripts\Artillery\Test\Init.sqf"; hint format ["DTA DEBUG MODE\n\nDRONGO'S ARTILLERY version %1",dtaVersion]; sleep 2; hint ""};

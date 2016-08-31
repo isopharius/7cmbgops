@@ -7,8 +7,8 @@ _vehicles = [];
 while {((count _men) > 0)} do {
 	_man = _men select 0;
 	_men = _men - [_man];
-	_vehicle = vehicle _man;
-	if NOT(_vehicle == _man) then {
+	_vehicle = objectParent _man;
+	if (!isNull _vehicle) then {
 		if NOT(_vehicle in _vehicles) then {_vehicles pushBack _vehicle};
 	};
 };

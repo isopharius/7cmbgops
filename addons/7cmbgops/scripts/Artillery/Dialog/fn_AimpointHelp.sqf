@@ -1,0 +1,1 @@
+hint "Example:\n\nX: 0236\nY: 1309\n\nIf map reference is 017, enter 0170. If aimpoint is between 017 and 018, enter 0175.";

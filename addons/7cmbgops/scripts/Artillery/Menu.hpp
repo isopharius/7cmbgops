@@ -306,7 +306,7 @@ class dtaDialogAssets
 		{
 			idc = 101;
 			text = "";
-			onLBSelChanged = "[] execVM '\7cmbgops\scripts\Artillery\Dialog\SelectAsset.sqf'";
+			onLBSelChanged = "call seven_fnc_SelectAsset";
 			x = DTA_COL;
 			y = DTA_ROW + (DTA_ROWINC * 1);
 			w = DTA_BUTTON_W + (DTA_COLINC * 6);
@@ -317,7 +317,7 @@ class dtaDialogAssets
 		{
 			idc = 102;
 			text = "";
-			onLBSelChanged = "[] execVM '\7cmbgops\scripts\Artillery\Dialog\SelectMission.sqf'";
+			onLBSelChanged = "call seven_fnc_SelectMission";
 			x = DTA_COL;
 			y = DTA_ROW + (DTA_ROWINC * 9);
 			w = DTA_BUTTON_W + (DTA_COLINC * 6);
@@ -328,7 +328,7 @@ class dtaDialogAssets
 		{
 			idc = -1;
 			text = "Control";
-			onButtonClick = "[false] execVM '\7cmbgops\scripts\Artillery\Dialog\ControlAsset.sqf'";
+			onButtonClick = "[false] spawn seven_fnc_ControlAsset";
 			x = DTA_COL + (DTA_COLINC * 0);
 			y = DTA_ROW + (DTA_ROWINC * 7);
 			w = DTA_BUTTON_W;
@@ -339,7 +339,7 @@ class dtaDialogAssets
 		{
 			idc = -1;
 			text = "Release";
-			onButtonClick = "[] execVM '\7cmbgops\scripts\Artillery\Dialog\ReleaseAsset.sqf'";
+			onButtonClick = "call seven_fnc_ReleaseAsset";
 			x = DTA_COL + (DTA_COLINC * 1);
 			y = DTA_ROW + (DTA_ROWINC * 7);
 			w = DTA_BUTTON_W;
@@ -350,7 +350,7 @@ class dtaDialogAssets
 		{
 			idc = -1;
 			text = "Refresh";
-			onButtonClick = "[] execVM '\7cmbgops\scripts\Artillery\Dialog\RefreshAssets.sqf'";
+			onButtonClick = "[] spawn seven_fnc_Assets";
 			x = DTA_COL + (DTA_COLINC * 6);
 			y = DTA_ROW + (DTA_ROWINC * 7);
 			w = DTA_BUTTON_W;
@@ -361,7 +361,7 @@ class dtaDialogAssets
 		{
 			idc = -1;
 			text = "Control";
-			onButtonClick = "[true] execVM '\7cmbgops\scripts\Artillery\Dialog\ControlAsset.sqf'";
+			onButtonClick = "[true] spawn seven_fnc_ControlAsset";
 			x = DTA_COL + (DTA_COLINC * 0);
 			y = DTA_ROW + (DTA_ROWINC * 14);
 			w = DTA_BUTTON_W;
@@ -486,7 +486,7 @@ class dtaDialogControl
 		class dtaTextAdjust : dta_RscText
 		{
 			idc = -1;
-			text = "Adjust (-x for </v)";
+			text = "  Adjust (-x for </v)";
 			//text = "-99 = < / v";
 			sizeEx = DTA_TEXTSIZE;
 			x = DTA_COL + (DTA_COLINC * 0);
@@ -498,7 +498,7 @@ class dtaDialogControl
 		class dtaTextAdjustLeftRight : dta_RscText
 		{
 			idc = -1;
-			text = "< / >";
+			text = "  < / >";
 			sizeEx = DTA_TEXTSIZE;
 			x = DTA_COL + (DTA_COLINC * 0);
 			y = DTA_ROW + (DTA_ROWINC * 8);
@@ -509,7 +509,7 @@ class dtaDialogControl
 		class dtaTextAdjustAddDrop : dta_RscText
 		{
 			idc = -1;
-			text = "^ / v";
+			text = "  ^ / v";
 			sizeEx = DTA_TEXTSIZE;
 			x = DTA_COL + (DTA_COLINC * 0);
 			y = DTA_ROW + (DTA_ROWINC * 9);
@@ -522,7 +522,7 @@ class dtaDialogControl
 			idc = -1;
 			text = "RNDS:";
 			sizeEx = DTA_TEXTSIZE;
-			x = DTA_COL + (DTA_COLINC * 2);
+			x = DTA_COL + (DTA_COLINC * 6.5);
 			y = DTA_ROW + (DTA_ROWINC * 8);
 			w = DTA_BUTTON_W / 2;
 			h = DTA_BUTTON_H;
@@ -542,10 +542,10 @@ class dtaDialogControl
 		class dtaTextSheafSize : dta_RscText
 		{
 			idc = -1;
-			text = "Sheaf Size (Y = BOX ONLY)";
+			text = "  Sheaf Size (Y = BOX ONLY)";
 			sizeEx = DTA_TEXTSIZE;
 			x = DTA_COL + (DTA_COLINC * 5);
-			y = DTA_ROW + (DTA_ROWINC * 4);
+			y = DTA_ROW + (DTA_ROWINC * 7);
 			w = (DTA_BUTTON_W * 3);
 			h = DTA_BUTTON_H;
 		};
@@ -555,8 +555,8 @@ class dtaDialogControl
 			idc = -1;
 			text = "  X:";
 			sizeEx = DTA_TEXTSIZE;
-			x = DTA_COL + (DTA_COLINC * 5.5);
-			y = DTA_ROW + (DTA_ROWINC * 5);
+			x = DTA_COL + (DTA_COLINC * 5);
+			y = DTA_ROW + (DTA_ROWINC * 8);
 			w = (DTA_BUTTON_W * 1);
 			h = DTA_BUTTON_H;
 		};
@@ -566,8 +566,41 @@ class dtaDialogControl
 			idc = -1;
 			text = "  Y:";
 			sizeEx = DTA_TEXTSIZE;
-			x = DTA_COL + (DTA_COLINC * 5.5);
-			y = DTA_ROW + (DTA_ROWINC * 6);
+			x = DTA_COL + (DTA_COLINC * 5);
+			y = DTA_ROW + (DTA_ROWINC * 9);
+			w = (DTA_BUTTON_W * 1);
+			h = DTA_BUTTON_H;
+		};
+
+		class dtaTextAimpoint : dta_RscText
+		{
+			idc = 401;
+			text = "  Input aimpoint (8-digit GR)";
+			sizeEx = DTA_TEXTSIZE;
+			x = DTA_COL + (DTA_COLINC * 5);
+			y = DTA_ROW + (DTA_ROWINC * 1);
+			w = DTA_BUTTON_W  + (DTA_COLINC * 6);
+			h = DTA_BUTTON_H;
+		};
+
+		class dtaTextPosXaimpoint : dta_RscText
+		{
+			idc = -1;
+			text = "  X:";
+			sizeEx = DTA_TEXTSIZE;
+			x = DTA_COL + (DTA_COLINC * 5);
+			y = DTA_ROW + (DTA_ROWINC * 2);
+			w = (DTA_BUTTON_W * 1);
+			h = DTA_BUTTON_H;
+		};
+
+		class dtaTextPosYaimpoint : dta_RscText
+		{
+			idc = -1;
+			text = "  Y:";
+			sizeEx = DTA_TEXTSIZE;
+			x = DTA_COL + (DTA_COLINC * 5);
+			y = DTA_ROW + (DTA_ROWINC * 3);
 			w = (DTA_BUTTON_W * 1);
 			h = DTA_BUTTON_H;
 		};
@@ -579,7 +612,7 @@ class dtaDialogControl
 		{
 			idc = -1;
 			text = "<<";
-			action = "[""Previous""] execVM '\7cmbgops\scripts\Artillery\Dialog\ChangeTube.sqf'";
+			action = "[""Previous""] call seven_fnc_ChangeTube";
 			x = DTA_COL + (DTA_COLINC * 5);
 			y = DTA_ROW + (DTA_ROWINC * 0);
 			w = DTA_BUTTON_W / 2;
@@ -590,7 +623,7 @@ class dtaDialogControl
 		{
 			idc = -1;
 			text = ">>";
-			action = "[""Next""] execVM '\7cmbgops\scripts\Artillery\Dialog\ChangeTube.sqf'";
+			action = "[""Next""] call seven_fnc_ChangeTube";
 			x = DTA_COL + (DTA_COLINC * 5.5);
 			y = DTA_ROW + (DTA_ROWINC * 0);
 			w = DTA_BUTTON_W / 2;
@@ -671,8 +704,7 @@ class dtaDialogControl
 		{
 			idc = -1;
 			text = "CLR";
-			//onButtonClick = "[false] execVM '\7cmbgops\scripts\Artillery\Dialog\ClearAdjust.sqf'";
-			onButtonClick = "[] execVM '\7cmbgops\scripts\Artillery\Dialog\ClearAdjust.sqf'";
+			onButtonClick = "call seven_fnc_ClearAdjust";
 			x = DTA_COL;
 			y = DTA_ROW + (DTA_ROWINC * 10);
 			w = DTA_BUTTON_W;
@@ -683,8 +715,7 @@ class dtaDialogControl
 		{
 			idc = -1;
 			text = "OK";
-			//onButtonClick = "[false] execVM '\7cmbgops\scripts\Artillery\Dialog\Adjust.sqf'";
-			onButtonClick = "[] execVM '\7cmbgops\scripts\Artillery\Dialog\Adjust.sqf'";
+			onButtonClick = "[] spawn seven_fnc_Adjust";
 			x = DTA_COL + (DTA_COLINC * 1);
 			y = DTA_ROW + (DTA_ROWINC * 10);
 			w = DTA_BUTTON_W;
@@ -705,8 +736,8 @@ class dtaDialogControl
 		class dtaEditRounds : dta_RscEdit
 		{
 			idc = 207;
-			x = DTA_COL + (DTA_COLINC * 2.5);
-			y = DTA_ROW + (DTA_ROWINC * 8);
+			x = DTA_COL + (DTA_COLINC * 6.5);
+			y = DTA_ROW + (DTA_ROWINC * 9);
 			w = (DTA_BUTTON_W / 2);
 			h = DTA_BUTTON_H;
 			text = "1";
@@ -717,7 +748,7 @@ class dtaDialogControl
 			idc = 209;
 			text = "";
 			onLBSelChanged = "";
-			x = DTA_COL + (DTA_COLINC * 4);
+			x = DTA_COL + (DTA_COLINC * 2);
 			y = DTA_ROW + (DTA_ROWINC * 8);
 			w = DTA_BUTTON_W;
 			h = (DTA_BUTTON_H * 3);
@@ -744,21 +775,10 @@ class dtaDialogControl
 				shadow = "false";
 			};*/
 			text = "XMIT";
-			onButtonClick = "[] execVM '\7cmbgops\scripts\Artillery\Dialog\Transmit.sqf'";
+			onButtonClick = "[] spawn seven_fnc_Transmit";
 			x = DTA_COL + (DTA_COLINC * 0);
 			y = DTA_ROW + (DTA_ROWINC * 15);
 			w = DTA_BUTTON_W  + (DTA_COLINC * 1);
-			h = DTA_BUTTON_H;
-		};
-
-		class dtaButtonMap : dta_RscButtonMenu
-		{
-			idc = -1;
-			text = "Map";
-			onButtonClick = "[] execVM '\7cmbgops\scripts\Artillery\Dialog\Map.sqf'";
-			x = DTA_COL + (DTA_COLINC * 0);
-			y = DTA_ROW + (DTA_ROWINC * 14);
-			w = DTA_BUTTON_W;
 			h = DTA_BUTTON_H;
 		};
 
@@ -767,8 +787,8 @@ class dtaDialogControl
 			idc = 211;
 			text = "";
 			onLBSelChanged = "";
-			x = DTA_COL + (DTA_COLINC * 5);
-			y = DTA_ROW + (DTA_ROWINC * 1);
+			x = DTA_COL + (DTA_COLINC * 4);
+			y = DTA_ROW + (DTA_ROWINC * 8);
 			w = DTA_BUTTON_W;
 			h = (DTA_BUTTON_H * 3);
 		};
@@ -776,9 +796,9 @@ class dtaDialogControl
 		class dtaEditSheafSizeX : dta_RscEdit
 		{
 			idc = 213;
-			x = DTA_COL + (DTA_COLINC * 6);
-			y = DTA_ROW + (DTA_ROWINC * 5);
-			w = (DTA_BUTTON_W);
+			x = DTA_COL + (DTA_COLINC * 5.5);
+			y = DTA_ROW + (DTA_ROWINC * 8);
+			w = (DTA_BUTTON_W / 2);
 			h = DTA_BUTTON_H;
 			text = "100";
 		};
@@ -786,9 +806,9 @@ class dtaDialogControl
 		class dtaEditSheafSizeY : dta_RscEdit
 		{
 			idc = 214;
-			x = DTA_COL + (DTA_COLINC * 6);
-			y = DTA_ROW + (DTA_ROWINC * 6);
-			w = (DTA_BUTTON_W);
+			x = DTA_COL + (DTA_COLINC * 5.5);
+			y = DTA_ROW + (DTA_ROWINC * 9);
+			w = (DTA_BUTTON_W / 2);
 			h = DTA_BUTTON_H;
 			text = "0";
 		};
@@ -797,9 +817,9 @@ class dtaDialogControl
 		{
 			idc = 212;
 			text = "";
-			onLBSelChanged = "[] execVM '\7cmbgops\scripts\Artillery\Dialog\SelectFuse.sqf'";
-			x = DTA_COL + (DTA_COLINC * 3);
-			y = DTA_ROW + (DTA_ROWINC * 12);
+			onLBSelChanged = "call seven_fnc_SelectFuse";
+			x = DTA_COL + (DTA_COLINC * 2);
+			y = DTA_ROW + (DTA_ROWINC * 11);
 			w = DTA_BUTTON_W * 2;
 			h = (DTA_BUTTON_H * 3);
 		};
@@ -809,8 +829,8 @@ class dtaDialogControl
 			idc = 215;
 			text = "";
 			onLBSelChanged = "";
-			x = DTA_COL + (DTA_COLINC * 5);
-			y = DTA_ROW + (DTA_ROWINC * 12);
+			x = DTA_COL + (DTA_COLINC * 4);
+			y = DTA_ROW + (DTA_ROWINC * 11);
 			w = DTA_BUTTON_W;
 			h = (DTA_BUTTON_H * 3);
 		};
@@ -819,7 +839,7 @@ class dtaDialogControl
 		{
 			idc = -1;
 			text = "Assets";
-			onButtonClick = "[] execVM '\7cmbgops\scripts\Artillery\Dialog\BackToAssets.sqf'";
+			onButtonClick = "closeDialog 0; [] spawn seven_fnc_Assets";
 			x = DTA_COL + (DTA_COLINC * 5);
 			y = DTA_ROW + (DTA_ROWINC * 15);
 			w = DTA_BUTTON_W * 2;
@@ -830,81 +850,17 @@ class dtaDialogControl
 		{
 			idc = -1;
 			text = "End Mission";
-			onButtonClick = "[] execVM '\7cmbgops\scripts\Artillery\Dialog\EndMission.sqf'";
+			onButtonClick = "call seven_fnc_EndMission";
 			x = DTA_COL + (DTA_COLINC * 3);
 			y = DTA_ROW + (DTA_ROWINC * 15);
 			w = DTA_BUTTON_W * 2;
 			h = DTA_BUTTON_H;
 		};
 
-	};
-};
-
-/////////////////////////////////////////////////////////////
-// Aimpoint input
-/////////////////////////////////////////////////////////////
-class dtaDialogAimpoint
-{
-	idd = 400;
-	name= "DTAaimpoint";
-	movingEnable = false;
-	enableSimulation = true;
-	onLoad = "";
-
-	class controlsBackground
-	{
-
-		class MainBackground:dta_RscText {
-			colorBackground[] = {0, 0, 0, 0.7};
-			idc = -1;
-			x = DTA_X + (DTA_BUTTON_W * 2);
-			y = DTA_Y;
-			//w = DTA_W;
-			//h = DTA_H;
-			w = DTA_W - (DTA_BUTTON_W * 4);
-			h = (DTA_H / 2) - DTA_BUTTON_H;
-		};
-
-		class dtaTextAimpoint : dta_RscText
-		{
-			idc = 401;
-			text = "Input aimpoint (8-digit GR)";
-			sizeEx = DTA_TEXTSIZE;
-			x = DTA_COL + (DTA_COLINC * 3);
-			y = DTA_ROW + (DTA_ROWINC * 1);
-			w = DTA_BUTTON_W  + (DTA_COLINC * 6);
-			h = DTA_BUTTON_H;
-		};
-
-		class dtaTextPosXaimpoint : dta_RscText
-		{
-			idc = -1;
-			text = "X:";
-			sizeEx = DTA_TEXTSIZE;
-			x = DTA_COL + (DTA_COLINC * 2.5);
-			y = DTA_ROW + (DTA_ROWINC * 2);
-			w = (DTA_BUTTON_W * 0.5);
-			h = DTA_BUTTON_H;
-		};
-
-		class dtaTextPosYaimpoint : dta_RscText
-		{
-			idc = -1;
-			text = "Y:";
-			sizeEx = DTA_TEXTSIZE;
-			x = DTA_COL + (DTA_COLINC * 2.5);
-			y = DTA_ROW + (DTA_ROWINC * 3);
-			w = (DTA_BUTTON_W * 0.5);
-			h = DTA_BUTTON_H;
-		};
-	};
-
-	class controls
-	{
 		class dtaEditXaimpoint : dta_RscEdit
 		{
 			idc = 402;
-			x = DTA_COL + (DTA_COLINC * 3);
+			x = DTA_COL + (DTA_COLINC * 5.5);
 			y = DTA_ROW + (DTA_ROWINC * 2);
 			w = DTA_BUTTON_W;
 			h = DTA_BUTTON_H;
@@ -914,7 +870,7 @@ class dtaDialogAimpoint
 		class dtaEditYaimpoint : dta_RscEdit
 		{
 			idc = 403;
-			x = DTA_COL + (DTA_COLINC * 3);
+			x = DTA_COL + (DTA_COLINC * 5.5);
 			y = DTA_ROW + (DTA_ROWINC * 3);
 			w = DTA_BUTTON_W;
 			h = DTA_BUTTON_H;
@@ -925,42 +881,21 @@ class dtaDialogAimpoint
 		{
 			idc = -1;
 			text = "Input";
-			onButtonClick = "[] execVM '\7cmbgops\scripts\Artillery\Dialog\InputAimpoint.sqf'";
-			x = DTA_COL + (DTA_COLINC * 3);
+			onButtonClick = "[] spawn seven_fnc_InputAimpoint";
+			x = DTA_COL + (DTA_COLINC * 5);
 			y = DTA_ROW + (DTA_ROWINC * 4);
 			w = DTA_BUTTON_W;
 			h = DTA_BUTTON_H;
 		};
 
-		class dtaButtonInputAimpointMapclick : dta_RscButtonMenu
-		{
-			idc = -1;
-			text = "Mapclick";
-			onButtonClick = "[] execVM '\7cmbgops\scripts\Artillery\Dialog\InputAimpointMapclick.sqf'";
-			x = DTA_COL + (DTA_COLINC * 4);
-			y = DTA_ROW + (DTA_ROWINC * 4);
-			w = DTA_BUTTON_W;
-			h = DTA_BUTTON_H;
-		};
-
-		class dtaButtonAimpointAssets : dta_RscButtonMenu
-		{
-			idc = -1;
-			text = "Assets";
-			onButtonClick = "[] execVM '\7cmbgops\scripts\Artillery\Dialog\BackToAssets.sqf'";
-			x = DTA_COL + (DTA_COLINC * 3);
-			y = DTA_ROW + (DTA_ROWINC * 6);
-			w = DTA_BUTTON_W;
-			h = DTA_BUTTON_H;
-		};
 		class dtaButtonAimpointHelp : dta_RscButtonMenu
 		{
 			idc = -1;
 			text = "Help";
-			onButtonClick = "[] execVM '\7cmbgops\scripts\Artillery\Dialog\AimpointHelp.sqf'";
-			x = DTA_COL + (DTA_COLINC * 4.5);
-			y = DTA_ROW + (DTA_ROWINC * 6);
-			w = DTA_BUTTON_W / 2;
+			onButtonClick = "call seven_fnc_AimpointHelp";
+			x = DTA_COL + (DTA_COLINC * 6);
+			y = DTA_ROW + (DTA_ROWINC * 4);
+			w = DTA_BUTTON_W;
 			h = DTA_BUTTON_H;
 		};
 

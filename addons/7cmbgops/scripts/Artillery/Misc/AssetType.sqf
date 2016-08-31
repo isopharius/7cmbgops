@@ -23,7 +23,7 @@ if ("I_MBT_01_mlrs_F" in _parents) then {_assetType = "Rockets"};
 if ("rhs_2s3_tv" in _parents) then {_assetType = "Cannon"};
 
 // Second attempt to detect. Assumes unit is a howitzer unless it has some magazines that contain the word "rocket"
-if (_assetType == "INVALID") then {
+if (_assetType isEqualTo "INVALID") then {
 	_assetType = "Cannon";
 	_magazines = getArray (configFile >> "CfgVehicles" >> _vehicleType >> "magazines");
 	_magazinesT= getArray (configFile >> "CfgVehicles" >> _vehicleType >> "turrets" >> "mainturret" >> "magazines");

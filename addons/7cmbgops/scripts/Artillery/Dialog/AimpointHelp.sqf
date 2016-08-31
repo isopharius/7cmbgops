@@ -1,1 +1,0 @@
-hint "Example:\n\nX: 0236\nY: 1309\n\nIf the Arma 3 map reference (when zoomed in) is 017, enter 0170. If your desired aimpoint is between 017 and 018, enter 0175.";

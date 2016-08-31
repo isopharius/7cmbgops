@@ -799,23 +799,23 @@
 	<Russian>Adjust fire.</Russian>
 	<Spanish>Adjust fire.</Spanish>
     </Key>
-	
+
 <!-- Dialog\Adjust.sqf END -->
 
 <!-- Dialog\AimpointHelp.sqf START -->
 
     <Key ID="STR_Drongos_AimpointHelp_Hint">
-	<Czech>Example:\n\nX: 0236\nY: 1309\n\nIf the Arma 3 map reference (when zoomed in) is 017, enter 0170. If your desired aimpoint is between 017 and 018, enter 0175.</Czech>
-	<English>Example:\n\nX: 0236\nY: 1309\n\nIf the Arma 3 map reference (when zoomed in) is 017, enter 0170. If your desired aimpoint is between 017 and 018, enter 0175.</English>
-	<French>Example:\n\nX: 0236\nY: 1309\n\nIf the Arma 3 map reference (when zoomed in) is 017, enter 0170. If your desired aimpoint is between 017 and 018, enter 0175.</French>
-	<German>Example:\n\nX: 0236\nY: 1309\n\nIf the Arma 3 map reference (when zoomed in) is 017, enter 0170. If your desired aimpoint is between 017 and 018, enter 0175.</German>
-	<Hungarian>Example:\n\nX: 0236\nY: 1309\n\nIf the Arma 3 map reference (when zoomed in) is 017, enter 0170. If your desired aimpoint is between 017 and 018, enter 0175.</Hungarian>
-	<Polish>Example:\n\nX: 0236\nY: 1309\n\nIf the Arma 3 map reference (when zoomed in) is 017, enter 0170. If your desired aimpoint is between 017 and 018, enter 0175.</Polish>
-	<Portuguese>Example:\n\nX: 0236\nY: 1309\n\nIf the Arma 3 map reference (when zoomed in) is 017, enter 0170. If your desired aimpoint is between 017 and 018, enter 0175.</Portuguese>
-	<Russian>Example:\n\nX: 0236\nY: 1309\n\nIf the Arma 3 map reference (when zoomed in) is 017, enter 0170. If your desired aimpoint is between 017 and 018, enter 0175.</Russian>
-	<Spanish>Example:\n\nX: 0236\nY: 1309\n\nIf the Arma 3 map reference (when zoomed in) is 017, enter 0170. If your desired aimpoint is between 017 and 018, enter 0175.</Spanish>
+	<Czech>Example:\n\nX: 0236\nY: 1309\n\nIf the map reference is 017, enter 0170. If aimpoint is between 017 and 018, enter 0175.</Czech>
+	<English>Example:\n\nX: 0236\nY: 1309\n\nIf the map reference is 017, enter 0170. If aimpoint is between 017 and 018, enter 0175.</English>
+	<French>Example:\n\nX: 0236\nY: 1309\n\nIf the map reference is 017, enter 0170. If aimpoint is between 017 and 018, enter 0175.</French>
+	<German>Example:\n\nX: 0236\nY: 1309\n\nIf the map reference is 017, enter 0170. If aimpoint is between 017 and 018, enter 0175.</German>
+	<Hungarian>Example:\n\nX: 0236\nY: 1309\n\nIf the map reference is 017, enter 0170. If aimpoint is between 017 and 018, enter 0175.</Hungarian>
+	<Polish>Example:\n\nX: 0236\nY: 1309\n\nIf the map reference is 017, enter 0170. If aimpoint is between 017 and 018, enter 0175.</Polish>
+	<Portuguese>Example:\n\nX: 0236\nY: 1309\n\nIf the map reference is 017, enter 0170. If aimpoint is between 017 and 018, enter 0175.</Portuguese>
+	<Russian>Example:\n\nX: 0236\nY: 1309\n\nIf the map reference is 017, enter 0170. If aimpoint is between 017 and 018, enter 0175.</Russian>
+	<Spanish>Example:\n\nX: 0236\nY: 1309\n\nIf the map reference is 017, enter 0170. If aimpoint is between 017 and 018, enter 0175.</Spanish>
     </Key>
-	
+
 <!-- Dialog\AimpointHelp.sqf END -->
 
 <!-- Dialog\Check.sqf START -->
@@ -831,7 +831,7 @@
 	<Russian>No suitable radio.</Russian>
 	<Spanish>No suitable radio.</Spanish>
     </Key>
-	
+
 <!-- Dialog\Check.sqf END -->
 
 <!-- Dialog\Control.sqf START -->
@@ -847,7 +847,7 @@
 	<Russian>No asset selected.</Russian>
 	<Spanish>No asset selected.</Spanish>
     </Key>
-	
+
     <Key ID="STR_Drongos_Control_GRIDREF">
 	<Czech>%1:  %2 x %3    GRID REF: %4 - %5</Czech>
 	<English>%1:  %2 x %3    GRID REF: %4 - %5</English>
@@ -859,7 +859,7 @@
 	<Russian>%1:  %2 x %3    GRID REF: %4 - %5</Russian>
 	<Spanish>%1:  %2 x %3    GRID REF: %4 - %5</Spanish>
     </Key>
-	
+
 <!-- Dialog\Control.sqf END -->
 
 <!-- Dialog\ControlAsset.sqf START -->
@@ -967,7 +967,7 @@
 	<Russian>ERROR: invalid X and/or Y coordinates</Russian>
 	<Spanish>ERROR: invalid X and/or Y coordinates</Spanish>
     </Key>
-	
+
     <Key ID="STR_Drongos_Artillery_InputAimpoint_ErrorX">
 	<Czech>ERROR: X must be between 000 and 999</Czech>
 	<English>ERROR: X must be between 000 and 999</English>
@@ -979,7 +979,7 @@
 	<Russian>ERROR: X must be between 000 and 999</Russian>
 	<Spanish>ERROR: X must be between 000 and 999</Spanish>
     </Key>
-	
+
     <Key ID="STR_Drongos_Artillery_InputAimpoint_ErrorY">
 	<Czech>ERROR: Y must be between 000 and 999</Czech>
 	<English>ERROR: Y must be between 000 and 999</English>
@@ -1007,7 +1007,7 @@
 	<Russian>No asset under control</Russian>
 	<Spanish>No asset under control</Spanish>
     </Key>
-	
+
     <Key ID="STR_Drongos_Artillery_ReleaseAsset_Released">
 	<Czech>Asset released.</Czech>
 	<English>Asset released.</English>
@@ -1118,7 +1118,7 @@
 	<Spanish>No suitable radio.</Spanish>
     </Key>
 
-<!-- Misc\KeyPressed.sqf END -->	
+<!-- Misc\KeyPressed.sqf END -->
 
 <!-- Dialog\ Folder End -->
 

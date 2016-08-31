@@ -19,10 +19,7 @@ while {((count _groups) > 0)} do {
 	if (_vehicle in dtaExclude) then {_add = false};
 	if (_typeOf in dtaExclude) then {_add = false};
 	if (_add) then {
-		//_type = [_group] call dta_fnc_GroupType;
-		//if ((_type == "Artillery") AND (_side == (side _group))) then {_out pushBack _group};
 		_isArtillery = getNumber (configFile >> "CfgVehicles" >> _typeOf >> "artilleryScanner");
-//		systemChat format ["IA: %1",_isArtillery];
 		if ((_isArtillery isEqualTo 1) AND (_side isEqualTo (side _group))) then {_out pushBack _group};
 	};
 };

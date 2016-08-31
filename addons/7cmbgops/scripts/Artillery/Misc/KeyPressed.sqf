@@ -22,9 +22,13 @@ if (!isNull (objectParent player)) then {_haveRadio = true};
 if (_haveRadio) exitWith {
 //	if (dtaDebug) then {systemChat format ["dtaX: %1  dtaY: %2",dtaX,dtaY]; systemChat format ["player pos: %1",(getPos player)]};
 	closeDialog 0;
-	if (dtaLastDialog isEqualTo "Assets") then {[] execVM "\7cmbgops\scripts\Artillery\Dialog\Assets.sqf"};
-	if (dtaLastDialog isEqualTo "Aimpoint") then {[] execVM "\7cmbgops\scripts\Artillery\Dialog\Aimpoint.sqf"};
-	if (dtaLastDialog isEqualTo "Control") then {[false] execVM "\7cmbgops\scripts\Artillery\Dialog\Control.sqf"};
+	if (dtaLastDialog isEqualTo "Assets") then {
+		[] spawn seven_fnc_Assets;
+	} else {
+		if (dtaLastDialog isEqualTo "Control") then {
+			[false] spawn seven_fnc_Control;
+		};
+	};
 };
 
 hint "No suitable radio.";
