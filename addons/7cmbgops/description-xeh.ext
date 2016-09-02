@@ -37,7 +37,7 @@ class Extended_InitPost_EventHandlers {
 	};
 
 	//ACE medics
-	class ONS_Soldier_CSOR_TW {
+	class ONS_Soldier_CSOR_Base {
 		medic_init = "(_this select 0) setvariable ['ace_medical_medicClass', 1, true];";
 	};
 
