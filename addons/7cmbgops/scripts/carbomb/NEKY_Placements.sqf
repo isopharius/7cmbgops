@@ -1,8 +1,8 @@
 //	Manually gathered AttachTo XYZ cordinates for demo charges.
-//	
+//
 //	_VehiclePos = [[[AttachTo X, AttachTo Y, AttachTo Z], bearing, [SetVectorUp X, SetVectorUp Y, SetVectorUp Z]]];
 /////////////////////////////////////////////////////
-//	
+//
 //	1. [AttachTo X, AttachTo Y, AttachTo Z].
 //		a. Use the AttachTo command to bring the charge to your preferred position ( https://community.bistudio.com/wiki/attachTo ).
 //		b. You can use BoundingBox to make it a bit easier to find the borders of the vehicle. ( https://community.bistudio.com/wiki/boundingBox ).
@@ -15,7 +15,7 @@
 ////////////
 //	How To
 ////////////
-//	
+//
 //	1. Place a demo charge in your editor and name it BOMB.
 //	2. Place the vehicle you want to add to this list in your editor and name it CAR.
 //	3. Hit Preview.
@@ -29,11 +29,11 @@
 //	9. Now place another comma and copy your SetVectorUp array, for example: _MyCustomVehicle1 = [[0.5,1.22,-1],45,[0,0,-1]];
 //	10. Repeat step 5-9 until you have as many position you feel is neccessary, remember to place a comma between each section. When done, move to step 11.
 //	11. In one of the Watch taps, enter: TypeOf CAR
-//	12. Copy the string returned by the code and enter NEKY_CarBomb.sqf. 
+//	12. Copy the string returned by the code and enter NEKY_CarBomb.sqf.
 //	13. Navigate to about line 39, you should see a Switch (_TypeVehicle) case... code.
-//	14. Enter a new case with your string, for example: case "My_TypeOf_CAR_String": {_Pos = (_MyCustomVehicle1 call BIS_FNC_SelectRandom)};
+//	14. Enter a new case with your string, for example: case "My_TypeOf_CAR_String": {_Pos = (selectRandom _MyCustomVehicle1)};
 //	15. Done!
-//	
+//
 ////////////////////////
 //	Made by NeKo-ArroW
 ////////////////////////

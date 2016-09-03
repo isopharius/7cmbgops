@@ -21,10 +21,10 @@ if(count _doorArr > 0) then {
 	if (_actStatus) then {
 		private _magazines = magazines player;
 		{
-			if (_x == "rhsusf_m112_mag") exitWith {
+			if (_x isEqualTo "rhsusf_m112_mag") exitWith {
 				player removeMagazineGlobal "rhsusf_m112_mag";
 			};
-			if (_x == "DemoCharge_Remote_Mag") exitWith {
+			if (_x isEqualTo "DemoCharge_Remote_Mag") exitWith {
 				player removeMagazineGlobal "DemoCharge_Remote_Mag";
 			};
 		} count _magazines;
@@ -51,8 +51,8 @@ if(count _doorArr > 0) then {
 		};
 
 		//->Finalize
-		_c4Pos = [_finalPositionTrue select 0,_finalPositionTrue select 1 ,_finalPositionTrue select 2];
-		private _c4 = "DemoCharge_Remote_Ammo_Scripted" createVehicle _c4Pos;
+		_c4Pos = [_finalPositionTrue select 0, _finalPositionTrue select 1, _finalPositionTrue select 2];
+		private _c4 = createVehicle ["DemoCharge_Remote_Ammo_Scripted", _c4Pos, [], 0, "NONE"];
 		[_c4,[[0.5,0.5,0],[-0.5,0.5,0]]] remoteExecCall ["setVectorDirAndUp"];
 		_n = count _c4Arr;
 		_c4Arr set [_n, _c4];
@@ -88,7 +88,7 @@ if(count _doorArr > 0) then {
 					if (_pTmp > 0.3) then { _p = 1};
 				};
 			};
-			isNull _c4 || !alive player || _p > 0
+			isNull _c4 || {!alive player} || {_p > 0}
 		};
 
 		if (!isNull _c4) then {

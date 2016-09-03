@@ -107,30 +107,30 @@ Switch (_TypeVehicle) do
 {
 	Private "_Pos";
 	case "b_g_offroad_01_f";
-	case "c_offroad_01_f": {_Pos = (_OffroadPos call BIS_FNC_SelectRandom)};
-	case "b_g_offroad_01_armed_f": {_Pos = (_OffroadArmedPos call BIS_FNC_SelectRandom)};
-	case "c_hatchback_01_f": {_Pos = (_HatchbackPos call BIS_FNC_SelectRandom)};
-	case "c_hatchback_01_sport_f": {_Pos = (_HatchbackSportPos call BIS_FNC_SelectRandom)};
-	case "c_suv_01_f": {_Pos = (_SUVPos call BIS_FNC_SelectRandom)};
-	case "c_van_01_transport_f": {_Pos = (_TruckPos call BIS_FNC_SelectRandom)};
+	case "c_offroad_01_f": {_Pos = (selectRandom _OffroadPos)};
+	case "b_g_offroad_01_armed_f": {_Pos = (selectRandom _OffroadArmedPos)};
+	case "c_hatchback_01_f": {_Pos = (selectRandom _HatchbackPos)};
+	case "c_hatchback_01_sport_f": {_Pos = (selectRandom _HatchbackSportPos)};
+	case "c_suv_01_f": {_Pos = (selectRandom _SUVPos)};
+	case "c_van_01_transport_f": {_Pos = (selectRandom _TruckPos)};
 	case "c_van_01_box_f";
-	case "b_g_van_01_transport_f": {_Pos = (_TruckFIAPos call BIS_FNC_SelectRandom)};
+	case "b_g_van_01_transport_f": {_Pos = (selectRandom _TruckFIAPos)};
 	default {SystemChat Format ["Vehicle %1 not supported for NEKY_CarBomb!",(TypeOf _Vehicle)]};
 };
 if (IsNil "_Pos") exitWith {False};
 
 // Create and attach bomb
-_Bomb = CreateVehicle [(_Visual call BIS_FNC_SelectRandom), [0,0,1000], [], 0, "NONE"];
+_Bomb = CreateVehicle [(selectRandom _Visual), [0,0,1000], [], 0, "NONE"];
 _Bomb attachTo [_Vehicle,(_Pos select 0)];
 [[_Bomb,_Pos],{(_This select 0) setDir (_This select 1 select 1); (_This select 0) setVectorUp (_This select 1 select 2)}] remoteExecCall ["BIS_FNC_SPAWN", 0, false];
 
 // Random Bomb
-If (_BombType == "random") then {_BombType = (_RandomBomb call BIS_FNC_SelectRandom)};
+If (_BombType isEqualTo "random") then {_BombType = (selectRandom _RandomBomb)};
 
 // Define Bomb(explosion) Type
 Switch (_BombType) do
 {
-	Private ["_BombType"];
+	Private "_BombType";
 	case "small": {_BombType = _Small};
 	case "medium": {_BombType = _Medium};
 	case "large": {_BombType = _Large};
@@ -171,20 +171,20 @@ if (_BumpSensitivity > 0) then
 		_Active = True;
 		Sleep 5;
 
-		While {Alive _Bomb && _Active} do
+		While {Alive _Bomb && {_Active}} do
 		{
 			if ({(_Vehicle distance _x) < 300} Count AllPlayers > 0) then {sleep _FrequencyC} else {sleep _FrequencyF};
-			if ((Speed _Vehicle > 1) or (Speed _Vehicle < -1)) then { if ((random 1) <= _BumpSensitivity) then {_Active = False; [_Bomb,_BombType] Spawn NEKY_CarBombDetonate} };
+			if ((Speed _Vehicle > 1) || {(Speed _Vehicle < -1)}) then { if ((random 1) <= _BumpSensitivity) then {_Active = False; [_Bomb,_BombType] Spawn NEKY_CarBombDetonate} };
 		};
 		SystemChat "Exiting Check if vehicle is Bumped";
 	};
 };
 
 // Explode if entered or turning ignition
-if (({_x isEqualTo True} count _RigPositions > 0) && ((random 1) <= _ChanceofRigged)) then
+if (({_x isEqualTo True} count _RigPositions > 0) && {((random 1) <= _ChanceofRigged)}) then
 {
 	_Index = 0;
-	if (_RigPositions select 0 && _RigPositions select 2) then {_RigPositions deleteAt 2};
+	if (_RigPositions select 0 && {_RigPositions select 2}) then {_RigPositions deleteAt 2};
 	for "_i" from 1 to (count _RigPositions) do
 	{
 		if (_RigPositions select _Index) then
@@ -201,7 +201,7 @@ if (({_x isEqualTo True} count _RigPositions > 0) && ((random 1) <= _ChanceofRig
 				_Active = True;
 				Sleep 5;
 
-				While {Alive _Bomb && _Active} do
+				While {Alive _Bomb && {_Active}} do
 				{
 					if ({(_Vehicle distance _x) < 300} Count AllPlayers > 0) then {sleep _FrequencyC} else {sleep _FrequencyF};
 					if (call _RigPosition) then {_Active = False; [_Bomb,_BombType] Spawn NEKY_CarBombDetonate;};
@@ -221,10 +221,10 @@ if (({_x isEqualTo True} count _RigPositions > 0) && ((random 1) <= _ChanceofRig
 	_Bomb = _This select 0;
 	_Vehicle = _This select 1;
 	_BombType = _This select 2;
-	While {Alive _Vehicle && Alive _Bomb} do
+	While {Alive _Vehicle && {Alive _Bomb}} do
 	{
 		if ({(_Vehicle distance _x) < 300} Count AllPlayers > 0) then {sleep (_FrequencyC * 3)} else {sleep (_FrequencyF * 2)};
-		if (((Getdammage _Bomb) >= _BombHealth) or !(Alive _Vehicle)) then {[_Bomb,_BombType] Spawn NEKY_CarBombDetonate};
+		if (((Getdammage _Bomb) >= _BombHealth) || {!(Alive _Vehicle)}) then {[_Bomb,_BombType] Spawn NEKY_CarBombDetonate};
 	};
 	SystemChat "Exiting check if Vehicle and Bomb is alive.";
 };
@@ -239,16 +239,16 @@ NEKY_CarBombRemoteScanner =
 	_BombType = _This select 3;
 	_RemoteRange = _This select 4;
 
-	While {Alive _Bomb && Alive _Controller} do
+	While {Alive _Bomb && {Alive _Controller}} do
 	{
-		if ( ((_Controller Distance _Vehicle) <= _RemoteRange) && (({((_Vehicle distance _x) < _ProximityM) && ((((getPosATL _x) select 2) > (((getPosATL _Vehicle) select 2) -1.5)) && (((getPosATL _x) select 2) < (((getPosATL _Vehicle) select 2) +1.5)))} Count AllPlayers > 0) or ({((_Vehicle distance _x) < _ProximityV) && (_x in Vehicles)} Count AllPlayers > 0)) ) then {[_Bomb,_BombType] Spawn NEKY_CarBombDetonate};
+		if ( ((_Controller Distance _Vehicle) <= _RemoteRange) && {(({((_Vehicle distance _x) < _ProximityM) && ((((getPosATL _x) select 2) > (((getPosATL _Vehicle) select 2) -1.5)) && (((getPosATL _x) select 2) < (((getPosATL _Vehicle) select 2) +1.5)))} Count AllPlayers > 0) || ({((_Vehicle distance _x) < _ProximityV) && (_x in Vehicles)} Count AllPlayers > 0))}) then {[_Bomb,_BombType] Spawn NEKY_CarBombDetonate};
 		if ({(_Vehicle distance _x) < 300} Count AllPlayers > 0) then {sleep (_FrequencyC)} else {sleep (_FrequencyF)};
 	};
 	SystemChat "Exiting check if players are near vehicle.";
 };
 
 // Select a remote controller for the bomb
-if (typeName (_Remote select 0) == "BOOL") then {_Case = 0} else {_Case = 1};
+if (typeName (_Remote select 0) isEqualTo "BOOL") then {_Case = 0} else {_Case = 1};
 Switch (_Case) do
 {
 	case 0:	// If script shall select controllers on its own
@@ -256,17 +256,17 @@ Switch (_Case) do
 		if !(_Remote Select 0) exitWith {False};
 		For "_i" from 1 to (_RemoteControllers) do
 		{
-			if (_ControllerSide == SideUnknown) exitWith {SystemChat "Did not select a side, no remote controller selected"};
+			if (_ControllerSide isEqualTo SideUnknown) exitWith {SystemChat "Did not select a side, no remote controller selected"};
 			_Controller = False;
 			sleep (random 20); // To avoid having one person controlling multiple vehicles
-			While {(TypeName _Controller == "BOOL") and (Alive _Bomb)} do
+			While {(TypeName _Controller isEqualTo "BOOL") && {(Alive _Bomb)}} do
 			{
 				_TempArray = [];
 				_Units = NearestObjects [_Vehicle, ["CAManBase"], _RemoteRange];
 				if (count _Units > 0) then
 				{
-					{if ((side _x == _ControllerSide) && (Alive _x) && !(isPlayer _x) && !(_x in NEKY_CarBombControllers)) then {_TempArray pushBack _x}} forEach _Units;
-					if (Count _TempArray > 0) then {_Controller = (_TempArray call BIS_FNC_SelectRandom); NEKY_CarBombControllers pushBack _Controller};
+					{if ((side _x isEqualTo _ControllerSide) && {(Alive _x)} && {!(isPlayer _x)} && {!(_x in NEKY_CarBombControllers)}) then {_TempArray pushBack _x}} forEach _Units;
+					if (Count _TempArray > 0) then {_Controller = (selectRandom _TempArray); NEKY_CarBombControllers pushBack _Controller};
 				};
 				Sleep 10;
 			};
@@ -286,8 +286,8 @@ Switch (_Case) do
 				_Temp = _Grp AddWaypoint [([_Vehicle, (10 + (random 40)), (random 360)] call BIS_FNC_RelPos), 0];
 				_Temp setWaypointSpeed "Limited";
 
-				if (_Index == 1) then {_WPPos = GetWPPos _Temp};
-				if (_Index == 6) then {_Temp SetWPPos _WPPos; _Temp SetWaypointType "CYCLE"};
+				if (_Index isEqualTo 1) then {_WPPos = GetWPPos _Temp};
+				if (_Index isEqualTo 6) then {_Temp SetWPPos _WPPos; _Temp SetWaypointType "CYCLE"};
 			};
 			sleep 1;
 
@@ -300,7 +300,7 @@ Switch (_Case) do
 				_RemoteRange = _This select 3;
 				_Grp = Group _Controller;
 
-				While {Alive _Vehicle && Alive _Bomb && Alive _Controller} do
+				While {Alive _Vehicle && {Alive _Bomb} && {Alive _Controller}} do
 				{
 					if (_Controller Distance _Vehicle > (_RemoteRange * 1.5)) then {_Grp SetCurrentWaypoint [_Grp,(Round (Random 5))]};
 					Sleep 15;

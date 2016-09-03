@@ -14,7 +14,7 @@ private _affected = _center nearEntities ["CAManBase", _r];
 		case "STAND": { _stance  = "Up"; };
 	};
 	sleep 0.2;
-	if (alive _x && !isPlayer _x && !_conscious && !_cuffed && _safHos == -1 && !_surrending)  then {
+	if (alive _x && {!isPlayer _x} && {!_conscious} && {!_cuffed} && {_safHos isEqualTo -1} && {!_surrending})  then {
 		private _strength = 1 - (((getPosASL _x) vectorDistance _center) min 20) / 20;
 
 
@@ -30,13 +30,13 @@ private _affected = _center nearEntities ["CAManBase", _r];
 					sleep 0.1;
 					_t = _t +0.1;
 
-					_t > 5 || !alive _u
+					_t > 5 || {!alive _u}
 				};
 
 				private _cuffed = _u getVariable ["ace_captives_isHandcuffed", false];
 				private _safHos = _u getVariable ["SAF_var_hostage_state",-1];
 				private _surrending = _u getVariable ["ace_captives_isSurrendering", false];
-				if (!_cuffed && _safHos == -1) then {
+				if (!_cuffed && {_safHos isEqualTo -1}) then {
 					_u switchMove "";
 					if (!_surrending) then {
 						_u playActionNow "crouch";

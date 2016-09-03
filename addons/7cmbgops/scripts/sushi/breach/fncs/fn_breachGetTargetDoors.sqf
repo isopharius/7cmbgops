@@ -5,7 +5,7 @@ params [
 ];
 scopeName "mainScope";
 
-if(!isNull _target && _target isKindOf "house" || _target isKindOf "Cargo_Patrol_base_F" || _target isKindOf "Cargo_Tower_base_F" || _target isKindOf "Cargo_HQ_base_F" && _target call BIS_fnc_isBuildingEnterable) then {
+if((!isNull _target) && {(_target isKindOf "house" || {_target isKindOf "Cargo_Patrol_base_F"} || {_target isKindOf "Cargo_Tower_base_F"} || {_target isKindOf "Cargo_HQ_base_F"}) && {(_target call BIS_fnc_isBuildingEnterable)}}) then {
 	private _selectionName = "";
 	private _dir = getDir player;
 	private _cameraVector = [positionCameraToWorld [0,0,0], positionCameraToWorld [0,0,1]] call BIS_fnc_vectorFromXtoY; // Get the current camera vector
@@ -19,13 +19,13 @@ if(!isNull _target && _target isKindOf "house" || _target isKindOf "Cargo_Patrol
 	if(count _intersects > 0) then {
 		private _door = (_intersects select 0) select 0;
 		private _door1 = str(_door);
-		if ((_door1 find "door") > 0 || (_door1 find "dvere") > 0 || _door1 in saf_mission_setting_breach_customDoorNames) then 
+		if ((_door1 find "door") > 0 || {(_door1 find "dvere") > 0} || {_door1 in saf_mission_setting_breach_customDoorNames}) then
 		{
 			private _selectionName_def = format ["%1_rot", (_intersects select 0) select 0];
 			private _selectionName_jbad = format ["%1", (_intersects select 0) select 0];
 			private _selectionName_dvere = _selectionName_jbad;
 			private _selectionName_Map = _selectionName_jbad;
-			private _n = 0; 
+			private _n = 0;
 				if ((_door1 find "1") > 0) then  { _n = 1; } else {
 					if ((_door1 find "2") > 0) then  { _n = 2; } else {
 						if ((_door1 find "3") > 0) then  { _n = 3; } else {
@@ -43,7 +43,7 @@ if(!isNull _target && _target isKindOf "house" || _target isKindOf "Cargo_Patrol
 						};
 					};
 				};
-				
+
 			if ((_door1 find "dvere") < 1) then {
 				_selectionName_dvere = format ["Dvere%1", _n];
 			};
@@ -59,7 +59,7 @@ if(!isNull _target && _target isKindOf "house" || _target isKindOf "Cargo_Patrol
 			If ((_door1 find "doorF") > 0) then {
 				_selectionName_Map = format ["doorF%1",_n];
 			};
-			
+
 			//-->Manage door locking
 			//-->Manage door locking
 			private _dS1 = _target getVariable [format ["bis_disabled_%1", _selectionName_def],-1];
@@ -69,8 +69,8 @@ if(!isNull _target && _target isKindOf "house" || _target isKindOf "Cargo_Patrol
 			private _break = if (saf_mission_setting_breach_closeFix > 0) then { true } else { false };
 			{
 				private _p = _target animationPhase _x;
-				if (saf_mission_setting_breach_closeFix > 0) then { 
-					if (_p < 0 || _p > 0) then {
+				if (saf_mission_setting_breach_closeFix > 0) then {
+					if (_p < 0 || {_p > 0}) then {
 						_break = false;
 					};
 				} else {
@@ -78,15 +78,15 @@ if(!isNull _target && _target isKindOf "house" || _target isKindOf "Cargo_Patrol
 						_break = true;
 					};
 				};
-				
+
 			} foreach [_selectionName_def,_selectionName_jbad,_selectionName_dvere,_selectionName_Map];
 			if (_break) then {breakTo "mainScope";};
 			if (saf_mission_setting_breach_LockFrontDoorsOnly  > 0) then {
-			if (_target in saf_mission_setting_breach_Buildings && _dS1 == -1 && _dS2 == -1 && _dS3 == -1  && _dS4 == -1 &&
-				((_selectionName_def == "door_1_rot" || _selectionName_def == "door_3_rot" || _selectionName_def == "door_2_rot") || 
-				(_selectionName_jbad == "door_1" || _selectionName_jbad == "door_3" || _selectionName_jbad == "door_2") ||
-				(_selectionName_dvere == "dvere1" || _selectionName_dvere == "dvere2" || _selectionName_dvere == "dvere3") ||
-				(_selectionName_Map == "DoorF" || _selectionName_Map == "DoorR" || _selectionName_Map == "DoorE"))) then {	
+			if ((_target in saf_mission_setting_breach_Buildings) && {_dS1 isEqualTo -1} && {_dS2 isEqualTo -1} && {_dS3 isEqualTo -1}  && {_dS4 isEqualTo -1} &&
+				{((_selectionName_def isEqualTo "door_1_rot" || {_selectionName_def isEqualTo "door_3_rot"} || {_selectionName_def isEqualTo "door_2_rot"}) ||
+								{(_selectionName_jbad isEqualTo "door_1" || {_selectionName_jbad isEqualTo "door_3"} || {_selectionName_jbad isEqualTo "door_2"})} ||
+								{(_selectionName_dvere isEqualTo "dvere1" || {_selectionName_dvere isEqualTo "dvere2"} || {_selectionName_dvere isEqualTo "dvere3"})} ||
+								{(_selectionName_Map isEqualTo "DoorF" || {_selectionName_Map isEqualTo "DoorR"} || {_selectionName_Map isEqualTo "DoorE"})})}) then {
 				[_target,_selectionName_def,_selectionName_jbad,_selectionName_dvere,_selectionName_Map,_dS1,_dS2,_ds3,_ds4] call SAF_fnc_breachLockDoor;
 			} else {
 
@@ -96,7 +96,7 @@ if(!isNull _target && _target isKindOf "house" || _target isKindOf "Cargo_Patrol
 			};
 			} else {
 			if (saf_mission_setting_breach_LockFrontDoorsOnly  < 1 ) then {
-				if (_target in saf_mission_setting_breach_Buildings && _dS1 == -1 && _dS2 == -1 && _dS3 == -1 && _dS4 == -1) then {	
+				if ((_target in saf_mission_setting_breach_Buildings) && {((_dS1 isEqualTo -1 && {_dS2 isEqualTo -1}) && {(_dS3 isEqualTo -1 && {_dS4 isEqualTo -1})})}) then {
 				[_target,_selectionName_def,_selectionName_jbad,_selectionName_dvere,_selectionName_Map,_dS1,_dS2,_ds3,_ds4] call SAF_fnc_breachLockDoor;
 			} else {
 
@@ -111,4 +111,4 @@ if(!isNull _target && _target isKindOf "house" || _target isKindOf "Cargo_Patrol
 	};
 };
 
-_return;			
+_return;

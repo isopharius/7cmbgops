@@ -4,9 +4,9 @@ Author: I34dKarma
 Description: Karma Carbomb Target Select Script
 ******************************************************************************************************* */
 private ["_playerlist","_targetselect","_targetPos"];
-_car = _this select 0;
+params ["_car"];
 _playerlist = switchableUnits + playableUnits;
-_targetselect = _playerlist call BIS_fnc_selectRandom;
+_targetselect = selectRandom _playerlist;
 _targetPos = getPosATL _targetselect;
 _car setSpeedMode "NORMAL";
 _car doMove _targetPos;

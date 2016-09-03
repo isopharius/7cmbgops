@@ -15,7 +15,7 @@ disableSerialization;
 
 	Returns:
 	BOOL - true kiedy jendostka skonczy, fals jeśli przerwie
-	
+
 	Example:
 	["Sprawdzam",10,player,[getPos player,5]] call SAF_fnc_showStatus;
 
@@ -38,12 +38,12 @@ private _sleep = _timeTo / 100;
 scopeName "mainScope";
 createDialog "SAF_status_dialog";
 for "_i" from 0 to 100 do {
-	
+
 	_txt = format ["%1<br/><t size = '.4'>%2%3</t>",_txtBase,_i,"%"];
 	[_txt,-1,-1,0.1,0,0,789] spawn BIS_fnc_dynamicText;
-	
-	if (!isNull _unit && count _refArr > 0) then {
-		if (_unit distance (_refArr select 0) > (_refArr select 1) || !alive _unit) then {_return = false; breakTo "mainScope"; };
+
+	if (!isNull _unit && {s}) then {
+		if (_unit distance (_refArr select 0) > (_refArr select 1) || {!alive _unit}) then {_return = false; breakTo "mainScope"; };
 	};
 	private _s = call _code;
 	if (isNull (uiNamespace getVariable ['SAF_status_dialog', objNull])) then { _return = false; breakTo "mainScope"; };

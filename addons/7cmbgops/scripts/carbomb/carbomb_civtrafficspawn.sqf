@@ -5,11 +5,12 @@ Description: Karma Civ Spawn Script
 ******************************************************************************************************* */
 private ["_civtraffic","_civdriver","_namevar","_position","_vehicletype",
 	"_name","_location"];
-_locationlist = _this select 0;
+params ["_locationlist"];
 _location = [_locationlist] call karma_cb_location_scan;
-_vehicletype = ["C_Hatchback_01_F","C_Hatchback_01_sport_F","C_Offroad_01_F","C_SUV_01_F","C_Van_01_box_F","C_Van_01_transport_F"] call BIS_fnc_SelectRandom;
-_civtraffic = createVehicle [_vehicletype, _location, [], 0, "NONE"];
+_vehicletype = selectRandom ["C_Hatchback_01_F","C_Hatchback_01_sport_F","C_Offroad_01_F","C_SUV_01_F","C_Van_01_box_F","C_Van_01_transport_F"];
+_civtraffic = createVehicle [_vehicletype, [0,0,0], [], 0, "CAN_COLLIDE"];
 createVehicleCrew _civtraffic;
+_civtraffic setPos _location;
 _civdriver = driver _civtraffic;
 _location = [_locationlist] call karma_cb_location_scan;
 _civtraffic setSpeedMode "NORMAL";
@@ -22,10 +23,6 @@ _civtraffic setVariable ["Driver", _civdriver, false];
 _driverOut = _civdriver addEventHandler ["GetOut",{
 	_driver = _this select 2;
 	_vehicle = _this select 0;
-	if (karma_cb_debug == 1) then {
-		_marker = _vehicle getVariable "markername";
-		deleteMarker _marker;
-	};
 	_idleState = _vehicle getVariable "IdleState";
 	if (_idleState isEqualTo 0) then {_vehicle setVariable ["IdleState", 2, false]};
 		karma_cb_civlist = karma_cb_civlist - [_vehicle];
@@ -42,29 +39,20 @@ _civname = missionNamespace getVariable _name;
 //hint format ["%1",_civname];
 sleep 1;
 _civtraffic setVariable ["markername", _name, false];
-if (karma_cb_debug isEqualTo 1) then {
-	_markerstr = createMarker[_name,getPosATL _civtraffic];
-	_name setMarkerShape "ICON";
-	_name setMarkerType "mil_dot";
-	_name setMarkerText _name;
-};
-_driverkilled = _civdriver addEventHandler ["Killed",{
-	_driver = _this select 0;
-	_killer = _this select 1;
-	_killername = name _killer;
-	_vehicle = vehicle _driver;
-	if (isPlayer _killer) then {
-	//[[_killername],"karma_cb_civtraffic_killed",nil,true] spawn BIS_fnc_MP;
-	[_killername] remoteExec [nil,true];
-	};
-	if (karma_cb_debug isEqualTo 1) then {
-		_marker = _vehicle getVariable "markername";
-		deleteMarker _marker;
-	};
-	karma_cb_civlist = karma_cb_civlist - [_vehicle];
-	karma_cb_wrecklist set [count karma_cb_wrecklist, _vehicle];
-	karma_cb_wrecklist set [count karma_cb_wrecklist, _driver];
-}];
+_driverkilled = _civdriver addEventHandler [
+	"Killed",
+	{
+		params ["_driver", "_killer"];
+		_killername = name _killer;
+		_vehicle = vehicle _driver;
+		if (isPlayer _killer) then {
+			[_killername] remoteExecCall ["karma_cb_civtraffic_killed", 0, false];
+		};
+		karma_cb_civlist = karma_cb_civlist - [_vehicle];
+		karma_cb_wrecklist set [count karma_cb_wrecklist, _vehicle];
+		karma_cb_wrecklist set [count karma_cb_wrecklist, _driver];
+	}
+];
 _civdriver disableAI "TARGET";
 _civdriver disableAI "AUTOTARGET";
 _civdriver setSkill ["general",.5];

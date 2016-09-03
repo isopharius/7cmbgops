@@ -3,14 +3,12 @@ ARMA 3 Script
 Author: I34dKarma
 Description: Karma Carbomb Spawn Script
 ******************************************************************************************************* */
-private ["_namevar","_position","_vehicletype",
-	"_name","_targetunit","_location"];
-_locationlist = _this select 0;
-_location = [_locationlist] call karma_cb_location_scan;
-_vehicletype = ["C_Hatchback_01_F","C_Hatchback_01_sport_F","C_Offroad_01_F","C_SUV_01_F","C_Van_01_box_F","C_Van_01_transport_F"] call BIS_fnc_SelectRandom;
-_carbomb = createVehicle [_vehicletype, [0,0,0], [], 0, "NONE"];
+private ["_namevar","_position","_vehicletype","_name","_targetunit","_location"];
+_location = [_this] call karma_cb_location_scan;
+_vehicletype = selectRandom ["C_Hatchback_01_F","C_Hatchback_01_sport_F","C_Offroad_01_F","C_SUV_01_F","C_Van_01_box_F","C_Van_01_transport_F"];
+_carbomb = createVehicle [_vehicletype, [0,0,0], [], 0, "CAN_COLLIDE"];
 createVehicleCrew _carbomb;
-_carbom setPos _location;
+_carbomb setPos _location;
 _cbombdriver = driver _carbomb;
 //Switch Side
 _cbombergroup = createGroup EAST;
@@ -26,12 +24,6 @@ _cbombname = missionNamespace getVariable _name;
 sleep 1;
 karma_cb_carbomblist set [count karma_cb_carbomblist, _cbombname];
 _carbomb setVariable ["markername", _name, false];
-if (karma_cb_debug isEqualTo 1) then {
-_markerstr = createMarker[_name,getPosATL _carbomb];
-_name setMarkerShape "ICON";
-_name setMarkerType "mil_dot";
-_name setMarkerText _name;
-};
 _carbomb setVariable ["TargetScan", 0, false];
 _carbomb setVariable ["EntityScan", 0, false];
 _carbomb setVariable ["Target", 0, false];

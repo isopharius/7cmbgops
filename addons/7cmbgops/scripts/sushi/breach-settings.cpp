@@ -4,7 +4,7 @@ class BREACH
 	{	
 		useBreach = 1; //< 0 script off, 1 script on
 		LockFrontDoorsOnly = 1; //1<-Will only work on the front doors, will ignore almost all internal doors
-		closeFix = 1; //< try to use it if script dont work on some maps like N`ziwasogo.
+		closeFix = 0; //< try to use it if script dont work on some maps like N`ziwasogo.
 		//customDoorNames[] = {"vrata1","vrata2"}; //< use to define custom door names if script dont work
 		
 		/*Allow to lock pick closed doors (player must have ToolKIT item or ACE_key_lockpick item in inventory)*/
@@ -26,7 +26,7 @@ class BREACH
 			{
 				zone = "full"; //< marker (rectangle or elipse) that covers zone.  Change this name to the one you made
 				closeDoors = 1; //<1- close all doors in zone, 0- do nothing
-				lockAll = 0; //< 1- lock all closed doors in zone, 0-lock random (50%) closed doors, 2-lock 75% of doors in the zone
+				lockAll = 1; //< 1- lock all closed doors in zone, 0-lock random (50%) closed doors, 2-lock 75% of doors in the zone
 			};
 		};
 	};

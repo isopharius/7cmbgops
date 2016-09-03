@@ -1,7 +1,7 @@
 class breach_safplug
 {
 
-		file = "sushi_scripts\breach\fncs";
+		file = "sushi\breach\fncs";
 		class breachGetSettings { preInit = 1; };
 		class breachPostInit { postInit = 1; };
 		

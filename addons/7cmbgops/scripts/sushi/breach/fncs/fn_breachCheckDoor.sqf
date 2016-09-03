@@ -7,8 +7,8 @@ if(count _doorArr > 0) then {
 	private _s = _doorArr select 1;
 	{
 		_doorStatus = _d getVariable [format ["bis_disabled_%1", _x], 0];
-		
-		if (_doorStatus == 1 && _charge) then {
+
+		if (_doorStatus isEqualTo 1 && {_charge}) then {
 			_doorStatus = _d getVariable [format ["saf_var_charge_%1", _x], 0];
 		};
 	} foreach _s;

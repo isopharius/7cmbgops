@@ -14,7 +14,7 @@ if(count _doorArr > 0) then {
 		};
 	
 		_doorStatus = _d getVariable [format ["bis_disabled_%1", _x], 0];
-		if (_doorStatus == 0) then {
+		if (_doorStatus isEqualto 0) then {
 			_txt = SAF_STR_BREACH_STATUS_OPEN;
 		} else {
 			_txt = SAF_STR_BREACH_STATUS_LOCK;
