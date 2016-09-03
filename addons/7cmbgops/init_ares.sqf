@@ -146,12 +146,12 @@ if (hasInterface) then { //players
 			_groups = [];
 			{
 				_ignoreFlag = false;
-				if ((typeOf _x) in Ares_EditableObjectBlacklist or _x == player or isPlayer _x) then
+				if ((typeOf _x) in Ares_EditableObjectBlacklist or _x isEqualTo player or isPlayer _x) then
 				{
 					_ignoreFlag = true;
 				};
 
-				if (!_ignoreFlag and ((_x distance _position <= _radius) or _radius isEqualTo -1)) then
+				if (!_ignoreFlag and {(_radius isEqualTo -1 or {(_x distance _position <= _radius)})}) then
 				{
 					["Processing object: %1 - %2", _x, typeof(_x)] call Ares_fnc_LogMessage;
 					_ignoreFlag = true;
@@ -619,7 +619,7 @@ if (hasInterface) then { //players
 				_x moveInCargo _plane;
 			} foreach _haloplayers;
 
-			waitUntil {(!alive _plane) or ((_plane distance (waypointPosition _waypoint)) < 5000)};
+			waitUntil {sleep 1; (!alive _plane) or {((_plane distance (waypointPosition _waypoint)) < 5000)}};
 			if (!alive _plane) exitWith {};
 
 			_plane animateSource ["ramp", 0.65];
@@ -632,6 +632,44 @@ if (hasInterface) then { //players
 			} foreach _crewplane;
 			deletevehicle _plane;
 			deleteGroup _groupplane;
+		}
+	] call Ares_fnc_RegisterCustomModule;
+
+	[
+		"7CMBG",
+		"Rooftop Statics",
+		{
+			_dialogResult =
+				[
+					"Rooftop Statics",
+					[
+						["Zone in meters", ""],
+						["Static Type", ["Light", "Heavy"]],
+						["Max number of statics ", ""],
+						["SIDE", ["EAST", "INDEPENDENTS", "WEST"]]
+					]
+				] call Ares_fnc_ShowChooseDialog;
+			if (count _dialogResult isEqualTo 0) exitWith {};
+
+			_pos = _this select 0;
+			_size = parseNumber(_dialogResult select 0);
+			["rooftops", [_pos select 0, _pos select 1], "ELLIPSE", [_size, _size], "GLOBAL"] call CBA_fnc_createMarker;
+			"rooftops" setMarkerAlpha 0;
+
+			_side = dialogResult select 3;
+			if (_side isEqualTo 0) then {
+				_side = EAST;
+			} else {
+				if (_side isEqualTo 1) then {
+					_side = RESISTANCE;
+				} else {
+					_side = WEST;
+				};
+			};
+
+			[["rooftops", (_dialogResult select 1), parseNumber(_dialogResult select 2), true, "LOP_AFR_Infantry_Rifleman", _side], "\7cmbgops\scripts\spawnRooftopStaticWeapons.sqf"] remoteExecCall ["BIS_fnc_execVM", 2, false];
+
+			["Statics placed."] call Ares_fnc_ShowZeusMessage;
 		}
 	] call Ares_fnc_RegisterCustomModule;
 };

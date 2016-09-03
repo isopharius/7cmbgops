@@ -61,8 +61,8 @@ if (_prePlotted) then {_sizeX2 = dtaSheafSize select 0; _sizeY2 = dtaSheafSize s
 	_sizeY = ctrlText (_iccCode + 14);
 	_sizeY2 = parseNumber _sizeY;
 };
-if ((_sheaf isEqualTo "BOX") AND (_sizeX2 isEqualTo 0)) exitWith {hint "INVALID SHEAF SIZE X"};
-if ((_sheaf isEqualTo "CIRC") AND (_sizeX2 isEqualTo 0)) exitWith {hint "INVALID SHEAF SIZE Y"};
+if ((_sheaf isEqualTo "BOX") AND {(_sizeX2 isEqualTo 0)}) exitWith {hint "INVALID SHEAF SIZE X"};
+if ((_sheaf isEqualTo "CIRC") AND {(_sizeX2 isEqualTo 0)}) exitWith {hint "INVALID SHEAF SIZE Y"};
 if (_sizeX2 < 0) exitWith {hint "INVALID SHEAF SIZE X"};
 if (_sizeY2 < 0) exitWith {hint "INVALID SHEAF SIZE Y"};
 _sheafSize = [_sizeX2,_sizeY2];

@@ -68,7 +68,7 @@ if (!(_return)) then
 			call seven_fnc_updateCamera;
 		};
 		//case 78://Num +
-		if ((({_x in _pressedButtonArray} count (actionKeys "ZoomIn")) > 0) || (({_x in _pressedButtonArray} count (actionKeys "MoveDown")) > 0)) exitWith
+		if ((({_x in _pressedButtonArray} count (actionKeys "ZoomIn")) > 0) || {(({_x in _pressedButtonArray} count (actionKeys "MoveDown")) > 0)}) exitWith
 		{
 			if ((PXS_SatelliteZoom + (0.02 * FACTOR)) <= 47) then
 			{
@@ -78,7 +78,7 @@ if (!(_return)) then
 			};
 		};
 		//case 74://Num -
-		if ((({_x in _pressedButtonArray} count (actionKeys "ZoomOut")) > 0) || (({_x in _pressedButtonArray} count (actionKeys "MoveUp")) > 0)) then
+		if ((({_x in _pressedButtonArray} count (actionKeys "ZoomOut")) > 0) || {(({_x in _pressedButtonArray} count (actionKeys "MoveUp")) > 0)}) then
 		{
 			if ((PXS_SatelliteZoom - (0.02 * FACTOR)) >= 0.1) then
 			{

@@ -1,6 +1,6 @@
 // Checks if the artillery dialog can be shown
 
-if (!(dtaReady) or (time < 4)) exitWith {hint "DTA starting, please wait..."};
+if (!(dtaReady) or {(time < 4)}) exitWith {hint "DTA starting, please wait..."};
 
 if (!alive player) exitWith {hint "You are dead..."};
 _haveRadio = false;
@@ -13,7 +13,7 @@ if (dtaRestrictUsers) then {
 	if (player in dtaAuthorizedUnits) then {_authorized = true};
 };
 
-if ((dtaRestrictUsers) AND (NOT _authorized)) exitWith {hint "You are not an authorized artillery user."};
+if ((dtaRestrictUsers) && {(NOT _authorized)}) exitWith {hint "You are not an authorized artillery user."};
 
 // Use vehicle radio
 if (!isNull (objectParent player)) then {_haveRadio = true};

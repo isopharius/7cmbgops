@@ -2,7 +2,7 @@
 // Checks if the asset can be taken control of (ie. not busy/not controlled by another player)
 
 params ["_prePlotted"];
-if ((_prePlotted) AND ((count dtaSelectedPrePlotted) isEqualTo 0)) exitWith {hint "No mission selected"};
+if ((_prePlotted) AND {((count dtaSelectedPrePlotted) isEqualTo 0)}) exitWith {hint "No mission selected"};
 
 _asset = grpNull;
 _asset = dtaSelectedAsset;

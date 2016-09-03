@@ -1,6 +1,6 @@
 params ["_bomb", "_time", "_yield"];
 
-	if ((_time > 0) && (!DEFUSED)) then {
+	if ((!DEFUSED) && {(_time > 0)}) then {
 		format["Bomb Detonation in: \n %1", [((_time)/60)+.01,"HH:MM"] call BIS_fnc_timetostring] remoteExecCall ["hintSilent", 0, false];
 
 		if (_time < 1) then {

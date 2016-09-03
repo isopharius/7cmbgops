@@ -1,4 +1,4 @@
-if ((!isnil "stoptrain") && (stoptrain isEqualTo 0)) exitwith {};
+if ((!isnil "stoptrain") && {(stoptrain isEqualTo 0)}) exitwith {};
 
 createCenter east;
 createCenter west;
@@ -52,7 +52,7 @@ Projectile_Impact_Aux = "Sign_Sphere10cm_F" createVehiclelocal [0,0,0];
 
 
 [[_reset,_clear,_check,_skeet,_targ,_popup,_mover,_plate,_ball,_trace,_cam,_short,_med,_long,_stop],[_traceeh,_cameh]] spawn {
-	waituntil {sleep 1; !(alive player) || (stoptrain isEqualTo 1)};
+	waituntil {sleep 1; (stoptrain isEqualTo 1) || {!(alive player)}};
 
 	{
 		player removeAction _x;

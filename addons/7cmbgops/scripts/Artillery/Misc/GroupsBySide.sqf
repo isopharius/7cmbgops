@@ -20,7 +20,7 @@ while {((count _groups) > 0)} do {
 	if (_typeOf in dtaExclude) then {_add = false};
 	if (_add) then {
 		_isArtillery = getNumber (configFile >> "CfgVehicles" >> _typeOf >> "artilleryScanner");
-		if ((_isArtillery isEqualTo 1) AND (_side isEqualTo (side _group))) then {_out pushBack _group};
+		if ((_isArtillery isEqualTo 1) AND {(_side isEqualTo (side _group))}) then {_out pushBack _group};
 	};
 };
 _out

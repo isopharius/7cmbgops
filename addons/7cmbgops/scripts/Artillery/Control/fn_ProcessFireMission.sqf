@@ -89,7 +89,7 @@ if (_distance > _maximumRange) exitWith {
 	publicVariable "dtaAssetsBusy";
 };
 
-if ((_missionType isEqualTo "SPOT") OR (_missionType isEqualTo "FFE")) then {
+if ((_missionType isEqualTo "SPOT") OR {(_missionType isEqualTo "FFE")}) then {
 	[_asset,_warheadType] call dta_fnc_LoadMagazineGroup;
 	if (dtaDebug) then {sleep 10};
 	//[_asset,_warheadType,_pos] call dta_fnc_LoadMagazineGroup;

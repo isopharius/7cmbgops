@@ -20,7 +20,7 @@ ShowCinemaBorder false;
 
 cutText ["Press 'Enter' to exit the bullet camera", "PLAIN DOWN"];
 
-while {(alive _bullet) && !TrainingCourse_BulletCameraAbort} do
+while {!TrainingCourse_BulletCameraAbort && {(alive _bullet)}} do
 {
 	_camera camSetPos (getPosworld _bullet);
 	_camera camCommit 0.1;

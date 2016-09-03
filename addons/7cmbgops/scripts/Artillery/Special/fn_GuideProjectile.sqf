@@ -40,7 +40,7 @@ _homeMissile = {
 	private ["_velocityX", "_velocityY", "_velocityZ", "_target"];
 	_target = _secondaryTarget;
 
-	if (!(_guidedRandomly) && _missile distance _target > _missileSpeed * 1.5) then {
+	if (!(_guidedRandomly) && {_missile distance _target > _missileSpeed * 1.5}) then {
 		_guidedRandomly = TRUE;
 		_target = _secondaryTarget;
 		_dispersion = (_missile distance _defaultTargetPos) / 20;

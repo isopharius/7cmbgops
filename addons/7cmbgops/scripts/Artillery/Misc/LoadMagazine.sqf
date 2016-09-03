@@ -6,15 +6,16 @@ private [/*"_magazineRounds",_allMagazines",*/"_omitOnce","_newMagazines","_inde
 
 params ["_tube", "_magazineType"];
 
-if ((currentMagazine _tube) isEqualTo _magazineType) exitWith {
+if ((currentMagazine _tube) isEqualTo _magazineType) then {
 		_tube setVehicleAmmo 1;
-};
 
-[
-	[_tube, _magazineType],
-	{
-		params ["_tube", "_magazineType"];
-		_tube loadMagazine [[0], (_tube weaponsTurret [0]) select 0, _magazineType];
-		_tube setVehicleAmmo 1;
-	}
-] remoteExecCall ["bis_fnc_call", _tube, false];
+} else {
+	[
+		[_tube, _magazineType],
+		{
+			params ["_tube", "_magazineType"];
+			_tube loadMagazine [[0], (_tube weaponsTurret [0]) select 0, _magazineType];
+			_tube setVehicleAmmo 1;
+		}
+	] remoteExecCall ["bis_fnc_call", _tube, false];
+};

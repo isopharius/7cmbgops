@@ -9,12 +9,11 @@ if (hasInterface) then {
 
 	_para = createVehicle ["OH_T10_PARACHUTE", [0,0,0], [], 0, "CAN_COLLIDE"];
 	_para setPosworld (getPosworld player);
-	sleep 1;
-
+	sleep 0.1;
 	player moveindriver _para;
+	sleep 0.1;
 	_veh allowdamage true;
-	sleep 1;
-
-	waitUntil {isTouchingGround player};
+	sleep 0.1;
+	waitUntil {sleep 1; isTouchingGround player};
 	player allowdamage true;
 };

@@ -197,7 +197,7 @@ while {(_rounds > 0)} do {
 	};
 
 	_sleepTime = 1;
-	if NOT((_assetType isEqualTo "Rockets") OR (_assetType isEqualTo "BM21")) then {_sleepTime = 2};
+	if NOT((_assetType isEqualTo "Rockets") OR {(_assetType isEqualTo "BM21")}) then {_sleepTime = 2};
 	if (_sheaf isEqualTo "POINT") then {_sleepTime = 1};
 	sleep _sleepTime;
 
@@ -241,7 +241,7 @@ while {(_rounds > 0)} do {
 	};
 
 	_reloadDifference = (random 1.5);
-	if ((_assetType isEqualTo "Rockets") OR (_assetType isEqualTo "BM21")) then {_reloadDifference = 0};
+	if ((_assetType isEqualTo "Rockets") OR {(_assetType isEqualTo "BM21")}) then {_reloadDifference = 0};
 	_rounds = _rounds - 1;
 	sleep _timeBetweenRounds;
 };
@@ -249,11 +249,11 @@ while {(_rounds > 0)} do {
 if (dtaTrackRounds) then {_tube removeEventHandler ["fired",_trackEH]};
 
 // Remove the airburst EH
-if ((_fuse isEqualTo "AIRBURST") OR (_fuse isEqualTo "MIXED")) then {_tube removeEventHandler ["fired",_airburstEH]};
+if ((_fuse isEqualTo "AIRBURST") OR {(_fuse isEqualTo "MIXED")}) then {_tube removeEventHandler ["fired",_airburstEH]};
 if (_action > 0) then {_tube removeEventHandler ["fired",_specialEH]};
 
 // Release the group from being busy (firing) and allow the controlling player to issue orders again
-if ((_tube isEqualTo (vehicle (leader _asset))) AND (_missionType isEqualTo "FFE")) then {
+if ((_tube isEqualTo (vehicle (leader _asset))) AND {(_missionType isEqualTo "FFE")}) then {
 		sleep 2;
 		dtaAssetsBusy = dtaAssetsBusy - [_asset];
 		publicVariable "dtaAssetsBusy";

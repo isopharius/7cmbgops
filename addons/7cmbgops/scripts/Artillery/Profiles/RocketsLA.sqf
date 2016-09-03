@@ -15,8 +15,8 @@ _maximumRange = 20000;
 _index = 0;
 _modes = ["Close","Medium"];
 
-if ((_distance >= 100) AND (_distance < 500)) then {_index = 0};
-if ((_distance >= 500) AND (_distance < 20000)) then {_index = 1};
+if ((_distance >= 100) && {(_distance < 500)}) then {_index = 0};
+if ((_distance >= 500) && {(_distance < 20000)}) then {_index = 1};
 
 _charge = _modes select _index;
 _out = [_charge,_timeBetweenRounds,_minimumRange,_maximumRange];

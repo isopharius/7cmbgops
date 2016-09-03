@@ -346,7 +346,7 @@ IL_fnc_addAction = {
 				if (_ison) then {
 					player setUserActionText[IL_action,IL_text_OFF];
 
-					if ( (cameraView != 'INTERNAL') && ((IL_config select _i) select 1) ) then {
+					if ( (cameraView != 'INTERNAL') && {((IL_config select _i) select 1)} ) then {
 						if (count IL_lights > 0) then {
 							{
 								IL_lights = IL_lights - [_x];
@@ -400,8 +400,8 @@ IL_fnc_addAction = {
 				} forEach IL_lights;
 			};
 		};
-		if (IL_Crew_Only) then { _show = (_show && ((_this isEqualTo driver _target) OR (_this isEqualTo gunner _target) OR (_this isEqualTo commander _target) OR (_this in (vehicle _target call IL_fnc_returnTurretUnits)))) };
-		if (IL_Action_Night && sunOrMoon isEqualTo 1) then { _show = (_show && (vehicle _target getVariable [IL_varname,false] )) };
+		if (IL_Crew_Only) then { _show = (_show && {((_this isEqualTo driver _target) OR {(_this isEqualTo gunner _target}) OR {(_this isEqualTo commander _target)} OR {(_this in (vehicle _target call IL_fnc_returnTurretUnits))})}) };
+		if (IL_Action_Night && {sunOrMoon isEqualTo 1}) then { _show = (_show && (vehicle _target getVariable [IL_varname,false] )) };
 		_show
 	"];
 
@@ -452,10 +452,10 @@ IL_fnc_addAction = {
 		_i = _veh call IL_fnc_inList;
 		_show = false;
 		_override = _veh getVariable 'IL_override';
-		if (!(isNil _override) && (IL_c_green in (_override select 0))) then { player setUserActionText[IL_action2,IL_Red_Text];};
+		if (!(isNil _override) && {(IL_c_green in (_override select 0))}) then { player setUserActionText[IL_action2,IL_Red_Text];};
 		if (isNil _override) then { player setUserActionText[IL_action2,IL_Green_Text];};
-		if ((_veh != player) && (_i > -1)) then { _show = ((_i > -1) && ((IL_config select _i) select 3)) };
-		if (IL_Crew_Only) then { _show = (_show && ((_this isEqualTo driver _target) OR (_this isEqualTo gunner _target) OR (_this isEqualTo commander _target) OR (_this in (vehicle _target call IL_fnc_returnTurretUnits)))) };
+		if ((_veh != player) && (_i > -1)) then { _show = ((_i > -1) && {((IL_config select _i) select 3)}) };
+		if (IL_Crew_Only) then { _show = (_show && {((_this isEqualTo driver _target) OR {(_this isEqualTo gunner _target)} OR {(_this isEqualTo commander _target)} OR {(_this in (vehicle _target call IL_fnc_returnTurretUnits))})}) };
 		_veh getVariable [IL_varname,false] &&
 		_show
 	"];

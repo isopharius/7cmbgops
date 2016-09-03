@@ -7,7 +7,7 @@ _dialogResult =
 		]
 	] call Ares_fnc_ShowChooseDialog;
 
-if ((count _dialogResult isEqualTo 0) or ((_dialogResult select 0) isEqualTo "")) then {
+if ((count _dialogResult isEqualTo 0) or {((_dialogResult select 0) isEqualTo "")}) then {
 	hint "CallSign not changed.";
 
 } else {

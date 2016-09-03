@@ -1,7 +1,7 @@
 if (isHC) exitwith {};
 
 {
-		if ((_x find "respawn" > -1) || (_x find "tp" > -1)) then { //all tp flags
+		if ((_x find "respawn" > -1) || {(_x find "tp" > -1)}) then { //all tp flags
 
 			if (!isdedicated) then { //clientside arsenal box and flag at tp marker with name
 				_markerpos = getmarkerpos _x;
@@ -25,12 +25,12 @@ if (isHC) exitwith {};
 				};
 			};
 
-			if ((isserver) && !(_x find "respawn" > -1)) then { //add tp respawn
+			if ((isserver) && {!(_x find "respawn" > -1)}) then { //add tp respawn
 				[missionnamespace, _x] call BIS_fnc_addRespawnPosition;
 			};
 
 		} else {
-			if ((isserver) && (_x find "mash" > -1)) then { //create med facility at mash marker
+			if ((isserver) && {(_x find "mash" > -1)}) then { //create med facility at mash marker
 				_mash = createVehicle ["Land_Medevac_house_V1_F", [0,0,0], [], 0, "none"];
     			_mash enableSimulation false;
 				_mash allowdamage false;

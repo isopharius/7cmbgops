@@ -1,5 +1,6 @@
-_scoretable = _this select 3 select 0;
-_target_name = _this select 3 select 1;
+_target = _this select 3;
+_scoretable = _target select 0;
+_target_name = _target select 1;
 
 _borders = [0.460,0.410,0.365,0.320,0.270,0.225,0.175,0.130,0.080,0.035, 0];
 _scorelist = [];
