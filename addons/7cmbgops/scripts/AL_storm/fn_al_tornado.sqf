@@ -8,7 +8,7 @@ deletemarker _tornado_start;
 deletemarker _tornado_dest;
 
 _tornadasource = createVehicle ["Land_HelipadEmpty_F", [0,0,0], [], 0, "CAN_COLLIDE"];
-_tornadosource setPos _posstart;
+_tornadasource setPos _posstart;
 
 // transmite la clienti
 [_tornadasource] remoteExec ["seven_fnc_tornadoSound", 0, true];

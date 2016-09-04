@@ -3,15 +3,15 @@ params ["_tsource"];
 
 _tsourcepos = getPos _tsource;
 
-[_tsource] spawn {
-	params ["_tsource"];
+[_tsource, _tsourcepos] spawn {
+	params ["_tsource", "_tsourcepos"];
 	waitUntil {
 		if ((player distance _tsourcepos) < 300) then {
 			addCamShake [0.3,7,11];
 			sleep 10 + random 60;
 		};
 		sleep 5;
-		(isNull _torsouce)
+		(isNull _tsource)
 	};
 };
 

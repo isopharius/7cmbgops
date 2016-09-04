@@ -50,7 +50,9 @@ sleep 0.1;
 [] spawn {
 	_ifog=0;
 	waitUntil {
-		_ifog=_ifog+0.001; 0 setFog _ifog; sleep 0.01;
+		_ifog=_ifog+0.001;
+		0 setFog _ifog;
+		sleep 0.01;
 		!(_ifog <0.3)
 	};
 };
@@ -60,12 +62,12 @@ sleep 0.1;
 if (_dust_wall) then {
 	// perete de praf
 	_rand_pl = [] spawn seven_fnc_alias_hunt;
-	waitUntil {sleep 0.1; scriptDone _rand_pl};
+	waitUntil {sleep 0.1; (scriptDone _rand_pl)};
 
 	//_origine_storm = -1*_direction_duststorm;
 
 	//_pozstorm = getpos hunt_alias;
-	_rapoz = 360-_direction_duststorm;
+	_rapoz = 360 - _direction_duststorm;
 
 	_xpoz= 0;
 	_ypoz= 0;

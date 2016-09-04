@@ -8,7 +8,7 @@ enableCamShake true;
 
 [] spawn {
 	waitUntil {
-		ddCamShake [0.3,7,11];
+		addCamShake [0.3,7,11];
 		sleep 15+random 120;
 		(!al_duststorm_on)
 	};

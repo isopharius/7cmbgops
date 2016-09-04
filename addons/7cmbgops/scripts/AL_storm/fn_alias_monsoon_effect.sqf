@@ -2,14 +2,13 @@
 // Tutorial: https://www.youtube.com/user/aliascartoons
 // [[[],"\7cmbgops\scripts\AL_storm\alias_monsoon_effect.sqf"],"BIS_fnc_execVM",true,false] spawn BIS_fnc_MP;
 
-
 if (!hasInterface) exitWith {};
 
 enableCamShake true;
 
 [] spawn {
 	waitUntil {
-		ddCamShake [0.3,7,11];
+		addCamShake [0.3,7,11];
 		sleep 15+random 120;
 		(!al_monsoon_om)
 	};
