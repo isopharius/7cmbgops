@@ -90,16 +90,26 @@ if (_dust_wall) then {
 	if ((_ypoz == -800) or ((_ypoz == 800))) then {_yadd =0; _xadd = 160};
 	if ((_xpoz == -800) or ((_xpoz == 800))) then {_yadd =160; _xadd = 0};
 
-	_stormsource = "Land_HelipadEmpty_F" createVehicle _pozobcj;
+	_stormsource = createVehicle ["Land_HelipadEmpty_F",[0,0,0], [], 0, "CAN_COLLIDE"];
+	_stormsource setPos _pozobcj;
 
-	_stormsource_1 = "Land_HelipadEmpty_F" createVehicle [(_pozobcj select 0)-2*_xadd,(_pozobcj select 1)-2*_yadd,0];
-	_stormsource_2 = "Land_HelipadEmpty_F" createVehicle [(_pozobcj select 0)-_xadd,(_pozobcj select 1)-_yadd,0];
+	_stormsource_1 = createVehicle ["Land_HelipadEmpty_F",[0,0,0], [], 0, "CAN_COLLIDE"];
+	_stormsource_1 setPos [(_pozobcj select 0)-2*_xadd,(_pozobcj select 1)-2*_yadd,0];
 
-	_stormsource_3 = "Land_HelipadEmpty_F" createVehicle [(_pozobcj select 0)+_xadd,(_pozobcj select 1)+_yadd,0];
-	_stormsource_4 = "Land_HelipadEmpty_F" createVehicle [(_pozobcj select 0)+2*_xadd,(_pozobcj select 1)+2*_yadd,0];
+	_stormsource_2 = createVehicle ["Land_HelipadEmpty_F",[0,0,0], [], 0, "CAN_COLLIDE"];
+	_stormsource_2 setPos [(_pozobcj select 0)-_xadd,(_pozobcj select 1)-_yadd,0];
 
-	_stormsource_5 = "Land_HelipadEmpty_F" createVehicle [(_pozobcj select 0)-3*_xadd,(_pozobcj select 1)-3*_yadd,0];
-	_stormsource_6 = "Land_HelipadEmpty_F" createVehicle [(_pozobcj select 0)+3*_xadd,(_pozobcj select 1)+3*_yadd,0];
+	_stormsource_3 = createVehicle ["Land_HelipadEmpty_F",[0,0,0], [], 0, "CAN_COLLIDE"];
+	_stormsource_3 setPos [(_pozobcj select 0)+_xadd,(_pozobcj select 1)+_yadd,0];
+
+	_stormsource_4 = createVehicle ["Land_HelipadEmpty_F",[0,0,0], [], 0, "CAN_COLLIDE"];
+	_stormsource_4 setPos [(_pozobcj select 0)+2*_xadd,(_pozobcj select 1)+2*_yadd,0];
+
+	_stormsource_5 = createVehicle ["Land_HelipadEmpty_F",[0,0,0], [], 0, "CAN_COLLIDE"];
+	_stormsource_5 setPos [(_pozobcj select 0)-3*_xadd,(_pozobcj select 1)-3*_yadd,0];
+
+	_stormsource_6 = createVehicle ["Land_HelipadEmpty_F",[0,0,0], [], 0, "CAN_COLLIDE"];
+	_stormsource_6 setPos [(_pozobcj select 0)+3*_xadd,(_pozobcj select 1)+3*_yadd,0];
 
 	[_stormsource,_stormsource_1,_stormsource_2,_stormsource_3,_stormsource_4,_stormsource_5,_stormsource_6] spawn {
 		_storm = _this select 0;
