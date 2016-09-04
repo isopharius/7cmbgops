@@ -31,6 +31,7 @@ class seven
 		class helipad_light_remove {};
 		class SHK_moveObjects {};
 		class Teleport {};
+		class spawnRooftopStaticWeapons {};
 	};
 	class loadouts
 	{
@@ -170,4 +171,16 @@ class seven
 			class FireShrapnel {};
 			class OriginToTarget {};
 		};
+	class storm {
+		file = "\7cmbgops\scripts\AL_storm";
+		class al_duststorm {};
+		class al_monsoon {};
+		class al_tornado {};
+		class al_tornado_effect {};
+		class alias_dust_wall {};
+		class alias_duststorm_effect {};
+		class alias_hunt {};
+		class alias_monsoon_effect {};
+		class tornadosound {};
+	};
 };
