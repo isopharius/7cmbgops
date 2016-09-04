@@ -631,7 +631,6 @@ if (hasInterface) then { //players
 				_plane deleteVehicleCrew _x;
 			} foreach _crewplane;
 			deletevehicle _plane;
-			deleteGroup _groupplane;
 		}
 	] call Ares_fnc_RegisterCustomModule;
 
@@ -641,12 +640,12 @@ if (hasInterface) then { //players
 		{
 			_dialogResult =
 				[
-					"Rooftop Statics",
+					"Rooftop Statics Settings",
 					[
-						["Zone in meters", ""],
-						["Static Type", ["Light", "Heavy"]],
+						["Zone radius in meters", ""],
+						["Static Type", ["Light", "Medium", "Heavy"]],
 						["Max number of statics", ""],
-						["SIDE", ["EAST", "INDEPENDENTS", "WEST"]]
+						["SIDE", ["INDEPENDENTS", "EAST", "WEST"]]
 					]
 				] call Ares_fnc_ShowChooseDialog;
 			if (count _dialogResult isEqualTo 0) exitWith {};
@@ -656,18 +655,18 @@ if (hasInterface) then { //players
 			["rooftops", [_pos select 0, _pos select 1], "ELLIPSE", [_size, _size], "GLOBAL"] call CBA_fnc_createMarker;
 			"rooftops" setMarkerAlpha 0;
 
-			_side = dialogResult select 3;
+			_side = _dialogResult select 3;
 			if (_side isEqualTo 0) then {
-				_side = EAST;
+				_side = RESISTANCE;
 			} else {
 				if (_side isEqualTo 1) then {
-					_side = RESISTANCE;
+					_side = EAST;
 				} else {
 					_side = WEST;
 				};
 			};
 
-			[["rooftops", (_dialogResult select 1), parseNumber(_dialogResult select 2), true, "LOP_AFR_Infantry_Rifleman", _side], "\7cmbgops\scripts\spawnRooftopStaticWeapons.sqf"] remoteExecCall ["BIS_fnc_execVM", 2, false];
+			["rooftops", (_dialogResult select 1) + 1, parseNumber(_dialogResult select 2), true, "LOP_AFR_Infantry_Rifleman", _side] remoteExecCall ["seven_fnc_spawnRooftopStaticWeapons", 2, false];
 
 			["Statics placed."] call Ares_fnc_ShowZeusMessage;
 		}
@@ -703,6 +702,7 @@ if (hasInterface) then { //players
 		"Environment",
 		"Tornado Start",
 		{
+			if !((getmarkerPos "start") isEqualto [0,0,0]) exitWith {["START POSITION ALREADY SET!"] call Ares_fnc_ShowZeusMessage;};
 			params ["_pos"];
 			["start", [_pos select 0, _pos select 1], "ELLIPSE", [0,0], "GLOBAL"] call CBA_fnc_createMarker;
 			["NOW SET END POSITION"] call Ares_fnc_ShowZeusMessage;
@@ -713,7 +713,7 @@ if (hasInterface) then { //players
 		"Environment",
 		"Tornado End",
 		{
-			if (isNil "start") exitWith {["SET START POSITION FIRST!"] call Ares_fnc_ShowZeusMessage;};
+			if ((getmarkerPos "start") isEqualto [0,0,0]) exitWith {["SET START POSITION FIRST!"] call Ares_fnc_ShowZeusMessage;};
 			params ["_pos"];
 			["end", [_pos select 0, _pos select 1], "ELLIPSE", [0,0], "GLOBAL"] call CBA_fnc_createMarker;
 			["start", "end"] remoteExec ["seven_fnc_al_tornado", 2, false];
