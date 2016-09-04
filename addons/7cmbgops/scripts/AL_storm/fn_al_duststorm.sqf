@@ -5,10 +5,7 @@
 
 if (!isServer) exitWith {};
 
-_direction_duststorm	= _this select 0;
-_duration_duststorm		= _this select 1;
-_effect_on_objects		= _this select 2;
-_dust_wall				= _this select 3;
+params ["_direction_duststorm", "_duration_duststorm", "_effect_on_objects", "_dust_wall"];
 
 //hint str _direction_duststorm;
 
@@ -237,7 +234,7 @@ if (_effect_on_objects) then {
 		sleep 1;
 		[] spawn {
 			_rafale = selectRandom ["rafala_1","sandstorm","rafala_4_dr","rafala_5_st","rafala_7"];
-			[_rafale,"playSound"] call BIS_fnc_MP;
+			[_rafale] remoteExecCall ["playSound", 0, false];
 			//hint str _rafale;
 		};
 

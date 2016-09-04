@@ -5,9 +5,7 @@
 
 if (!isServer) exitWith {};
 
-_direction_monsoon	= _this select 0;
-_duration_monsoon	= _this select 1;
-_effect_on_objects	= _this select 2;
+params ["_duration_monsoon", "_duration_monsoon", "_effect_on_objects"];
 
 al_monsoon_om = true;
 publicVariable "al_monsoon_om";
@@ -26,7 +24,7 @@ publicVariable "al_windlevel";
 sleep 0.1;
 
 [_duration_monsoon] spawn {
-	x_duration_monsoon = _this select 0;
+	params ["x_duration_monsoon"];
 	sleep x_duration_monsoon;
 
 	al_monsoon_om = false;

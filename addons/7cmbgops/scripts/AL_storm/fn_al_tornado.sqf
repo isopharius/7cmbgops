@@ -3,7 +3,11 @@ if (!isServer) exitWith {};
 params ["_tornado_start", "_tornado_dest"];
 
 _posstart = getMarkerpos _tornado_start;
-_tornadasource = "Land_HelipadEmpty_F" createVehicleLocal [0,0,0];
+_posdest = getMarkerpos _tornado_dest;
+deletemarker _tornado_start;
+deletemarker _tornado_dest;
+
+_tornadasource = createVehicle ["Land_HelipadEmpty_F", [0,0,0], [], 0, "CAN_COLLIDE"];
 _tornadosource setPos _posstart;
 
 // transmite la clienti
@@ -11,7 +15,7 @@ _tornadosource setPos _posstart;
 [_tornadasource] remoteExec ["seven_fnc_al_tornado_effect", 0, true];
 
 [_tornadasource] spawn {
-	_tuner_tor = _this select 0;
+	params ["_tuner_tor"];
 	while {!isNull _tuner_tor} do {
 	[_tuner_tor] remoteExec ["seven_fnc_al_tunet_tornado", 0, true];
 	//sleep 10 + random 60;
@@ -22,8 +26,6 @@ _tornadosource setPos _posstart;
 //---------------------------------------------------
 
 // *************************************** deplasare ********************************************
-
-_posdest = getMarkerpos _tornado_dest;
 _xdest = _posdest select 0;
 _ydest = _posdest select 1;
 _xstart= _posstart select 0;

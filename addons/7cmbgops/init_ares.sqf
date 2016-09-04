@@ -645,7 +645,7 @@ if (hasInterface) then { //players
 					[
 						["Zone in meters", ""],
 						["Static Type", ["Light", "Heavy"]],
-						["Max number of statics ", ""],
+						["Max number of statics", ""],
 						["SIDE", ["EAST", "INDEPENDENTS", "WEST"]]
 					]
 				] call Ares_fnc_ShowChooseDialog;
@@ -670,6 +670,86 @@ if (hasInterface) then { //players
 			[["rooftops", (_dialogResult select 1), parseNumber(_dialogResult select 2), true, "LOP_AFR_Infantry_Rifleman", _side], "\7cmbgops\scripts\spawnRooftopStaticWeapons.sqf"] remoteExecCall ["BIS_fnc_execVM", 2, false];
 
 			["Statics placed."] call Ares_fnc_ShowZeusMessage;
+		}
+	] call Ares_fnc_RegisterCustomModule;
+
+	[
+		"Environment",
+		"Monsoon",
+		{
+			_dialogResult =
+				[
+					"Monsoon Settings",
+					[
+						["Direction in degrees", ""],
+						["Duration in seconds", ""],
+						["Throw objects", ["YES", "NO"]]
+					]
+				] call Ares_fnc_ShowChooseDialog;
+			if (count _dialogResult isEqualTo 0) exitWith {};
+
+			_throw = false;
+			if ((_dialogResult select 2) isEqualTo 0) then {
+				_throw = true;
+			};
+
+			[parseNumber(_dialogResult select 0), parseNumber(_dialogResult select 1), _throw] remoteExec ["seven_fnc_al_monsoon", 2, false];
+
+			["MONSOON INCOMING!"] call Ares_fnc_ShowZeusMessage;
+		}
+	] call Ares_fnc_RegisterCustomModule;
+
+	[
+		"Environment",
+		"Tornado Start",
+		{
+			params ["_pos"];
+			["start", [_pos select 0, _pos select 1], "ELLIPSE", [0,0], "GLOBAL"] call CBA_fnc_createMarker;
+			["NOW SET END POSITION"] call Ares_fnc_ShowZeusMessage;
+		}
+	] call Ares_fnc_RegisterCustomModule;
+
+	[
+		"Environment",
+		"Tornado End",
+		{
+			if (isNil "start") exitWith {["SET START POSITION FIRST!"] call Ares_fnc_ShowZeusMessage;};
+			params ["_pos"];
+			["end", [_pos select 0, _pos select 1], "ELLIPSE", [0,0], "GLOBAL"] call CBA_fnc_createMarker;
+			["start", "end"] remoteExec ["seven_fnc_al_tornado", 2, false];
+
+			["TORNADO INCOMING!"] call Ares_fnc_ShowZeusMessage;
+		}
+	] call Ares_fnc_RegisterCustomModule;
+
+	[
+		"Environment",
+		"Dust Storm",
+		{
+			_dialogResult =
+				[
+					"Dust Storm Settings",
+					[
+						["Direction in degrees", ""],
+						["Duration in seconds", ""],
+						["Throw objects", ["YES", "NO"]].
+						["Wall of Dust", ["YES", "NO"]]
+					]
+				] call Ares_fnc_ShowChooseDialog;
+			if (count _dialogResult isEqualTo 0) exitWith {};
+
+			_throw = false;
+			_wall = false;
+			if ((_dialogResult select 2) isEqualTo 0) then {
+				_throw = true;
+			};
+			if ((_dialogResult select 3) isEqualTo 0) then {
+				_wall = true;
+			};
+
+			[parseNumber(_dialogResult select 0), parseNumber(_dialogResult select 1), _throw, _wall] remoteExec ["seven_fnc_al_duststorm", 2, false];
+
+			["DUSTSTORM INCOMING!"] call Ares_fnc_ShowZeusMessage;
 		}
 	] call Ares_fnc_RegisterCustomModule;
 };
