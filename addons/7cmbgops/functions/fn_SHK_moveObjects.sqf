@@ -33,13 +33,13 @@ _types = if (count _this > 3) then {_this select 3} else {[]};
 _dAdj = if (count _this > 4) then {_this select 4} else {0};
 if (count _this > 5) then {
   _fDir = _this select 5;
-  if (typename _fDir isEqualTo typename objNull) then {_fDir = getdir _fDir};
+  if (_fDir isEqualType objNull) then {_fDir = getdir _fDir};
 };
 
-if (typename _aPos isEqualTo typename objNull) then {_aPos = getpos _aPos};
-if (typename _dPos isEqualTo typename objNull) then {_dPos = getpos _dPos};
-if (typename _types isEqualTo typename "") then {_types = [_types]};
-if (typename _dAdj isEqualTo typename objNull) then {_dAdj = getdir _dAdj};
+if (_aPos isEqualType objNull) then {_aPos = getpos _aPos};
+if (_dPos isEqualType objNull) then {_dPos = getpos _dPos};
+if (_types isEqualType "") then {_types = [_types]};
+if (_dAdj isEqualType objNull) then {_dAdj = getdir _dAdj};
 
 _objects = nearestobjects [_aPos,_types,_range];
 

@@ -8,7 +8,7 @@ PARAMS_2(_target,_params);
 _menuName = "";
 _menuRsc = "popup";
 
-if (typeName _params isEqualTo "ARRAY") then {
+if (_params isEqualType []) then {
 	if (count _params < 1) exitWith {diag_log format["Error: Invalid params: %1, %2", _this, __FILE__];};
 	_menuName = _params select 0;
 	_menuRsc = if (count _params > 1) then {_params select 1} else {_menuRsc};
