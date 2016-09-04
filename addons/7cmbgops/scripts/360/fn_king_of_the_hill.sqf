@@ -1,7 +1,6 @@
 {_x removeAllEventHandlers "HitPart"; deleteVehicle _x} forEach TrainingCourse_TargetList;
 {deleteVehicle _x} forEach allUnits;
 {deleteVehicle _x} forEach allDead;
-{deleteGroup _x} forEach allGroups;
 
 Projectile_Impact_Aux setposworld [0, 0, 0];
 

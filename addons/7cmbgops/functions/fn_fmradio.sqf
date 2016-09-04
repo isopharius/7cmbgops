@@ -8,7 +8,6 @@ if (isnil "fmradio") then {
 		_grp = group _log;
 		detach _log;
 		deletevehicle _log;
-		deletegroup _grp;
 		fmradio = fmradio - [_radio];
 	} else {
 		fmradio pushback _radio;

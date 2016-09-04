@@ -10,7 +10,6 @@ private _targetRangeMax  = _arguments select 4;
 {_x removeAllEventHandlers "HitPart"; deleteVehicle _x} forEach TrainingCourse_TargetList;
 {deleteVehicle _x} forEach allUnits;
 {deleteVehicle _x} forEach allDead;
-{deleteGroup _x} forEach allGroups;
 
 TrainingCourse_TargetList = [];
 
