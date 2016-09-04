@@ -41,9 +41,10 @@ sleep 0.1;
 };
 
 [] spawn {
-	while {al_duststorm_on} do {
+	waitUntil {
 		["bcg_wind"] remoteExecCall ["playSound", 0, true];
 		sleep 60;
+		(!al_duststorm_on)
 	};
 };
 
@@ -51,8 +52,9 @@ sleep 0.1;
 
 [] spawn {
 	_ifog=0;
-	while {_ifog <0.3} do {
+	waitUntil {
 		_ifog=_ifog+0.001; 0 setFog _ifog; sleep 0.01;
+		!(_ifog <0.3)
 	};
 };
 
@@ -61,7 +63,7 @@ sleep 0.1;
 if (_dust_wall) then {
 	// perete de praf
 	_rand_pl = [] spawn seven_fnc_alias_hunt;
-	waitUntil {scriptDone _rand_pl};
+	waitUntil {sleep 0.1; scriptDone _rand_pl};
 
 	//_origine_storm = -1*_direction_duststorm;
 
@@ -134,15 +136,16 @@ if (_dust_wall) then {
 		} else {_xadv = 1;_yadv =0;};
 
 		//hint str _xadv;
-		while {al_duststorm_on} do {
-		_storm setPos [(getPos _storm select 0)+_xadv,(getPos _storm select 1)+_yadv,0];
-		_storm_1 setPos [(getPos _storm_1 select 0)+_xadv,(getPos _storm_1 select 1)+_yadv,0];
-		_storm_2 setPos [(getPos _storm_2 select 0)+_xadv,(getPos _storm_2 select 1)+_yadv,0];
-		_storm_3 setPos [(getPos _storm_3 select 0)+_xadv,(getPos _storm_3 select 1)+_yadv,0];
-		_storm_4 setPos [(getPos _storm_4 select 0)+_xadv,(getPos _storm_4 select 1)+_yadv,0];
-		_storm_5 setPos [(getPos _storm_5 select 0)+_xadv,(getPos _storm_5 select 1)+_yadv,0];
-		_storm_6 setPos [(getPos _storm_6 select 0)+_xadv,(getPos _storm_6 select 1)+_yadv,0];
-		sleep 5;
+		waitUntil {
+			_storm setPos [(getPos _storm select 0)+_xadv,(getPos _storm select 1)+_yadv,0];
+			_storm_1 setPos [(getPos _storm_1 select 0)+_xadv,(getPos _storm_1 select 1)+_yadv,0];
+			_storm_2 setPos [(getPos _storm_2 select 0)+_xadv,(getPos _storm_2 select 1)+_yadv,0];
+			_storm_3 setPos [(getPos _storm_3 select 0)+_xadv,(getPos _storm_3 select 1)+_yadv,0];
+			_storm_4 setPos [(getPos _storm_4 select 0)+_xadv,(getPos _storm_4 select 1)+_yadv,0];
+			_storm_5 setPos [(getPos _storm_5 select 0)+_xadv,(getPos _storm_5 select 1)+_yadv,0];
+			_storm_6 setPos [(getPos _storm_6 select 0)+_xadv,(getPos _storm_6 select 1)+_yadv,0];
+			sleep 5;
+			(!al_duststorm_on)
 		};
 	};
 
@@ -150,9 +153,10 @@ if (_dust_wall) then {
 
 	[_stormsource] spawn {
 		_stormsource_s = _this select 0;
-		while {al_duststorm_on} do {
+		waitUntil {
 			[_stormsource_s, "uragan_1"] call CBA_fnc_globalSay3d;
 			sleep 60;
+			(!al_duststorm_on)
 		};
 	};
 
@@ -197,7 +201,7 @@ incr = true;
 incrx = false;
 incry = false;
 
-while {incr} do {
+waitUntil {
 	sleep 0.01;
 	if (inx < abs vx) then {inx = inx+0.1;} else {incrx = true};
 	if (iny < abs vy) then {iny = iny+0.1} else {incry = true};
@@ -205,13 +209,14 @@ while {incr} do {
 	winx = floor (inx*fctx);
 	winy = floor (iny*fcty);
 	setWind [winx,winy,true];
+	(!incr)
 };
 
 if (_effect_on_objects) then {
 
 	while {al_duststorm_on} do {
 		_rand_pl = [] spawn seven_fnc_alias_hunt;
-		waitUntil {scriptDone _rand_pl};
+		waitUntil {sleep 0.1; (scriptDone _rand_pl)};
 
 	// interval object blow
 		sleep 1;
@@ -244,13 +249,13 @@ if (_effect_on_objects) then {
 			_xx=0;
 			_yy=0;
 
-			while {(_xx< _xblow) or (_yy< _yblow)} do {
+			waitUntil {
 				_blowobj setvelocity [_xx*fctx,_yy*fcty,random 0.1];
 				_xx = _xx + 0.01;
 				_yy = _yy + 0.01;
 				sleep 0.001;
+				((_xx < _xblow) or {(_yy < _yblow)})
 			};
-
 		};
 	};
 };

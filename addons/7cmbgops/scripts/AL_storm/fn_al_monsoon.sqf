@@ -40,9 +40,10 @@ sleep 0.1;
 };
 
 [] spawn {
-	while {al_monsoon_om} do {
-		["bcg_wind","playSound"] call BIS_fnc_MP;
+	waitUntil {
+		["bcg_wind"] remoteExecCall ["playSound", 0, false];
 		sleep 60;
+		(!al_monsoon_om)
 	};
 };
 
@@ -51,8 +52,9 @@ sleep 0.1;
 
 [] spawn {
 	_irain=0;
-	while {_irain <1} do {
+	waitUntil {
 		_irain=_irain+0.01;0 setrain _irain; sleep 0.1;
+		!(_irain <1)
 	};
 };
 
@@ -110,8 +112,8 @@ while {incr} do {
 if (_effect_on_objects) then {
 
 	while {al_monsoon_om} do {
-		_rand_pl = [] remoteExec ["seven_fnc_alias_hunt", 0, false];
-		waitUntil {scriptDone _rand_pl};
+		_rand_pl = [] spawn seven_fnc_alias_hunt;
+		waitUntil {sleep 0.1; scriptDone _rand_pl};
 
 	// interval object blow
 		sleep 1;
@@ -132,7 +134,7 @@ if (_effect_on_objects) then {
 		sleep 1;
 		[] spawn {
 			_rafale = selectRandom ["rafala_1","rafala_2","rafala_4_dr","rafala_5_st","rafala_6","rafala_7","rafala_8","rafala_9"];
-			[_rafale,"playSound"] call BIS_fnc_MP;
+			[_rafale] remoteExecCall ["playSound", 0, false];
 			//hint str _rafale;
 		};
 
