@@ -67,7 +67,7 @@ if (hasInterface) then {
 		{
 			if (!(dtaReady) or (time < 4)) exitWith {hint "DTA starting, please wait..."};
 			if (dtaLastDialog isEqualTo "Assets") then {
-				[] execVM "\7cmbgops\scripts\Artillery\Dialog\Assets.sqf";
+				[] spawn seven_fnc_Assets;
 			} else {
 				if (dtaLastDialog isEqualTo "Control") then {
 				[false] spawn seven_fnc_Control;
