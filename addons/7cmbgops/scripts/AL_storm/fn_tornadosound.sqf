@@ -1,7 +1,7 @@
 if (!hasInterface) exitWith {};
 params ["_object"];
-while{true} do
-{
+waitUntil {
 	_object say3D "uragan_1";
 	sleep 150;
+	(isNull _object)
 };
