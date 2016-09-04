@@ -400,7 +400,7 @@ IL_fnc_addAction = {
 				} forEach IL_lights;
 			};
 		};
-		if (IL_Crew_Only) then { _show = (_show && {((_this isEqualTo driver _target) OR {(_this isEqualTo gunner _target}) OR {(_this isEqualTo commander _target)} OR {(_this in (vehicle _target call IL_fnc_returnTurretUnits))})}) };
+		if (IL_Crew_Only) then { _show = (_show && {((_this isEqualTo driver _target) OR {(_this isEqualTo gunner _target)} OR {(_this isEqualTo commander _target)} OR {(_this in (vehicle _target call IL_fnc_returnTurretUnits))})}) };
 		if (IL_Action_Night && {sunOrMoon isEqualTo 1}) then { _show = (_show && (vehicle _target getVariable [IL_varname,false] )) };
 		_show
 	"];

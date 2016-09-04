@@ -122,7 +122,6 @@ class seven
 		class preInit { preInit = 1; };
 		class showStatus {};
 	};
-	class artillery {
 		class Control {
 			file = "\7cmbgops\scripts\Artillery\Control";
 			class Splash {};
@@ -166,10 +165,9 @@ class seven
 			class AirburstFireHigh {};
 			class AirburstFireLow {};
 			class AirburstFireMed {};
-			class AirburstFireHit {};
+			class AirburstHit {};
 			class CallShrapnel {};
-			class FireShrappnel {};
+			class FireShrapnel {};
 			class OriginToTarget {};
 		};
-	};
 };

@@ -11,13 +11,7 @@ class Extended_Killed_Eventhandlers
 
 class Extended_PostInit_EventHandlers
 {
-	Init = "
-		[] execVM '\7cmbgops\init_map.sqf';
-		[] execVM '\7cmbgops\init_custom.sqf';
-		[] execVM '\7cmbgops\init_ares.sqf';
-		[] execVM '\7cmbgops\init_ace.sqf';
-		[] execVM '\7cmbgops\scripts\Artillery\Start.sqf';
-	";
+	Init = "[] execVM '\7cmbgops\init_map.sqf'; [] execVM '\7cmbgops\init_custom.sqf'; [] execVM '\7cmbgops\init_ares.sqf'; [] execVM '\7cmbgops\init_ace.sqf'; [] execVM '\7cmbgops\scripts\Artillery\Start.sqf';";
 };
 
 class Extended_InitPost_EventHandlers {

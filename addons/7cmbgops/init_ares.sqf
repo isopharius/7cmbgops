@@ -732,7 +732,7 @@ if (hasInterface) then { //players
 					[
 						["Direction in degrees", ""],
 						["Duration in seconds", ""],
-						["Throw objects", ["YES", "NO"]].
+						["Throw objects", ["YES", "NO"]],
 						["Wall of Dust", ["YES", "NO"]]
 					]
 				] call Ares_fnc_ShowChooseDialog;
