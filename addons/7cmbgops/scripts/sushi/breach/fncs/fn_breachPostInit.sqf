@@ -1,7 +1,7 @@
 #include "..\cfg\cfgDefines.cpp"
 if ( SAF_MISSION_SET(breach_useBreach) < 1 ) exitWith {};
 [] spawn {
-	private _langFile = format["sushi\breach\locale\%1.sqf",SAF_app_lang];
+	private _langFile = format["\7cmbgops\scripts\sushi\breach\locale\%1.sqf",SAF_app_lang];
 	call compile preProcessFileLineNumbers _langFile;
 	private _zeroes = ["dvere","dvere1l","dvere1r","dvere2l","dvere2r","dvere_spodni_r","dvere_spodni_l","dvere_vrchni","vrata1","vrata2","vratal1","vratar1","vratal2","vratar2","vratal3","vratar3"];
 	private _ones = ["door","door_1_1","door_1_2","door_2_1","door_2_2","dvere1","dvere2","dvere3","dvere4","dvere5","dvere6","dvere7","dvere8","dvere9","dvere10","dvere11","dvere12","dvere13","dvere14","doorl","doorr","door_01","door01_a","door_02","door02_a","door_03","door_04","door_05","door_06","door_1a","door_1","door_2", "DoorR", "DoorL", "DoorF", "Door2F", "Door_1_source", "Door_2_soruce", "DoorE1", "DoorE2"];

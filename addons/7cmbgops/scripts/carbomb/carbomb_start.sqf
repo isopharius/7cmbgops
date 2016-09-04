@@ -25,17 +25,17 @@ if (isServer) then {
 	karma_cb_wrecklist = [];
 	karma_cb_civlist = [];
 
-	karma_cb_target_scan = compile preprocessFileLineNumbers "carbomb\carbomb_targetscan.sqf";
-	karma_cb_target_found = compile preprocessFileLineNumbers "carbomb\carbomb_targetfound.sqf";
-	karma_cb_driver_killed = compile preprocessFileLineNumbers "carbomb\carbomb_driverkilled.sqf";
-	karma_cb_location_scan = compile preprocessFileLineNumbers "carbomb\arbomb_locationscan.sqf";
-	karma_cb_target_select = compile preprocessFileLineNumbers "carbomb\carbomb_targetselect.sqf";
-	karma_cb_distance_check = compile preprocessFileLineNumbers "carbomb\carbomb_distancecheck.sqf";
-	karma_cb_wreck_remove = compile preprocessFileLineNumbers "carbomb\carbomb_wreckremove.sqf";
-	karma_cb_nearest_player = compile preprocessFileLineNumbers "carbomb\carbomb_nearestplayer.sqf";
-	karma_cb_carbomb_spawn = compile preprocessFileLineNumbers "carbomb\carbomb_carbombspawn.sqf";
-	karma_cb_civtraffic_spawn = compile preprocessFileLineNumbers "carbomb\carbomb_civtrafficspawn.sqf";
-	karma_cb_civtraffic_killed = compile preprocessFileLineNumbers "carbomb\carbomb_civkilled.sqf";
+	karma_cb_target_scan = compile preprocessFileLineNumbers "\7cmbgops\scripts\carbomb\carbomb_targetscan.sqf";
+	karma_cb_target_found = compile preprocessFileLineNumbers "\7cmbgops\scripts\carbomb\carbomb_targetfound.sqf";
+	karma_cb_driver_killed = compile preprocessFileLineNumbers "\7cmbgops\scripts\carbomb\carbomb_driverkilled.sqf";
+	karma_cb_location_scan = compile preprocessFileLineNumbers "\7cmbgops\scripts\carbomb\arbomb_locationscan.sqf";
+	karma_cb_target_select = compile preprocessFileLineNumbers "\7cmbgops\scripts\carbomb\carbomb_targetselect.sqf";
+	karma_cb_distance_check = compile preprocessFileLineNumbers "\7cmbgops\scripts\carbomb\carbomb_distancecheck.sqf";
+	karma_cb_wreck_remove = compile preprocessFileLineNumbers "\7cmbgops\scripts\carbomb\carbomb_wreckremove.sqf";
+	karma_cb_nearest_player = compile preprocessFileLineNumbers "\7cmbgops\scripts\carbomb\carbomb_nearestplayer.sqf";
+	karma_cb_carbomb_spawn = compile preprocessFileLineNumbers "\7cmbgops\scripts\carbomb\carbomb_carbombspawn.sqf";
+	karma_cb_civtraffic_spawn = compile preprocessFileLineNumbers "\7cmbgops\scripts\carbomb\carbomb_civtrafficspawn.sqf";
+	karma_cb_civtraffic_killed = compile preprocessFileLineNumbers "\7cmbgops\scripts\carbomb\carbomb_civkilled.sqf";
 
 	_sizehalf = worldSize / 2;
 	_centerpos = [_sizehalf, _sizehalf, 0];

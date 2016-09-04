@@ -10,7 +10,7 @@ while {alive _shell} do {
 };
 
 //_vulnerable = ["Man", "Air", "Car", "Motorcycle", "Tank"];
-_vulnerable = ["Man", "Air", "Car", "Motorcycle"];
+_vulnerable = ["CAManBase", "Air", "Car", "Motorcycle"];
 _units = [];
 // Units of 5 seconds
 private _time = 12;

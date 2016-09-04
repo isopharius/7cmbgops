@@ -248,7 +248,7 @@ NEKY_CarBombRemoteScanner =
 };
 
 // Select a remote controller for the bomb
-if (typeName (_Remote select 0) isEqualTo "BOOL") then {_Case = 0} else {_Case = 1};
+if ((_Remote select 0) isEqualType true) then {_Case = 0} else {_Case = 1};
 Switch (_Case) do
 {
 	case 0:	// If script shall select controllers on its own
@@ -259,7 +259,7 @@ Switch (_Case) do
 			if (_ControllerSide isEqualTo SideUnknown) exitWith {SystemChat "Did not select a side, no remote controller selected"};
 			_Controller = False;
 			sleep (random 20); // To avoid having one person controlling multiple vehicles
-			While {(TypeName _Controller isEqualTo "BOOL") && {(Alive _Bomb)}} do
+			While {(_Controller isEqualType true) && {(Alive _Bomb)}} do
 			{
 				_TempArray = [];
 				_Units = NearestObjects [_Vehicle, ["CAManBase"], _RemoteRange];

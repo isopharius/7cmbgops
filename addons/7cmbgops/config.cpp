@@ -69,6 +69,78 @@ class CfgSounds
 	#include "scripts\defuse\cfgSounds.hpp"
 	#include "scripts\Artillery\cfgSounds.hpp"
 
+	class uragan_1
+	{
+		name = "uragan_1";
+		sound[] = {"\7cmbg_sounds\storm\uragan_1.ogg", db+10, 1};
+		titles[] = {1, ""};
+	};
+	class uragan_end
+	{
+		name = "uragan_end";
+		sound[] = {"\7cmbg_sounds\storm\uragan_end.ogg", db+10, 1};
+		titles[] = {1, ""};
+	};
+	class bcg_wind
+	{
+		name = "bcg_wind";
+		sound[] = {"\7cmbg_sounds\storm\bcg_wind.ogg", db+5, 1};
+		titles[] = {1, ""};
+	};
+	class rafala_1
+	{
+		name = "rafala_1";
+		sound[] = {"\7cmbg_sounds\storm\rafala_1.ogg", db+10, 1};
+		titles[] = {1, ""};
+	};
+	class rafala_2
+	{
+		name = "rafala_2";
+		sound[] = {"\7cmbg_sounds\storm\rafala_2.ogg", db+5, 1};
+		titles[] = {1, ""};
+	};
+	class rafala_4_dr
+	{
+		name = "rafala_4_dr";
+		sound[] = {"\7cmbg_sounds\storm\rafala_4_dr.ogg", db+10, 1};
+		titles[] = {1, ""};
+	};
+	class rafala_5_st
+	{
+		name = "rafala_5_st";
+		sound[] = {"\7cmbg_sounds\storm\rafala_5_st.ogg", db+10, 1};
+		titles[] = {1, ""};
+	};
+	class rafala_6
+	{
+		name = "rafala_6";
+		sound[] = {"\7cmbg_sounds\storm\rafala_6.ogg", db+15, 1};
+		titles[] = {1, ""};
+	};
+	class rafala_7
+	{
+		name = "rafala_7";
+		sound[] = {"\7cmbg_sounds\storm\rafala_7.ogg", db+10, 1};
+		titles[] = {1, ""};
+	};
+	class rafala_8
+	{
+		name = "rafala_8";
+		sound[] = {"\7cmbg_sounds\storm\rafala_8.ogg", db+15, 1};
+		titles[] = {1, ""};
+	};
+	class rafala_9
+	{
+		name = "rafala_9";
+		sound[] = {"\7cmbg_sounds\storm\rafala_9.ogg", db+10, 1};
+		titles[] = {1, ""};
+	};
+	class sandstorm
+	{
+		name = "sandstorm";
+		sound[] = {"\7cmbg_sounds\storm\sandstorm.ogg", db+10, 1};
+		titles[] = {1, ""};
+	};
 	class alarm_prepare {
 		name = "alarm_prepare";
 		sound[] = {"\7cmbg_sounds\effects\alarm-prepare.ogg", 1, 1};

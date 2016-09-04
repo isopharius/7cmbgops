@@ -1,14 +1,13 @@
 class breach_safplug
 {
 
-		file = "sushi\breach\fncs";
+		file = "\7cmbgops\scripts\sushi\breach\fncs";
 		class breachGetSettings { preInit = 1; };
 		class breachPostInit { postInit = 1; };
-		
+
 		class breachFiredEh {};
 		class breachGetTargetDoors {};
 		class breachOpenDoor {};
-		
 		class breachGetBldDoorArr {};
 		class breachLockDoor {};
 		class breachCloseAllDoors {};

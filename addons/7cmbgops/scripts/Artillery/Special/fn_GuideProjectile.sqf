@@ -16,7 +16,7 @@ _defaultTargetPos = getPos _primaryTarget;
 if (isNull _primarytarget) exitWith {hintSilent "No Target Found!"};
 
 _perSecondChecks = 50; //direction checks per second
-_getPrimaryTarget = {if (typeName _primaryTarget isEqualTo "CODE") then {call _primaryTarget} else {_primaryTarget}}; //code can be used for laser dots
+_getPrimaryTarget = {if (_primaryTarget isEqualType {}) then {call _primaryTarget} else {_primaryTarget}}; //code can be used for laser dots
 _target = call _getPrimaryTarget;
 
 //secondary target used for random trajectory when laser designator is turned off prematurily
@@ -76,7 +76,7 @@ call _homeMissile;
 //missile flying
 while {alive _missile} do {
 	_velocityForCheck = call _homeMissile;
-	if ({(typeName _x) isEqualTo "SCALAR"} count _velocityForCheck isEqualTo 3) then {_missile setVelocity _velocityForCheck};
+	if ({typeName _x isEqualType 0} count _velocityForCheck isEqualTo 3) then {_missile setVelocity _velocityForCheck};
 	sleep (1 / _perSecondChecks)
 };
 deleteVehicle _secondaryTarget;

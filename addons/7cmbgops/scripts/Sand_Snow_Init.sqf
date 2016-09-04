@@ -342,17 +342,17 @@ if ((arInfoWorld_MKY select 0) isEqualTo "sand") then {
 		arSandsVolume_MKY = [7.83,7.84,7.85];	// global array - used to define the volume of particles, chosen at random
 
 		// allow rain during sand
-		if ((count _this) > 3) then {if (typeName (_this select 3) isEqualTo "BOOL") then {bAllowRain = (_this select 3);};};
+		if ((count _this) > 3) then {if ((_this select 3) isEqualType true) then {bAllowRain = (_this select 3);};};
 		// enforce winds
-		if ((count _this) > 4) then {if (typeName (_this select 4) isEqualTo "BOOL") then {bEnforceWind = (_this select 4);};};
+		if ((count _this) > 4) then {if ((_this select 4) isEqualType true) then {bEnforceWind = (_this select 4);};};
 		// allow fog variation
-		if ((count _this) > 5) then {if (typeName (_this select 5) isEqualTo "BOOL") then {bVaryFog = (_this select 5);};};
+		if ((count _this) > 5) then {if ((_this select 5) isEqualType true) then {bVaryFog = (_this select 5);};};
 		// use wind audio if allowed
-		if ((count _this) > 6) then {if (typeName (_this select 6) isEqualTo "BOOL") then {bUseAudio = (_this select 6);};};
+		if ((count _this) > 6) then {if ((_this select 6) isEqualType true) then {bUseAudio = (_this select 6);};};
 		// use effect strength
 		if ((count _this) > 7) then {
 			_switch = _this select 7;
-			if (typeName _switch isEqualTo "SCALAR") then {
+			if (_switch isEqualType 0) then {
 				call {
 					if (_switch isEqualTo 0) exitWith {
 						intEFX = 0;arSands_MKY = [-0.02,-0.01,0,0.01,0.02,5];
@@ -399,7 +399,7 @@ if ((arInfoWorld_MKY select 0) isEqualTo "sand") then {
 		// prepare overcast
 		_intOvercast_org = overcast;
 		if ((count _this) > 1) then {
-			if (typeName (_this select 1) isEqualTo "SCALAR") then {
+			if ((_this select 1) true 0) then {
 				skipTime -24;
 				86400 setOvercast (_this select 1);
 				skipTime 24;
@@ -412,7 +412,7 @@ if ((arInfoWorld_MKY select 0) isEqualTo "sand") then {
 
 		// prepare ppEffect
 		if ((count _this) > 2) then {
-			if (typeName (_this select 2) isEqualTo "BOOL") then {
+			if ((_this select 2) isEqualType true) then {
 				if (_this select 2) then {
 					if !(isNil "effsand") then {true;} else {
 						effsand = ppEffectCreate ["colorCorrections", 1501];
@@ -433,7 +433,7 @@ if ((arInfoWorld_MKY select 0) isEqualTo "sand") then {
 		// prepare fog
 		_arFog_org = fogParams;
 		if ((count _this) > 0) then {
-			if (typeName (_this select 0) isEqualTo "ARRAY") then {
+			if ((_this select 0) true []) then {
 				20 setFog (_this select 0); // can use a delay if needed, its at 0 for black out / black in
 				if (bVaryFog) then {
 					// create variance in fog values
