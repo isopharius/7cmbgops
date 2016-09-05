@@ -1,6 +1,5 @@
 dta_fnc_HasRadio = compile preprocessFile "\7cmbgops\scripts\Artillery\Misc\HasRadio.sqf";
 dta_fnc_ArtilleryGroupsBySide = compile preprocessFile "\7cmbgops\scripts\Artillery\Misc\GroupsBySide.sqf";
-dta_fnc_ArtilleryAmmoCheck = compile preprocessFile "\7cmbgops\scripts\Artillery\Misc\ArtilleryAmmoCheck.sqf";
 dta_fnc_GroupVehicles = compile preprocessFile "\7cmbgops\scripts\Artillery\Misc\GroupVehicles.sqf";
 dta_fnc_GetDirection = compile preprocessFile "\7cmbgops\scripts\Artillery\Misc\GetDirection.sqf";
 dta_fnc_VehicleName = compile preprocessFile "\7cmbgops\scripts\Artillery\Misc\VehicleName.sqf";
