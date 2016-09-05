@@ -18,7 +18,7 @@ if (_prePlotted) then {dtaHaveAimpoint = true};
 _iccCode = 200;
 
 _assetName = format ["%1",dtaSelectedAsset];
-if ((_asset isEqualTo "<NULL-group>") or {(_asset isEqualTo "any")}) exitWith {closeDialog 0; sleep 0.3; [] spawn seven_fnc_Assets;};
+if ((_assetName isEqualTo "<NULL-group>") or {(_assetName isEqualTo "any")}) exitWith {closeDialog 0; sleep 0.3; [] spawn seven_fnc_Assets;};
 
 _dialogName = "dtaDialogControl";
 createDialog _dialogName;
