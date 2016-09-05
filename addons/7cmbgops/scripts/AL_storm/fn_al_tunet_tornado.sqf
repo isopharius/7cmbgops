@@ -25,16 +25,14 @@ params ["_tunet_tornado"];
 		// scanteia
 		_lighting = "lightning_F" createvehiclelocal _relativePosition;
 		_lighting setdir random 360;
-		_lighting setpos _relativePosition;
 
 		//The light _tunet_tornado
-		_light = "#lightpoint" createvehiclelocal _relativePosition;
+		_light = "#lightpoint" createvehiclelocal [0,0,0];
+		_light setPos _relativePosition;
 		_light setLightDayLight true;
-		_light setpos _relativePosition;
 		_light setLightBrightness random 30;
 		_light setLightAmbient [0.5, 0.5, 1];
 		_light setlightcolor [1, 1, 2];
-
 
 		//Some delay
 		sleep (0.3 + random 0.1);

@@ -21,13 +21,17 @@ waitUntil {
 	effect_screen ppEffectCommit 0;
 
 	// particule in aer
+	_playerpos = getPosWorld player;
+
 	_leaves_p  = "#particlesource" createVehicleLocal [0,0,0];
+    _leaves_p setPosWorld _playerpos;
 	_leaves_p attachto [player];
 	_leaves_p setParticleRandom [0, [10, 10, 7], [4, 4, 5], 2, 0.1, [0, 0, 0, 0.5], 1, 1];
 	_leaves_p setParticleCircle [100, [0, 0, 0]];
 	_leaves_p setParticleParams [["\A3\data_f\ParticleEffects\Hit_Leaves\Sticks_Green", 1, 1, 1], "", "SpaceObject", 1,27,[0,0,0],[50,50,10],2,0.000001,0.0,0.1,[0.5+random 5],[[0.68,0.68,0.68,1]],[1.5,1],13,13,"","",vehicle player,0,true,1,[[0,0,0,0]]];
 
 	_alias_local_fog = "#particlesource" createVehicleLocal [0,0,0];
+    _alias_local_fog setPosWorld _playerpos;
 	_alias_local_fog attachto [player];
 	_alias_local_fog setParticleCircle [50, [3, 3, 0]];
 	_alias_local_fog setParticleRandom [10, [0.25, 0.25, 0], [1, 1, 0], 1, 1, [0, 0, 0, 0.1], 0, 0];

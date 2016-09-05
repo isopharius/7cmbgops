@@ -460,7 +460,7 @@ if (hasInterface) then { //players
 			publicVariableServer "DEFUSED";
 			publicVariableServer "ARMED";
 
-			[format["BOMB ARMED with CODE %1 - %2 - %3 - %4!", CODE select 0, CODE select 1,CODE select 2, CODE select 3]] call Ares_fnc_ShowZeusMessage;
+			[format["BOMB ARMED with CODE %1 - %2 - %3 - %4!", CODE select 0, CODE select 1, CODE select 2, CODE select 3]] call Ares_fnc_ShowZeusMessage;
 			player sidechat format["the CODE is %1 - %2 - %3 - %4, add it somewhere with Spawn>Intel", CODE select 0, CODE select 1,CODE select 2, CODE select 3];
 
 			sleep 2;
@@ -649,6 +649,7 @@ if (hasInterface) then { //players
 					]
 				] call Ares_fnc_ShowChooseDialog;
 			if (count _dialogResult isEqualTo 0) exitWith {};
+			if (((_dialogResult select 0) isEqualTo "") || {((_dialogResult select 2) isEqualTo "")}) exitWith {["PLEASE ENTER SETTINGS."] call Ares_fnc_ShowZeusMessage;};
 
 			_pos = _this select 0;
 			_size = parseNumber(_dialogResult select 0);
@@ -674,11 +675,11 @@ if (hasInterface) then { //players
 
 	[
 		"Environment",
-		"Monsoon",
+		"Hurricane",
 		{
 			_dialogResult =
 				[
-					"Monsoon Settings",
+					"Hurricane Settings",
 					[
 						["Direction in degrees", ""],
 						["Duration in seconds", ""],
@@ -686,6 +687,7 @@ if (hasInterface) then { //players
 					]
 				] call Ares_fnc_ShowChooseDialog;
 			if (count _dialogResult isEqualTo 0) exitWith {};
+			if (((_dialogResult select 0) isEqualTo "") || {((_dialogResult select 1) isEqualTo "")}) exitWith {["PLEASE ENTER SETTINGS."] call Ares_fnc_ShowZeusMessage;};
 
 			_throw = false;
 			if ((_dialogResult select 2) isEqualTo 0) then {
@@ -694,7 +696,7 @@ if (hasInterface) then { //players
 
 			[parseNumber(_dialogResult select 0), parseNumber(_dialogResult select 1), _throw] remoteExec ["seven_fnc_al_monsoon", 2, false];
 
-			["MONSOON INCOMING!"] call Ares_fnc_ShowZeusMessage;
+			["HURRICANE INCOMING!"] call Ares_fnc_ShowZeusMessage;
 		}
 	] call Ares_fnc_RegisterCustomModule;
 
@@ -737,6 +739,7 @@ if (hasInterface) then { //players
 					]
 				] call Ares_fnc_ShowChooseDialog;
 			if (count _dialogResult isEqualTo 0) exitWith {};
+			if (((_dialogResult select 0) isEqualTo "") || {((_dialogResult select 1) isEqualTo "")}) exitWith {["PLEASE ENTER SETTINGS."] call Ares_fnc_ShowZeusMessage;};
 
 			_throw = false;
 			_wall = false;

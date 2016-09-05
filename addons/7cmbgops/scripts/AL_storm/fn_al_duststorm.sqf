@@ -11,35 +11,25 @@ params ["_direction_duststorm", "_duration_duststorm", "_effect_on_objects", "_d
 
 al_duststorm_on = true;
 publicVariable "al_duststorm_on";
-
-al_foglevel		= fog;
-al_rainlevel	= rain;
-al_thundlevel	= lightnings;
-al_windlevel	= wind;
-publicVariable "al_foglevel";
-publicVariable "al_rainlevel";
-publicVariable "al_thundlevel";
-publicVariable "al_windlevel";
-
 sleep 0.1;
 
-[_duration_duststorm] spawn {
-	x_duration_storm = _this select 0;
-	sleep x_duration_storm;
+_foglevel	= fog;
+_windlevel	= wind;
+
+[_duration_duststorm, _foglevel, _windlevel] spawn {
+	sleep (_this select 0);
 
 	al_duststorm_on = false;
 	publicVariable "al_duststorm_on";
 
 // restaureaza parametri vreme
-	60 setFog al_foglevel;
-	60 setRain al_rainlevel;
-	60 setLightnings al_thundlevel;
-	setWind [al_windlevel select 0, al_windlevel select 1, true];
+	60 setFog (_this select 1);
+	setWind [(_this select 2) select 0, (_this select 2) select 1, true];
 };
 
 [] spawn {
 	waitUntil {
-		["bcg_wind"] remoteExecCall ["playSound", 0, true];
+		"bcg_wind" remoteExecCall ["playSound", 0, false];
 		sleep 60;
 		(!al_duststorm_on)
 	};
@@ -50,10 +40,10 @@ sleep 0.1;
 [] spawn {
 	_ifog=0;
 	waitUntil {
-		_ifog=_ifog+0.001;
+		_ifog=_ifog + 0.001;
 		0 setFog _ifog;
 		sleep 0.01;
-		!(_ifog <0.3)
+		!(_ifog < 0.3)
 	};
 };
 
@@ -88,8 +78,8 @@ if (_dust_wall) then {
 	_xadd = 0;
 	_yadd = 0;
 
-	if ((_ypoz == -800) or ((_ypoz == 800))) then {_yadd =0; _xadd = 160};
-	if ((_xpoz == -800) or ((_xpoz == 800))) then {_yadd =160; _xadd = 0};
+	if ((_ypoz isEqualTo -800) or ((_ypoz isEqualTo 800))) then {_yadd = 0; _xadd = 160};
+	if ((_xpoz isEqualTo -800) or ((_xpoz isEqualTo 800))) then {_yadd = 160; _xadd = 0};
 
 	_stormsource = createVehicle ["Land_HelipadEmpty_F",[0,0,0], [], 0, "CAN_COLLIDE"];
 	_stormsource setPos _pozobcj;
@@ -113,13 +103,7 @@ if (_dust_wall) then {
 	_stormsource_6 setPos [(_pozobcj select 0)+3*_xadd,(_pozobcj select 1)+3*_yadd,0];
 
 	[_stormsource,_stormsource_1,_stormsource_2,_stormsource_3,_stormsource_4,_stormsource_5,_stormsource_6] spawn {
-		_storm = _this select 0;
-		_storm_1 = _this select 1;
-		_storm_2 = _this select 2;
-		_storm_3 = _this select 3;
-		_storm_4 = _this select 4;
-		_storm_5 = _this select 5;
-		_storm_6 = _this select 6;
+		params ["_storm", "_storm_1", "_storm_2", "_storm_3", "_storm_4", "_storm_5", "_storm_6"];
 
 		_xadv = 0;
 		_yadv =0;
@@ -136,13 +120,13 @@ if (_dust_wall) then {
 
 		//hint str _xadv;
 		waitUntil {
-			_storm setPos [(getPos _storm select 0)+_xadv,(getPos _storm select 1)+_yadv,0];
-			_storm_1 setPos [(getPos _storm_1 select 0)+_xadv,(getPos _storm_1 select 1)+_yadv,0];
-			_storm_2 setPos [(getPos _storm_2 select 0)+_xadv,(getPos _storm_2 select 1)+_yadv,0];
-			_storm_3 setPos [(getPos _storm_3 select 0)+_xadv,(getPos _storm_3 select 1)+_yadv,0];
-			_storm_4 setPos [(getPos _storm_4 select 0)+_xadv,(getPos _storm_4 select 1)+_yadv,0];
-			_storm_5 setPos [(getPos _storm_5 select 0)+_xadv,(getPos _storm_5 select 1)+_yadv,0];
-			_storm_6 setPos [(getPos _storm_6 select 0)+_xadv,(getPos _storm_6 select 1)+_yadv,0];
+			_storm setPosWorld [(getPosWorld _storm select 0)+_xadv,(getPosWorld _storm select 1)+_yadv,0];
+			_storm_1 setPosWorld [(getPosWorld _storm_1 select 0)+_xadv,(getPosWorld _storm_1 select 1)+_yadv,0];
+			_storm_2 setPosWorld [(getPosWorld _storm_2 select 0)+_xadv,(getPosWorld _storm_2 select 1)+_yadv,0];
+			_storm_3 setPosWorld [(getPosWorld _storm_3 select 0)+_xadv,(getPosWorld _storm_3 select 1)+_yadv,0];
+			_storm_4 setPosWorld [(getPosWorld _storm_4 select 0)+_xadv,(getPosWorld _storm_4 select 1)+_yadv,0];
+			_storm_5 setPosWorld [(getPosWorld _storm_5 select 0)+_xadv,(getPosWorld _storm_5 select 1)+_yadv,0];
+			_storm_6 setPosWorld [(getPosWorld _storm_6 select 0)+_xadv,(getPosWorld _storm_6 select 1)+_yadv,0];
 			sleep 5;
 			(!al_duststorm_on)
 		};
@@ -151,9 +135,8 @@ if (_dust_wall) then {
 	sleep 0.1;
 
 	[_stormsource] spawn {
-		_stormsource_s = _this select 0;
 		waitUntil {
-			[_stormsource_s, "uragan_1"] call CBA_fnc_globalSay3d;
+			[_this select 0, "uragan_1"] remoteExecCall ["say3D", 0, false];
 			sleep 60;
 			(!al_duststorm_on)
 		};
@@ -176,21 +159,31 @@ if (_dust_wall) then {
 
 
 // seteaza wind storm functie de directie
-raport = 360/_direction_duststorm;
-raport = round (raport * (10 ^ 2)) / (10 ^ 2);
+raport = 360 / _direction_duststorm;
+raport = (round (raport * 100)) / 100;
 
-if (raport >= 4) then {fctx = 1; fcty = 1;}
-	else {if (raport >= 2) then {fctx = 1; fcty = -1;}
-						else { if (raport >=1.33) then {fctx = -1; fcty = -1;}
-												else {fctx = -1; fcty = 1;};
-						};
+if (raport >= 4) then {
+	fctx = 1;
+	fcty = 1;
+} else {
+	if (raport >= 2) then {
+		fctx = 1;
+		fcty = -1;
+	} else {
+		if (raport >= 1.33) then {
+			fctx = -1;
+			fcty = -1;
+		} else {
+			fctx = -1;
+			fcty = 1;
+		};
 	};
-if ((raport <= 2) and (raport >= 1.33)) then {fctx = -1; fcty = -1;};
+};
 
-_unx	= ((_direction_duststorm - floor (_direction_duststorm/90)*90))*fctx;
+_unx = (_direction_duststorm - floor ((_direction_duststorm/90) * 90)) * fctx;
 
 vx = floor (_unx * 0.6);
-vy = (54 - vx)*fcty;
+vy = (54 - vx) * fcty;
 
 // mareste incremental vantul
 inx = 0;
@@ -200,7 +193,7 @@ incr = true;
 incrx = false;
 incry = false;
 
-waitUntil {
+while {incr} do {
 	sleep 0.01;
 	if (inx < abs vx) then {inx = inx+0.1;} else {incrx = true};
 	if (iny < abs vy) then {iny = iny+0.1} else {incry = true};
@@ -208,7 +201,6 @@ waitUntil {
 	winx = floor (inx*fctx);
 	winy = floor (iny*fcty);
 	setWind [winx,winy,true];
-	(!incr)
 };
 
 if (_effect_on_objects) then {
@@ -220,25 +212,22 @@ if (_effect_on_objects) then {
 	// interval object blow
 		sleep 1;
 
-		al_nearobjects = nearestObjects [hunt_alias,[],50];
-		ar_obj_eligibl = [];
+		_nearobjects = nearestObjects [hunt_alias,[],50];
+		_obj_eligibl = [];
 
-		{if((_x isKindOf "LandVehicle") or {(_x isKindOf "CAManBase")} or {(_x isKindOf "Air")} or {(_x isKindOf "Wreck")}) then
-			{ar_obj_eligibl pushBack _x;};
-		} foreach al_nearobjects;
+		{if((_x isKindOf "LandVehicle") || {(_x isKindOf "CAManBase")} || {(_x isKindOf "Air")} || {(_x isKindOf "Wreck")}) then
+			{_obj_eligibl pushBack _x;};
+		} foreach _nearobjects;
 
 		sleep 1;
-
 		// alege obiect
-		_blowobj = selectRandom ar_obj_eligibl;
+		_blowobj = selectRandom _obj_eligibl;
 
 		//durata_rafala = 1+random 5;	sleep 30+random 120;
 		sleep 1;
-		[] spawn {
-			_rafale = selectRandom ["rafala_1","sandstorm","rafala_4_dr","rafala_5_st","rafala_7"];
-			[_rafale] remoteExecCall ["playSound", 0, false];
-			//hint str _rafale;
-		};
+		_rafale = selectRandom ["rafala_1","sandstorm","rafala_4_dr","rafala_5_st","rafala_7"];
+		_rafale remoteExecCall ["playSound", 0, false];
+		//hint str _rafale;
 
 		if (!isNull _blowobj) then {
 			_xblow	= 0.1+random 5;
@@ -249,11 +238,12 @@ if (_effect_on_objects) then {
 			_yy=0;
 
 			waitUntil {
-				_blowobj setvelocity [_xx*fctx,_yy*fcty,random 0.1];
+				_blowobj setvelocity [_xx * fctx, _yy * fcty, random 0.1];
 				_xx = _xx + 0.01;
 				_yy = _yy + 0.01;
 				sleep 0.001;
-				((_xx < _xblow) or {(_yy < _yblow)})
+
+				((_xx < _xblow) || {(_yy < _yblow)})
 			};
 		};
 	};

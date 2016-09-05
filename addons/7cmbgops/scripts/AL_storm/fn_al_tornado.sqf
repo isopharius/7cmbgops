@@ -11,15 +11,24 @@ _tornadasource = createVehicle ["Land_HelipadEmpty_F", [0,0,0], [], 0, "CAN_COLL
 _tornadasource setPos _posstart;
 
 // transmite la clienti
-[_tornadasource] remoteExec ["seven_fnc_tornadoSound", 0, true];
+[_tornadasource] spawn {
+	params ["_tornadasource"];
+	waitUntil {
+		[_tornadasource, "uragan_1"] remoteExecCall ["say3D", 0, false];
+		sleep 150;
+		(isNull _tornadasource)
+	};
+};
+
 [_tornadasource] remoteExec ["seven_fnc_al_tornado_effect", 0, true];
 
 [_tornadasource] spawn {
 	params ["_tuner_tor"];
-	while {!isNull _tuner_tor} do {
-	[_tuner_tor] remoteExec ["seven_fnc_al_tunet_tornado", 0, true];
-	//sleep 10 + random 60;
-	sleep 3;
+	waitUntil {
+		[_tuner_tor] remoteExec ["seven_fnc_al_tunet_tornado", 0, false];
+		//sleep 10 + random 60;
+		sleep 3;
+		(isNull _tuner_tor)
 	};
 };
 
@@ -36,61 +45,53 @@ _ystart= _posstart select 1;
 tornadosino = "goon";
 publicvariable "tornadosino";
 
-al_foglevel		= fog;
-al_rainlevel	= rain;
-al_thundlevel	= lightnings;
-al_windlevel	= wind;
-publicVariable "al_foglevel";
-publicVariable "al_rainlevel";
-publicVariable "al_thundlevel";
-publicVariable "al_windlevel";
+_foglevel	= fog;
+_rainlevel	= rain;
+_overcast	= overcast;
+_thundlevel	= lightnings;
 
 sleep 0.1;
 
 [] spawn {
 	_ifog=0;
-	while {_ifog <0.3} do {
-		_ifog=_ifog+0.001; 0 setFog _ifog; sleep 0.01;
+	waitUntil {
+		_ifog = _ifog + 0.001;
+		0 setFog _ifog;
+		sleep 0.01;
+
+		!(_ifog < 0.3)
 	};
 };
 
-[] spawn {
-	_irain=0;
-	while {_irain <1} do {
-		_irain=_irain+0.01;0 setrain _irain; sleep 0.1;
-	};
-};
-/*
-[tornadosino] spawn {
-	_tornadodur = _this select 0;
-	waitUntil {_tornadodur == "goof"};
-
-// restaureaza parametri vreme
-	60 setFog al_foglevel;
-	60 setRain al_rainlevel;
-	60 setLightnings al_thundlevel;
-	setWind [al_windlevel select 0, al_windlevel select 1, true];
-};
-*/
-while {tornadosino isEqualTo "goon"} do
 {
+	skipTime -24;
+	86400 setOvercast 0.8;
+	skipTime 24;
+	sleep 0.1;
+	simulWeatherSync;
+} remoteExec ["BIS_fnc_spawn", 0, true];
 
-	_xmove = getpos _tornadasource select 0;
-	_ymove = getpos _tornadasource select 1;
+10 setLightnings 0.8;
+10 setrain 0.8;
 
-	_xcheck = _xmove-_xdest;
-	_ycheck = _ymove-_ydest;
+while {tornadosino isEqualTo "goon"} do {
 
+	_tornadaposworld = getPosWorld _tornadasource;
+	_xmove = _tornadaposworld select 0;
+	_ymove = _tornadaposworld select 1;
+
+	_xcheck = _xmove - _xdest;
+	_ycheck = _ymove - _ydest;
 	if ((_xcheck > 10) or (_xcheck < -10)) then
 	{
 		if (_xstart < _xdest) then
 		{
-		_tornadasource setpos [(getpos _tornadasource select 0) + 5, getpos _tornadasource select 1, 2];
+		_tornadasource setposWorld [_xmove + 5, _ymove, 2];
 		};
 
 		if (_xstart > _xdest) then
 		{
-		_tornadasource setpos [(getpos _tornadasource select 0) -5, getpos _tornadasource select 1, 2];
+		_tornadasource setposWorld [_xmove - 5, _ymove, 2];
 		};
 
 	};
@@ -99,16 +100,16 @@ while {tornadosino isEqualTo "goon"} do
 	{
 		if (_ystart < _ydest) then
 		{
-		_tornadasource setpos [(getpos _tornadasource select 0),(getpos _tornadasource select 1) + 5 + random 5, 2];
+		_tornadasource setposWorld [_xmove, _ymove + 5 + random 5, 2];
 		} else {
 			if (_ystart > _ydest) then
 			{
-			_tornadasource setpos [(getpos _tornadasource select 0),(getpos _tornadasource select 1) - 5 - random 5, 2];
+			_tornadasource setposWorld [_xmove, _ymove - 5 - random 5, 2];
 			};
 		};
 	};
 
-	_nearobjects = nearestObjects[_tornadasource,[],50];
+	_nearobjects = nearestObjects [_tornadaposworld, [], 50];
 
 	//avoid destroying _tornadasource
 
@@ -120,8 +121,8 @@ while {tornadosino isEqualTo "goon"} do
 	{
 
    	_source_end = createVehicle ["Land_HelipadEmpty_F",[0,0,0], [], 0, "CAN_COLLIDE"];
-	_tornadasource setPos (position _tornadasource);
-	[_source_end, "uragan_end"] call CBA_fnc_globalSay3d;
+	_source_end setPosWorld _tornadaposworld;
+	[_source_end, "uragan_end"] remoteExecCall ["say3D", 0, false];
 
 	sleep 0.1;
 	deletevehicle _tornadasource;
@@ -143,7 +144,17 @@ while {tornadosino isEqualTo "goon"} do
 deleteVehicle _tornadasource;
 enableCamShake false;
 
-	60 setFog al_foglevel;
-	60 setRain al_rainlevel;
-	60 setLightnings al_thundlevel;
-	setWind [al_windlevel select 0, al_windlevel select 1, true];
+[
+	[_overcast],
+	{
+		skipTime -24;
+		86400 setOvercast (_this select 0);
+		skipTime 24;
+		sleep 0.1;
+		simulWeatherSync;
+	}
+] remoteExecCall ["BIS_fnc_spawn", 0, true];
+
+60 setFog _foglevel;
+60 setRain _rainlevel;
+60 setLightnings _thundlevel;
