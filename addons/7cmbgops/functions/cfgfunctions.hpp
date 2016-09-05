@@ -96,7 +96,7 @@ class seven
 		file = "\7cmbgops\scripts\defuse";
 		class searchAction {};
 	};
-	class breach_safplug {
+	/*class breach_safplug {
 		file = "\7cmbgops\scripts\sushi\breach\fncs";
 		//class breachGetSettings { preInit = 1; };
 		//class breachPostInit { postInit = 1; };
@@ -122,7 +122,7 @@ class seven
 		file = "\7cmbgops\scripts\sushi\core\fncs";
 		class preInit { preInit = 1; };
 		class showStatus {};
-	};
+	};*/
 		class Control {
 			file = "\7cmbgops\scripts\Artillery\Control";
 			class Splash {};
@@ -181,6 +181,5 @@ class seven
 		class alias_duststorm_effect {};
 		class alias_hunt {};
 		class alias_monsoon_effect {};
-		class tornadosound {};
 	};
 };
